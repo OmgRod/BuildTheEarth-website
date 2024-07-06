@@ -1,0 +1,7 @@
+:root {
+    --mantine-navbar-width: 300
+}
+
+.xl2 {
+    font-size: calc(var(--mantine-font-size-xl) * 1.5) !important;
+}
