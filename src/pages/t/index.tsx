@@ -206,13 +206,15 @@ export default function Home() {
           </RawCard>
         </GridCol>
         <GridCol span={12}>
-          <DateCard
-            id="createdAt"
-            title="Created At"
-            withEdit={false}
-            withCopy={false}
-            date={data?.date}
-          />
+          {data?.createdAt && (
+            <DateCard
+              id="createdAt"
+              title="Created At"
+              withEdit={false}
+              withCopy={false}
+              date={data.createdAt}
+            />
+          )}
         </GridCol>
         <GridCol span={12}>
           <RawCard

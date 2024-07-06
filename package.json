@@ -25,6 +25,7 @@
     "mantine-contextmenu": "^7.11.0",
     "mantine-datatable": "^7.11.1",
     "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
     "next": "14.2.4",
     "next-auth": "^4.24.7",
     "react": "^18",

@@ -35,7 +35,7 @@ export default function AdminNavbar(props: AdminNavbar) {
           <Group>
             <Image src="/logo.png" h={32} alt="BuildTheEarth Logo" />
             <Text fw="bold" fz="xl" lineClamp={1}>
-              BuildTheEarth
+              Admin
             </Text>
           </Group>
           <ActionIcon variant="default" size="sm">

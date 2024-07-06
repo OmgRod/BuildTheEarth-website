@@ -33,7 +33,7 @@ export default function ToolsNavbar(props: ToolsNavbar) {
           <Group>
             <Image src="/logo.png" h={32} alt="BuildTheEarth Logo" />
             <Text fw="bold" fz="xl" lineClamp={1}>
-              BuildTheEarth
+              Tools
             </Text>
           </Group>
           <ActionIcon variant="default" size="sm">
