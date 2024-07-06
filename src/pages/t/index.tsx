@@ -12,9 +12,9 @@ import {
 } from "@mantine/core";
 
 import Anchor from "@/components/core/Anchor";
-import BuildTeamLayout from "@/components/layout/buildTeam";
 import DateCard from "@/components/core/card/DateCard";
 import { DiscordInviteCard } from "@/components/core/card/DiscordInviteCard";
+import Layout from "@/components/layout";
 import { RawCard } from "@/components/core/card/RawCard";
 import TextCard from "@/components/core/card/TextCard";
 import { getCountryNames } from "@/util/countries";
@@ -24,7 +24,7 @@ export default function Home() {
   const { data } = useBuildTeamData("/");
 
   return (
-    <BuildTeamLayout currentLink="/">
+    <Layout currentLink="/" team>
       <Grid>
         <GridCol span={6}>
           <TextCard title="Build Team Name" id="name" text={data?.name} />
@@ -233,7 +233,7 @@ export default function Home() {
           </RawCard>
         </GridCol>
       </Grid>
-    </BuildTeamLayout>
+    </Layout>
   );
 }
 

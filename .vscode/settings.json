@@ -1,4 +1,4 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "conventionalCommits.scopes": ["src"]
+  "conventionalCommits.scopes": ["src", "layout"]
 }

@@ -1,23 +1,31 @@
-import {
-  AppShell,
-  Box,
-  Burger,
-  ScrollArea,
-  ScrollAreaAutosize,
-} from "@mantine/core";
+import { AppShell, Box, ScrollArea } from "@mantine/core";
 
-import BuildTeamNavbar from "./navbar";
-import { useDisclosure } from "@mantine/hooks";
+import AdminNavbar from "./admin/navbar";
+import BuildTeamNavbar from "./buildTeam/navbar";
+import ToolsNavbar from "./tools/navbar";
 
-export interface BuildTeamLayout {
+export interface LayoutProps {
   children: React.ReactNode;
   currentLink: string;
+  tools?: boolean;
+  admin?: boolean;
+  team?: boolean;
 }
 
 /**
  * Root layout of BuildTeam Pages
  */
-export default function BuildTeamLayout(props: BuildTeamLayout) {
+export default function Layout(props: LayoutProps) {
+  const Navbar = props.team
+    ? BuildTeamNavbar
+    : props.tools
+    ? ToolsNavbar
+    : props.admin
+    ? AdminNavbar
+    : () => {
+        return <></>;
+      };
+
   return (
     <AppShell
       navbar={{
@@ -28,7 +36,7 @@ export default function BuildTeamLayout(props: BuildTeamLayout) {
       h="100vh"
     >
       <AppShell.Navbar p={0}>
-        <BuildTeamNavbar currentLink={props.currentLink} />
+        <Navbar currentLink={props.currentLink} />
       </AppShell.Navbar>
 
       <AppShell.Main h="100vh" style={{ overflow: "hidden" }}>
