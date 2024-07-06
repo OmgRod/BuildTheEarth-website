@@ -1,4 +1,4 @@
-import { IconClock, IconList } from "@tabler/icons-react";
+import { IconClock, IconList, IconMap } from "@tabler/icons-react";
 
 /**
  * These links are used for navigation between buildteam related pages
@@ -12,6 +12,7 @@ export const buildTeamNavLinks: NavLink[] = [
  */
 export const toolsNavLiks: NavLink[] = [
   { link: "/timezone", label: "Timezone Converter", icon: IconClock },
+  { link: "/coordinates", label: "Coordinate Converter", icon: IconMap },
 ];
 
 /**

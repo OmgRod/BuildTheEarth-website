@@ -19,7 +19,7 @@ import TextCard from "@/components/core/card/TextCard";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
 
-export default function Home() {
+export default function Timezones() {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [date, setDate] = useState<Date | undefined | null>(

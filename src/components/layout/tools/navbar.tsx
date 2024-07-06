@@ -17,7 +17,7 @@ export default function ToolsNavbar(props: ToolsNavbar) {
   const links = toolsNavLiks.map((item) => (
     <a
       className={classes.navbarLink}
-      data-active={item.link === props.currentLink}
+      data-active={item.link == props.currentLink}
       href={"/tools" + item.link}
       key={item.label}
     >
