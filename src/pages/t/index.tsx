@@ -5,29 +5,33 @@ import {
   Grid,
   GridCol,
   Image,
+  Loader,
   Stack,
   Switch,
   Text,
-  rem,
 } from "@mantine/core";
 
 import Anchor from "@/components/core/Anchor";
 import DateCard from "@/components/core/card/DateCard";
 import { DiscordInviteCard } from "@/components/core/card/DiscordInviteCard";
-import Layout from "@/components/layout";
 import { RawCard } from "@/components/core/card/RawCard";
 import TextCard from "@/components/core/card/TextCard";
-import { getCountryNames } from "@/util/countries";
+import Layout from "@/components/layout";
 import useBuildTeamData from "@/hooks/useBuildTeamData";
+import { getCountryNames } from "@/util/countries";
 
 export default function Home() {
-  const { data } = useBuildTeamData("/");
+  const { data, isLoading } = useBuildTeamData("/");
 
   return (
-    <Layout currentLink="/" team>
+    <Layout currentLink="/" team isLoading={isLoading} loader={<Loader />}>
       <Grid>
         <GridCol span={6}>
-          <TextCard title="Build Team Name" id="name" text={data?.name} />
+          <TextCard
+            title="Build Team Name"
+            id="name"
+            text={isLoading ? "Loading... " : data?.name}
+          />
         </GridCol>
         <GridCol span={3}>
           <RawCard
@@ -43,7 +47,7 @@ export default function Home() {
               href={`https://buildtheearth.net/teams/${data?.slug}`}
               target="_blank"
             >
-              teams/{data?.slug}
+              teams{!isLoading && "/" + data?.slug}
             </Anchor>
           </RawCard>
         </GridCol>
@@ -52,7 +56,7 @@ export default function Home() {
             title="Build Team ID"
             id="id"
             withEdit={false}
-            text={data?.id.split("-")[0]}
+            text={isLoading ? "XXXXXXXX" : data?.id.split("-")[0]}
           />
         </GridCol>
 
@@ -60,7 +64,7 @@ export default function Home() {
           <Stack h="100%">
             <RawCard title="Logo" id="icon" withCopy={false}>
               <Avatar
-                src={data?.icon}
+                src={data?.icon || "./avatar.png"}
                 w="100%"
                 h="100%"
                 radius="sm"
@@ -92,6 +96,7 @@ export default function Home() {
           >
             <Image
               src={data?.backgroundImage}
+              fallbackSrc="./fallback.png"
               style={{ aspectRatio: "16 / 9" }}
               alt={data?.name + " Background Image"}
               radius="sm"
@@ -110,7 +115,11 @@ export default function Home() {
             id="location"
             textProps={{ lineClamp: 1 }}
             style={{ height: "100%" }}
-            text={getCountryNames(data?.location.split(", ") || []).join(", ")}
+            text={
+              isLoading
+                ? "Globe"
+                : getCountryNames(data?.location.split(", ") || []).join(", ")
+            }
           />
         </GridCol>
 
@@ -126,11 +135,15 @@ export default function Home() {
         </GridCol>
         <GridCol span={4}>
           <Stack h="100%">
-            <TextCard title="Server IP" id="ip" text={data?.ip} />
+            <TextCard
+              title="Server IP"
+              id="ip"
+              text={isLoading ? "buildtheearth.net" : data?.ip}
+            />
             <TextCard
               title="Server Version"
               id="version"
-              text={"Minecraft " + data?.version}
+              text={"Minecraft " + isLoading ? "1.12.2" : data?.version}
             />
             <RawCard
               title="Applications"
@@ -201,12 +214,12 @@ export default function Home() {
               href={`https://api.buildtheearth.net/api/v1/buildteams/${data?.id}`}
               target="_blank"
             >
-              {data?.id}
+              {isLoading ? "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" : data?.id}
             </Anchor>
           </RawCard>
         </GridCol>
-        <GridCol span={12}>
-          {data?.createdAt && (
+        {data?.createdAt && (
+          <GridCol span={12}>
             <DateCard
               id="createdAt"
               title="Created At"
@@ -214,14 +227,18 @@ export default function Home() {
               withCopy={false}
               date={data.createdAt}
             />
-          )}
-        </GridCol>
+          </GridCol>
+        )}
         <GridCol span={12}>
           <RawCard
             title="Creator ID"
             id="creatorId"
             withEdit={false}
-            copyText={data?.creatorId}
+            copyText={
+              isLoading
+                ? "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                : data?.creatorId
+            }
           >
             <Anchor
               fw="bold"
@@ -230,7 +247,9 @@ export default function Home() {
               href={`/t/members/${data?.creatorId}`}
               target="_blank"
             >
-              {data?.creatorId}
+              {isLoading
+                ? "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                : data?.creatorId}
             </Anchor>
           </RawCard>
         </GridCol>

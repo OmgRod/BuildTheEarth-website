@@ -10,6 +10,8 @@ export interface LayoutProps {
   tools?: boolean;
   admin?: boolean;
   team?: boolean;
+  isLoading?: boolean;
+  loader?: React.ReactNode;
 }
 
 /**
