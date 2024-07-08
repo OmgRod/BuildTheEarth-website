@@ -1,13 +1,14 @@
-import { showNotification } from "@mantine/notifications";
-import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
+import { LoadingOverlay } from "@mantine/core";
 import { SWRConfig } from "swr";
+import { Session } from "next-auth";
+import { showNotification } from "@mantine/notifications";
+import { useSession } from "next-auth/react";
 
 export default function SWRSetup({ children }: any) {
   const session = useSession();
-  // if (session.status == 'loading') {
-  // 	return <LoadingOverlay visible />;
-  // }
+  if (session.status == "loading") {
+    return <LoadingOverlay visible />;
+  }
   return (
     <SWRConfig
       value={{
@@ -46,6 +47,7 @@ export default function SWRSetup({ children }: any) {
 export const swrFetcher = (session?: { data: Session | null }) => {
   return async (resource: any, init: any) => {
     if (!resource.includes("/undefined") && !resource.includes("/null")) {
+      console.log(session);
       const res = await fetch(process.env.NEXT_PUBLIC_API_URL + resource, {
         headers: {
           "Access-Control-Allow-Origin": "*",

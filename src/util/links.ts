@@ -1,10 +1,17 @@
-import { IconClock, IconList, IconMap } from "@tabler/icons-react";
+import {
+  IconClock,
+  IconList,
+  IconMap,
+  IconUsers,
+  IconUsersGroup,
+} from "@tabler/icons-react";
 
 /**
  * These links are used for navigation between buildteam related pages
  */
 export const buildTeamNavLinks: NavLink[] = [
   { link: "/", label: "Team Overview", icon: IconList },
+  { link: "/members", label: "Members", icon: IconUsersGroup },
 ];
 
 /**
