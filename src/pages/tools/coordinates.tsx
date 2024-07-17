@@ -20,14 +20,14 @@ export default function Coordinates() {
   const handleConvertRl = async () => {
     const res = await fetch(
       process.env.NEXT_PUBLIC_SMYLER_API_URL +
-        `/projection/fromGeo?geopos=${rlCoords}`
+        `/projection/fromGeo?geopos=${rlCoords}`,
     ).then((res) => res.json());
     setRlResult(res);
   };
   const handleConvertMc = async () => {
     const res = await fetch(
       process.env.NEXT_PUBLIC_SMYLER_API_URL +
-        `/projection/toGeo?mcpos=${mcCoords}`
+        `/projection/toGeo?mcpos=${mcCoords}`,
     ).then((res) => res.json());
     setMcResult(res);
   };

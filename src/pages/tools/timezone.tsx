@@ -23,7 +23,7 @@ export default function Timezones() {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [date, setDate] = useState<Date | undefined | null>(
-    router.query?.date ? new Date(router.query.date as string) : new Date()
+    router.query?.date ? new Date(router.query.date as string) : new Date(),
   );
   let loadedDate = moment(date);
 

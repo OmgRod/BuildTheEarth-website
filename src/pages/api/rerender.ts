@@ -5,7 +5,7 @@ import { nextAuthConfig } from "./auth/[...nextauth]";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const session = await getServerSession(req, res, nextAuthConfig);
 
@@ -15,7 +15,7 @@ export default async function handler(
 
   const webRes = await fetch(
     process.env.NEXT_PUBLIC_FRONTEND_URL +
-      `/api/revalidate?secret=${process.env.FRONTEND_KEY}&paths=${req.query.routes}`
+      `/api/revalidate?secret=${process.env.FRONTEND_KEY}&paths=${req.query.routes}`,
   );
   if (webRes.status !== 200) {
     return res.status(webRes.status).send(webRes.statusText);

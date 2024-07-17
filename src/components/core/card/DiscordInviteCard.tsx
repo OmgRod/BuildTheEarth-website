@@ -27,7 +27,7 @@ export function DiscordInviteCard({
   const { data } = useSWR(
     `https://discord.com/api/v10/invites/${inviteCode}?with_counts=true&with_expiration=true`,
     blankFetcher,
-    {}
+    {},
   );
 
   return (

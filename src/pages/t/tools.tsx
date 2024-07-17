@@ -20,15 +20,15 @@ export default function Home() {
       "/teams/[team]/manage/settings",
     ].map(
       (route) =>
-        "/" + lang + route.replaceAll("[team]", activeBuildTeam?.slug || "")
-    )
+        "/" + lang + route.replaceAll("[team]", activeBuildTeam?.slug || ""),
+    ),
   );
   const [loading, setLoading] = useState(false);
 
   const handleRerender = async () => {
     setLoading(true);
     await fetch(`/api/rerender?routes=${JSON.stringify(routes)}`).then((res) =>
-      setLoading(false)
+      setLoading(false),
     );
   };
 

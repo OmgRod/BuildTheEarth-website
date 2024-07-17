@@ -197,7 +197,7 @@ export default function Home() {
                 </Anchor>
               </RawCard>
             </GridCol>
-          )
+          ),
         )}
       </Grid>
       <Divider mt="xl" mb="xs" />

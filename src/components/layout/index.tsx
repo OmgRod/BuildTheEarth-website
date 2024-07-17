@@ -21,12 +21,12 @@ export default function Layout(props: LayoutProps) {
   const Navbar = props.team
     ? BuildTeamNavbar
     : props.tools
-    ? ToolsNavbar
-    : props.admin
-    ? AdminNavbar
-    : () => {
-        return <></>;
-      };
+      ? ToolsNavbar
+      : props.admin
+        ? AdminNavbar
+        : () => {
+            return <></>;
+          };
 
   return (
     <AppShell

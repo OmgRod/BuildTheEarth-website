@@ -7,7 +7,7 @@ import Link, { LinkProps } from "next/link";
 export default function Anchor(
   props: AnchorProps &
     LinkProps &
-    React.AnchorHTMLAttributes<HTMLAnchorElement> & { children: any }
+    React.AnchorHTMLAttributes<HTMLAnchorElement> & { children: any },
 ) {
   return <MantineAnchor {...props} component={Link} />;
 }

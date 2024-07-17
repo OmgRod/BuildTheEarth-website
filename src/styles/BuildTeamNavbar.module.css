@@ -4,8 +4,9 @@
 
 .navbarHead {
   margin-bottom: var(--mantine-spacing-md);
-  padding: calc(var(--mantine-spacing-md) * 1.5) var(--mantine-spacing-md) ;
-  border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  padding: calc(var(--mantine-spacing-md) * 1.5) var(--mantine-spacing-md);
+  border-bottom: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
 .navbarLinks {
@@ -23,7 +24,10 @@
   font-weight: 500;
 
   @mixin hover {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-6)
+    );
     color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
 
     .navbarLinkIcon {
@@ -52,8 +56,8 @@
 }
 
 .navbarBottom {
-   margin-top: var(--mantine-spacing-md);
+  margin-top: var(--mantine-spacing-md);
   /* padding: calc(var(--mantine-spacing-md) * 1.5) var(--mantine-spacing-md) ; */
-  border-top: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  border-top: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
- 
