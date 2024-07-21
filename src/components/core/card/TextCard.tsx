@@ -9,7 +9,7 @@ export default function TextCard({
   return (
     <RawCard {...props} copyText={text}>
       <Text fw="bold" className="xl2" {...textProps}>
-        {text}
+        {props.loading ? "..." : text}
       </Text>
     </RawCard>
   );

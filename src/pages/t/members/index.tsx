@@ -25,20 +25,6 @@ import { useState } from "react";
 export default function Home() {
   const [page, setPage] = useState(0);
   const { data, isLoading } = useBuildTeamData(`/members?page=${page}`);
-  /*
-
-        {
-            "id": "022578bb-fccd-4eba-9036-04aef96a9603",
-            "ssoId": "3b184362-db6e-45b7-bf0d-1163e4c64227",
-            "discordId": "567014365019111466",
-            "createdTimestamp": 1712680717271,
-            "email": "caspervandenberg08@gmail.com",
-            "username": "politicalpsycho34",
-            "enabled": true,
-            "emailVerified": true,
-            "avatar": null
-        },
-    */
 
   return (
     <Layout currentLink="/members" team>
