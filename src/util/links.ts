@@ -2,6 +2,8 @@ import {
   IconClock,
   IconList,
   IconMap,
+  IconMessageReport,
+  IconReport,
   IconTool,
   IconUsersGroup,
 } from "@tabler/icons-react";
@@ -21,6 +23,7 @@ export const buildTeamNavLinks: NavLink[] = [
 export const toolsNavLiks: NavLink[] = [
   { link: "/timezone", label: "Timezone Converter", icon: IconClock },
   { link: "/coordinates", label: "Coordinate Converter", icon: IconMap },
+  { link: "/report", label: "Reports", icon: IconMessageReport },
 ];
 
 /**
