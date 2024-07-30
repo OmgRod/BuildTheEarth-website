@@ -39,7 +39,7 @@ export default function BuildTeamNavbar(props: BuildTeamNavbar) {
       <div className={classes.navbarTop}>
         <Group className={classes.navbarHead} justify="space-between">
           <Group>
-            <Image src="/logo.png" h={32} />
+            <Image src="/logo.png" h={32} alt="BTE Logo" />
             <Text fw="bold" fz="xl" lineClamp={1}>
               BuildTheEarth
             </Text>

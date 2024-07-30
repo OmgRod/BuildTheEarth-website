@@ -21,6 +21,7 @@ interface UserButton {
   image: string;
   title: string;
   subtitle: string;
+  onClick?: (team: any) => void;
 }
 
 /**
@@ -57,8 +58,12 @@ export function UserButton(props: UserButton) {
       <MenuDropdown>
         {availableBuildTeams?.map((team) => (
           <MenuItem
+            key={team.id}
             leftSection={<Avatar src={team.icon} size={22} />}
-            onClick={() => setActiveBuildTeam(team.id)}
+            onClick={() => {
+              setActiveBuildTeam(team.id);
+              props.onClick?.(team);
+            }}
             fw={team.id == activeBuildTeamId ? "bold" : undefined}
           >
             {team.name}
