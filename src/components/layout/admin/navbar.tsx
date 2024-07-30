@@ -1,12 +1,10 @@
 "use client";
 
-import { ActionIcon, AppShellNavbar, Group, Image, Text } from "@mantine/core";
-import { adminNavLinks, toolsNavLiks } from "@/util/links";
+import { AppShellNavbar, Group, Image, Text } from "@mantine/core";
 
-import { IconLock } from "@tabler/icons-react";
+import ThemeIcon from "@/components/core/ThemeIcon";
 import classes from "@/styles/BuildTeamNavbar.module.css";
-import useAvailableBuildTeam from "@/hooks/useAvailableBuildTeam";
-import { useSession } from "next-auth/react";
+import { adminNavLinks } from "@/util/links";
 
 export interface AdminNavbar {
   currentLink: string;
@@ -38,9 +36,7 @@ export default function AdminNavbar(props: AdminNavbar) {
               Admin
             </Text>
           </Group>
-          <ActionIcon variant="default" size="sm">
-            <IconLock style={{ width: "70%", height: "70%" }} stroke={1.5} />
-          </ActionIcon>
+          <ThemeIcon />
         </Group>
         <div className={classes.navbarLinks}>{links}</div>
       </div>

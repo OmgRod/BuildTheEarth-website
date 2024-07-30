@@ -2,9 +2,10 @@
 
 import { ActionIcon, AppShellNavbar, Group, Image, Text } from "@mantine/core";
 
-import { IconLock } from "@tabler/icons-react";
+import ThemeIcon from "@/components/core/ThemeIcon";
 import classes from "@/styles/BuildTeamNavbar.module.css";
 import { toolsNavLiks } from "@/util/links";
+import { IconLock } from "@tabler/icons-react";
 
 export interface ToolsNavbar {
   currentLink: string;
@@ -36,9 +37,7 @@ export default function ToolsNavbar(props: ToolsNavbar) {
               Tools
             </Text>
           </Group>
-          <ActionIcon variant="default" size="sm">
-            <IconLock style={{ width: "70%", height: "70%" }} stroke={1.5} />
-          </ActionIcon>
+          <ThemeIcon />
         </Group>
         <div className={classes.navbarLinks}>{links}</div>
       </div>
