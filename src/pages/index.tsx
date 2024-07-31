@@ -61,7 +61,10 @@ export default function Debug() {
             fz="sm"
             c="dimmed"
             onClick={() =>
-              signIn("keycloak", { callbackUrl: "/t/select", redirect: true })
+              signIn("keycloak", {
+                callbackUrl: "/team/select",
+                redirect: true,
+              })
             }
             style={{ cursor: "pointer" }}
           >

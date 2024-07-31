@@ -27,7 +27,7 @@ export default function Home() {
   const { data, isLoading } = useBuildTeamData(`/members?page=${page}`);
 
   return (
-    <Layout currentLink="/members" team>
+    <Layout currentLink="/team/members" currentSpace="team">
       <DataTable
         withTableBorder
         borderRadius="sm"
@@ -101,7 +101,7 @@ export default function Home() {
                   variant="subtle"
                   color="gray"
                   component={Link}
-                  href={`/t/members/${record.id}`}
+                  href={`/team/members/${record.id}`}
                 >
                   <IconEye size={16} />
                 </ActionIcon>

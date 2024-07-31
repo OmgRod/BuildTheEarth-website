@@ -7,10 +7,10 @@ import {
   TextInput,
 } from "@mantine/core";
 
-import Layout from "@/components/layout";
-import { useState } from "react";
 import DynamicIcon from "@/components/core/DynamicIcon";
 import { IconError404 } from "@tabler/icons-react";
+import Layout from "@/components/layout";
+import { useState } from "react";
 
 interface Category {
   id: string;
@@ -29,8 +29,10 @@ export default function Assets() {
   };
 
   return (
-    <Layout currentLink="/assets" tools>
-      <Button onClick={handleGetCategories} fullWidth={false}>Get Categories</Button>
+    <Layout currentLink="/tools/assets" currentSpace="me">
+      <Button onClick={handleGetCategories} fullWidth={false}>
+        Get Categories
+      </Button>
       <Paper withBorder p="md" radius="sm">
         <SimpleGrid cols={1}>
           {categoriesResult.map((category) => {

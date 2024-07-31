@@ -201,7 +201,7 @@ export default function Report() {
   };
 
   return (
-    <Layout currentLink="/report" tools>
+    <Layout currentLink="/tools/report" currentSpace="me">
       <Title>BuildTheEarth Report Form</Title>
       <Text mb="xl" c="dimmed">
         To submit a report to us, you need to fill in all the data below.

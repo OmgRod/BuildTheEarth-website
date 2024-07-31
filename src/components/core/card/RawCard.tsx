@@ -95,7 +95,7 @@ export function RawCard({
                   color="gray"
                   aria-label="Edit Field"
                   component={Link}
-                  href={`/t/edit?fld=${props.id}`}
+                  href={`/team/edit?fld=${props.id}`}
                 >
                   <IconPencil
                     style={{ width: "70%", height: "70%" }}

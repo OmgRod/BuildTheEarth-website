@@ -59,7 +59,7 @@ export default function Home() {
   );
 
   return (
-    <Layout currentLink="/members" team>
+    <Layout currentLink="/team/members" currentSpace="team">
       <Group mb="md" justify="space-between">
         <Group gap="xs">
           <ActionIcon variant="default" aria-label="Go back">
@@ -292,7 +292,7 @@ export default function Home() {
                           disabled={
                             application.buildteam.id != activeBuildTeam?.id
                           }
-                          href={`/t/applications/${application.id}`}
+                          href={`/team/applications/${application.id}`}
                         >
                           <IconEye size={16} />
                         </ActionIcon>

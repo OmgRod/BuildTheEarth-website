@@ -4,7 +4,6 @@ import {
   IconList,
   IconMap,
   IconMessageReport,
-  IconReport,
   IconTool,
   IconUsersGroup,
 } from "@tabler/icons-react";
@@ -12,26 +11,26 @@ import {
 /**
  * These links are used for navigation between buildteam related pages
  */
-export const buildTeamNavLinks: NavLink[] = [
-  { link: "/", label: "Team Overview", icon: IconList },
-  { link: "/members", label: "Members", icon: IconUsersGroup },
-  { link: "/tools", label: "Debug Tools", icon: IconTool },
+export const teamNavLinks: NavLink[] = [
+  { link: "/team", label: "Team Overview", icon: IconList },
+  { link: "/team/members", label: "Members", icon: IconUsersGroup },
+  { link: "/team/tools", label: "Debug Tools", icon: IconTool },
 ];
 
 /**
  * These links are used for navigation between tool pages
  */
-export const toolsNavLiks: NavLink[] = [
-  { link: "/timezone", label: "Timezone Converter", icon: IconClock },
-  { link: "/coordinates", label: "Coordinate Converter", icon: IconMap },
-  { link: "/report", label: "Reports", icon: IconMessageReport },
-  { link: "/assets", label: "Assets", icon: IconFiles}
+export const meNavLinks: NavLink[] = [
+  { link: "/tools/timezone", label: "Timezone Converter", icon: IconClock },
+  { link: "/tools/coordinates", label: "Coordinate Converter", icon: IconMap },
+  { link: "/tools/report", label: "Reports", icon: IconMessageReport },
+  { link: "/tools/assets", label: "Assets", icon: IconFiles },
 ];
 
-/**
- * These links are used for navigation between management and staff pages
- */
-export const adminNavLinks: NavLink[] = [];
+export const navLinks: NavLinkGroup = {
+  team: teamNavLinks,
+  me: meNavLinks,
+};
 
 /**
  * Converts a NavLink array to an array of href links
@@ -46,4 +45,7 @@ interface NavLink {
   link: string;
   label: string;
   icon: any;
+}
+interface NavLinkGroup {
+  [section: string]: NavLink[];
 }

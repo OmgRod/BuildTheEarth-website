@@ -11,11 +11,11 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 
-import { DateTimePicker } from "@mantine/dates";
-import { IconSearch } from "@tabler/icons-react";
-import Layout from "@/components/layout";
 import { RawCard } from "@/components/core/card/RawCard";
 import TextCard from "@/components/core/card/TextCard";
+import Layout from "@/components/layout";
+import { DateTimePicker } from "@mantine/dates";
+import { IconSearch } from "@tabler/icons-react";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
 
@@ -23,7 +23,7 @@ export default function Timezones() {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [date, setDate] = useState<Date | undefined | null>(
-    router.query?.date ? new Date(router.query.date as string) : new Date(),
+    router.query?.date ? new Date(router.query.date as string) : new Date()
   );
   let loadedDate = moment(date);
 
@@ -37,7 +37,7 @@ export default function Timezones() {
   }, [date, router]);
 
   return (
-    <Layout currentLink="/timezone" tools>
+    <Layout currentLink="/tools/timezone" currentSpace="me">
       <Grid>
         <GridCol span={8}>
           <RawCard

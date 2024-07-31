@@ -33,7 +33,7 @@ export default function Coordinates() {
   };
 
   return (
-    <Layout currentLink="/coordinates" tools>
+    <Layout currentLink="/tools/coordinates" currentSpace="me">
       <SimpleGrid cols={2}>
         <Paper withBorder p="md" radius="sm">
           <Text size="xs" c="dimmed" tt="uppercase" fw="bold">

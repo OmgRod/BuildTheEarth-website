@@ -24,7 +24,12 @@ export default function Home() {
   const { data, isLoading } = useBuildTeamData("/");
 
   return (
-    <Layout currentLink="/" team isLoading={isLoading} loader={<Loader />}>
+    <Layout
+      currentLink="/team"
+      currentSpace="team"
+      isLoading={isLoading}
+      loader={<Loader />}
+    >
       <Grid>
         <GridCol span={6}>
           <TextCard
@@ -197,7 +202,7 @@ export default function Home() {
                 </Anchor>
               </RawCard>
             </GridCol>
-          ),
+          )
         )}
       </Grid>
       <Divider mt="xl" mb="xs" />
@@ -244,7 +249,7 @@ export default function Home() {
               fw="bold"
               className="xl2"
               lineClamp={1}
-              href={`/t/members/${data?.creatorId}`}
+              href={`/team/members/${data?.creatorId}`}
               target="_blank"
             >
               {isLoading
