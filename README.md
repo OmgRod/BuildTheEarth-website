@@ -5,7 +5,7 @@
 
 # dashboard-website
 
-_The main discord bot for the BuildTheEarth Discord server._
+_The dashboard for the BuildTheEarth Project._
 
 ![official](https://go.buildtheearth.net/official-shield)
 ![build](https://github.com/BuildTheEarth/website-frontend/actions/workflows/main.yml/badge.svg)
