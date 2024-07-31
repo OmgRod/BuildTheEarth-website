@@ -1,5 +1,6 @@
 import {
   IconClock,
+  IconFiles,
   IconList,
   IconMap,
   IconMessageReport,
@@ -24,6 +25,7 @@ export const toolsNavLiks: NavLink[] = [
   { link: "/timezone", label: "Timezone Converter", icon: IconClock },
   { link: "/coordinates", label: "Coordinate Converter", icon: IconMap },
   { link: "/report", label: "Reports", icon: IconMessageReport },
+  { link: "/assets", label: "Assets", icon: IconFiles}
 ];
 
 /**
