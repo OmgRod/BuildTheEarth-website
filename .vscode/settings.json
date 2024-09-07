@@ -28,6 +28,7 @@
     "special",
     "auth",
     "upload",
-    "config"
+    "config",
+    "mono"
   ]
 }

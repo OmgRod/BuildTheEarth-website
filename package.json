@@ -1,0 +1,19 @@
+{
+  "name": "web",
+  "version": "1.1.0",
+  "private": true,
+  "author": {
+    "name": "BuildTheEarth Development",
+    "url": "https://buildtheearth.net/contact",
+    "email": "development@buildtheearth.net"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "turbo": "^2.1.1"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "yarn@1.22.22"
+}

@@ -1,12 +1,13 @@
 {
 	"name": "frontend",
-	"version": "1.0.576",
+	"version": "1.1.0",
 	"private": true,
+	"packageManager": "yarn@1.22.22",
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
+		"check-types": "tsc --noEmit",
 		"prettier": "prettier --write ./src",
 		"docker": "npm run docker:build && npm run docker:run",
 		"docker:build": "docker build -t bte-frontend .",

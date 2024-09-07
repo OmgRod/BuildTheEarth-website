@@ -1,0 +1,28 @@
+# Monorepo
+.turbo
+
+# IDEs
+**/.idea
+
+# Tooling
+**/package-lock.json
+**/yarn.lock
+
+# Dependencies
+**/node_modules
+**/.pnp
+.pnp.js
+
+# Configuration
+**/.env*.local
+**/*.env*.local
+**/.env
+**/*.env
+
+# Builds
+**/build
+**/dist
+**/out
+**/*.js.map
+**/*.js
+**/logs/*.log

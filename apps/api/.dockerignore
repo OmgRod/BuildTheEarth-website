@@ -5,3 +5,4 @@ node_modules
 **/*.md
 keycloak.json
 .env
+prisma/migrations/**/*.sql
