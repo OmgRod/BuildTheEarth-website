@@ -1,0 +1,262 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String                   @id @default(uuid())
+  ssoId             String                   @unique
+  discordId         String?
+  avatar            String?
+  username          String?
+  minecraft         String?
+  reviewed          Application[]            @relation("reviewer")
+  applications      Application[]            @relation("user")
+  createdBuildTeams BuildTeam[]              @relation("creator")
+  claims            Claim[]                  @relation("owner")
+  permissions       UserPermission[]
+  claimsBuilder     Claim[]                  @relation("builders")
+  joinedBuildTeams  BuildTeam[]              @relation("members")
+  verifications     MinecraftVerifications[]
+  writtenBlogs      Blog[]
+}
+
+model BuildTeam {
+  id                   String                        @id @default(uuid())
+  name                 String                        @unique
+  icon                 String
+  backgroundImage      String
+  invite               String
+  about                String
+  creatorId            String
+  createdAt            DateTime                      @default(now())
+  location             String                        @default("")
+  slug                 String                        @unique @default("")
+  ip                   String                        @default("buildtheearth.net")
+  acceptionMessage     String                        @default("")
+  allowTrial           Boolean                       @default(false)
+  rejectionMessage     String                        @default("")
+  trialMessage         String                        @default("")
+  token                String                        @default("")
+  version              String                        @default("1.12.2")
+  allowBuilderClaim    Boolean?                      @default(true)
+  instantAccept        Boolean?                      @default(false)
+  webhook              String?
+  allowApplications    Boolean?                      @default(true)
+  color                String                        @default("#1098AD")
+  Application          Application[]
+  applicationQuestions ApplicationQuestion[]         @relation("applicationQuestions")
+  creator              User                          @relation("creator", fields: [creatorId], references: [id])
+  claims               Claim[]
+  showcases            Showcase[]                    @relation("showcases")
+  socials              Social[]                      @relation("socials")
+  UserPermission       UserPermission[]
+  members              User[]                        @relation("members")
+  CalendarEvent        CalendarEvent[]
+  responseTemplate     ApplicationResponseTemplate[]
+}
+
+model ApplicationQuestion {
+  id                String                  @id @default(uuid())
+  title             String
+  subtitle          String
+  placeholder       String                  @default("")
+  required          Boolean                 @default(true)
+  type              ApplicationQuestionType
+  icon              String
+  additionalData    Json                    @default("{}")
+  buildTeamId       String
+  sort              Int
+  trial             Boolean                 @default(false)
+  ApplicationAnswer ApplicationAnswer[]
+  buildTeam         BuildTeam               @relation("applicationQuestions", fields: [buildTeamId], references: [id])
+}
+
+model Social {
+  id          String    @id @default(uuid())
+  name        String
+  icon        String
+  url         String
+  buildTeamId String
+  buildTeam   BuildTeam @relation("socials", fields: [buildTeamId], references: [id])
+}
+
+model Showcase {
+  id          String    @id @default(uuid())
+  title       String
+  city        String    @default("")
+  approved    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  buildTeamId String
+  uploadId    String
+  buildTeam   BuildTeam @relation("showcases", fields: [buildTeamId], references: [id])
+  image       Upload    @relation(fields: [uploadId], references: [id])
+}
+
+model UserPermission {
+  id           String      @id @default(uuid())
+  userId       String
+  buildTeamId  String?
+  permissionId String
+  buildTeam    BuildTeam?  @relation(fields: [buildTeamId], references: [id])
+  permission   Permisision @relation(fields: [permissionId], references: [id])
+  user         User        @relation(fields: [userId], references: [id])
+}
+
+model MinecraftVerifications {
+  code      Int      @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @updatedAt()
+}
+
+model Permisision {
+  id             String           @unique
+  description    String           @default("")
+  defaultValue   Boolean          @default(false)
+  global         Boolean          @default(false)
+  UserPermission UserPermission[]
+}
+
+model FAQQuestion {
+  id       String @id @default(uuid())
+  question String
+  answer   String
+  links    Json[] @default([])
+}
+
+model Contact {
+  id      String  @id @default(uuid())
+  name    String
+  role    String
+  discord String?
+  email   String?
+  avatar  String?
+}
+
+model Blog {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  summary     String
+  content     String
+  thumbnail   Upload   @relation(fields: [thumbnailId], references: [id])
+  thumbnailId String
+  publishedAt DateTime
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  public      Boolean?
+}
+
+model Claim {
+  id          String    @id @default(uuid())
+  ownerId     String?
+  area        String[]
+  center      String?
+  size        Int       @default(0)
+  active      Boolean   @default(false)
+  finished    Boolean   @default(false)
+  buildTeamId String
+  name        String    @default("")
+  createdAt   DateTime  @default(now())
+  externalId  String?   @unique
+  description String?
+  buildings   Int       @default(1)
+  city        String?
+  osmName     String?
+  buildTeam   BuildTeam @relation(fields: [buildTeamId], references: [id])
+  owner       User?     @relation("owner", fields: [ownerId], references: [id])
+  builders    User[]    @relation("builders")
+  images      Upload[]
+}
+
+model Application {
+  id                String              @id @default(uuid())
+  buildteamId       String
+  userId            String
+  reviewerId        String?
+  status            ApplicationStatus   @default(SEND)
+  createdAt         DateTime            @default(now())
+  reviewedAt        DateTime?
+  reason            String?
+  claimId           String?
+  trial             Boolean             @default(false)
+  buildteam         BuildTeam           @relation(fields: [buildteamId], references: [id])
+  reviewer          User?               @relation("reviewer", fields: [reviewerId], references: [id])
+  user              User                @relation("user", fields: [userId], references: [id])
+  ApplicationAnswer ApplicationAnswer[]
+}
+
+model ApplicationAnswer {
+  id            String              @id @default(uuid())
+  applicationId String
+  questionId    String
+  answer        String
+  application   Application         @relation(fields: [applicationId], references: [id])
+  question      ApplicationQuestion @relation(fields: [questionId], references: [id])
+}
+
+model ApplicationResponseTemplate {
+  id          String    @id @default(uuid())
+  buildteamId String
+  name        String    @default("Response Template")
+  content     String
+  buildteam   BuildTeam @relation(fields: [buildteamId], references: [id])
+}
+
+model Upload {
+  id        String     @id @default(uuid())
+  name      String
+  hash      String
+  height    Int
+  width     Int
+  checked   Boolean    @default(false)
+  createdAt DateTime   @default(now())
+  Showcase  Showcase[]
+  Claim     Claim?     @relation(fields: [claimId], references: [id])
+  claimId   String?
+  Blog      Blog[]
+}
+
+model CalendarEvent {
+  id          String     @id @default(uuid())
+  name        String
+  description String?
+  city        String?
+  country     String?
+  start       DateTime
+  end         DateTime
+  discordLink String?
+  buildTeam   BuildTeam? @relation(fields: [buildTeamId], references: [id])
+  buildTeamId String?
+}
+
+model JsonStore {
+  id   String @id @default(uuid())
+  data Json
+}
+
+enum ApplicationStatus {
+  SEND
+  REVIEWING
+  ACCEPTED
+  DECLINED
+  TRIAL
+}
+
+enum ApplicationQuestionType {
+  TEXT
+  SHORT_INPUT
+  LONG_INPUT
+  DROPDOWN
+  CITY
+  URL
+  MINECRAFT
+  SLIDER
+  IMAGE
+  CHECKBOX
+}
