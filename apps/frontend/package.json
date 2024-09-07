@@ -4,14 +4,12 @@
 	"private": true,
 	"packageManager": "yarn@1.22.22",
 	"scripts": {
-		"dev": "next dev",
 		"build": "next build",
+		"clean": "rm -rf .next",
 		"start": "next start",
-		"check-types": "tsc --noEmit",
-		"prettier": "prettier --write ./src",
-		"docker": "npm run docker:build && npm run docker:run",
-		"docker:build": "docker build -t bte-frontend .",
-		"docker:run": "docker run -p 3000:3000 bte-frontend"
+		"dev": "next dev",
+		"lint": "eslint . --max-warnings 0",
+		"prettier": "prettier --write ./src"
 	},
 	"dependencies": {
 		"@bte-germany/terraconvert": "^1.1.2",
@@ -47,7 +45,7 @@
 		"@tiptap/pm": "^2.0.2",
 		"@tiptap/react": "^2.0.2",
 		"@tiptap/starter-kit": "^2.0.2",
-		"@types/mapbox__mapbox-gl-draw": "^1.4.4",
+		"@types/mapbox__mapbox-gl-draw": "1.4.4",
 		"@types/sanitize-html": "^2.9.0",
 		"axios": "^1.6.0",
 		"clsx": "^2.1.0",
@@ -61,7 +59,7 @@
 		"i18next": "^21.10.0",
 		"keycloak-js": "^19.0.1",
 		"mantine-contextmenu": "^7.3.3",
-		"mapbox-gl": "^2.9.1",
+		"mapbox-gl": "2.13.0",
 		"mapbox-gl-draw-snap-mode": "^0.2.0",
 		"mapbox-gl-style-switcher": "^1.0.11",
 		"minimatch": "^8.0.2",
@@ -86,8 +84,8 @@
 	"devDependencies": {
 		"@types/node": "18.7.15",
 		"@types/nprogress": "^0.2.0",
-		"@types/react": "18.0.18",
-		"@types/react-dom": "18.0.6",
+		"@types/react": "18.3.5",
+		"@types/react-dom": "18.3.0",
 		"@types/uuid": "^9.0.1",
 		"@typescript-eslint/eslint-plugin": "^5.27.1",
 		"@typescript-eslint/parser": "^5.27.1",

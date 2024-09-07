@@ -1,3 +1,4 @@
+const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 });
@@ -33,9 +34,6 @@ const nextConfig = {
 			},
 		],
 	},
-	// compiler: {
-	// 	styledComponents: true,
-	// },
 	i18n: {
 		defaultLocale: 'en',
 		locales: ['en', 'de', 'fr', 'nl', 'no', 'ru', 'zh'],
@@ -101,6 +99,9 @@ const nextConfig = {
 				permanent: true,
 			},
 		];
+	},
+	experimental: {
+		outputFileTracingRoot: path.join(__dirname, '../../'),
 	},
 };
 

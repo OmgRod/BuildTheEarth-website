@@ -20,6 +20,7 @@ import {
 	Tooltip,
 	rem,
 } from '@mantine/core';
+import { useClipboard, useDebouncedState } from '@mantine/hooks';
 import {
 	IconBrandMinecraft,
 	IconCheck,
@@ -31,24 +32,23 @@ import {
 	IconPlus,
 	IconTrash,
 } from '@tabler/icons-react';
-import { useClipboard, useDebouncedState } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 
 import { ClaimDrawerImages } from '@/components/map/ClaimDrawerImages';
-import { Discord } from '@icons-pack/react-simple-icons';
-import Link from 'next/link';
 import Map from '@/components/map/Map';
+import Page from '@/components/Page';
+import { useAccessToken } from '@/hooks/useAccessToken';
+import { useUser } from '@/hooks/useUser';
+import thumbnail from '@/public/images/thumbnails/me.png';
+import fetcher from '@/utils/Fetcher';
+import { Discord } from '@icons-pack/react-simple-icons';
+import { showNotification } from '@mantine/notifications';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { NextPage } from 'next';
-import Page from '@/components/Page';
-import fetcher from '@/utils/Fetcher';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { showNotification } from '@mantine/notifications';
-import thumbnail from '@/public/images/thumbnails/me.png';
-import { useAccessToken } from '@/hooks/useAccessToken';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '@/hooks/useUser';
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -317,7 +317,12 @@ const ClaimPage: NextPage = ({ claimId, data }: any) => {
 													</MenuTarget>
 													<MenuDropdown>
 														<MenuItem
-															leftSection={<Discord />}
+															leftSection={
+																<Discord
+																	onPointerEnterCapture={undefined}
+																	onPointerLeaveCapture={undefined}
+																/>
+															}
 															onClick={() => clipboard.copy(builder.discordId)}
 														>
 															Copy Discord Id

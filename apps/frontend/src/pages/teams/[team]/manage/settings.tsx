@@ -39,7 +39,7 @@ const Settings = ({ data: tempData }: any) => {
 	useEffect(() => {
 		setAllowSettings(permissions.has('team.settings.edit', data?.slug));
 		setAllowSocial(permissions.has('team.socials.edit', data?.slug));
-	}, [permissions]);
+	}, [permissions, data?.slug]);
 
 	const handleSave = (e: any) => {
 		e.preventDefault();

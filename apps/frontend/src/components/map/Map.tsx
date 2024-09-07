@@ -127,7 +127,7 @@ function Map({
 				mapboxMap.addControl(
 					new MapboxStyleSwitcherControl(styles, {
 						defaultStyle: scheme.colorScheme == 'dark' ? 'Dark' : 'Light',
-					}),
+					}) as unknown as mapboxgl.IControl, // TODO: Types are wrong, dependency versions?
 				);
 
 			mapboxMap.addControl(

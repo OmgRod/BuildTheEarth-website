@@ -21,11 +21,11 @@ import {
 	Menu,
 	MenuItem,
 	Paper,
-	rem,
 	Text,
 	Tooltip,
 	Transition,
 	UnstyledButton,
+	rem,
 	useMantineColorScheme,
 	useMantineTheme,
 } from '@mantine/core';
@@ -400,27 +400,42 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 									break;
 								}
 								case 'youtube': {
-									icon = <Youtube />;
+									icon = (
+										<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+									);
 									break;
 								}
 								case 'twitter': {
-									icon = <Twitter />;
+									icon = (
+										<Twitter onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+									);
 									break;
 								}
 								case 'reddit': {
-									icon = <Reddit />;
+									icon = (
+										<Reddit onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+									);
 									break;
 								}
 								case 'twitch': {
-									icon = <Twitch />;
+									icon = (
+										<Twitch onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+									);
 									break;
 								}
 								case 'instagram': {
-									icon = <Instagram />;
+									icon = (
+										<Instagram
+											onPointerEnterCapture={undefined}
+											onPointerLeaveCapture={undefined}
+										/>
+									);
 									break;
 								}
 								case 'tiktok': {
-									icon = <Tiktok />;
+									icon = (
+										<Tiktok onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+									);
 									break;
 								}
 								default:
@@ -448,7 +463,7 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 								color="gray"
 								key={'discord-inv'}
 							>
-								<Discord />
+								<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 							</ActionIcon>
 						)}
 						{userStatus != 'Not Joined' ? (

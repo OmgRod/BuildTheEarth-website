@@ -1,5 +1,5 @@
+import { Alert, Badge, Button, Card, Flex, Group, Tabs, Text, TextInput, rem } from '@mantine/core';
 import { Discord, Github } from '@icons-pack/react-simple-icons';
-import { Alert, Badge, Button, Card, Flex, Group, rem, Tabs, Text, TextInput } from '@mantine/core';
 import {
 	IconAlertCircle,
 	IconBroadcast,
@@ -14,18 +14,18 @@ import {
 } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 
-import Page from '@/components/Page';
-import { useAccessToken } from '@/hooks/useAccessToken';
-import { useUser } from '@/hooks/useUser';
-import thumbnail from '@/public/images/thumbnails/me.png';
-import { useForm } from '@mantine/form';
-import { showNotification } from '@mantine/notifications';
 import { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
+import Page from '@/components/Page';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { showNotification } from '@mantine/notifications';
+import thumbnail from '@/public/images/thumbnails/me.png';
+import { useAccessToken } from '@/hooks/useAccessToken';
+import { useForm } from '@mantine/form';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
+import { useSession } from 'next-auth/react';
+import { useTranslation } from 'react-i18next';
+import { useUser } from '@/hooks/useUser';
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -250,9 +250,9 @@ const SocialAccount = ({ identities, socialName }: any) => {
 		<Card mb={'md'} withBorder>
 			<Flex align={'center'} gap={'md'}>
 				{socialName === 'discord' ? (
-					<Discord size={'3rem'} />
+					<Discord size={'3rem'} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				) : socialName == 'github' ? (
-					<Github size={'3rem'} />
+					<Github size={'3rem'} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				) : (
 					<IconWorld size={'3rem'} />
 				)}

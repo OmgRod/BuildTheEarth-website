@@ -1,66 +1,51 @@
-FROM node:18-alpine AS base
+FROM node:21-alpine AS base
 
-#
-# Dependency Installation - Cached
-#
-FROM base AS deps
+FROM base AS builder
+RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+# Run turbo (will prune the lockfile to only include target dependencies)
+RUN yarn global add turbo@^2.1.1
+COPY . .
+RUN turbo prune frontend --docker
 
-#
-# Building Source - Cached
-#
-FROM base AS builder
+# Add lockfile and package.json's of isolated subworkspace
+FROM base AS installer
+RUN apk update
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-COPY build.env.local /app/.env.local
+# First install the dependencies (as they change less often)
+COPY --from=builder /app/out/json/ .
+RUN yarn install
+
+# Build the project
+COPY --from=builder /app/out/full/ .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+RUN yarn turbo run build --filter=frontend...
 
-#
-# Production Image
-#
 FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
-# ENV NEXT_SHARP_PATH /node_modules/sharp
 
-
+# Create a runner user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
 USER nextjs
+
+# Reduce image size
+COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/.next/static ./apps/frontend/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/public ./apps/frontend/public
 
 EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD node apps/frontend/server.js

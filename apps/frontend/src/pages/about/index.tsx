@@ -11,14 +11,14 @@ import {
 } from '@mantine/core';
 
 import BackgroundImage from '@/components/BackgroundImage';
-import Page from '@/components/Page';
-import thumbnail from '@/public/images/thumbnails/about.webp';
-import { Youtube } from '@icons-pack/react-simple-icons';
-import { NextPage } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 import { ChevronRight } from 'tabler-icons-react';
+import Link from 'next/link';
+import { NextPage } from 'next';
+import Page from '@/components/Page';
+import { Youtube } from '@icons-pack/react-simple-icons';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import thumbnail from '@/public/images/thumbnails/about.webp';
+import { useTranslation } from 'react-i18next';
 
 const Home: NextPage = () => {
 	const theme = useMantineTheme();
@@ -65,7 +65,7 @@ const Home: NextPage = () => {
 							m="md"
 							cite="– @miallv14"
 							color="red"
-							icon={<Youtube />}
+							icon={<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
 							mt="lg"
 							iconSize={40}
 						>
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
 							m="md"
 							cite="– @lukastrommer"
 							color="red"
-							icon={<Youtube />}
+							icon={<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
 							mt="lg"
 							iconSize={40}
 						>

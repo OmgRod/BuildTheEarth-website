@@ -126,7 +126,12 @@ const Apply: NextPage = ({ data, buildteam }: any) => {
 				style={{ marginBottom: 'var(--mantine-spacing-md)' }}
 			/>
 			{uiError?.title && (
-				<Alert title={uiError.title} mb="md" color="red" icon={<Discord />}>
+				<Alert
+					title={uiError.title}
+					mb="md"
+					color="red"
+					icon={<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
+				>
 					{uiError?.content}
 				</Alert>
 			)}

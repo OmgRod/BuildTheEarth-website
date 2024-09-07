@@ -3,6 +3,7 @@
 
 # IDEs
 **/.idea
+**/.vscode
 
 # Tooling
 **/package-lock.json
@@ -26,3 +27,4 @@
 **/*.js.map
 **/*.js
 **/logs/*.log
+**/*.tsbuildinfo

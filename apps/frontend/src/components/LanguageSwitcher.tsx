@@ -1,4 +1,4 @@
-import '/node_modules/flag-icons/css/flag-icons.min.css';
+import '../../../../node_modules/flag-icons/css/flag-icons.min.css'; // TODO: Local repo
 
 import { Group, Menu, UnstyledButton } from '@mantine/core';
 

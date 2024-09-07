@@ -58,7 +58,12 @@ const Contact: NextPage = ({ data }: any) => {
 							</Text>
 
 							<Group wrap="nowrap" gap={10} mt={3} justify="flex-start">
-								<Discord width={18} size={16} />
+								<Discord
+									width={18}
+									size={16}
+									onPointerEnterCapture={undefined}
+									onPointerLeaveCapture={undefined}
+								/>
 								<Text size="xs" c="dimmed">
 									{contact.discord}
 								</Text>
@@ -92,7 +97,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Discord />
+					<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				</ThemeIcon>
 
 				<ThemeIcon
@@ -104,7 +109,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Youtube />
+					<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -115,7 +120,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Instagram />
+					<Instagram onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -126,7 +131,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Tiktok />
+					<Tiktok onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -137,7 +142,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Twitter />
+					<Twitter onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				</ThemeIcon>
 
 				<ThemeIcon
@@ -149,7 +154,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Twitch />
+					<Twitch onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -160,7 +165,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Facebook />
+					<Facebook onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 				</ThemeIcon>
 			</Group>
 			<Title order={2} mt="lg">

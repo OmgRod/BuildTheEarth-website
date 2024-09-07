@@ -36,7 +36,7 @@ export default function Footer({ links, style }: FooterProps) {
 						aria-label="Discord"
 						target="_blank"
 					>
-						<Discord />
+						<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 					</ActionIcon>
 					<LanguageSwitcher className={classes.language} />
 				</Group>
