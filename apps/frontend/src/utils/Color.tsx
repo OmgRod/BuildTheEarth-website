@@ -37,4 +37,3 @@ export function getRandomColor(): MantineColor {
 	];
 	return colors[Math.floor(Math.random() * colors.length)];
 }
-// changes to have changes
