@@ -11,7 +11,7 @@ export function useContextMenu({
 	disableEventPosition = false,
 }: {
 	disableEventPosition?: boolean;
-}): [ContextMenuInfo, React.Dispatch, React.MouseEventHandler] {
+}): [ContextMenuInfo, React.Dispatch<ContextMenuInfo>, React.MouseEventHandler] {
 	const [info, setInfo] = useState<ContextMenuInfo>({ x: 0, y: 0, opened: false });
 
 	const contextMenuHandler = useCallback<React.MouseEventHandler>(
