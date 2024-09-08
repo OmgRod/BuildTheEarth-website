@@ -16,7 +16,7 @@
 		"start": "turbo start",
 		"dev": "turbo dev db:studio",
 		"lint": "turbo lint",
-		"prettier": "turbo prettier",
+		"prettier": "turbo prettier --ui=stream",
 		"db:generate": "turbo db:generate",
 		"db:studio": "yarn workspace api db:studio",
 		"db:migrate": "yarn workspace api db:migrate",
@@ -29,6 +29,7 @@
 		"@repo/prettier-config": "*",
 		"@repo/typescript-config": "*",
 		"husky": "^9.1.5",
+		"lint-staged": "^15.2.10",
 		"turbo": "^2.1.1"
 	},
 	"workspaces": [
@@ -36,5 +37,6 @@
 		"packages/*"
 	],
 	"packageManager": "yarn@1.22.22",
-	"prettier": "@repo/prettier-config"
+	"prettier": "@repo/prettier-config",
+	"dependencies": {}
 }
