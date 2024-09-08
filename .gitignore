@@ -8,6 +8,7 @@
 # Tooling
 **/package-lock.json
 **/yarn.lock
+!yarn.lock
 
 # Dependencies
 **/node_modules
