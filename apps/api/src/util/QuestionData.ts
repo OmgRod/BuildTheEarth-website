@@ -43,5 +43,4 @@ export const questions = [
 	dropdownQuestionDataSchema,
 	checkboxQuestionDataSchema,
 ];
-
 // WE WO CHANGES
