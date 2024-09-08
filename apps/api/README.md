@@ -19,7 +19,7 @@ The backend for the BuildTheEarth.net website
 📌 All settings can be made in a `.env` file. The following options are available:
 
 | Name                    | Description                                                                                                                  | Required | Type                        |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------|----------|-----------------------------|
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------- |
 | `WEBPORT`               | The port the server should listen on                                                                                         | Yes      | number                      |
 | `LOGLEVEL`              | The loglevel, that shall be used.                                                                                            | Yes      | debug, info, warning, error |
 | `SESSION_SECRET`        | A long random string                                                                                                         | Yes      | string                      |

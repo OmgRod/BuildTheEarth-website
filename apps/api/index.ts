@@ -1,6 +1,6 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 
-import Core from "./src/Core.js";
+import Core from './src/Core.js';
 
 dotenv.config();
 
