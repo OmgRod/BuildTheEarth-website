@@ -1,11 +1,11 @@
 {
-  "files.exclude": {
-    "**/*.js": {
-      "when": "$(basename).ts"
-    },
-    "**/*.js.map": true
-  },
-  "typescript.tsdk": "node_modules\\typescript\\lib",
+	"files.exclude": {
+		"**/*.js": {
+			"when": "$(basename).ts"
+		},
+		"**/*.js.map": true
+	},
+	"typescript.tsdk": "node_modules\\typescript\\lib",
 
-  "conventionalCommits.scopes": ["mono", "api/src", "frontend/src"]
+	"conventionalCommits.scopes": ["mono", "api/src", "frontend/src", "actions"]
 }
