@@ -19,12 +19,17 @@
 		"prettier": "turbo prettier",
 		"db:generate": "turbo db:generate",
 		"db:studio": "yarn workspace api db:studio",
-		"ws": "yarn workspace"
+		"db:migrate": "yarn workspace api db:migrate",
+		"git:pull": "git pull && yarn install && yarn run db:generate",
+		"ws": "yarn workspace",
+		"prepare": "husky || true",
+		"postinstall": "husky || true"
 	},
 	"devDependencies": {
-		"turbo": "^2.1.1",
+		"@repo/prettier-config": "*",
 		"@repo/typescript-config": "*",
-		"@repo/prettier-config": "*"
+		"husky": "^9.1.5",
+		"turbo": "^2.1.1"
 	},
 	"workspaces": [
 		"apps/*",
