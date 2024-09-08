@@ -9,6 +9,5 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "outDir": "./dist"
   }
 }

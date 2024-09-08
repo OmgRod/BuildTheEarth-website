@@ -1,41 +1,44 @@
-#
+<!-- markdownlint-disable -->
+<div align="center">
 
-<div style="text-align: center;">
-<img src="https://buildtheearth.net/assets/img/site-logo-animated.gif" alt="">
-<h1>Build the Earth Website Backend</h1>
-The backend for the BuildTheEarth.net website
+<img width="128" src="https://github.com/BuildTheEarth/assets/blob/main/images/logos/logo.png?raw=true" />
+
+# Website API
+
+_The API for the Build The Earth Project._
+
+![official](https://go.buildtheearth.net/official-shield)
+[![chat](https://img.shields.io/discord/706317564904472627.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord.gg/buildtheearth)
+[![Crowdin](https://badges.crowdin.net/buildtheearth-website/localized.svg)](https://crowdin.com/project/buildtheearth-website)
+
 </div>
+<!-- markdownlint-restore -->
 
-# Start Developing
+This is a [express.js](https://expressjs.com/) project.
 
-#### If you are using JetBrains WebStorm, look below under `Start Developing in WebStorm`
+## Getting Started
 
-1. Clone this Repository (`git clone https://github.com/BuildTheEarth/website-node-backend.git`)
-2. Install the dependencies with `yarn`
-3. Compile the TS files to JS (`tsc` if not installed, run `npm install -g typescript`)
-4. Start the server with `yarn start`
-5. 🎉 Start Coding
+See the global Readme file.
 
-📌 All settings can be made in a `.env` file. The following options are available:
+# Envoriment Variables
 
-| Name                    | Description                                                                                                                  | Required | Type                        |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------- |
-| `WEBPORT`               | The port the server should listen on                                                                                         | Yes      | number                      |
-| `LOGLEVEL`              | The loglevel, that shall be used.                                                                                            | Yes      | debug, info, warning, error |
-| `SESSION_SECRET`        | A long random string                                                                                                         | Yes      | string                      |
-| `DATABASE_URL`          | The database connection string. More info: https://www.prisma.io/docs/concepts/database-connectors/postgresql#connection-url | Yes      | string                      |
-| `KEYCLOAK_CLIENTID`     | The ID of the keycloak client                                                                                                | Yes      | string                      |
-| `KEYCLOAK_CLIENTSECRET` | The secret of the keycloak client                                                                                            | Yes      | string                      |
-| `KEYCLOAK_URL`          | The endpoint of your keycloak instance                                                                                       | Yes      | string                      |
-| `KEYCLOAK_REALM`        | Your keycloak realm                                                                                                          | Yes      | string                      |
-
-# Start Developing in WebStorm
-
-1. Clone this Repository (`git clone https://github.com/BuildTheEarth/website-node-backend.git`)
-2. Install the dependencies with `yarn`
-3. Open your WebStorm settings (CTRL+ALT+S)
-4. Enable the following checkbox ![](https://nach.link/G2q9i)
-5. Start the server with `yarn start`
-   6🎉 Start Coding
-
-📌 All settings can be made in a `.env` file. (Just copy and rename the `.example.env`)
+| Variable               | Example Value                                          | Description                                                            |
+| ---------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| KEYCLOAK_URL           | https://yourkeycloak.net                               | The Keycloak SSO URL                                                   |
+| KEYCLOAK_REALM         | yourrealm                                              | Your Keycloak Realm                                                    |
+| KEYCLOAK_CLIENTID      | yourclient                                             | A client ID for your Keycloak Installation                             |
+| KEYCLOAK_CLIENTSECRET  | topsecret                                              | The client secret of your client                                       |
+| DATABASE_URL           | postgresql://user:pass@ip:5432/database?pool_timeout=0 | A formatted Database Connection URL                                    |
+| FRONTEND_URL           | http://localhost:3000                                  | The URL to your local or deployed BuildTheEarth Website                |
+| FRONTEND_KEY           | secondtopsecret                                        | The Key used to Authenticate against the BuildTheEarth Website         |
+| AWS_REGION             | reg-1                                                  | The Region your S3 Bucket is hosted in                                 |
+| AWS_ACCESS_KEY         | thirdtopsecret                                         | Your AWS S3 Access Key                                                 |
+| AWS_SECRET_KEY         | fourthtopsecret                                        | Your actual S3 Secret                                                  |
+| AWS_UPLOAD_BUCKET_NAME | uploads                                                | The Bueckt to use for User Uploads                                     |
+| AWS_STATIC_BUCKET_NAME | static                                                 | The Bucket to use for static images                                    |
+| DISCORD_WEBHOOK_URL    | https://discord.com/api/webhooks                       | A webhook to a private channel on discord                              |
+| DISCORD_BOT_URL        | https://bot.yourserver.net                             | The URL where your local or deployed BuildTheEarth Bot API responds on |
+| DISCORD_BOT_SECRET     | fifthtopsecret                                         | The Secret Key to communicate witht the BuildTheEarth Bot API          |
+| SESSION_SECRET         | sixthtopsecret                                         | Secret used to encode session information of users                     |
+| LOGLEVEL               | debug                                                  | Which logs should be logged to the console?                            |
+| WEBPORT                | 8080                                                   | The port the API should run on                                     |

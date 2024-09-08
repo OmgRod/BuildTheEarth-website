@@ -1,22 +1,35 @@
 {
-  "name": "web",
-  "version": "1.1.0",
-  "private": true,
-  "author": {
-    "name": "BuildTheEarth Development",
-    "url": "https://buildtheearth.net/contact",
-    "email": "development@buildtheearth.net"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "turbo": "^2.1.1",
-    "@repo/typescript-config": "*",
-    "@repo/prettier-config": "*"
-  },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "packageManager": "yarn@1.22.22",
-  "prettier": "@repo/prettier-config"
+	"name": "web",
+	"version": "1.1.0",
+	"private": true,
+	"author": {
+		"name": "BuildTheEarth Development",
+		"url": "https://buildtheearth.net/contact",
+		"email": "development@buildtheearth.net"
+	},
+	"license": "MIT",
+	"scripts": {
+		"build": "turbo build",
+		"build:api": "turbo build --filter=api...",
+		"build:frontend": "turbo build --filter=frontend...",
+		"clean": "turbo clean",
+		"start": "turbo start",
+		"dev": "turbo dev db:studio",
+		"lint": "turbo lint",
+		"prettier": "turbo prettier",
+		"db:generate": "turbo db:generate",
+		"db:studio": "yarn workspace api db:studio",
+		"ws": "yarn workspace"
+	},
+	"devDependencies": {
+		"turbo": "^2.1.1",
+		"@repo/typescript-config": "*",
+		"@repo/prettier-config": "*"
+	},
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"packageManager": "yarn@1.22.22",
+	"prettier": "@repo/prettier-config"
 }
