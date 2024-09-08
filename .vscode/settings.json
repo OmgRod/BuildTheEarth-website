@@ -7,5 +7,5 @@
 	},
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 
-	"conventionalCommits.scopes": ["mono", "api/src", "frontend/src", "actions"]
+	"conventionalCommits.scopes": ["mono", "api/src", "frontend/src", "actions", "frontend/components", "frontent/pages"]
 }
