@@ -23,9 +23,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
 	const { t } = useTranslation();
 	const router = useRouter();
 
-	const [selected, setSelected] = useState(
-		languages.find((l: any) => l.code == (router.locale || 'en')),
-	);
+	const [selected, setSelected] = useState(languages.find((l: any) => l.code == (router.locale || 'en')));
 	const changeLanguage = (lang: { label: string; code: string; flag: string }) => {
 		setSelected(lang);
 		const { pathname, asPath, query } = router;
@@ -35,10 +33,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
 	const items = languages.map((item) => (
 		<Menu.Item
 			leftSection={
-				<span
-					className={`fi fi-${item.flag} fis`}
-					style={{ height: 18, width: 18, borderRadius: '50%' }}
-				></span>
+				<span className={`fi fi-${item.flag} fis`} style={{ height: 18, width: 18, borderRadius: '50%' }}></span>
 			}
 			onClick={() => changeLanguage(item)}
 			key={item.label}
@@ -48,12 +43,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
 	));
 
 	return (
-		<Menu
-			onOpen={() => setOpened(true)}
-			onClose={() => setOpened(false)}
-			radius="sm"
-			width="target"
-		>
+		<Menu onOpen={() => setOpened(true)} onClose={() => setOpened(false)} radius="sm" width="target">
 			<Menu.Target>
 				<UnstyledButton className={`${classes.control} ${className}`} data-opened={opened}>
 					<Group gap="xs">

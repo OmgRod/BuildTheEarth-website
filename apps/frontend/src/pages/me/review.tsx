@@ -40,10 +40,7 @@ const ReviewPage: NextPage = () => {
 					</Table.Thead>
 					<Table.Tbody>
 						{data
-							?.sort(
-								(a: any, b: any) =>
-									new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-							)
+							?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 							.map((a: any) => (
 								<Table.Tr key={a.id}>
 									<Table.Td>

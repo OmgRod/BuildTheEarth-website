@@ -26,9 +26,7 @@ const SignIn: NextPage = () => {
 				To access this page you need to sign in with your BuildTheEarth Account. <br />
 			</p>
 
-			{router.query.error && (
-				<p style={{ color: theme.colors.red[6] }}>An error occurred, please try again later.</p>
-			)}
+			{router.query.error && <p style={{ color: theme.colors.red[6] }}>An error occurred, please try again later.</p>}
 
 			<Button onClick={() => signIn('keycloak')}>Sign in</Button>
 

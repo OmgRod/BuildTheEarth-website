@@ -12,24 +12,13 @@ interface UsersTableProps {
 	actions?: (data: any) => any;
 }
 
-export function UsersTable({
-	data,
-	actions,
-	extraHead,
-	extraContent,
-	loading = false,
-}: UsersTableProps) {
+export function UsersTable({ data, actions, extraHead, extraContent, loading = false }: UsersTableProps) {
 	const rows = !loading ? (
 		data.map((user) => (
 			<Table.Tr key={user.id}>
 				<Table.Td>
 					<Group gap="sm">
-						<Avatar
-							size={40}
-							radius={40}
-							color={user.enabled ? 'green' : 'red'}
-							alt={user?.username + ' Avatar'}
-						>
+						<Avatar size={40} radius={40} color={user.enabled ? 'green' : 'red'} alt={user?.username + ' Avatar'}>
 							{user.username ? user?.username?.charAt(0).toUpperCase() : <IconUserQuestion />}
 						</Avatar>
 						<div>
@@ -53,11 +42,7 @@ export function UsersTable({
 						}
 						position="top-start"
 					>
-						<p>
-							{user.createdTimestamp
-								? vagueTime.get({ to: new Date(user.createdTimestamp) })
-								: 'Not yet'}
-						</p>
+						<p>{user.createdTimestamp ? vagueTime.get({ to: new Date(user.createdTimestamp) }) : 'Not yet'}</p>
 					</Tooltip>
 				</Table.Td>
 

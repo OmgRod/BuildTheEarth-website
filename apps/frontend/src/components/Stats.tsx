@@ -12,14 +12,7 @@ interface StatsGridProps {
 
 export function StatsGrid(data: StatsGridProps) {
 	return (
-		<Paper
-			withBorder
-			p="md"
-			radius="md"
-			key={data.title}
-			{...data.paperProps}
-			onClick={data.onClick}
-		>
+		<Paper withBorder p="md" radius="md" key={data.title} {...data.paperProps} onClick={data.onClick}>
 			<Group justify="space-between">
 				<Text size="xs" c="dimmed" fw={700} style={{ textTransform: 'uppercase' }}>
 					{data.title}

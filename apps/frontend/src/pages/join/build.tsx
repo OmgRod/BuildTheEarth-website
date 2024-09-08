@@ -66,11 +66,7 @@ const Build: NextPage = ({ data }: any) => {
 							padding: 16,
 						}}
 					>
-						<Title
-							style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }}
-							ta="center"
-							order={1}
-						>
+						<Title style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }} ta="center" order={1}>
 							{t('build.title')}
 						</Title>
 					</Center>
@@ -140,8 +136,7 @@ const Build: NextPage = ({ data }: any) => {
 								<Group
 									wrap="nowrap"
 									style={{
-										backgroundColor:
-											scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
+										backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
 										borderRadius: 0,
 										cursor: 'pointer',
 										boxShadow: 'var(--mantine-shadow-block)',

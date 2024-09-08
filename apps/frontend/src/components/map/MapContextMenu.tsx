@@ -23,12 +23,7 @@ interface MapContextMenuProps extends ContextMenuProps {
 	oLng?: number | null;
 }
 
-export function MapContextMenu({
-	contextMenuInfo,
-	setContextMenuInfo,
-	oLat,
-	oLng,
-}: MapContextMenuProps) {
+export function MapContextMenu({ contextMenuInfo, setContextMenuInfo, oLat, oLng }: MapContextMenuProps) {
 	const clipboard = useClipboard();
 	const [{ lat, lng }, setCoords] = useState({ lat: oLat, lng: oLng });
 	const [data, setData] = useState<any>();
@@ -63,9 +58,7 @@ export function MapContextMenu({
 						Block Coordinates
 					</MenuItem>
 					<MenuItem
-						onClick={() =>
-							clipboard.copy(`${Math.floor(data.mc?.x / 16)} ${Math.floor(data.mc?.z / 16)}`)
-						}
+						onClick={() => clipboard.copy(`${Math.floor(data.mc?.x / 16)} ${Math.floor(data.mc?.z / 16)}`)}
 						disabled={!data.mc}
 						leftSection={<IconSquare style={{ width: rem(14), height: rem(14) }} />}
 					>
@@ -73,9 +66,7 @@ export function MapContextMenu({
 					</MenuItem>
 					<MenuItem
 						onClick={() =>
-							clipboard.copy(
-								`r.${Math.floor(data.mc?.x / 16) >> 5}.${Math.floor(data.mc?.z / 16) >> 5}.mca`,
-							)
+							clipboard.copy(`r.${Math.floor(data.mc?.x / 16) >> 5}.${Math.floor(data.mc?.z / 16) >> 5}.mca`)
 						}
 						disabled={!data.mc}
 						leftSection={<IconFile style={{ width: rem(14), height: rem(14) }} />}

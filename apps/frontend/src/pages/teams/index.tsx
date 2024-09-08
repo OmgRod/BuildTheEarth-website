@@ -65,8 +65,7 @@ const Teams: NextPage = ({ data }: any) => {
 							<Group
 								wrap="nowrap"
 								style={{
-									backgroundColor:
-										scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
+									backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
 									borderRadius: theme.radius.xs,
 									cursor: 'pointer',
 								}}
@@ -80,9 +79,7 @@ const Teams: NextPage = ({ data }: any) => {
 											{element.name}
 										</Text>
 
-										{element?.members?.length >= 1 ? (
-											<Badge color="green">{t('common:builder')}</Badge>
-										) : null}
+										{element?.members?.length >= 1 ? <Badge color="green">{t('common:builder')}</Badge> : null}
 									</Group>
 
 									<Group wrap="nowrap" gap={10} mt={3}>
@@ -115,9 +112,7 @@ const Teams: NextPage = ({ data }: any) => {
 			<Group justify="center" pt="md">
 				<Pagination
 					total={Math.ceil(
-						data?.filter((element: any) =>
-							element.name.toLowerCase().includes(search?.toLowerCase() || ''),
-						).length / 8,
+						data?.filter((element: any) => element.name.toLowerCase().includes(search?.toLowerCase() || '')).length / 8,
 					)}
 					radius="xs"
 					value={activePage}

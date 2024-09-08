@@ -1,12 +1,4 @@
-import {
-	Alert,
-	Anchor,
-	Button,
-	SegmentedControl,
-	Skeleton,
-	Text,
-	useMantineTheme,
-} from '@mantine/core';
+import { Alert, Anchor, Button, SegmentedControl, Skeleton, Text, useMantineTheme } from '@mantine/core';
 import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
 import { signIn, useSession } from 'next-auth/react';
 import useSWR, { mutate } from 'swr';
@@ -34,9 +26,7 @@ const Apply: NextPage = ({ data, buildteam }: any) => {
 	const user = useUser();
 	const { accessToken } = useAccessToken();
 	const session = useSession();
-	const { data: pastApplications } = useSWR(
-		`/buildteams/${buildteam?.id}/applications/user/${user.user?.id}`,
-	);
+	const { data: pastApplications } = useSWR(`/buildteams/${buildteam?.id}/applications/user/${user.user?.id}`);
 	const { t } = useTranslation('teams');
 	const [loading, setLoading] = useState(false);
 	const [trial, setTrial] = useState(false);
@@ -48,8 +38,7 @@ const Apply: NextPage = ({ data, buildteam }: any) => {
 	const handleSubmit = (e: any) => {
 		setLoading(true);
 		fetch(
-			process.env.NEXT_PUBLIC_API_URL +
-				`/buildteams/${team}/apply${trial ? '?trial=true&slug=true' : '?slug=true'}`,
+			process.env.NEXT_PUBLIC_API_URL + `/buildteams/${team}/apply${trial ? '?trial=true&slug=true' : '?slug=true'}`,
 			{
 				method: 'POST',
 				headers: {
@@ -154,11 +143,7 @@ const Apply: NextPage = ({ data, buildteam }: any) => {
 						<>
 							{buildteam?.allowTrial && (
 								<>
-									<Alert
-										mb="md"
-										icon={<IconAlertCircle size="1rem" />}
-										title={t('apply.trial.title')}
-									>
+									<Alert mb="md" icon={<IconAlertCircle size="1rem" />} title={t('apply.trial.title')}>
 										{t('apply.trial.description')}
 									</Alert>
 									<SegmentedControl
@@ -212,14 +197,7 @@ const Apply: NextPage = ({ data, buildteam }: any) => {
 							>
 								{t('common:button.apply')}
 							</Button>
-							<Button
-								variant="outline"
-								color="cyan"
-								ml="md"
-								mt="md"
-								onClick={() => router.back()}
-								disabled={loading}
-							>
+							<Button variant="outline" color="cyan" ml="md" mt="md" onClick={() => router.back()} disabled={loading}>
 								{t('common:button.cancel')}
 							</Button>
 						</>

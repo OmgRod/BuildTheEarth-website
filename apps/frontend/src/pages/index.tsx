@@ -65,11 +65,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 					}}
 				>
 					<Stack>
-						<Title
-							style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }}
-							ta="center"
-							order={1}
-						>
+						<Title style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }} ta="center" order={1}>
 							{t('head.title')}
 						</Title>
 						<Button
@@ -132,10 +128,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 				}}
 			>
 				<Grid>
-					<Grid.Col
-						span={{ lg: 5 }}
-						style={{ marginTop: 150, marginBottom: 50, minHeight: '30vh' }}
-					>
+					<Grid.Col span={{ lg: 5 }} style={{ marginTop: 150, marginBottom: 50, minHeight: '30vh' }}>
 						<Center style={{ width: '100%', height: '100%' }}>
 							<div style={{ padding: '0px 10%' }}>
 								<h2 id="more" style={{ scrollMarginTop: 150 }}>
@@ -174,8 +167,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 					<Grid.Col span={{ lg: 7 }} style={{ minHeight: '30vh', position: 'relative' }}>
 						<motion.div
 							style={{
-								backgroundColor:
-									scheme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+								backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
 								y: missionY,
 								marginLeft: '10%',
 								width: '70%',
@@ -226,14 +218,10 @@ const Home: NextPage = ({ data, headData }: any) => {
 							/>
 						</motion.div>
 					</Grid.Col>
-					<Grid.Col
-						span={{ lg: 6 }}
-						style={{ minHeight: '30vh', position: 'relative', marginTop: 150 }}
-					>
+					<Grid.Col span={{ lg: 6 }} style={{ minHeight: '30vh', position: 'relative', marginTop: 150 }}>
 						<motion.div
 							style={{
-								backgroundColor:
-									scheme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+								backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
 								y: getstartedY,
 								marginLeft: '25%',
 								width: '65%',
@@ -253,10 +241,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 							/>
 						</motion.div>
 					</Grid.Col>
-					<Grid.Col
-						span={{ lg: 5 }}
-						style={{ marginTop: 150, marginBottom: 50, minHeight: '30vh' }}
-					>
+					<Grid.Col span={{ lg: 5 }} style={{ marginTop: 150, marginBottom: 50, minHeight: '30vh' }}>
 						<Center style={{ width: '100%', height: '100%' }}>
 							<div style={{ padding: '0px 10%' }}>
 								<h2 id="more" style={{ scrollMarginTop: 70 }}>

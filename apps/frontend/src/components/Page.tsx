@@ -44,10 +44,7 @@ const Page = (props: PageProps) => {
 	return props.loading ? (
 		<ErrorPage code={'1'} />
 	) : props.requiredPermissions &&
-	  !permissions.hasAny(
-			props.requiredPermissions.permissions,
-			props.requiredPermissions.buildteam,
-	  ) ? (
+	  !permissions.hasAny(props.requiredPermissions.permissions, props.requiredPermissions.buildteam) ? (
 		<ErrorPage code={'403'} />
 	) : (
 		<>
@@ -108,9 +105,7 @@ const Page = (props: PageProps) => {
 								{props.head?.title}
 								{props.head?.subtitle && (
 									<>
-										<Text style={{ fontWeight: 'normal', fontSize: theme.fontSizes.lg }}>
-											{props.head?.subtitle}
-										</Text>
+										<Text style={{ fontWeight: 'normal', fontSize: theme.fontSizes.lg }}>{props.head?.subtitle}</Text>
 									</>
 								)}
 							</h1>
@@ -143,11 +138,7 @@ const Page = (props: PageProps) => {
 export const LogoPage = (props: PageProps & { headData: any; team: string; color?: string }) => {
 	return (
 		<Page {...props} fullWidth>
-			<LogoHeader
-				{...props.headData}
-				applyHref={`${props.team}/apply`}
-				settingsHref={`${props.team}/manage`}
-			/>
+			<LogoHeader {...props.headData} applyHref={`${props.team}/apply`} settingsHref={`${props.team}/manage`} />
 			<ContentContainer style={props.style} smallPadding={props.smallPadding}>
 				{props.children}
 			</ContentContainer>

@@ -45,9 +45,7 @@ const Faq: NextPage = ({ data }: any) => {
 						<Accordion.Item value={element.id} key={element.id}>
 							<Accordion.Control>{element.question}</Accordion.Control>
 							<Accordion.Panel>
-								<div
-									dangerouslySetInnerHTML={{ __html: isClient ? sanitizeHtml(element.answer) : '' }}
-								/>
+								<div dangerouslySetInnerHTML={{ __html: isClient ? sanitizeHtml(element.answer) : '' }} />
 							</Accordion.Panel>
 						</Accordion.Item>
 					))}

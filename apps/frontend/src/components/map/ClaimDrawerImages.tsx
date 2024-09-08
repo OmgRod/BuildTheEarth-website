@@ -1,22 +1,6 @@
 import { Carousel, CarouselSlide } from '@mantine/carousel';
-import {
-	ActionIcon,
-	Center,
-	Group,
-	Image,
-	Progress,
-	Stack,
-	Text,
-	Tooltip,
-	rem,
-} from '@mantine/core';
-import {
-	Dropzone,
-	DropzoneAccept,
-	DropzoneIdle,
-	DropzoneReject,
-	IMAGE_MIME_TYPE,
-} from '@mantine/dropzone';
+import { ActionIcon, Center, Group, Image, Progress, rem, Stack, Text, Tooltip } from '@mantine/core';
+import { Dropzone, DropzoneAccept, DropzoneIdle, DropzoneReject, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { IconPhoto, IconTrash, IconUpload, IconX } from '@tabler/icons-react';
 
 import { useAccessToken } from '@/hooks/useAccessToken';
@@ -228,10 +212,7 @@ function ClaimDropzone({ id, onAdd, t }: { id: string; onAdd?: (image: any) => v
 							/>
 						</DropzoneAccept>
 						<DropzoneReject>
-							<IconX
-								style={{ width: rem(52), height: rem(52), color: 'var(--mantine-color-red-6)' }}
-								stroke={1.5}
-							/>
+							<IconX style={{ width: rem(52), height: rem(52), color: 'var(--mantine-color-red-6)' }} stroke={1.5} />
 						</DropzoneReject>
 						<DropzoneIdle>
 							<IconPhoto

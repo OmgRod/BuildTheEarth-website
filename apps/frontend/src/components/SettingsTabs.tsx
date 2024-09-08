@@ -1,11 +1,4 @@
-import {
-	Box,
-	LoadingOverlay,
-	Paper,
-	Tabs,
-	useMantineColorScheme,
-	useMantineTheme,
-} from '@mantine/core';
+import { Box, LoadingOverlay, Paper, Tabs, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import {
 	IconClock,
 	IconDashboard,
@@ -23,15 +16,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-const SettingsTabs = ({
-	children,
-	team,
-	loading = false,
-}: {
-	children: any;
-	team: string;
-	loading?: boolean;
-}) => {
+const SettingsTabs = ({ children, team, loading = false }: { children: any; team: string; loading?: boolean }) => {
 	const theme = useMantineTheme();
 	const scheme = useMantineColorScheme();
 	const permissions = usePermissions();
@@ -106,9 +91,7 @@ const SettingsTabs = ({
 						<Tabs.Tab
 							value="review"
 							leftSection={<IconSearch size="0.8rem" />}
-							disabled={
-								!permissions.hasAny(['team.application.review', 'team.application.list'], team)
-							}
+							disabled={!permissions.hasAny(['team.application.review', 'team.application.list'], team)}
 						>
 							Review
 						</Tabs.Tab>
@@ -134,13 +117,7 @@ const SettingsTabs = ({
 	);
 };
 
-export const AdminSettingsTabs = ({
-	children,
-	loading = false,
-}: {
-	children: any;
-	loading?: boolean;
-}) => {
+export const AdminSettingsTabs = ({ children, loading = false }: { children: any; loading?: boolean }) => {
 	const theme = useMantineTheme();
 	const scheme = useMantineColorScheme();
 	const permissions = usePermissions();
@@ -169,9 +146,7 @@ export const AdminSettingsTabs = ({
 					variant="pills"
 					orientation={!mobileLayout ? 'vertical' : 'horizontal'}
 					value={router.pathname.split('admin/')[1]}
-					onChange={(value) =>
-						value == 'quit' ? router.push(`/`) : router.push(`/admin/${value}`)
-					}
+					onChange={(value) => (value == 'quit' ? router.push(`/`) : router.push(`/admin/${value}`))}
 					style={{ width: '100%' }}
 				>
 					<Tabs.List>

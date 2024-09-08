@@ -47,15 +47,10 @@ const Calendar: NextPage = () => {
 
 	const handleSelectDate = (date: Date) => {
 		const isSelected =
-			form.values.start === date.toISOString()
-				? 'start'
-				: form.values.end === date.toISOString()
-					? 'end'
-					: null;
+			form.values.start === date.toISOString() ? 'start' : form.values.end === date.toISOString() ? 'end' : null;
 
 		if (!isSelected) {
-			if (date.getTime() < new Date(form.values.start).getTime())
-				form.setFieldValue('start', date.toISOString());
+			if (date.getTime() < new Date(form.values.start).getTime()) form.setFieldValue('start', date.toISOString());
 			else form.setFieldValue('end', date.toISOString());
 			return;
 		}
@@ -86,27 +81,9 @@ const Calendar: NextPage = () => {
 					placeholder="The Great Event"
 					maw="40%"
 				/>
-				<TextInput
-					mt="md"
-					label="BuildTeam (Slug)"
-					{...form.getInputProps('buildTeam')}
-					maw="40%"
-					placeholder="de"
-				/>
-				<TextInput
-					mt="md"
-					label="City"
-					{...form.getInputProps('city')}
-					maw="40%"
-					placeholder="Berlin"
-				/>
-				<TextInput
-					mt="md"
-					label="Country"
-					{...form.getInputProps('country')}
-					placeholder="Germany"
-					maw="40%"
-				/>
+				<TextInput mt="md" label="BuildTeam (Slug)" {...form.getInputProps('buildTeam')} maw="40%" placeholder="de" />
+				<TextInput mt="md" label="City" {...form.getInputProps('city')} maw="40%" placeholder="Berlin" />
+				<TextInput mt="md" label="Country" {...form.getInputProps('country')} placeholder="Germany" maw="40%" />
 				<TextInput
 					mt="md"
 					label="Discord Link"
@@ -146,8 +123,7 @@ const Calendar: NextPage = () => {
 					readOnly
 					value={
 						Math.floor(
-							(new Date(form.values.end).getTime() - new Date(form.values.start).getTime()) /
-								(1000 * 3600 * 24),
+							(new Date(form.values.end).getTime() - new Date(form.values.start).getTime()) / (1000 * 3600 * 24),
 						) + 1
 					}
 					maw="40%"

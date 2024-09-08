@@ -47,9 +47,7 @@ const Apply: NextPage = ({ team, id }: any) => {
 	const theme = useMantineTheme();
 	const { accessToken } = useAccessToken();
 	const clipboard = useClipboard();
-	const { data } = useSWR(
-		`/buildteams/${team}/applications/${id}?includeAnswers=true&includeUser=true&slug=true`,
-	);
+	const { data } = useSWR(`/buildteams/${team}/applications/${id}?includeAnswers=true&includeUser=true&slug=true`);
 	const { data: templateResponses } = useSWR(`/buildteams/${team}/application/templates?slug=true`);
 
 	const responseEditor = useEditor({
@@ -99,10 +97,7 @@ const Apply: NextPage = ({ team, id }: any) => {
 						color: 'green',
 						icon: <IconCheck />,
 					});
-					mutate(
-						`/buildteams/${team}/applications/${id}?includeAnswers=true&includeUser=true&slug=true`,
-						res,
-					);
+					mutate(`/buildteams/${team}/applications/${id}?includeAnswers=true&includeUser=true&slug=true`, res);
 				}
 			});
 	};
@@ -156,23 +151,23 @@ const Apply: NextPage = ({ team, id }: any) => {
 					<Grid>
 						<Grid.Col span={{ md: 6 }} pr="lg">
 							<h2>Answers</h2>
-							{data?.ApplicationAnswer?.sort(
-								(a: any, b: any) => a.question.sort - b.question.sort,
-							).map((a: any, i: number) => {
-								const d = a.question;
+							{data?.ApplicationAnswer?.sort((a: any, b: any) => a.question.sort - b.question.sort).map(
+								(a: any, i: number) => {
+									const d = a.question;
 
-								const Question = ApplicationQuestions[d.type];
+									const Question = ApplicationQuestions[d.type];
 
-								return (
-									<Question
-										key={d.id}
-										{...d}
-										style={{ marginTop: i > 0 && theme.spacing.md }}
-										readonly={true}
-										value={a.answer}
-									/>
-								);
-							})}
+									return (
+										<Question
+											key={d.id}
+											{...d}
+											style={{ marginTop: i > 0 && theme.spacing.md }}
+											readonly={true}
+											value={a.answer}
+										/>
+									);
+								},
+							)}
 						</Grid.Col>
 						<Grid.Col span={{ md: 6 }} pl="lg">
 							<h2>Details</h2>
@@ -202,11 +197,7 @@ const Apply: NextPage = ({ team, id }: any) => {
 									<Tooltip label={'Click to copy ID'}>
 										<Group>
 											<Text>{data?.user?.username} </Text>
-											<ActionIcon
-												variant="light"
-												color="gray"
-												onClick={() => clipboard.copy(data?.user?.discordId)}
-											>
+											<ActionIcon variant="light" color="gray" onClick={() => clipboard.copy(data?.user?.discordId)}>
 												<IconCopy />
 											</ActionIcon>
 										</Group>
@@ -222,9 +213,7 @@ const Apply: NextPage = ({ team, id }: any) => {
 									<Text>Trial</Text>
 									<Badge
 										variant="gradient"
-										gradient={
-											data.trial ? { from: 'green', to: 'lime' } : { from: 'red', to: 'orange' }
-										}
+										gradient={data.trial ? { from: 'green', to: 'lime' } : { from: 'red', to: 'orange' }}
 									>
 										{data.trial ? 'Yes' : 'No'}{' '}
 									</Badge>
@@ -252,8 +241,8 @@ const Apply: NextPage = ({ team, id }: any) => {
 							{data.status != 'SEND' && (
 								<>
 									<Alert title="Warning" color="orange" mb="md">
-										This Application was already reviewed, changing its Status may revoke
-										permissions from the User. The original Reviewer Response is listed below.
+										This Application was already reviewed, changing its Status may revoke permissions from the User. The
+										original Reviewer Response is listed below.
 									</Alert>
 								</>
 							)}
@@ -303,11 +292,7 @@ const Apply: NextPage = ({ team, id }: any) => {
 								<RichTextEditor.Content />
 							</RichTextEditor>
 							<Group>
-								<Button
-									leftSection={<IconCheck />}
-									onClick={() => handleSubmit(true)}
-									color="green"
-								>
+								<Button leftSection={<IconCheck />} onClick={() => handleSubmit(true)} color="green">
 									Accept
 								</Button>
 								<Button leftSection={<IconX />} onClick={() => handleSubmit(false)} color="red">
@@ -322,9 +307,7 @@ const Apply: NextPage = ({ team, id }: any) => {
 											centered: true,
 											children: (
 												<>
-													<Text size="sm">
-														You need to give the template a name to be able to reference it later.
-													</Text>
+													<Text size="sm">You need to give the template a name to be able to reference it later.</Text>
 													<TextInput
 														placeholder="My new Template"
 														label="Name"
@@ -407,11 +390,7 @@ function statusToGradient(status: string) {
 	}
 }
 
-function InsertReviewTemplateControl({
-	templates,
-}: {
-	templates: { name: string; id: string; content: string }[];
-}) {
+function InsertReviewTemplateControl({ templates }: { templates: { name: string; id: string; content: string }[] }) {
 	const { editor } = useRichTextEditorContext();
 	return (
 		<RichTextEditor.Control aria-label="Insert response template" title="Insert response template">
@@ -430,9 +409,7 @@ function InsertReviewTemplateControl({
 				]}
 				onChange={(_value, option) => {
 					if (option) {
-						editor?.commands.setContent(
-							templates.find((t) => t.id == option.value)?.content || '-',
-						);
+						editor?.commands.setContent(templates.find((t) => t.id == option.value)?.content || '-');
 					} else {
 						editor?.commands.setContent('');
 					}

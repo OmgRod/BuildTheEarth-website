@@ -1,7 +1,6 @@
 :root {
 	--mantine-shadow-block: 10px 10px 0px 4px rgba(0, 0, 0, 0.45);
-	--map-color-filter: invert(77%) sepia(8%) saturate(271%) hue-rotate(169deg) brightness(93%)
-		contrast(90%);
+	--map-color-filter: invert(77%) sepia(8%) saturate(271%) hue-rotate(169deg) brightness(93%) contrast(90%);
 }
 
 html,

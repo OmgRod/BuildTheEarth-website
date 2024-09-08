@@ -1,8 +1,7 @@
-
-pull_request_title: "feat(lang): 🌐 Update translation files"
+pull_request_title: 'feat(lang): 🌐 Update translation files'
 pull_request_labels:
-  - "translation"
-commit_message: "chore(lang): 🌐 Update %language% translation of %original_file_name% [no ci]"
+  - 'translation'
+commit_message: 'chore(lang): 🌐 Update %language% translation of %original_file_name% [no ci]'
 append_commit_message: false
 
 files:

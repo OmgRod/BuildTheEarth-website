@@ -7,8 +7,8 @@ import {
 	Select,
 	Switch,
 	Text,
-	TextInput,
 	Textarea,
+	TextInput,
 	Tooltip,
 	useMantineColorScheme,
 	useMantineTheme,
@@ -270,23 +270,17 @@ const Settings = ({ data: tempData }: any) => {
 								/>
 							</Grid.Col>
 						</Grid>
-						<Input.Wrapper
-							label="About"
-							description="The about section on the Build Team Page."
-							mb="md"
-						>
+						<Input.Wrapper label="About" description="The about section on the Build Team Page." mb="md">
 							<RTE
 								style={{
 									root: {
 										marginTop: '5px',
 									},
 									content: {
-										backgroundColor:
-											scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+										backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
 									},
 									toolbar: {
-										backgroundColor:
-											scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+										backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
 									},
 								}}
 								value={data.about}
@@ -347,11 +341,10 @@ const Settings = ({ data: tempData }: any) => {
 						/>
 						<h3>Messages</h3>
 						<Text size="sm" mb="md">
-							All Messages support full Discord Markdown syntax. Additionally you can use these
-							dynamic values in the Messages:{' '}
+							All Messages support full Discord Markdown syntax. Additionally you can use these dynamic values in the
+							Messages:{' '}
 							<Text c="teal" span>
-								{'{user}'} {'{team}'} {'{url}'} {'{reason}'} {'{reviewedAt}'} {'{createdAt}'}{' '}
-								{'{id}'}
+								{'{user}'} {'{team}'} {'{url}'} {'{reason}'} {'{reviewedAt}'} {'{createdAt}'} {'{id}'}
 							</Text>
 							. Leaving the Textfield empty will not send any Message to the User.
 						</Text>
@@ -403,12 +396,7 @@ const Settings = ({ data: tempData }: any) => {
 							</Button>
 						</Group>
 						{data.socials.map((social: any, i: number) => (
-							<Group
-								grow
-								key={social.id}
-								mb="md"
-								style={{ alignItems: 'flex-end', display: 'flex' }}
-							>
+							<Group grow key={social.id} mb="md" style={{ alignItems: 'flex-end', display: 'flex' }}>
 								<Select
 									required
 									label="Type"

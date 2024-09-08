@@ -2,8 +2,8 @@ import { Button, Checkbox, Group, Paper, Progress, Title, Tooltip } from '@manti
 import useSWR, { mutate } from 'swr';
 
 import Page from '@/components/Page';
-import { swrFetcher } from '@/components/SWRSetup';
 import { AdminSettingsTabs } from '@/components/SettingsTabs';
+import { swrFetcher } from '@/components/SWRSetup';
 import { useAccessToken } from '@/hooks/useAccessToken';
 import thumbnail from '@/public/images/thumbnails/teams.png';
 import { showNotification } from '@mantine/notifications';
@@ -26,17 +26,13 @@ const Settings = ({ data: tempData }: any) => {
 	const [skipExistingAddresses, setSkipExistingAddresses] = useState(false);
 
 	const handleCalculateBuildings = () => {
-		fetch(
-			process.env.NEXT_PUBLIC_API_URL +
-				`/admin/claims/buildings?skipExisting=${skipExistingBuildings}`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + accessToken,
-				},
+		fetch(process.env.NEXT_PUBLIC_API_URL + `/admin/claims/buildings?skipExisting=${skipExistingBuildings}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + accessToken,
 			},
-		)
+		})
 			.then((res) => res.json())
 			.then((res) => {
 				if (res.errors) {
@@ -57,17 +53,13 @@ const Settings = ({ data: tempData }: any) => {
 			});
 	};
 	const handleCalculateAddresses = () => {
-		fetch(
-			process.env.NEXT_PUBLIC_API_URL +
-				`/admin/claims/addresses?skipExisting=${skipExistingAddresses}`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + accessToken,
-				},
+		fetch(process.env.NEXT_PUBLIC_API_URL + `/admin/claims/addresses?skipExisting=${skipExistingAddresses}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + accessToken,
 			},
-		)
+		})
 			.then((res) => res.json())
 			.then((res) => {
 				if (res.errors) {

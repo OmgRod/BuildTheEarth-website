@@ -72,9 +72,7 @@ export function ClaimDrawer(props: ClaimDrawerProps) {
 				</Center>
 			) : (
 				<>
-					{data.images && (
-						<ClaimDrawerImages id={props.id} images={data.images} editable={false} t={t} />
-					)}
+					{data.images && <ClaimDrawerImages id={props.id} images={data.images} editable={false} t={t} />}
 					{!data.finished && (
 						<Alert
 							color="red"
@@ -95,20 +93,11 @@ export function ClaimDrawer(props: ClaimDrawerProps) {
 						</StatsGrid>
 					)}
 					{data.city && (
-						<StatsGrid
-							title={t('claim.details.city')}
-							icon={IconBuildingCommunity}
-							paperProps={{ mb: 'md' }}
-							isText
-						>
+						<StatsGrid title={t('claim.details.city')} icon={IconBuildingCommunity} paperProps={{ mb: 'md' }} isText>
 							{data.city}
 						</StatsGrid>
 					)}
-					<StatsGrid
-						title={t('claim.details.team')}
-						icon={IconUsersGroup}
-						paperProps={{ mb: 'md' }}
-					>
+					<StatsGrid title={t('claim.details.team')} icon={IconUsersGroup} paperProps={{ mb: 'md' }}>
 						<Flex justify="flex-start" align="center" direction="row" wrap="wrap" gap="md">
 							<Avatar
 								src={data.buildTeam.icon}
@@ -136,22 +125,14 @@ export function ClaimDrawer(props: ClaimDrawerProps) {
 						</StatsGrid>
 					)}
 					{data.description && (
-						<StatsGrid
-							title={t('claim.details.description')}
-							icon={IconInfoCircle}
-							paperProps={{ mb: 'md' }}
-						>
+						<StatsGrid title={t('claim.details.description')} icon={IconInfoCircle} paperProps={{ mb: 'md' }}>
 							<Text lineClamp={10} fz="sm">
 								{data.description}
 							</Text>
 						</StatsGrid>
 					)}
 					{data.builders.length > 0 && (
-						<StatsGrid
-							title={t('claim.details.builders')}
-							icon={IconUsersGroup}
-							paperProps={{ mb: 'md' }}
-						>
+						<StatsGrid title={t('claim.details.builders')} icon={IconUsersGroup} paperProps={{ mb: 'md' }}>
 							<Avatar.Group>
 								{data.builders.map((b: any) => (
 									<Tooltip label={b?.username || 'Username is not defined'} key={b.id}>
@@ -168,28 +149,14 @@ export function ClaimDrawer(props: ClaimDrawerProps) {
 							</Avatar.Group>
 						</StatsGrid>
 					)}
-					<StatsGrid
-						title={t('claim.details.buildings')}
-						icon={IconBuilding}
-						paperProps={{ mb: 'md' }}
-						isText
-					>
+					<StatsGrid title={t('claim.details.buildings')} icon={IconBuilding} paperProps={{ mb: 'md' }} isText>
 						{data.buildings}
 					</StatsGrid>
-					<StatsGrid
-						title={t('claim.details.area')}
-						icon={IconRuler2}
-						paperProps={{ mb: 'md' }}
-						isText
-					>
+					<StatsGrid title={t('claim.details.area')} icon={IconRuler2} paperProps={{ mb: 'md' }} isText>
 						{data.size?.toLocaleString()}
 						m²
 					</StatsGrid>
-					<StatsGrid
-						title={t('claim.details.address')}
-						icon={IconAddressBook}
-						paperProps={{ mb: 'md' }}
-					>
+					<StatsGrid title={t('claim.details.address')} icon={IconAddressBook} paperProps={{ mb: 'md' }}>
 						<Text lineClamp={10} fz="sm">
 							{data.osmName}
 						</Text>
@@ -237,8 +204,7 @@ export function ClaimDrawer(props: ClaimDrawerProps) {
 						>
 							{t('claim.details.actions.link')}
 						</Button>
-						{(data.owner?.id == user?.id ||
-							permissions.has('team.claim.list', data.buildTeam.id)) && (
+						{(data.owner?.id == user?.id || permissions.has('team.claim.list', data.buildTeam.id)) && (
 							<Button
 								component={Link}
 								variant="outline"

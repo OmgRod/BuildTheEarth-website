@@ -10,21 +10,13 @@ import {
 	MenuDropdown,
 	MenuItem,
 	MenuTarget,
+	rem,
 	Table,
 	TextInput,
 	ThemeIcon,
 	Tooltip,
-	rem,
 } from '@mantine/core';
-import {
-	IconAlertTriangle,
-	IconCheck,
-	IconDots,
-	IconMap,
-	IconPhoto,
-	IconPin,
-	IconTrash,
-} from '@tabler/icons-react';
+import { IconAlertTriangle, IconCheck, IconDots, IconMap, IconPhoto, IconPin, IconTrash } from '@tabler/icons-react';
 import useSWR, { mutate } from 'swr';
 
 import Page from '@/components/Page';
@@ -50,16 +42,13 @@ const Settings = () => {
 	const clipboard = useClipboard();
 
 	const handleDelete = (id: string) => {
-		fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/claims/${id}?slug=true`,
-			{
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + accessToken,
-				},
+		fetch(process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/claims/${id}?slug=true`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + accessToken,
 			},
-		)
+		})
 			.then((res) => res.json())
 			.then((res) => {
 				if (res.errors) {
@@ -94,11 +83,7 @@ const Settings = () => {
 			centered: true,
 			children: (
 				<>
-					<InputWrapper
-						label="Image"
-						description="This Image will get converted to be the showcase image"
-						required
-					>
+					<InputWrapper label="Image" description="This Image will get converted to be the showcase image" required>
 						<Carousel
 							mt={4}
 							style={{
@@ -162,18 +147,14 @@ const Settings = () => {
 
 		const submit = () => {
 			loading = true;
-			fetch(
-				process.env.NEXT_PUBLIC_API_URL +
-					`/buildteams/${router.query.team}/showcases/link?slug=true`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: 'Bearer ' + accessToken,
-					},
-					body: JSON.stringify({ image, title: name, city, date }),
+			fetch(process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/showcases/link?slug=true`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + accessToken,
 				},
-			)
+				body: JSON.stringify({ image, title: name, city, date }),
+			})
 				.then((res) => res.json())
 				.then((res) => {
 					loading = false;
@@ -226,9 +207,7 @@ const Settings = () => {
 							{data
 								?.map((s: any) => ({
 									...s,
-									area: Math.round(
-										getAreaOfPolygon(s.area.map((p: string) => p.split(', ').map(Number))),
-									),
+									area: Math.round(getAreaOfPolygon(s.area.map((p: string) => p.split(', ').map(Number)))),
 								}))
 								.sort((a: any, b: any) => b.area - a.area)
 								.map((s: any) => (
@@ -259,9 +238,7 @@ const Settings = () => {
 													</MenuTarget>
 													<MenuDropdown>
 														<MenuItem
-															leftSection={
-																<IconPhoto style={{ width: rem(14), height: rem(14) }} />
-															}
+															leftSection={<IconPhoto style={{ width: rem(14), height: rem(14) }} />}
 															onClick={() => handleAddShowcase(s)}
 															disabled={s.images.length == 0}
 														>
@@ -271,9 +248,7 @@ const Settings = () => {
 														<MenuItem
 															leftSection={<IconPin style={{ width: rem(14), height: rem(14) }} />}
 															onClick={() => {
-																clipboard.copy(
-																	`${s.center.split(', ')[1]}, ${s.center.split(', ')[0]}`,
-																);
+																clipboard.copy(`${s.center.split(', ')[1]}, ${s.center.split(', ')[0]}`);
 																showNotification({
 																	title: 'Coordinates copied',
 																	message: 'Paste them anywhere.',
@@ -294,9 +269,7 @@ const Settings = () => {
 														</MenuItem>
 														<MenuDivider />
 														<MenuItem
-															leftSection={
-																<IconTrash style={{ width: rem(14), height: rem(14) }} />
-															}
+															leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
 															onClick={() => handleDelete(s.id)}
 															color="red"
 														>

@@ -6,10 +6,10 @@ import {
 	Image,
 	Loader,
 	Pagination,
+	rem,
 	Table,
 	Text,
 	Tooltip,
-	rem,
 } from '@mantine/core';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import { IconCheck, IconExternalLink, IconTrash } from '@tabler/icons-react';
@@ -26,9 +26,7 @@ import { useState } from 'react';
 var vagueTime = require('vague-time');
 const Settings = () => {
 	const [activePage, setPage] = useState(1);
-	const { data, isLoading: dataLoading } = useSWR(
-		`/claims/images?take=20&skip=${activePage * 20 - 20}`,
-	);
+	const { data, isLoading: dataLoading } = useSWR(`/claims/images?take=20&skip=${activePage * 20 - 20}`);
 	const { accessToken } = useAccessToken();
 	const [loading, setLoading] = useState(false);
 
@@ -152,10 +150,7 @@ const Settings = () => {
 				<Table verticalSpacing="sm">
 					<Table.Tbody>
 						{data?.data
-							?.sort(
-								(a: any, b: any) =>
-									new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-							)
+							?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 							.map((image: any) => (
 								<Table.Tr key={image.id}>
 									<Table.Td>
@@ -188,16 +183,8 @@ const Settings = () => {
 													<IconCheck style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
 												</ActionIcon>
 											</Tooltip>
-											<ActionIcon
-												variant="subtle"
-												color="gray"
-												component={Link}
-												href={'/map?claim=' + image.Claim.id}
-											>
-												<IconExternalLink
-													style={{ width: rem(18), height: rem(18) }}
-													stroke={1.5}
-												/>
+											<ActionIcon variant="subtle" color="gray" component={Link} href={'/map?claim=' + image.Claim.id}>
+												<IconExternalLink style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
 											</ActionIcon>
 											<ActionIcon
 												variant="subtle"

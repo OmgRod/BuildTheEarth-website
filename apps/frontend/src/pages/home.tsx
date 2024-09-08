@@ -15,9 +15,7 @@ const Home = () => {
 					{ link: '/contact', translation: 'contact' },
 				]}
 			/>
-			<div
-				style={{ background: 'var(--mantine-color-dark-5)', width: '100vw', minHeight: '100vh' }}
-			>
+			<div style={{ background: 'var(--mantine-color-dark-5)', width: '100vw', minHeight: '100vh' }}>
 				<BackgroundImage src={'./home.jpg'} w={'100vw'} h={'100vh'}>
 					<div
 						style={{

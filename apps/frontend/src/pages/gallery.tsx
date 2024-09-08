@@ -65,10 +65,7 @@ const MePage: NextPage = ({ data }: any) => {
 						gap={0}
 						images={
 							data
-								?.sort(
-									(a: any, b: any) =>
-										new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-								)
+								?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 								.slice(activePage * 20 - 20, activePage * 20)
 								.map((d: any) => ({
 									name: d?.title + (d?.city ? ', ' + d.city : ''),

@@ -1,15 +1,4 @@
-import {
-	Badge,
-	Button,
-	Card,
-	CardSection,
-	Grid,
-	GridCol,
-	Group,
-	Text,
-	Title,
-	Tooltip,
-} from '@mantine/core';
+import { Badge, Button, Card, CardSection, Grid, GridCol, Group, Text, Title, Tooltip } from '@mantine/core';
 
 import Page from '@/components/Page';
 import { usePermissions } from '@/hooks/usePermissions';
@@ -87,12 +76,7 @@ const Calendar: NextPage = ({ data }: any) => {
 				))}
 			</Grid>
 			{permissions.has('calendar.manage', 'ää') && (
-				<Button
-					leftSection={<IconPlus />}
-					onClick={() => router.push('calendar/manage')}
-					mt="xl"
-					w="20%"
-				>
+				<Button leftSection={<IconPlus />} onClick={() => router.push('calendar/manage')} mt="xl" w="20%">
 					Add Event
 				</Button>
 			)}
@@ -116,13 +100,7 @@ export function EventList(props: any) {
 			: (daysToEnd + 1) * -1 + ' days ago';
 
 	return (
-		<Card
-			padding="lg"
-			radius={0}
-			w="100%"
-			h="100%"
-			style={{ boxShadow: 'var(--mantine-shadow-block)' }}
-		>
+		<Card padding="lg" radius={0} w="100%" h="100%" style={{ boxShadow: 'var(--mantine-shadow-block)' }}>
 			<Group justify="space-between">
 				<Tooltip label={props.buildTeam.name}>
 					<Image
@@ -133,9 +111,7 @@ export function EventList(props: any) {
 						style={{ width: '2rem', height: '2rem', borderRadius: '50%' }}
 					/>
 				</Tooltip>
-				<Badge color={props.ongoing ? 'green' : props.upcoming ? 'teal' : 'orange'}>
-					{badgeMsg}
-				</Badge>
+				<Badge color={props.ongoing ? 'green' : props.upcoming ? 'teal' : 'orange'}>{badgeMsg}</Badge>
 			</Group>
 
 			<Text fz="lg" fw={500} mt="md">

@@ -1,27 +1,16 @@
-import {
-	ActionIcon,
-	Badge,
-	Code,
-	Group,
-	Pagination,
-	SimpleGrid,
-	Table,
-	Text,
-	Tooltip,
-	useMantineTheme,
-} from '@mantine/core';
+import { ActionIcon, Badge, Code, Group, Pagination, SimpleGrid, Table, Tooltip, useMantineTheme } from '@mantine/core';
 import { IconCheck, IconClock, IconQuestionMark, IconX } from '@tabler/icons-react';
 
-import { IconChevronRight } from '@tabler/icons-react';
-import Link from 'next/link';
 import Page from '@/components/Page';
 import SettingsTabs from '@/components/SettingsTabs';
 import { StatsRing } from '@/components/Stats';
-import fetcher from '@/utils/Fetcher';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import thumbnail from '@/public/images/thumbnails/teams.png';
-import useSWR from 'swr';
+import fetcher from '@/utils/Fetcher';
+import { IconChevronRight } from '@tabler/icons-react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
 import { useState } from 'react';
+import useSWR from 'swr';
 
 var vagueTime = require('vague-time');
 const Review = ({ team }: any) => {
@@ -67,9 +56,7 @@ const Review = ({ team }: any) => {
 					<StatsRing
 						label="Accepted Applications"
 						stats={data?.filter((d: any) => d.status == 'ACCEPTED').length}
-						progress={
-							(data?.filter((d: any) => d.status == 'ACCEPTED').length / data?.length) * 100
-						}
+						progress={(data?.filter((d: any) => d.status == 'ACCEPTED').length / data?.length) * 100}
 						color="green"
 						icon={IconCheck}
 						onClick={() => setFilter('ACCEPTED')}
@@ -78,9 +65,7 @@ const Review = ({ team }: any) => {
 					<StatsRing
 						label="Rejected Applications"
 						stats={data?.filter((d: any) => d.status == 'DECLINED').length}
-						progress={
-							(data?.filter((d: any) => d.status == 'DECLINED').length / data?.length) * 100
-						}
+						progress={(data?.filter((d: any) => d.status == 'DECLINED').length / data?.length) * 100}
 						color="red"
 						icon={IconX}
 						onClick={() => setFilter('DECLINED')}
@@ -102,10 +87,7 @@ const Review = ({ team }: any) => {
 						</Table.Thead>
 						<Table.Tbody>
 							{data
-								?.sort(
-									(a: any, b: any) =>
-										new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-								)
+								?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 								.filter((d: any) => d.status == filter || !filter)
 								.slice(activePage * 20 - 20, activePage * 20)
 								.map((a: any) => (
@@ -149,11 +131,7 @@ const Review = ({ team }: any) => {
 										</Table.Td>
 										<Table.Td>
 											<Group gap={0} justify="flex-end">
-												<ActionIcon
-													variant="subtle"
-													component={Link}
-													href={`/teams/${team}/manage/review/${a.id}`}
-												>
+												<ActionIcon variant="subtle" component={Link} href={`/teams/${team}/manage/review/${a.id}`}>
 													<IconChevronRight />
 												</ActionIcon>
 											</Group>

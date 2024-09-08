@@ -102,11 +102,7 @@ const Visit: NextPage = ({ data }: any) => {
 							padding: 16,
 						}}
 					>
-						<Title
-							style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }}
-							ta="center"
-							order={1}
-						>
+						<Title style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }} ta="center" order={1}>
 							{t('visit.title')}
 						</Title>
 					</Center>
@@ -170,8 +166,7 @@ const Visit: NextPage = ({ data }: any) => {
 								<Group
 									wrap="nowrap"
 									style={{
-										backgroundColor:
-											scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
+										backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
 										borderRadius: 0,
 										cursor: 'pointer',
 										boxShadow: 'var(--mantine-shadow-block)',
@@ -180,8 +175,7 @@ const Visit: NextPage = ({ data }: any) => {
 									onClick={() => {
 										setSelected({
 											...element,
-											type:
-												element.ip && element.ip != 'buildtheearth.net' ? 'standalone' : 'network',
+											type: element.ip && element.ip != 'buildtheearth.net' ? 'standalone' : 'network',
 										});
 										router.push('#country');
 									}}
@@ -293,12 +287,7 @@ const Visit: NextPage = ({ data }: any) => {
 							{' '}
 							{t('visit.back')}
 						</Button>
-						<Button
-							mt="xl"
-							component={Link}
-							href={`/teams/${selected?.slug}`}
-							leftSection={<IconExternalLink />}
-						>
+						<Button mt="xl" component={Link} href={`/teams/${selected?.slug}`} leftSection={<IconExternalLink />}>
 							{' '}
 							{t('visit.open')}
 						</Button>

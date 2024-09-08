@@ -47,22 +47,12 @@ const MapPage: NextPage = ({ data, areaPercentage, days }: any) => {
 			<Grid grow>
 				<GridCol span={6}>
 					<StatsGrid title={t('stats.average.buildings')} isText>
-						<NumberFormatter
-							suffix=" Buildings"
-							value={data.average.buildings}
-							decimalScale={2}
-							thousandSeparator
-						/>
+						<NumberFormatter suffix=" Buildings" value={data.average.buildings} decimalScale={2} thousandSeparator />
 					</StatsGrid>
 				</GridCol>
 				<GridCol span={6}>
 					<StatsGrid title={t('stats.average.area')} isText>
-						<NumberFormatter
-							suffix=" m²"
-							value={data.average.area}
-							decimalScale={2}
-							thousandSeparator
-						/>
+						<NumberFormatter suffix=" m²" value={data.average.area} decimalScale={2} thousandSeparator />
 					</StatsGrid>
 				</GridCol>
 				<GridCol span={12}>
@@ -161,12 +151,7 @@ const MapPage: NextPage = ({ data, areaPercentage, days }: any) => {
 				{areaPercentage.map((continent: any, i: number) => (
 					<GridCol key={continent.name} span={3}>
 						<StatsGrid title={continent.name} isText paperProps={{ style: { height: '100%' } }}>
-							<NumberFormatter
-								suffix="%"
-								value={continent.value}
-								thousandSeparator
-								decimalScale={10}
-							/>
+							<NumberFormatter suffix="%" value={continent.value} thousandSeparator decimalScale={10} />
 						</StatsGrid>
 					</GridCol>
 				))}
@@ -182,9 +167,7 @@ const MapPage: NextPage = ({ data, areaPercentage, days }: any) => {
 									suffix={comparison.asX ? 'x' : '%'}
 									value={(data.total.area / comparison.area) * (comparison.asX ? 1 : 100)}
 									thousandSeparator
-									decimalScale={
-										comparison.asX ? comparison.decimals || 0 : comparison.decimals || 2
-									}
+									decimalScale={comparison.asX ? comparison.decimals || 0 : comparison.decimals || 2}
 								/>
 							</StatsGrid>
 						</GridCol>
@@ -218,9 +201,7 @@ function calculatePercentages(area: number) {
 	].sort((a, b) => b.value - a.value);
 }
 function datediff() {
-	return Math.round(
-		(new Date().getTime() - new Date('2020-03-21T12:00:00+0000').getTime()) / (1000 * 60 * 60 * 24),
-	);
+	return Math.round((new Date().getTime() - new Date('2020-03-21T12:00:00+0000').getTime()) / (1000 * 60 * 60 * 24));
 }
 
 const comparisons: (

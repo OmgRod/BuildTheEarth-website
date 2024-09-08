@@ -54,8 +54,7 @@ export const usePermissions = () => {
 
 			if (!buildteam || buildteam == null) {
 				return data.some(
-					({ permission, buildTeamId }) =>
-						buildTeamId == null && permissionsToCheck.includes(permission),
+					({ permission, buildTeamId }) => buildTeamId == null && permissionsToCheck.includes(permission),
 				);
 			}
 

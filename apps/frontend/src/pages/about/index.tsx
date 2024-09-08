@@ -11,14 +11,14 @@ import {
 } from '@mantine/core';
 
 import BackgroundImage from '@/components/BackgroundImage';
-import { ChevronRight } from 'tabler-icons-react';
-import Link from 'next/link';
-import { NextPage } from 'next';
 import Page from '@/components/Page';
-import { Youtube } from '@icons-pack/react-simple-icons';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import thumbnail from '@/public/images/thumbnails/about.webp';
+import { Youtube } from '@icons-pack/react-simple-icons';
+import { NextPage } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { ChevronRight } from 'tabler-icons-react';
 
 const Home: NextPage = () => {
 	const theme = useMantineTheme();
@@ -45,11 +45,7 @@ const Home: NextPage = () => {
 						right: 0,
 					}}
 				>
-					<Title
-						style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }}
-						ta="center"
-						order={1}
-					>
+					<Title style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }} ta="center" order={1}>
 						{t('head.title')}
 					</Title>
 				</Center>
@@ -94,14 +90,7 @@ const Home: NextPage = () => {
 						</Blockquote>
 					</Grid.Col>
 				</Grid>
-				<Button
-					px={'xl'}
-					mb="xl"
-					component={Link}
-					href="/join"
-					mt="md"
-					rightSection={<ChevronRight />}
-				>
+				<Button px={'xl'} mb="xl" component={Link} href="/join" mt="md" rightSection={<ChevronRight />}>
 					{t('history.action')}
 				</Button>
 			</Container>

@@ -1,13 +1,4 @@
-import {
-	Anchor,
-	Avatar,
-	Box,
-	Burger,
-	Button,
-	CSSProperties,
-	Group,
-	Transition,
-} from '@mantine/core';
+import { Anchor, Avatar, Box, Burger, Button, CSSProperties, Group, Transition } from '@mantine/core';
 
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { useUser } from '@/hooks/useUser';
@@ -46,12 +37,7 @@ const Header = ({ links }: { links: { link: string; translation: string }[] }) =
 	return (
 		<Box className={classes.root} data-on-top={scrollY < 100}>
 			<Box className={classes.container}>
-				<Group
-					gap={5}
-					className={classes.logo}
-					onClick={() => router.push('/')}
-					data-on-top={scrollY < 100}
-				>
+				<Group gap={5} className={classes.logo} onClick={() => router.push('/')} data-on-top={scrollY < 100}>
 					<Image
 						src={logo}
 						alt="Logo"

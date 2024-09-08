@@ -1,12 +1,4 @@
-import {
-	Discord,
-	Instagram,
-	Reddit,
-	Tiktok,
-	Twitch,
-	Twitter,
-	Youtube,
-} from '@icons-pack/react-simple-icons';
+import { Discord, Instagram, Reddit, Tiktok, Twitch, Twitter, Youtube } from '@icons-pack/react-simple-icons';
 import {
 	ActionIcon,
 	Anchor,
@@ -21,11 +13,11 @@ import {
 	Menu,
 	MenuItem,
 	Paper,
+	rem,
 	Text,
 	Tooltip,
 	Transition,
 	UnstyledButton,
-	rem,
 	useMantineColorScheme,
 	useMantineTheme,
 } from '@mantine/core';
@@ -144,11 +136,7 @@ const Header = ({ links, style, solid }: HeaderProps) => {
 								<UnstyledButton className={classes.user} data-useractive={userMenuOpened}>
 									<Group gap={7}>
 										<Avatar
-											alt={
-												session.user.username + ' Logo' ||
-												session.user.email + ' Logo' ||
-												'User Avatar'
-											}
+											alt={session.user.username + ' Logo' || session.user.email + ' Logo' || 'User Avatar'}
 											radius="xl"
 											size={'sm'}
 											color="cyan"
@@ -170,54 +158,32 @@ const Header = ({ links, style, solid }: HeaderProps) => {
 								<Menu.Item component={Link} href="/map/edit" leftSection={<IconMap size={14} />}>
 									Claims Map
 								</Menu.Item>
-								<Menu.Item
-									leftSection={<IconSettings size={14} />}
-									component={Link}
-									href="/me/settings/general"
-								>
+								<Menu.Item leftSection={<IconSettings size={14} />} component={Link} href="/me/settings/general">
 									{t('user.settings')}
 								</Menu.Item>
 								<Menu.Divider />
 								<Menu.Label>{t('user.quickActions')}</Menu.Label>
 								<Menu.Item
-									leftSection={
-										colorScheme === 'dark' ? <IconMoonStars size={14} /> : <IconSun size={14} />
-									}
+									leftSection={colorScheme === 'dark' ? <IconMoonStars size={14} /> : <IconSun size={14} />}
 									onClick={() => toggleColorScheme()}
 								>
 									{t(`user.theme.${colorScheme}`)}
 								</Menu.Item>
-								<Menu.Item
-									leftSection={<IconSearch size={14} />}
-									component={Link}
-									href="/map?s=true"
-								>
+								<Menu.Item leftSection={<IconSearch size={14} />} component={Link} href="/map?s=true">
 									{t('search')}
 								</Menu.Item>
 								<Menu.Divider />
 								<Menu.Label>{t('staff')}</Menu.Label>
-								<Menu.Item
-									leftSection={<FileSearch size={14} />}
-									component={Link}
-									href="/me/review"
-								>
+								<Menu.Item leftSection={<FileSearch size={14} />} component={Link} href="/me/review">
 									{t('user.review')}
 								</Menu.Item>
 								{permissions.has('admin.admin') && (
-									<Menu.Item
-										leftSection={<IconDashboard size={14} />}
-										component={Link}
-										href="/admin/cron"
-									>
+									<Menu.Item leftSection={<IconDashboard size={14} />} component={Link} href="/admin/cron">
 										Administration
 									</Menu.Item>
 								)}
 								{permissions.has('calendar.manage') && (
-									<Menu.Item
-										leftSection={<IconCalendar size={14} />}
-										component={Link}
-										href="/calendar"
-									>
+									<Menu.Item leftSection={<IconCalendar size={14} />} component={Link} href="/calendar">
 										Event Calendar
 									</Menu.Item>
 								)}
@@ -279,11 +245,7 @@ const Header = ({ links, style, solid }: HeaderProps) => {
 									<UnstyledButton className={classes.user} onClick={() => router.push('/me')}>
 										<Group gap={7}>
 											<Avatar
-												alt={
-													session.user.username + ' Logo' ||
-													session.user.email + ' Logo' ||
-													'User Avatar'
-												}
+												alt={session.user.username + ' Logo' || session.user.email + ' Logo' || 'User Avatar'}
 												radius="xl"
 												size={'sm'}
 												color="cyan"
@@ -338,9 +300,7 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 	const user = useUser();
 	const permissions = usePermissions();
 	const bgPosY = useTransform(scrollYProgress, (latest) => `${latest * 20 + 50}%`);
-	const userStatus = props?.members?.find((m: any) => m.id == user.user?.id)
-		? 'Joined'
-		: 'Not Joined';
+	const userStatus = props?.members?.find((m: any) => m.id == user.user?.id) ? 'Joined' : 'Not Joined';
 	return (
 		<>
 			<Image
@@ -363,9 +323,7 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 				style={{
 					width: '100%',
 					backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[7] : '#fff',
-					borderBottom: `1px solid ${
-						scheme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
-					}`,
+					borderBottom: `1px solid ${scheme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]}`,
 				}}
 			>
 				<Group
@@ -400,42 +358,27 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 									break;
 								}
 								case 'youtube': {
-									icon = (
-										<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-									);
+									icon = <Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
 									break;
 								}
 								case 'twitter': {
-									icon = (
-										<Twitter onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-									);
+									icon = <Twitter onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
 									break;
 								}
 								case 'reddit': {
-									icon = (
-										<Reddit onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-									);
+									icon = <Reddit onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
 									break;
 								}
 								case 'twitch': {
-									icon = (
-										<Twitch onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-									);
+									icon = <Twitch onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
 									break;
 								}
 								case 'instagram': {
-									icon = (
-										<Instagram
-											onPointerEnterCapture={undefined}
-											onPointerLeaveCapture={undefined}
-										/>
-									);
+									icon = <Instagram onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
 									break;
 								}
 								case 'tiktok': {
-									icon = (
-										<Tiktok onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-									);
+									icon = <Tiktok onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
 									break;
 								}
 								default:
@@ -515,9 +458,7 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 											leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
 											component={Link}
 											href={props.settingsHref + '/settings' || ''}
-											disabled={
-												!permissions.hasAny(['team.settings.edit', 'team.socials.edit'], props.id)
-											}
+											disabled={!permissions.hasAny(['team.settings.edit', 'team.socials.edit'], props.id)}
 										>
 											Settings
 										</MenuItem>
@@ -533,9 +474,7 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 											leftSection={<IconUsers style={{ width: rem(14), height: rem(14) }} />}
 											component={Link}
 											href={props.settingsHref + '/members' || ''}
-											disabled={
-												!permissions.hasAny(['permission.add', 'permission.remove'], props.id)
-											}
+											disabled={!permissions.hasAny(['permission.add', 'permission.remove'], props.id)}
 										>
 											Members
 										</MenuItem>
@@ -559,12 +498,7 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 											leftSection={<IconSearch style={{ width: rem(14), height: rem(14) }} />}
 											component={Link}
 											href={props.settingsHref + '/review' || ''}
-											disabled={
-												!permissions.hasAny(
-													['team.application.review', 'team.application.list'],
-													props.id,
-												)
-											}
+											disabled={!permissions.hasAny(['team.application.review', 'team.application.list'], props.id)}
 										>
 											Review
 										</MenuItem>

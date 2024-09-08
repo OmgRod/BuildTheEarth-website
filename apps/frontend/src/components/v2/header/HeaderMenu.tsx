@@ -30,11 +30,7 @@ const HeaderMenu = ({ children, t }: { children: any; t: (key: string) => string
 				<Menu.Item component={Link} href="/map/edit" leftSection={<IconMap size={14} />}>
 					Claim Map
 				</Menu.Item>
-				<Menu.Item
-					component={Link}
-					href="/me/settings/general"
-					leftSection={<IconSettings size={14} />}
-				>
+				<Menu.Item component={Link} href="/me/settings/general" leftSection={<IconSettings size={14} />}>
 					Settings
 				</Menu.Item>
 				<Menu.Divider />

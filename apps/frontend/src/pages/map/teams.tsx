@@ -1,16 +1,15 @@
 import Map, { mapClickEvent } from '@/components/map/Map';
 
+import { useContextMenu } from '@/components/ContextMenu';
 import { MapContextMenu } from '@/components/map/MapContextMenu';
-import { NextPage } from 'next';
 import Page from '@/components/Page';
 import fetcher from '@/utils/Fetcher';
 import getCountryName from '@/utils/ISOCountries';
 import mapboxgl from 'mapbox-gl';
+import { NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useContextMenu } from '@/components/ContextMenu';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const MapPage: NextPage = ({ data }: any) => {
 	const [state, setState, contextHandler] = useContextMenu({ disableEventPosition: false });
@@ -51,12 +50,7 @@ const MapPage: NextPage = ({ data }: any) => {
 
 	return (
 		<Page fullWidth title="Map" description="Find the Buildteam building a specific country here.">
-			<MapContextMenu
-				contextMenuInfo={state}
-				setContextMenuInfo={setState}
-				oLat={clientPos.lat}
-				oLng={clientPos.lng}
-			/>
+			<MapContextMenu contextMenuInfo={state} setContextMenuInfo={setState} oLat={clientPos.lat} oLng={clientPos.lng} />
 			<div style={{ height: '96vh', width: '100%', position: 'relative' }}>
 				<Map
 					onContextMenu={contextHandler}

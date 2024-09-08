@@ -1,11 +1,4 @@
-import {
-	Button,
-	Center,
-	Loader,
-	Title,
-	useMantineColorScheme,
-	useMantineTheme,
-} from '@mantine/core';
+import { Button, Center, Loader, Title, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 
 import Page from '@/components/Page';
 import thumbnail from '@/public/images/thumbnails/error.png';
@@ -53,11 +46,7 @@ function ErrorPage(props: any) {
 								<Loader color="white" size="xl" />
 							</Title>
 						) : (
-							<Title
-								style={{ color: '#ffffff', fontSize: 220, userSelect: 'none' }}
-								ta="center"
-								order={1}
-							>
+							<Title style={{ color: '#ffffff', fontSize: 220, userSelect: 'none' }} ta="center" order={1}>
 								{code}
 							</Title>
 						)}
@@ -106,8 +95,7 @@ const errors: any = {
 	},
 	'301': {
 		title: 'Moved Permanently',
-		message:
-			'The page you requested has been permanently moved to a different URL. Please try again with the new URL.',
+		message: 'The page you requested has been permanently moved to a different URL. Please try again with the new URL.',
 	},
 	'400': {
 		title: 'Bad Request',
@@ -127,8 +115,7 @@ const errors: any = {
 	},
 	'405': {
 		title: 'Method Not Allowed',
-		message:
-			'The method used to access this page is not allowed. Please try again with a GET method.',
+		message: 'The method used to access this page is not allowed. Please try again with a GET method.',
 	},
 	'408': {
 		title: 'Request Timeout',
@@ -149,8 +136,7 @@ const errors: any = {
 	},
 	'501': {
 		title: 'Not Implemented',
-		message:
-			'Your browser does not support features our website requires. Please update your browser.',
+		message: 'Your browser does not support features our website requires. Please update your browser.',
 	},
 	'502': {
 		title: 'Bad Gateway',

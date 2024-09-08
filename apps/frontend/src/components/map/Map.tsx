@@ -110,15 +110,7 @@ function Map({
 			setLoading(false);
 
 			src &&
-				mapLoadGeoJson(
-					mapboxMap,
-					src,
-					'claims',
-					'fill',
-					'claims-source',
-					mapStatusColorPolygon,
-					mapStatusColorLine,
-				);
+				mapLoadGeoJson(mapboxMap, src, 'claims', 'fill', 'claims-source', mapStatusColorPolygon, mapStatusColorLine);
 
 			layerSetup && (await layerSetup(mapboxMap));
 
@@ -140,15 +132,7 @@ function Map({
 
 			mapboxMap.on('style.load', async () => {
 				src &&
-					mapLoadGeoJson(
-						mapboxMap,
-						src,
-						'claims',
-						'fill',
-						'claims-source',
-						mapStatusColorPolygon,
-						mapStatusColorLine,
-					);
+					mapLoadGeoJson(mapboxMap, src, 'claims', 'fill', 'claims-source', mapStatusColorPolygon, mapStatusColorLine);
 				layerSetup && (await layerSetup(mapboxMap));
 			});
 		});

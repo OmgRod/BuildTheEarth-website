@@ -47,9 +47,8 @@ export default function CookieBanner() {
 							/>
 						</Group>
 						<Text c="dimmed" fz="xs">
-							On our website, we use cookies. You can opt to allow only essential cookies, such as
-							authentication cookies, or opt to include analytics cookies as well, enabling us to
-							enhance your website experience.
+							On our website, we use cookies. You can opt to allow only essential cookies, such as authentication
+							cookies, or opt to include analytics cookies as well, enabling us to enhance your website experience.
 						</Text>
 						<Group justify="flex-end" mt="md">
 							<Button variant="outline" size="sm" onClick={handleAcceptEssential}>

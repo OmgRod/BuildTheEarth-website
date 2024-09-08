@@ -16,6 +16,7 @@ import {
 	MenuItem,
 	MenuTarget,
 	NumberInput,
+	rem,
 	ScrollAreaAutosize,
 	Select,
 	Switch,
@@ -24,10 +25,9 @@ import {
 	TableTd,
 	TableTr,
 	Text,
-	TextInput,
 	Textarea,
+	TextInput,
 	Tooltip,
-	rem,
 } from '@mantine/core';
 import { useClipboard, useDebouncedState } from '@mantine/hooks';
 import {
@@ -116,10 +116,7 @@ const ClaimEditPage: NextPage = () => {
 	const isAbleToUpdate = (feature: any) => {
 		if (feature.properties?.owner?.id == user.user?.id) return { able: true, type: 'OWNER' };
 		if (feature.properties?.new == true) return { able: true, type: 'OWNER' };
-		if (
-			feature.properties.buildTeam &&
-			permissions.has('team.claim.list', feature.properties.buildTeam.id)
-		)
+		if (feature.properties.buildTeam && permissions.has('team.claim.list', feature.properties.buildTeam.id))
 			return { able: true, type: 'TEAM' };
 		return { able: false, type: '' };
 	};
@@ -157,17 +154,13 @@ const ClaimEditPage: NextPage = () => {
 
 	useEffect(() => {
 		if (builderSearch.length > 0) {
-			fetch(
-				process.env.NEXT_PUBLIC_API_URL +
-					`/builders/search?search=${builderSearch}&take=5&exact=false`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: 'Bearer ' + accessToken,
-					},
+			fetch(process.env.NEXT_PUBLIC_API_URL + `/builders/search?search=${builderSearch}&take=5&exact=false`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + accessToken,
 				},
-			)
+			})
 				.then((res) => res.json())
 				.then((res) => {
 					if (res.errors) {
@@ -198,8 +191,8 @@ const ClaimEditPage: NextPage = () => {
 			title: 'Confirm Ownership Transfer',
 			children: (
 				<Text size="sm">
-					You will transfer the ownership of this claim to <b>{newOwner.username}</b>. This action
-					cannot be reversed. You will lose all permissions to edit this claim.
+					You will transfer the ownership of this claim to <b>{newOwner.username}</b>. This action cannot be reversed.
+					You will lose all permissions to edit this claim.
 				</Text>
 			),
 			labels: { confirm: 'Transfer', cancel: 'Cancel' },
@@ -235,9 +228,7 @@ const ClaimEditPage: NextPage = () => {
 	};
 
 	const handleCreate = (feature: any) => {
-		draw
-			.setFeatureProperty(feature.id, 'id', feature.id)
-			.setFeatureProperty(feature.id, 'new', true);
+		draw.setFeatureProperty(feature.id, 'id', feature.id).setFeatureProperty(feature.id, 'new', true);
 		setSelected(draw.get(feature.id));
 	};
 
@@ -284,9 +275,9 @@ const ClaimEditPage: NextPage = () => {
 						setSelected(undefined);
 
 						draw.changeMode('simple_select');
-						const geojson = await fetch(
-							`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`,
-						).then((r) => r.json());
+						const geojson = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`).then((r) =>
+							r.json(),
+						);
 
 						draw.set(geojson);
 						setLoading(false);
@@ -298,24 +289,21 @@ const ClaimEditPage: NextPage = () => {
 	const handleSave = () => {
 		setSelected(draw.get(selected.id));
 		setLoading(true);
-		fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/claims/${selected.properties.id}?coordType=numberarray`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + accessToken,
-				},
-				body: JSON.stringify({
-					...selected.properties,
-					area: selected.geometry.coordinates[0],
-					buidings: undefined,
-					buildTeam: undefined,
-					osmName: undefined,
-					owner: selected.properties.owner.id,
-				}),
+		fetch(process.env.NEXT_PUBLIC_API_URL + `/claims/${selected.properties.id}?coordType=numberarray`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + accessToken,
 			},
-		)
+			body: JSON.stringify({
+				...selected.properties,
+				area: selected.geometry.coordinates[0],
+				buidings: undefined,
+				buildTeam: undefined,
+				osmName: undefined,
+				owner: selected.properties.owner.id,
+			}),
+		})
 			.then((res) => res.json())
 			.then(async (res) => {
 				if (res.errors) {
@@ -333,9 +321,9 @@ const ClaimEditPage: NextPage = () => {
 						icon: <IconCheck />,
 					});
 
-					const geojson = await fetch(
-						`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`,
-					).then((r) => r.json());
+					const geojson = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`).then((r) =>
+						r.json(),
+					);
 
 					draw.set(geojson);
 					setLoading(false);
@@ -389,9 +377,9 @@ const ClaimEditPage: NextPage = () => {
 						icon: <IconCheck />,
 					});
 
-					const geojson = await fetch(
-						`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`,
-					).then((r) => r.json());
+					const geojson = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`).then((r) =>
+						r.json(),
+					);
 
 					draw.set(geojson);
 					setLoading(false);
@@ -403,12 +391,7 @@ const ClaimEditPage: NextPage = () => {
 
 	return (
 		<Page fullWidth solidHeader>
-			<MapContextMenu
-				contextMenuInfo={state}
-				setContextMenuInfo={setState}
-				oLat={clientPos.lat}
-				oLng={clientPos.lng}
-			/>
+			<MapContextMenu contextMenuInfo={state} setContextMenuInfo={setState} oLat={clientPos.lat} oLng={clientPos.lng} />
 			<Grid columns={10} gutter={0} grow>
 				<GridCol span={3}>
 					<ScrollAreaAutosize
@@ -429,30 +412,27 @@ const ClaimEditPage: NextPage = () => {
 								<h1>Edit Claims</h1>
 								<h2>Select Claim</h2>
 								<p>
-									Select a Claim on the Map to edit it. You can select your own Claims or Claims of
-									BuildTeams in which you have the correct Permissions.
+									Select a Claim on the Map to edit it. You can select your own Claims or Claims of BuildTeams in which
+									you have the correct Permissions.
 								</p>
 								<h2>Edit Claim Area</h2>
 								<p>
-									When having a Claim selected, you can click on it again to enter edit mode. In
-									this mode you can drag all corners and add new ones by draging the smaller dots
-									between corners. All corners you add will automatically snap to other corners and
-									claims in the area.
+									When having a Claim selected, you can click on it again to enter edit mode. In this mode you can drag
+									all corners and add new ones by draging the smaller dots between corners. All corners you add will
+									automatically snap to other corners and claims in the area.
 								</p>
 								<h2>Edit Claim Properties</h2>
 								<p>
-									If you have selected a Claim on the Map, all its properties which you can edit
-									will appear here. The area and building count will be automatically calculated
-									once you save your edit.
+									If you have selected a Claim on the Map, all its properties which you can edit will appear here. The
+									area and building count will be automatically calculated once you save your edit.
 								</p>
 								<Alert variant="outline" title="Saving" icon={<IconDeviceFloppy />} mt="xl">
-									Do not forget to save your changes, they will be overriden once you reload the
-									Page.
+									Do not forget to save your changes, they will be overriden once you reload the Page.
 								</Alert>
 								<h1>Create Claim</h1>
 								<p>
-									Click on the button below to start creating a new Claim on the Map. Left click to
-									add a edge, double click to finish.
+									Click on the button below to start creating a new Claim on the Map. Left click to add a edge, double
+									click to finish.
 								</p>
 								<Button
 									leftSection={<IconPlus />}
@@ -468,13 +448,7 @@ const ClaimEditPage: NextPage = () => {
 							<>
 								<h1>Edit Claim</h1>
 								{isAbleToUpdate(selected).type == 'TEAM' && (
-									<Alert
-										variant="outline"
-										title="BuildTeam Claim"
-										icon={<IconUsersGroup />}
-										color="yellow"
-										mb="lg"
-									>
+									<Alert variant="outline" title="BuildTeam Claim" icon={<IconUsersGroup />} color="yellow" mb="lg">
 										This claim does not belong to you. You are editing it on behalf of{' '}
 										{selected.properties.buildTeam.name}.
 									</Alert>
@@ -484,9 +458,7 @@ const ClaimEditPage: NextPage = () => {
 									id={selected.id}
 									images={selected.properties.images}
 									editable={
-										isLoggedIn &&
-										(selected.properties?.owner?.id == user.user?.id ||
-											permissions.has('admin.admin'))
+										isLoggedIn && (selected.properties?.owner?.id == user.user?.id || permissions.has('admin.admin'))
 									}
 									t={t}
 									onAdd={(image) => {
@@ -510,14 +482,9 @@ const ClaimEditPage: NextPage = () => {
 										mb="md"
 										onChange={(v) => {
 											const bt = userData?.joinedBuildTeams.find((bt: any) => bt.id == v);
-											handleUpdate(
-												'buildTeam',
-												bt ? { id: bt.id, slug: bt.slug, name: bt.name } : undefined,
-											);
+											handleUpdate('buildTeam', bt ? { id: bt.id, slug: bt.slug, name: bt.name } : undefined);
 										}}
-										placeholder={
-											userDataLoading ? 'Loading aviable BuildTeams...' : 'Select a BuildTeam'
-										}
+										placeholder={userDataLoading ? 'Loading aviable BuildTeams...' : 'Select a BuildTeam'}
 									/>
 								)}
 								<TextInput
@@ -583,17 +550,8 @@ const ClaimEditPage: NextPage = () => {
 										<Table.Tr>
 											<Table.Td>
 												<Group gap="sm">
-													<Indicator
-														disabled={!selected.properties?.owner?.new}
-														processing={loading}
-														color="orange"
-													>
-														<Avatar
-															size={40}
-															src={selected.properties?.owner?.avatar}
-															radius={40}
-															color="cyan"
-														>
+													<Indicator disabled={!selected.properties?.owner?.new} processing={loading} color="orange">
+														<Avatar size={40} src={selected.properties?.owner?.avatar} radius={40} color="cyan">
 															{(selected.properties?.owner?.username ||
 																selected.properties?.owner?.minecraft ||
 																selected.properties?.owner?.name ||
@@ -611,8 +569,7 @@ const ClaimEditPage: NextPage = () => {
 														</Text>
 														<Text c="dimmed" fz="xs">
 															{t('common:owner')}
-															{selected.properties?.owner?.id == user.user?.id &&
-																' - ' + t('common:you')}
+															{selected.properties?.owner?.id == user.user?.id && ' - ' + t('common:you')}
 														</Text>
 													</div>
 												</Group>
@@ -656,34 +613,23 @@ const ClaimEditPage: NextPage = () => {
 																onClick={() =>
 																	handleUpdate(
 																		'builders',
-																		selected.properties.builders.filter(
-																			(b: any) => b.id != builder.id,
-																		),
+																		selected.properties.builders.filter((b: any) => b.id != builder.id),
 																	)
 																}
 															>
-																<IconTrash
-																	style={{ width: rem(16), height: rem(16) }}
-																	stroke={1.5}
-																/>
+																<IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
 															</ActionIcon>
 														</Tooltip>
 														<Menu>
 															<MenuTarget>
 																<ActionIcon variant="subtle" color="gray">
-																	<IconDots
-																		style={{ width: rem(16), height: rem(16) }}
-																		stroke={1.5}
-																	/>
+																	<IconDots style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
 																</ActionIcon>
 															</MenuTarget>
 															<MenuDropdown>
 																<MenuItem
 																	leftSection={
-																		<Discord
-																			onPointerEnterCapture={undefined}
-																			onPointerLeaveCapture={undefined}
-																		/>
+																		<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 																	}
 																	onClick={() => clipboard.copy(builder.discordId)}
 																>
@@ -696,10 +642,7 @@ const ClaimEditPage: NextPage = () => {
 																>
 																	Copy Minecraft Name
 																</MenuItem>
-																<MenuItem
-																	leftSection={<IconId />}
-																	onClick={() => clipboard.copy(builder.id)}
-																>
+																<MenuItem leftSection={<IconId />} onClick={() => clipboard.copy(builder.id)}>
 																	Copy Id
 																</MenuItem>
 																<MenuDivider />
@@ -720,11 +663,7 @@ const ClaimEditPage: NextPage = () => {
 											<Table.Td>
 												<Group gap="sm">
 													<Avatar size={40} radius={40} color="orange">
-														{builderSearchLoading ? (
-															<Loader size="sm" color="orange" />
-														) : (
-															<IconPlus />
-														)}
+														{builderSearchLoading ? <Loader size="sm" color="orange" /> : <IconPlus />}
 													</Avatar>
 													<Select
 														searchable
@@ -827,9 +766,9 @@ const ClaimEditPage: NextPage = () => {
 								setMap(map);
 								map.addControl(draw, 'top-right');
 
-								const geojson = await fetch(
-									`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`,
-								).then((r) => r.json());
+								const geojson = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/claims/geojson?props=true`).then((r) =>
+									r.json(),
+								);
 
 								draw.set(geojson);
 

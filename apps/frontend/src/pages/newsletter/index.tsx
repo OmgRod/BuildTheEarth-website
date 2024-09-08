@@ -1,13 +1,6 @@
 /* eslint-disable no-undef */
 
-import {
-	Avatar,
-	Group,
-	Pagination,
-	Text,
-	useMantineColorScheme,
-	useMantineTheme,
-} from '@mantine/core';
+import { Avatar, Group, Pagination, Text, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import { Calendar, Number } from 'tabler-icons-react';
 
 import Page from '@/components/Page';
@@ -42,8 +35,7 @@ const NewsletterList: NextPage = () => {
 					<Group
 						wrap="nowrap"
 						style={{
-							backgroundColor:
-								scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
+							backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
 							borderRadius: theme.radius.xs,
 							// TODO
 							// '&:hover': {
@@ -81,13 +73,7 @@ const NewsletterList: NextPage = () => {
 				))}
 			</Group>
 			<Group justify="center" pt="md">
-				<Pagination
-					total={data?.pages || 1}
-					radius="xs"
-					value={activePage}
-					onChange={setPage}
-					siblings={1}
-				/>
+				<Pagination total={data?.pages || 1} radius="xs" value={activePage} onChange={setPage} siblings={1} />
 			</Group>
 		</Page>
 	);

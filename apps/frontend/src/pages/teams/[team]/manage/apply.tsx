@@ -17,13 +17,7 @@ import {
 	Title,
 	useMantineTheme,
 } from '@mantine/core';
-import {
-	IconCheck,
-	IconChevronDown,
-	IconChevronUp,
-	IconLetterT,
-	IconPlus,
-} from '@tabler/icons-react';
+import { IconCheck, IconChevronDown, IconChevronUp, IconLetterT, IconPlus } from '@tabler/icons-react';
 
 import Icon from '@/components/Icon';
 import Page from '@/components/Page';
@@ -343,11 +337,7 @@ const Apply: NextPage = ({ data: tempData, team }: any) => {
 										<IconChevronUp />
 									</ActionIcon>
 									<ActionIcon
-										variant={
-											i == data.filter((d: any) => d.trial == trial).length - 1
-												? 'transparent'
-												: 'subtle'
-										}
+										variant={i == data.filter((d: any) => d.trial == trial).length - 1 ? 'transparent' : 'subtle'}
 										disabled={i == data.filter((d: any) => d.trial == trial).length - 1}
 										onClick={() => {
 											handleMoveDown(i);
@@ -357,11 +347,7 @@ const Apply: NextPage = ({ data: tempData, team }: any) => {
 									</ActionIcon>
 								</Stack>
 								<Divider orientation="vertical" />
-								<Stack
-									gap={0}
-									style={{ cursor: 'pointer', flexGrow: 1 }}
-									onClick={() => setEditingQuestion(d)}
-								>
+								<Stack gap={0} style={{ cursor: 'pointer', flexGrow: 1 }} onClick={() => setEditingQuestion(d)}>
 									<Title order={4} style={{ display: 'flex', alignItems: 'center' }}>
 										<Icon name={d.icon} style={{ height: 20, marginRight: 4 }} />
 										{d.sort + 1}. {d.title}

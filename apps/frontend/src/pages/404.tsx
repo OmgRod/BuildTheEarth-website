@@ -1,11 +1,11 @@
 import { Button, Center, Title, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 
-import Image from 'next/image';
 import Page from '@/components/Page';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import thumbnail from '@/public/images/thumbnails/error.png';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 function ErrorPage() {
 	const { t } = useTranslation('common');
@@ -40,19 +40,14 @@ function ErrorPage() {
 					}}
 				>
 					<div>
-						<Title
-							style={{ color: '#ffffff', fontSize: 220, userSelect: 'none' }}
-							ta="center"
-							order={1}
-						>
+						<Title style={{ color: '#ffffff', fontSize: 220, userSelect: 'none' }} ta="center" order={1}>
 							404
 						</Title>
 						<Title style={{ color: '#ffffff' }} ta="center" order={1}>
 							While we are busy building the earth, we have not yet built this page.
 						</Title>
 						<Title style={{ color: theme.colors.gray[4] }} ta="center" order={3}>
-							We can&apos;t find the page you&apos;re looking for. Please check the URL and try
-							again.
+							We can&apos;t find the page you&apos;re looking for. Please check the URL and try again.
 							<br />
 							<Button
 								variant="outline"

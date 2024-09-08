@@ -31,12 +31,7 @@ const MinecraftQuestion = (props: MinecraftQuestionProps) => {
 			value={props.value}
 			rightSection={
 				props.value && (
-					<ActionIcon
-						component={Link}
-						href={`https://namemc.com/${props.value}`}
-						variant="subtle"
-						target="_blank"
-					>
+					<ActionIcon component={Link} href={`https://namemc.com/${props.value}`} variant="subtle" target="_blank">
 						<IconExternalLink style={{ width: '70%', height: '70%' }} stroke={1.5} />
 					</ActionIcon>
 				)

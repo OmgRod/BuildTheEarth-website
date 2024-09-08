@@ -109,9 +109,7 @@ const Team: NextPage = ({ data, data2 }: any) => {
 			<GalleryGrid
 				images={
 					data2
-						?.sort(
-							(a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-						)
+						?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 						?.slice(showcasePage * 10 - 10, showcasePage * 10)
 						.map((d: any) => ({
 							name: d?.title,
@@ -122,11 +120,7 @@ const Team: NextPage = ({ data, data2 }: any) => {
 				}
 			/>
 			<Group justify="center" w="100%" mt="md">
-				<Pagination
-					total={Math.ceil(data2?.length / 10)}
-					value={showcasePage}
-					onChange={setShowcasePage}
-				/>
+				<Pagination total={Math.ceil(data2?.length / 10)} value={showcasePage} onChange={setShowcasePage} />
 			</Group>
 		</LogoPage>
 	);

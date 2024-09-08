@@ -57,11 +57,7 @@ const GetStarted: NextPage = () => {
 							padding: 16,
 						}}
 					>
-						<Title
-							style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }}
-							ta="center"
-							order={1}
-						>
+						<Title style={{ color: '#ffffff', fontSize: 64, textShadow: '0px 0px 28px #000' }} ta="center" order={1}>
 							{t('choose.title')}
 						</Title>
 					</Center>
@@ -120,11 +116,7 @@ const GetStarted: NextPage = () => {
 							}}
 						>
 							<Card.Section>
-								<Image
-									alt="Visit us"
-									src={visitImg}
-									style={{ height: '25vh', width: '100%', objectFit: 'cover' }}
-								/>
+								<Image alt="Visit us" src={visitImg} style={{ height: '25vh', width: '100%', objectFit: 'cover' }} />
 							</Card.Section>
 
 							<Title order={2} mt="md">

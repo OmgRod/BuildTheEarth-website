@@ -5,27 +5,27 @@ import {
 	FileInput,
 	Group,
 	Image as MImage,
+	rem,
 	Switch,
 	Table,
 	Text,
 	TextInput,
 	Tooltip,
-	rem,
 } from '@mantine/core';
 import { IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
 import useSWR, { mutate } from 'swr';
 
-import { DateInput } from '@mantine/dates';
-import Image from 'next/image';
 import Page from '@/components/Page';
 import SettingsTabs from '@/components/SettingsTabs';
-import fetcher from '@/utils/Fetcher';
-import { modals } from '@mantine/modals';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { showNotification } from '@mantine/notifications';
-import thumbnail from '@/public/images/thumbnails/teams.png';
 import { useAccessToken } from '@/hooks/useAccessToken';
 import { usePermissions } from '@/hooks/usePermissions';
+import thumbnail from '@/public/images/thumbnails/teams.png';
+import fetcher from '@/utils/Fetcher';
+import { DateInput } from '@mantine/dates';
+import { modals } from '@mantine/modals';
+import { showNotification } from '@mantine/notifications';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -44,8 +44,8 @@ const Settings = () => {
 			centered: true,
 			children: (
 				<Text>
-					Are you sure you want to delete the showcase image of <b>{image.title}</b> from the team?
-					This action cannot be undone.
+					Are you sure you want to delete the showcase image of <b>{image.title}</b> from the team? This action cannot
+					be undone.
 				</Text>
 			),
 			labels: { confirm: 'Delete Image', cancel: 'Cancel' },
@@ -58,17 +58,13 @@ const Settings = () => {
 				}),
 			onConfirm: () => {
 				setLoading(true);
-				fetch(
-					process.env.NEXT_PUBLIC_API_URL +
-						`/buildteams/${router.query.team}/showcases/${image.id}`,
-					{
-						method: 'DELETE',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: 'Bearer ' + accessToken,
-						},
+				fetch(process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/showcases/${image.id}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer ' + accessToken,
 					},
-				)
+				})
 					.then((res) => res.json())
 					.then((res) => {
 						setLoading(false);
@@ -154,17 +150,14 @@ const Settings = () => {
 			date && formdata.append('date', date.toISOString());
 
 			modals.closeAll();
-			fetch(
-				process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/showcases?slug=true`,
-				{
-					method: 'POST',
-					headers: {
-						// 'Content-Type': 'multipart/form-data',
-						Authorization: 'Bearer ' + accessToken,
-					},
-					body: formdata,
+			fetch(process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/showcases?slug=true`, {
+				method: 'POST',
+				headers: {
+					// 'Content-Type': 'multipart/form-data',
+					Authorization: 'Bearer ' + accessToken,
 				},
-			)
+				body: formdata,
+			})
 				.then((res) => res.json())
 				.then((res) => {
 					if (res.errors) {
@@ -256,18 +249,14 @@ const Settings = () => {
 		const handleSubmit = () => {
 			setLoading(true);
 			modals.closeAll();
-			fetch(
-				process.env.NEXT_PUBLIC_API_URL +
-					`/buildteams/${router.query.team}/showcases/${image.id}?slug=true`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: 'Bearer ' + accessToken,
-					},
-					body: JSON.stringify({ title: name, city, date, approved }),
+			fetch(process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/showcases/${image.id}?slug=true`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + accessToken,
 				},
-			)
+				body: JSON.stringify({ title: name, city, date, approved }),
+			})
 				.then((res) => res.json())
 				.then((res) => {
 					if (res.errors) {
@@ -306,21 +295,13 @@ const Settings = () => {
 		>
 			<SettingsTabs team={router.query.team?.toString() || ''} loading={!data || loading}>
 				<Table.ScrollContainer minWidth={800}>
-					<Button
-						leftSection={<IconPlus />}
-						onClick={() => handleAddImage()}
-						mb="md"
-						loading={loading}
-					>
+					<Button leftSection={<IconPlus />} onClick={() => handleAddImage()} mb="md" loading={loading}>
 						Add Showcase Image
 					</Button>
 					<Table verticalSpacing="sm">
 						<Table.Tbody>
 							{data
-								?.sort(
-									(a: any, b: any) =>
-										new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-								)
+								?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 								.map((s: any) => (
 									<Table.Tr key={s.id}>
 										<Table.Td>
@@ -346,18 +327,10 @@ const Settings = () => {
 												</Text>
 											</Tooltip>
 											<Group gap={4} mt="sm">
-												<ActionIcon
-													variant="subtle"
-													color="gray"
-													onClick={() => handleEditImage(s)}
-												>
+												<ActionIcon variant="subtle" color="gray" onClick={() => handleEditImage(s)}>
 													<IconPencil style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
 												</ActionIcon>
-												<ActionIcon
-													variant="subtle"
-													color="red"
-													onClick={() => handleDeleteImage(s)}
-												>
+												<ActionIcon variant="subtle" color="red" onClick={() => handleDeleteImage(s)}>
 													<IconTrash style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
 												</ActionIcon>
 											</Group>

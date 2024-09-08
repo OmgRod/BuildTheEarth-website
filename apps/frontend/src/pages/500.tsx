@@ -40,11 +40,7 @@ function ErrorPage() {
 					}}
 				>
 					<div>
-						<Title
-							style={{ color: '#ffffff', fontSize: 220, userSelect: 'none' }}
-							ta="center"
-							order={1}
-						>
+						<Title style={{ color: '#ffffff', fontSize: 220, userSelect: 'none' }} ta="center" order={1}>
 							500
 						</Title>
 						<Title style={{ color: '#ffffff' }} ta="center" order={1}>

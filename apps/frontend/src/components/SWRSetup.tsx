@@ -44,9 +44,7 @@ export const swrFetcher = (session?: { data: Session | null }) => {
 			const res = await fetch(process.env.NEXT_PUBLIC_API_URL + resource, {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
-					Authorization: session?.data?.accessToken
-						? 'Bearer ' + session?.data?.accessToken
-						: undefined,
+					Authorization: session?.data?.accessToken ? 'Bearer ' + session?.data?.accessToken : undefined,
 					...init?.headers,
 				},
 				...init,

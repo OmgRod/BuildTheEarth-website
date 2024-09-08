@@ -1,5 +1,5 @@
-import { Alert, Badge, Button, Card, Flex, Group, Tabs, Text, TextInput, rem } from '@mantine/core';
 import { Discord, Github } from '@icons-pack/react-simple-icons';
+import { Alert, Badge, Button, Card, Flex, Group, rem, Tabs, Text, TextInput } from '@mantine/core';
 import {
 	IconAlertCircle,
 	IconBroadcast,
@@ -14,18 +14,18 @@ import {
 } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 
-import { NextPage } from 'next';
 import Page from '@/components/Page';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { showNotification } from '@mantine/notifications';
-import thumbnail from '@/public/images/thumbnails/me.png';
 import { useAccessToken } from '@/hooks/useAccessToken';
-import { useForm } from '@mantine/form';
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-import { useSession } from 'next-auth/react';
-import { useTranslation } from 'react-i18next';
 import { useUser } from '@/hooks/useUser';
+import thumbnail from '@/public/images/thumbnails/me.png';
+import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
+import useSWR from 'swr';
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -100,51 +100,26 @@ const Settings: NextPage = ({ type }: any) => {
 			{data && (
 				<Tabs value={type} onChange={(v) => router.push({ query: { type: v } })}>
 					<Tabs.List>
-						<Tabs.Tab
-							value="general"
-							leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}
-						>
+						<Tabs.Tab value="general" leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
 							Profile Information
 						</Tabs.Tab>
-						<Tabs.Tab
-							value="security"
-							leftSection={<IconKey style={{ width: rem(14), height: rem(14) }} />}
-						>
+						<Tabs.Tab value="security" leftSection={<IconKey style={{ width: rem(14), height: rem(14) }} />}>
 							Security Details
 						</Tabs.Tab>
-						<Tabs.Tab
-							value="accounts"
-							leftSection={<IconLink style={{ width: rem(14), height: rem(14) }} />}
-						>
+						<Tabs.Tab value="accounts" leftSection={<IconLink style={{ width: rem(14), height: rem(14) }} />}>
 							Linked Accounts
 						</Tabs.Tab>
-						<Tabs.Tab
-							value="session"
-							leftSection={<IconBroadcast style={{ width: rem(14), height: rem(14) }} />}
-						>
+						<Tabs.Tab value="session" leftSection={<IconBroadcast style={{ width: rem(14), height: rem(14) }} />}>
 							Active Sessions
 						</Tabs.Tab>
 					</Tabs.List>
 
 					<Tabs.Panel value="general" mt="md">
 						<form onSubmit={form.onSubmit(handleSubmit)}>
-							<TextInput
-								label="Username"
-								{...form.getInputProps('username')}
-								required
-								placeholder="johnDoe"
-							/>
+							<TextInput label="Username" {...form.getInputProps('username')} required placeholder="johnDoe" />
 							<Group grow mt="md">
-								<TextInput
-									label="First Name"
-									{...form.getInputProps('firstName')}
-									placeholder="John"
-								/>
-								<TextInput
-									label="Last Name"
-									{...form.getInputProps('lastName')}
-									placeholder="Doe"
-								/>
+								<TextInput label="First Name" {...form.getInputProps('firstName')} placeholder="John" />
+								<TextInput label="Last Name" {...form.getInputProps('lastName')} placeholder="Doe" />
 							</Group>
 							<TextInput
 								label="Email"
@@ -153,12 +128,7 @@ const Settings: NextPage = ({ type }: any) => {
 								mt="md"
 								placeholder="john.doe@mail.com"
 							/>
-							<TextInput
-								label="Avatar"
-								{...form.getInputProps('avatar')}
-								mt="md"
-								placeholder="https://..."
-							/>
+							<TextInput label="Avatar" {...form.getInputProps('avatar')} mt="md" placeholder="https://..." />
 							<Group mt="md">
 								<Button type="submit" leftSection={<IconDeviceFloppy />} loading={loading}>
 									{t('common:button.save')}

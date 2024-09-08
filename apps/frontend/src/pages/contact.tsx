@@ -1,14 +1,6 @@
 /* eslint-disable no-undef */
 
-import {
-	Discord,
-	Facebook,
-	Instagram,
-	Tiktok,
-	Twitch,
-	Twitter,
-	Youtube,
-} from '@icons-pack/react-simple-icons';
+import { Discord, Facebook, Instagram, Tiktok, Twitch, Twitter, Youtube } from '@icons-pack/react-simple-icons';
 import {
 	Button,
 	Divider,
@@ -58,12 +50,7 @@ const Contact: NextPage = ({ data }: any) => {
 							</Text>
 
 							<Group wrap="nowrap" gap={10} mt={3} justify="flex-start">
-								<Discord
-									width={18}
-									size={16}
-									onPointerEnterCapture={undefined}
-									onPointerLeaveCapture={undefined}
-								/>
+								<Discord width={18} size={16} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 								<Text size="xs" c="dimmed">
 									{contact.discord}
 								</Text>
@@ -171,20 +158,12 @@ const Contact: NextPage = ({ data }: any) => {
 			<Title order={2} mt="lg">
 				Ban Appeals
 			</Title>
+			<p>If you wish to appeal your ban on the Discord server, please send an email to appeals@buildtheearth.net.</p>
 			<p>
-				If you wish to appeal your ban on the Discord server, please send an email to
-				appeals@buildtheearth.net.
+				In order to submit a ban appeal, you must include your Discord tag and user ID, screenshot of your ban message
+				and your reason for appealing. Illegitimate appeals will be ignored.
 			</p>
-			<p>
-				In order to submit a ban appeal, you must include your Discord tag and user ID, screenshot
-				of your ban message and your reason for appealing. Illegitimate appeals will be ignored.
-			</p>
-			<Button
-				component={Link}
-				variant="outline"
-				leftSection={<IconMail />}
-				href="mailto:appeals@buildtheearth.net"
-			>
+			<Button component={Link} variant="outline" leftSection={<IconMail />} href="mailto:appeals@buildtheearth.net">
 				Send an Email
 			</Button>
 		</Page>

@@ -1,10 +1,10 @@
 import { Avatar, Badge, Box, Title, useMantineTheme } from '@mantine/core';
 import React, { useState } from 'react';
 
-import BackgroundImage from './BackgroundImage';
 import { Carousel } from '@mantine/carousel';
 import Link from 'next/link';
 import classes from '../styles/components/Gallery.module.css';
+import BackgroundImage from './BackgroundImage';
 
 interface GalleryImageProps {
 	name?: string;
@@ -105,12 +105,7 @@ export function GalleryImage(i: GalleryImageProps) {
 						{i.name}
 					</Title>
 					{i.buildTeam && (
-						<Badge
-							component={Link}
-							href={`/teams/${i.buildTeamId}`}
-							variant="gradient"
-							style={{ cursor: 'pointer' }}
-						>
+						<Badge component={Link} href={`/teams/${i.buildTeamId}`} variant="gradient" style={{ cursor: 'pointer' }}>
 							{i.buildTeam}
 						</Badge>
 					)}

@@ -1,11 +1,4 @@
-import {
-	Switch,
-	Table,
-	Text,
-	Tooltip,
-	useMantineColorScheme,
-	useMantineTheme,
-} from '@mantine/core';
+import { Switch, Table, Text, Tooltip, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 
 import Page from '@/components/Page';
 import { AdminSettingsTabs } from '@/components/SettingsTabs';
@@ -48,11 +41,7 @@ const Settings = ({ data: tempData }: any) => {
 									<Switch readOnly checked={job.running} />
 								</Table.Td>
 								<Table.Td>
-									<Tooltip
-										label={
-											job.nextExecution ? vagueTime.get({ to: new Date(job.nextExecution) }) : ''
-										}
-									>
+									<Tooltip label={job.nextExecution ? vagueTime.get({ to: new Date(job.nextExecution) }) : ''}>
 										<Text>{new Date(job.nextExecution).toLocaleString()}</Text>
 									</Tooltip>
 								</Table.Td>

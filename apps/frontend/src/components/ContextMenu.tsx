@@ -11,10 +11,10 @@ export function useContextMenu({
 	disableEventPosition = false,
 }: {
 	disableEventPosition?: boolean;
-}): [ContextMenuInfo, React.Dispatch<ContextMenuInfo>, React.MouseEventHandler<HTMLElement>] {
+}): [ContextMenuInfo, React.Dispatch, React.MouseEventHandler] {
 	const [info, setInfo] = useState<ContextMenuInfo>({ x: 0, y: 0, opened: false });
 
-	const contextMenuHandler = useCallback<React.MouseEventHandler<HTMLElement>>(
+	const contextMenuHandler = useCallback<React.MouseEventHandler>(
 		(e) => {
 			e.preventDefault();
 			if (!disableEventPosition) {
@@ -34,12 +34,7 @@ export interface ContextMenuProps extends MenuProps {
 	setContextMenuInfo: (i: ContextMenuInfo) => void;
 }
 
-export function ContextMenu({
-	contextMenuInfo,
-	setContextMenuInfo,
-	children,
-	...other
-}: ContextMenuProps) {
+export function ContextMenu({ contextMenuInfo, setContextMenuInfo, children, ...other }: ContextMenuProps) {
 	const onClose = useCallback(
 		() => setContextMenuInfo({ ...contextMenuInfo, opened: false }),
 		[contextMenuInfo, setContextMenuInfo],

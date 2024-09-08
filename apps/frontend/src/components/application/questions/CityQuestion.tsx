@@ -42,9 +42,7 @@ const EditQuestion = ({ editingQuestion, handleUpdateEditingQuestion }: any) => 
 				label="Country"
 				description="The country to autocomplete"
 				mb="md"
-				onChange={(e) =>
-					handleUpdateEditingQuestion({ additionalData: { country: e.target.value } })
-				}
+				onChange={(e) => handleUpdateEditingQuestion({ additionalData: { country: e.target.value } })}
 			/>
 		</>
 	);

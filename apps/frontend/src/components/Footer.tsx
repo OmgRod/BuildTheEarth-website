@@ -23,12 +23,7 @@ export default function Footer({ links, style }: FooterSimpleProps) {
 	return (
 		<div className={classes.footer} style={style}>
 			<Container className={classes.inner} size="xl">
-				<Anchor<'a'>
-					style={{ fontSize: '14px' }}
-					c="dimmed"
-					variant="text"
-					className={classes.copyright1}
-				>
+				<Anchor style={{ fontSize: '14px' }} c="dimmed" variant="text" className={classes.copyright1}>
 					{t('copyright', { year: new Date().getFullYear() })}
 				</Anchor>
 				<Group className={classes.links}>
@@ -46,12 +41,7 @@ export default function Footer({ links, style }: FooterSimpleProps) {
 					</Group>
 					<LanguageSwitcher className={classes.language} />
 				</Group>
-				<Anchor<'a'>
-					style={{ fontSize: '14px' }}
-					c="dimmed"
-					variant="text"
-					className={classes.copyright2}
-				>
+				<Anchor style={{ fontSize: '14px' }} c="dimmed" variant="text" className={classes.copyright2}>
 					{t('copyright', { year: new Date().getFullYear() })}
 				</Anchor>
 			</Container>

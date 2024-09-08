@@ -5,13 +5,13 @@ import {
 	Checkbox,
 	Group,
 	Pagination,
+	rem,
 	ScrollAreaAutosize,
 	Stack,
 	Table,
 	Text,
 	TextInput,
 	Title,
-	rem,
 } from '@mantine/core';
 import { IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
 import useSWR, { mutate } from 'swr';
@@ -37,12 +37,8 @@ const Settings = () => {
 	const [page, setPage] = useState(1);
 	const [hasUpdated, setHasUpdated] = useState(false);
 	const [filter, setFilter] = useState('');
-	const { data: builders } = useSWR(
-		`/buildteams/${router.query.team}/members?slug=true&page=${page - 1}`,
-	);
-	const { data: managers, isLoading: loadingManagers } = useSWR(
-		`/buildteams/${router.query.team}/managers?slug=true`,
-	);
+	const { data: builders } = useSWR(`/buildteams/${router.query.team}/members?slug=true&page=${page - 1}`);
+	const { data: managers, isLoading: loadingManagers } = useSWR(`/buildteams/${router.query.team}/managers?slug=true`);
 	const { data: permissions } = useSWR(`/permissions`);
 
 	const handleRemoveBuilder = (member: any) => {
@@ -51,8 +47,8 @@ const Settings = () => {
 			centered: true,
 			children: (
 				<Text>
-					Are you sure you want to remove {member.username} from the team? This action cannot be
-					undone, the user needs to reapply.
+					Are you sure you want to remove {member.username} from the team? This action cannot be undone, the user needs
+					to reapply.
 				</Text>
 			),
 			labels: { confirm: 'Remove Builder', cancel: 'Cancel' },
@@ -130,9 +126,7 @@ const Settings = () => {
 						{permissions?.map((permission: any) => {
 							if (permission.global) return;
 
-							let memberHasPermission = member.permissions?.some(
-								(p: any) => p.permissionId == permission.id,
-							);
+							let memberHasPermission = member.permissions?.some((p: any) => p.permissionId == permission.id);
 							return (
 								<Checkbox
 									label={permission.description}
@@ -162,10 +156,7 @@ const Settings = () => {
 			title: `Remove ${member.username}´s Permissions`,
 			centered: true,
 			children: (
-				<Text>
-					Are you sure you want to remove {member.username}´s Permissions? This action cannot be
-					undone.
-				</Text>
+				<Text>Are you sure you want to remove {member.username}´s Permissions? This action cannot be undone.</Text>
 			),
 			labels: { confirm: 'Remove Permissions', cancel: 'Cancel' },
 			confirmProps: { color: 'red' },
@@ -176,20 +167,16 @@ const Settings = () => {
 					color: 'yellow',
 				}),
 			onConfirm: () => {
-				fetch(
-					process.env.NEXT_PUBLIC_API_URL +
-						`/users/${member.id}/permissions?buildteam=${router.query.team}`,
-					{
-						method: 'DELETE',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: 'Bearer ' + accessToken,
-						},
-						body: JSON.stringify({
-							permissions: member.permissions.map((p: any) => p.permissionId),
-						}),
+				fetch(process.env.NEXT_PUBLIC_API_URL + `/users/${member.id}/permissions?buildteam=${router.query.team}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer ' + accessToken,
 					},
-				)
+					body: JSON.stringify({
+						permissions: member.permissions.map((p: any) => p.permissionId),
+					}),
+				})
 					.then((res) => res.json())
 					.then((res) => {
 						setHasUpdated(true);
@@ -212,18 +199,14 @@ const Settings = () => {
 		});
 	};
 	const editPermission = (permission: string, add: boolean, member: any) => {
-		fetch(
-			process.env.NEXT_PUBLIC_API_URL +
-				`/users/${member.id}/permissions?buildteam=${router.query.team}`,
-			{
-				method: add ? 'POST' : 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + accessToken,
-				},
-				body: JSON.stringify({ permission }),
+		fetch(process.env.NEXT_PUBLIC_API_URL + `/users/${member.id}/permissions?buildteam=${router.query.team}`, {
+			method: add ? 'POST' : 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + accessToken,
 			},
-		)
+			body: JSON.stringify({ permission }),
+		})
 			.then((res) => res.json())
 			.then((res) => {
 				setHasUpdated(true);
@@ -274,13 +257,7 @@ const Settings = () => {
 				</Group>
 				<UsersTable
 					loading={!managers}
-					data={
-						managers
-							? managers.filter((b: any) =>
-									b.username?.toLowerCase().includes(filter.toLowerCase()),
-								)
-							: []
-					}
+					data={managers ? managers.filter((b: any) => b.username?.toLowerCase().includes(filter.toLowerCase())) : []}
 					actions={(data) => (
 						<Group gap={0} justify="flex-end">
 							<ActionIcon
@@ -352,13 +329,7 @@ const Settings = () => {
 					)}
 				/>
 				<Group justify="center" pt="md">
-					<Pagination
-						total={builders?.pages}
-						radius="xs"
-						value={page}
-						onChange={setPage}
-						siblings={1}
-					/>
+					<Pagination total={builders?.pages} radius="xs" value={page} onChange={setPage} siblings={1} />
 				</Group>
 			</SettingsTabs>
 		</Page>

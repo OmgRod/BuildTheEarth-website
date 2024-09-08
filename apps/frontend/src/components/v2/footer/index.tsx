@@ -40,12 +40,7 @@ export default function Footer({ links, style }: FooterProps) {
 					</ActionIcon>
 					<LanguageSwitcher className={classes.language} />
 				</Group>
-				<Anchor<'a'>
-					style={{ fontSize: '14px' }}
-					c="dimmed"
-					variant="text"
-					className={classes.copyright2}
-				>
+				<Anchor style={{ fontSize: '14px' }} c="dimmed" variant="text" className={classes.copyright2}>
 					{t('copyright', { year: new Date().getFullYear() })}
 				</Anchor>
 			</Box>

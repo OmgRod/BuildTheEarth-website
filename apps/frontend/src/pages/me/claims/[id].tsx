@@ -11,14 +11,14 @@ import {
 	MenuItem,
 	MenuTarget,
 	NumberInput,
+	rem,
 	Select,
 	Switch,
 	Table,
 	Text,
-	TextInput,
 	Textarea,
+	TextInput,
 	Tooltip,
-	rem,
 } from '@mantine/core';
 import { useClipboard, useDebouncedState } from '@mantine/hooks';
 import {
@@ -158,17 +158,13 @@ const ClaimPage: NextPage = ({ claimId, data }: any) => {
 
 	useEffect(() => {
 		if (builderSearch.length > 0) {
-			fetch(
-				process.env.NEXT_PUBLIC_API_URL +
-					`/builders/search?search=${builderSearch}&take=5&exact=false`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: 'Bearer ' + accessToken,
-					},
+			fetch(process.env.NEXT_PUBLIC_API_URL + `/builders/search?search=${builderSearch}&take=5&exact=false`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + accessToken,
 				},
-			)
+			})
 				.then((res) => res.json())
 				.then((res) => {
 					if (res.errors) {
@@ -239,12 +235,7 @@ const ClaimPage: NextPage = ({ claimId, data }: any) => {
 							mb="md"
 						/>
 						<Tooltip label={t('edit.buildings.description')}>
-							<NumberInput
-								readOnly
-								value={additionalData.buildings}
-								label={t('edit.buildings.title')}
-								disabled
-							/>
+							<NumberInput readOnly value={additionalData.buildings} label={t('edit.buildings.title')} disabled />
 						</Tooltip>
 						<h3>{t('edit.builders.title')}</h3>
 						<Table verticalSpacing="md" mb="md">
@@ -318,10 +309,7 @@ const ClaimPage: NextPage = ({ claimId, data }: any) => {
 													<MenuDropdown>
 														<MenuItem
 															leftSection={
-																<Discord
-																	onPointerEnterCapture={undefined}
-																	onPointerLeaveCapture={undefined}
-																/>
+																<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 															}
 															onClick={() => clipboard.copy(builder.discordId)}
 														>
@@ -334,10 +322,7 @@ const ClaimPage: NextPage = ({ claimId, data }: any) => {
 														>
 															Copy Minecraft Name
 														</MenuItem>
-														<MenuItem
-															leftSection={<IconId />}
-															onClick={() => clipboard.copy(builder.id)}
-														>
+														<MenuItem leftSection={<IconId />} onClick={() => clipboard.copy(builder.id)}>
 															Copy Id
 														</MenuItem>
 													</MenuDropdown>

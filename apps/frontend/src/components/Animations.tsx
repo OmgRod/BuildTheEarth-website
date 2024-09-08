@@ -4,21 +4,10 @@ import { useEffect, useState } from 'react';
 import { Box } from '@mantine/core';
 import { useInterval } from '@mantine/hooks';
 
-export const TextLoop = ({
-	words,
-	interval,
-	style,
-}: {
-	words: string[];
-	interval: number;
-	style?: MotionStyle;
-}) => {
+export const TextLoop = ({ words, interval, style }: { words: string[]; interval: number; style?: MotionStyle }) => {
 	const [index, setIndex] = useState(0);
 
-	const indexInterval = useInterval(
-		() => setIndex((s) => (s == words.length - 1 ? 0 : s + 1)),
-		interval,
-	);
+	const indexInterval = useInterval(() => setIndex((s) => (s == words.length - 1 ? 0 : s + 1)), interval);
 
 	useEffect(() => {
 		indexInterval.start();

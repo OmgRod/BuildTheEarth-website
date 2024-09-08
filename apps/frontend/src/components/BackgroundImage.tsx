@@ -18,10 +18,7 @@ export default function Background({
 }) {
 	return (
 		<>
-			<div
-				style={{ position: 'relative', overflow: 'hidden', ...props.rootStyle }}
-				onClick={props.onClick}
-			>
+			<div style={{ position: 'relative', overflow: 'hidden', ...props.rootStyle }} onClick={props.onClick}>
 				<Image
 					loading={loading}
 					priority={priority}
