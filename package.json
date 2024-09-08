@@ -10,11 +10,13 @@
   "license": "MIT",
   "devDependencies": {
     "turbo": "^2.1.1",
-    "@repo/typescript-config": "*"
+    "@repo/typescript-config": "*",
+    "@repo/prettier-config": "*"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@1.22.22",
+  "prettier": "@repo/prettier-config"
 }
