@@ -1,9 +1,9 @@
-import { ApplicationStatus } from '@prisma/client';
 import { Request, Response } from 'express';
 import Core, { ExtendedPrismaClient } from '../Core.js';
 import { ERROR_GENERIC, ERROR_NO_PERMISSION, ERROR_VALIDATION } from '../util/Errors.js';
 
 import type KcAdminClient from '@keycloak/keycloak-admin-client';
+import { ApplicationStatus } from '@prisma/client';
 import { validationResult } from 'express-validator';
 import { userHasPermissions } from '../web/routes/utils/CheckUserPermissionMiddleware.js';
 
@@ -611,22 +611,25 @@ async function searchUser(
 			},
 		},
 	});
-	const kcUsers = await Promise.all(
-		users?.map(async (user) => {
-			const kcUser = await kcAdmin.users.findOne({
-				id: user.ssoId,
-			});
-			const discordIdentity = kcUser.federatedIdentities.find((identity) => identity.identityProvider == 'discord');
-			return {
-				...user,
-				minecraft: kcUser?.attributes?.minecraft?.at(0) || null,
-				minecraftVerified: kcUser?.attributes?.minecraftVerified?.at(0) == 'true' || false,
-				createdAt: new Date(kcUser?.createdTimestamp || 0).toISOString(),
-				discordId: discordIdentity.userId,
-				discordName: discordIdentity.userName.replace('#0', ''),
-			};
-		}),
-	);
+	const kcUsers = (
+		await Promise.all(
+			users?.map(async (user) => {
+				const kcUser = await kcAdmin.users.findOne({
+					id: user.ssoId,
+				});
+				if (!kcUser) return null;
+				const discordIdentity = kcUser.federatedIdentities.find((identity) => identity.identityProvider == 'discord');
+				return {
+					...user,
+					minecraft: kcUser?.attributes?.minecraft?.at(0) || null,
+					minecraftVerified: kcUser?.attributes?.minecraftVerified?.at(0) == 'true' || false,
+					createdAt: new Date(kcUser?.createdTimestamp || 0).toISOString(),
+					discordId: discordIdentity.userId,
+					discordName: discordIdentity.userName.replace('#0', ''),
+				};
+			}),
+		)
+	).filter((user) => user != null);
 	return kcUsers;
 }
 
