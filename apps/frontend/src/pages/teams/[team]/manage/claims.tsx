@@ -12,11 +12,23 @@ import {
 	MenuTarget,
 	rem,
 	Table,
+	Text,
 	TextInput,
 	ThemeIcon,
 	Tooltip,
 } from '@mantine/core';
-import { IconAlertTriangle, IconCheck, IconDots, IconMap, IconPhoto, IconPin, IconTrash } from '@tabler/icons-react';
+import {
+	IconAlertTriangle,
+	IconCheck,
+	IconChevronDown,
+	IconChevronUp,
+	IconDots,
+	IconMap,
+	IconMinus,
+	IconPhoto,
+	IconPin,
+	IconTrash,
+} from '@tabler/icons-react';
 import useSWR, { mutate } from 'swr';
 
 import Page from '@/components/Page';
@@ -34,12 +46,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const Settings = () => {
 	const router = useRouter();
 	const { accessToken } = useAccessToken();
 	const { data } = useSWR(`/claims?slug=true&team=${router.query.team}`);
 	const clipboard = useClipboard();
+	const [sortType, setSortType] = useState<'area-asc' | 'area-des' | 'date-asc' | 'date-des'>('area-des');
 
 	const handleDelete = (id: string) => {
 		fetch(process.env.NEXT_PUBLIC_API_URL + `/buildteams/${router.query.team}/claims/${id}?slug=true`, {
@@ -198,8 +212,56 @@ const Settings = () => {
 								<Table.Th>Name</Table.Th>
 								<Table.Th>Finished</Table.Th>
 								<Table.Th>Images</Table.Th>
-								<Table.Th>Area</Table.Th>
-								<Table.Th>Created At</Table.Th>
+								<Table.Th>
+									<Group justify="space-between" gap={1}>
+										<Text p={0} size="sm" fw="bold">
+											Area
+										</Text>
+										<ActionIcon
+											size="xs"
+											variant="subtle"
+											onClick={() => {
+												setSortType(sortType.includes('-asc') ? 'area-des' : 'area-asc');
+											}}
+										>
+											{sortType.includes('area-') ? (
+												sortType.includes('-asc') ? (
+													<IconChevronDown />
+												) : (
+													<IconChevronUp />
+												)
+											) : (
+												<IconMinus />
+											)}
+										</ActionIcon>
+									</Group>
+								</Table.Th>
+								<Table.Th>
+									<Group w="100%">
+										<Group justify="space-between" gap={0}>
+											<Text p={0} size="sm" fw="bold">
+												Created
+											</Text>
+											<ActionIcon
+												size="xs"
+												variant="subtle"
+												onClick={() => {
+													setSortType(sortType.includes('-asc') ? 'date-des' : 'date-asc');
+												}}
+											>
+												{sortType.includes('date-') ? (
+													sortType.includes('-asc') ? (
+														<IconChevronDown />
+													) : (
+														<IconChevronUp />
+													)
+												) : (
+													<IconMinus />
+												)}
+											</ActionIcon>
+										</Group>
+									</Group>
+								</Table.Th>
 								<Table.Th></Table.Th>
 							</Table.Tr>
 						</Table.Thead>
@@ -209,7 +271,18 @@ const Settings = () => {
 									...s,
 									area: Math.round(getAreaOfPolygon(s.area.map((p: string) => p.split(', ').map(Number)))),
 								}))
-								.sort((a: any, b: any) => b.area - a.area)
+								.sort((a: any, b: any) => {
+									switch (sortType) {
+										case 'area-asc':
+											return a.area - b.area;
+										case 'area-des':
+											return b.area - a.area;
+										case 'date-asc':
+											return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+										case 'date-des':
+											return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+									}
+								})
 								.map((s: any) => (
 									<Table.Tr key={s.id}>
 										<Table.Td>{s.name}</Table.Td>
