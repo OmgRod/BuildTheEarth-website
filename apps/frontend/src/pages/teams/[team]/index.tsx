@@ -87,7 +87,7 @@ const Team: NextPage = ({ data, data2 }: any) => {
 						<Group justify="space-between">
 							<p>{t('team.location')}</p>
 							<p>
-								{data?.location
+								{(data?.location || '')
 									.split(', ')
 									.map((e: string) => getCountryName(e))
 									.join(', ')}

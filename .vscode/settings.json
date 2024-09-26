@@ -15,6 +15,7 @@
 		"frontend/components",
 		"frontent/pages",
 		"frontend/blog",
-		"api/users"
+		"api/users",
+		"frontend/teams"
 	]
 }
