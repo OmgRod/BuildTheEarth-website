@@ -422,9 +422,9 @@ class ClaimController {
 		const area = req.body.area;
 		const center = area && turf.center(toPolygon(area)).geometry.coordinates.join(', ');
 
-		const buildingCount = area && (await this.updateClaimBuildingCount({ area }));
+		const buildingCount = area && (await this.updateClaimBuildingCount({ area }, false));
 
-		if (!buildingCount || typeof buildingCount != 'number') {
+		if (buildingCount == undefined || buildingCount == null || typeof buildingCount != 'number') {
 			return ERROR_GENERIC(req, res, 500, 'Could not update building count');
 		}
 
@@ -560,7 +560,7 @@ class ClaimController {
 
 		try {
 			const { data } = await axios.post(
-				`https://overpass.kumi.systems/api/interpreter?`,
+				`https://overpass.private.coffee/api/interpreter?`,
 				`data=${overpassQuery.replace('\n', '')}`,
 			);
 
@@ -574,7 +574,7 @@ class ClaimController {
 				return parseInt(data?.elements[0]?.tags?.total) || 0;
 			}
 		} catch (e) {
-			this.core.getLogger().error(e.message + ` (https://overpass.kumi.systems/api/interpreter; claim: ${claim.id})`);
+			this.core.getLogger().error(e.message + ` (https://overpass.private.coffee/api/interpreter; claim: ${claim.id})`);
 			return e;
 		}
 	}
