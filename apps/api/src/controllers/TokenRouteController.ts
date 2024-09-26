@@ -263,7 +263,7 @@ class TokenRouteContoller {
 				: { id: req.params.id, buildTeamId: req.team.id },
 		});
 
-		if (!claim) {
+		if (!claim || !claim.id) {
 			ERROR_GENERIC(req, res, 404, 'Claim does not exist.');
 		}
 

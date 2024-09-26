@@ -996,6 +996,8 @@ class Routes {
 			},
 			checkUserPermission(this.web.getCore().getPrisma(), 'team.claim.list'),
 		);
+
+		this.web.getCore().getLogger().info('API routes registered. Ready to serve requests');
 	}
 }
 

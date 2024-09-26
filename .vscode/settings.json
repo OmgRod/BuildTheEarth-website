@@ -17,6 +17,7 @@
 		"frontend/blog",
 		"api/users",
 		"frontend/teams",
-		"api/claims"
+		"api/claims",
+		"api/core"
 	]
 }
