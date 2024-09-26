@@ -564,6 +564,7 @@ class ClaimController {
 				`data=${overpassQuery.replace('\n', '')}`,
 			);
 
+			console.log(JSON.stringify(data, null, 2));
 			if (!data?.elements || data?.elements.length <= 0) {
 				this.core
 					.getLogger()
