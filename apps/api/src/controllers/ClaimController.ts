@@ -564,6 +564,15 @@ class ClaimController {
 				`data=${overpassQuery.replace('\n', '')}`,
 			);
 
+			if (!data?.elements || data?.elements.length <= 0) {
+				this.core
+					.getLogger()
+					.error(
+						`Claim did not contain any elements, setting building count to 0 (https://overpass.private.coffee/api/interpreter; claim: ${claim.id})`,
+					);
+				return 0;
+			}
+
 			if (update) {
 				const updatedClaim = await this.core.getPrisma().claim.update({
 					where: { id: claim.id },
