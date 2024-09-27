@@ -1,8 +1,4 @@
 const path = require('path');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true',
-});
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
@@ -100,9 +96,12 @@ const nextConfig = {
 			},
 		];
 	},
+	devIndicators: {
+		buildActivityPosition: 'bottom-right',
+	},
 	experimental: {
 		outputFileTracingRoot: path.join(__dirname, '../../'),
 	},
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = nextConfig;
