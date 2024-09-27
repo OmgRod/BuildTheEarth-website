@@ -1,6 +1,5 @@
 import { Center, Container, Paper, Text, useMantineTheme } from '@mantine/core';
 import { NextSeo, NextSeoProps } from 'next-seo';
-import Header, { LogoHeader } from './Header';
 
 import { usePermissions } from '@/hooks/usePermissions';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
@@ -9,7 +8,9 @@ import React from 'react';
 import ErrorPage from '../pages/_error';
 import classes from '../styles/components/Page.module.css';
 import BackgroundImage from './BackgroundImage';
-import Footer from './Footer';
+import { LogoHeader } from './Header';
+import Footer from './v2/footer';
+import Header from './v2/header';
 
 interface PageProps {
 	children: React.ReactNode;
@@ -57,17 +58,12 @@ const Page = (props: PageProps) => {
 			{!props.disabled?.header && (
 				<Header
 					links={[
-						{ link: '/faq', translation: 'faq' },
 						{ link: '/gallery', translation: 'gallery' },
-						{ link: '/map', translation: 'map' },
 						{ link: '/teams', translation: 'teams' },
+						{ link: '/map', translation: 'map' },
+						{ link: '/faq', translation: 'faq' },
 						{ link: '/contact', translation: 'contact' },
 					]}
-					style={{
-						transition: 'opacity 0.2s linear',
-						zIndex: 9999,
-					}}
-					solid={props.solidHeader}
 				/>
 			)}
 

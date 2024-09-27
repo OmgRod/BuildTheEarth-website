@@ -18,6 +18,7 @@
 		"api/users",
 		"frontend/teams",
 		"api/claims",
-		"api/core"
+		"api/core",
+		"frontend/v2"
 	]
 }
