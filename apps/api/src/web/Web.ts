@@ -100,8 +100,8 @@ class Web {
 			faq: new FaqController(core),
 			user: new UserController(core),
 			contact: new ContactController(core),
-			blog: new BlogController(core),
 			tokenRoute: new TokenRouteContoller(core),
+			blog: new BlogController(core),
 			admin: new AdminController(core),
 			calendar: new CalendarController(core),
 		};

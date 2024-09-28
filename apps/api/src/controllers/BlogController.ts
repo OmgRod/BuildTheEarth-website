@@ -1,181 +1,176 @@
 import { Request, Response } from 'express';
-import { ERROR_GENERIC, ERROR_VALIDATION } from '../util/Errors.js';
-import { FrontendRoutesGroups, rerenderFrontend } from '../util/Frontend.js';
 
-import { validationResult } from 'express-validator';
+import showdown from 'showdown';
 import Core from '../Core.js';
 
 class BlogController {
 	private core: Core;
+	private outlineUrl: string;
+	private outlineKey: string;
 
 	constructor(core: Core) {
 		this.core = core;
+		this.outlineUrl = process.env.OUTLINE_URL;
+		this.outlineKey = process.env.OUTLINE_KEY;
 	}
 
-	public async getBlogPosts(req: Request, res: Response) {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return ERROR_VALIDATION(req, res, errors.array());
-		}
-		if (req.query && req.query.page) {
-			let page = parseInt(req.query.page as string);
-			const blogPosts = await this.core.getPrisma().blog.findMany({
-				skip: page * 10,
-				take: 10,
-				select: {
-					title: true,
-					summary: true,
-					publishedAt: true,
-					slug: true,
+	public async getBlogPosts(_req: Request, res: Response) {
+		let data = await this.makeOutlineRequest('documents.list', {
+			parentDocumentId: '930393dd-01a7-49d9-8fdd-d7d75b23f7d8',
+		})
+			.then((res) => res.data)
+			.then(async (data) => {
+				const promises = data.map(async (post: any) => ({
+					title: post.title,
+					id: post.id,
+					slug: post.url.replace('/doc/', ''),
+					publishedAt: post.publishedAt,
 					author: {
-						select: {
-							id: true,
-							discordId: true,
-							avatar: true,
-							username: true,
-							minecraft: true,
-							ssoId: true,
-						},
+						name: post.createdBy.name,
+						id: post.createdBy.id,
 					},
-					thumbnail: {
-						select: {
-							id: true,
-							name: true,
-							hash: true,
-							height: true,
-							width: true,
-						},
-					},
-				},
+					...(await this.parseBlogContent(post.text, true)),
+					content: undefined,
+				}));
+				const resolvedData = await Promise.all(promises);
+				return resolvedData;
 			});
-			let count = await this.core.getPrisma().blog.count();
-			res.send({ pages: Math.ceil(count / 10), data: blogPosts });
-		} else {
-			const blogPosts = await this.core.getPrisma().blog.findMany({
-				select: {
-					title: true,
-					summary: true,
-					publishedAt: true,
-					slug: true,
-					author: {
-						select: {
-							id: true,
-							discordId: true,
-							avatar: true,
-							username: true,
-							minecraft: true,
-							ssoId: true,
-						},
-					},
-					thumbnail: {
-						select: {
-							id: true,
-							name: true,
-							hash: true,
-							height: true,
-							width: true,
-						},
-					},
-				},
-			});
-			res.send(blogPosts);
-		}
+
+		data = data.filter((post: any) => post.metadata?.unpublished !== 'true');
+
+		res.send(data);
 	}
 
 	public async getBlogPost(req: Request, res: Response) {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return ERROR_VALIDATION(req, res, errors.array());
-		}
-		const blogPost = await this.core.getPrisma().blog.findUnique({
-			where: req.query.slug
-				? { slug: req.params.id }
-				: {
-						id: req.params.id,
-					},
-			include: {
-				author: {
-					select: {
-						id: true,
-						discordId: true,
-						avatar: true,
-						username: true,
-						minecraft: true,
-						ssoId: true,
-					},
-				},
-				thumbnail: {
-					select: {
-						id: true,
-						name: true,
-						hash: true,
-						height: true,
-						width: true,
-					},
-				},
+		let postId = req.params.id;
+
+		// if (req.query.slug) {
+		// 	postId = this.postCache[req.params.id as string];
+		// }
+
+		// if (!postId) {
+		// 	this.updatePostCache();
+		// 	postId = this.postCache[req.params.id as string];
+
+		// 	if (!postId) {
+		// 		return res.status(404).send({ error: 'Post not found' });
+		// 	}
+		// }
+
+		const post = (
+			await this.makeOutlineRequest('documents.info', {
+				id: postId,
+			})
+		).data;
+
+		res.send({
+			title: post.title,
+			id: post.id,
+			slug: post.url.replace('/doc/', ''),
+			publishedAt: post.publishedAt,
+			author: {
+				name: post.createdBy.name,
+				id: post.createdBy.id,
 			},
+			...(await this.parseBlogContent(post.text)),
+			text: post.text,
 		});
-		if (blogPost) {
-			res.send(blogPost);
-		} else {
-			ERROR_GENERIC(req, res, 404, 'Blog Post does not exist.');
-		}
-		return;
 	}
 
-	public async createBlogPost(req: Request, res: Response) {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return ERROR_VALIDATION(req, res, errors.array());
+	/**
+	 * Makes a request to the Outline API
+	 * @param method A valid RPC method from Outline
+	 * @param body Optional body to send with the request
+	 * @param opts Additional options
+	 * @returns a Promise with the response data or the blank response
+	 */
+	private makeOutlineRequest = async <T = { data: any }>(
+		method: string,
+		body?: any,
+		opts?: { dontParseJson?: boolean },
+	): Promise<T> => {
+		const response = await fetch(`${this.outlineUrl}/api/${method}`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${this.outlineKey}`,
+			},
+			body: JSON.stringify(body),
+		});
+
+		return opts?.dontParseJson ? response : await response.json();
+	};
+
+	/**
+	 * Parses the raw Markdown content of a blog post to html and valid images
+	 * @param content raw Markdown content
+	 * @param onlyThumbnail should the method only return the thumbnail image
+	 * @returns a object with thumbnail, content and metadata
+	 */
+	private async parseBlogContent(
+		content: string,
+		onlyThumbnail?: boolean,
+	): Promise<{
+		content: string;
+		thumbnail: string | undefined;
+		metadata: showdown.Metadata | string;
+		imageStore: any;
+	}> {
+		const converter = new showdown.Converter({
+			parseImgDimensions: true,
+			openLinksInNewWindow: true,
+			emoji: true,
+			metadata: true,
+			tables: true,
+			simpleLineBreaks: true,
+			simplifiedAutoLink: true,
+			strikethrough: true,
+			literalMidWordUnderscores: true,
+			requireSpaceBeforeHeadingText: true,
+			tasklists: true,
+			underline: true,
+		});
+		const regex = /!\[.*?\]\(\/api\/attachments\.redirect\?id=.*?(\s+"full-width")?\)/g;
+
+		let thumbnail: string | undefined = undefined;
+		const imageStore: { [original: string]: string } = {};
+
+		let parsedContent = content.replace(regex, (match, p1) => {
+			const imageUrl = match.match(/\/api\/attachments\.redirect\?id=.*?(?=\))/)[0];
+			if (p1 && !thumbnail) {
+				thumbnail = `${this.outlineUrl}${imageUrl.split(' ')[0]}`;
+				imageStore[thumbnail] = '';
+
+				return '';
+			} else {
+				if (!onlyThumbnail) {
+					imageStore[`${this.outlineUrl}${imageUrl}`] = '';
+				}
+
+				return `![image](${this.outlineUrl}${imageUrl})`;
+			}
+		});
+
+		for (const originalUrl in imageStore) {
+			const response = await this.makeOutlineRequest<any>(
+				'attachments.redirect',
+				{ id: originalUrl.split('=')[1].split(' ')[0] },
+				{ dontParseJson: true },
+			);
+
+			imageStore[originalUrl] = response.url.split('?')[0];
+			parsedContent = parsedContent.replace(originalUrl, response.url.split('?')[0]);
 		}
 
-		const blogPost = await this.core.getPrisma().blog.create({
-			data: {
-				title: req.body.title,
-				publishedAt: new Date(),
-				public: req.body.public ? req.body.public : true,
-				content: req.body.content,
-				summary: req.body.summary,
-				slug: req.body.slug,
-				author: {
-					connect: {
-						id: req.body.authorId,
-					},
-				},
-				thumbnail: {
-					connect: {
-						id: req.body.thumbnailId,
-					},
-				},
-			},
-			include: {
-				author: {
-					select: {
-						id: true,
-						discordId: true,
-						avatar: true,
-						username: true,
-						minecraft: true,
-						ssoId: true,
-					},
-				},
-				thumbnail: {
-					select: {
-						id: true,
-						name: true,
-						hash: true,
-						height: true,
-						width: true,
-					},
-				},
-			},
-		});
+		// parsedContent = parsedContent.replace(/\\/g, '');
 
-		rerenderFrontend(FrontendRoutesGroups.FAQ, {
-			slug: blogPost.slug,
-		});
-		res.send(blogPost);
+		return {
+			content: converter.makeHtml(parsedContent) /*.replace(/\\/g, '')*/,
+			thumbnail: imageStore[thumbnail ?? ''],
+			metadata: converter.getMetadata(),
+			imageStore,
+		};
 	}
 }
-
 export default BlogController;

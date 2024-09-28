@@ -757,37 +757,16 @@ class Routes {
 		 *
 		 */
 
-		router.addRoute(
-			RequestMethods.GET,
-			'/blog',
-			async (request, response) => {
-				await controllers.blog.getBlogPosts(request, response);
-			},
-			param('page').optional(),
-		);
+		router.addRoute(RequestMethods.GET, '/blog', async (request, response) => {
+			await controllers.blog.getBlogPosts(request, response);
+		});
 		router.addRoute(
 			RequestMethods.GET,
 			'/blog/:id',
 			async (request, response) => {
 				await controllers.blog.getBlogPost(request, response);
 			},
-			param('id'),
-			query('slug').optional(),
-		);
-		router.addRoute(
-			RequestMethods.POST,
-			'/blog',
-			async (request, response) => {
-				await controllers.blog.createBlogPost(request, response);
-			},
-			body('title').isString(),
-			body('content').isString(),
-			body('summary').isString(),
-			body('public').isBoolean(),
-			body('slug').isString(),
-			body('authorId').isUUID(),
-			body('thumbnailId').isUUID(),
-			checkUserPermission(this.web.getCore().getPrisma(), 'blog.add'),
+			param('id').isString(),
 		);
 
 		/*

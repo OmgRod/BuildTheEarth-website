@@ -22,7 +22,6 @@ model User {
   claimsBuilder     Claim[]                  @relation("builders")
   joinedBuildTeams  BuildTeam[]              @relation("members")
   verifications     MinecraftVerifications[]
-  writtenBlogs      Blog[]
 }
 
 model BuildTeam {
@@ -138,20 +137,6 @@ model Contact {
   avatar  String?
 }
 
-model Blog {
-  id          String   @id @default(uuid())
-  slug        String   @unique
-  title       String
-  summary     String
-  content     String
-  thumbnail   Upload   @relation(fields: [thumbnailId], references: [id])
-  thumbnailId String
-  publishedAt DateTime
-  author      User     @relation(fields: [authorId], references: [id])
-  authorId    String
-  public      Boolean?
-}
-
 model Claim {
   id          String    @id @default(uuid())
   ownerId     String?
@@ -219,7 +204,6 @@ model Upload {
   Showcase  Showcase[]
   Claim     Claim?     @relation(fields: [claimId], references: [id])
   claimId   String?
-  Blog      Blog[]
 }
 
 model CalendarEvent {

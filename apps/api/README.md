@@ -36,9 +36,11 @@ See the global Readme file.
 | AWS_SECRET_KEY         | fourthtopsecret                                        | Your actual S3 Secret                                                  |
 | AWS_UPLOAD_BUCKET_NAME | uploads                                                | The Bueckt to use for User Uploads                                     |
 | AWS_STATIC_BUCKET_NAME | static                                                 | The Bucket to use for static images                                    |
+| OUTLINE_URL            | https://outline.yourserver.net                         | The hosted Outline instance                                            |
+| OUTLINE_KEY            | ol_api_XXXXXX                                          | Your Outline API Key (must be of a admin)                              |
 | DISCORD_WEBHOOK_URL    | https://discord.com/api/webhooks                       | A webhook to a private channel on discord                              |
 | DISCORD_BOT_URL        | https://bot.yourserver.net                             | The URL where your local or deployed BuildTheEarth Bot API responds on |
 | DISCORD_BOT_SECRET     | fifthtopsecret                                         | The Secret Key to communicate witht the BuildTheEarth Bot API          |
 | SESSION_SECRET         | sixthtopsecret                                         | Secret used to encode session information of users                     |
 | LOGLEVEL               | debug                                                  | Which logs should be logged to the console?                            |
-| WEBPORT                | 8080                                                   | The port the API should run on                                     |
+| WEBPORT                | 8080                                                   | The port the API should run on                                         |
