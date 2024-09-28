@@ -1,10 +1,12 @@
 /* eslint-disable no-undef */
 
+import { Box, Skeleton } from '@mantine/core';
+
 import Page from '@/components/Page';
+import thumbnail from '@/public/images/thumbnails/newsletter.png';
 import classes from '@/styles/blog.module.css';
 import highlightClasses from '@/styles/highlight.module.css';
 import fetcher from '@/utils/Fetcher';
-import { Box } from '@mantine/core';
 import hljs from 'highlight.js';
 import { NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -15,16 +17,21 @@ const Blog: NextPage = ({ data }: any) => {
 		hljs.initHighlighting();
 	}, []);
 
-	if (!data)
+	if (data)
 		return (
 			<Page
 				head={{
-					title: 'huh',
-					image: '',
+					title: 'BuildTheEarth Blog',
+					image: thumbnail,
 				}}
 			>
-				idk
-				<pre>{JSON.stringify(data, null, 2)}</pre>
+				<Skeleton h={60} w="50%" radius="xl" />
+				<Skeleton h={14} mt={21} w="100%" radius="xl" />
+				<Skeleton h={14} mt={16} w="85%" radius="xl" />
+				<Skeleton h={14} mt={20} w="100%" radius="xl" />
+				<Skeleton h={14} mt={16} w="100%" radius="xl" />
+				<Skeleton h={14} mt={16} w="100%" radius="xl" />
+				<Skeleton h={14} mt={16} w="30%" radius="xl" />
 			</Page>
 		);
 
@@ -64,6 +71,6 @@ export async function getStaticPaths() {
 				slug: blogPost.slug,
 			},
 		})),
-		fallback: false,
+		fallback: true,
 	};
 }
