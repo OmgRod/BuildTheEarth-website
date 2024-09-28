@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 
 import {
+	Badge,
 	Breadcrumbs,
 	Card,
 	CardSection,
@@ -43,28 +44,29 @@ const NewsletterList: NextPage = ({ data }: any) => {
 				Discussions.
 			</p>
 			<Grid mt="xl">
-				{data?.slice(activePage * 8 - 8, activePage * 8).map((blogPost: any, i: number) => (
-					<GridCol key={blogPost.id} span={4}>
-						<Card onClick={() => router.push(`/blog/${blogPost.slug}`)} withBorder h="100%" w="100%">
+				{data?.slice(activePage * 8 - 8, activePage * 8).map((post: any, i: number) => (
+					<GridCol key={post.id} span={4}>
+						<Card onClick={() => router.push(`/blog/${post.slug}`)} withBorder h="100%" w="100%">
 							<CardSection withBorder>
-								<Image
-									src={`https://cdn.buildtheearth.net/uploads/${blogPost.thumbnail?.name}`}
-									alt={'Thumbnail Image'}
-									height={100}
-								/>
+								<Image src={post.thumbnail} alt={'Thumbnail Image'} height={100} />
 							</CardSection>
 							<Text fz="lg" mt="md" fw={'bold'} lineClamp={2}>
-								{blogPost.title}
+								{post.title}
 							</Text>
-
-							<Text fz="sm" mt="xs" lineClamp={4} h={'100px'}>
-								{blogPost.summary.slice(0, 150)}
-								{blogPost.summary.length > 150 && '...'}
-							</Text>
+							<Group mt="sm" gap="xs">
+								{post.metadata?.tags
+									?.split(', ')
+									.slice(0, 3)
+									.map((tag: string) => (
+										<Badge key={tag} variant="dot" size="sm">
+											{tag}
+										</Badge>
+									))}
+							</Group>
 							<CardSection withBorder p="md" mt="md">
 								<Breadcrumbs separator="·" fz="sm" c="dimmed">
-									{new Date(blogPost.publishedAt).toLocaleDateString()}
-									{blogPost.author?.username}
+									{new Date(post.publishedAt).toLocaleDateString()}
+									{post.author?.name}
 								</Breadcrumbs>
 							</CardSection>
 						</Card>

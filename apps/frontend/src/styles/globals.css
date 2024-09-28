@@ -35,7 +35,7 @@ a {
 	text-decoration: none;
 }
 
-* {
+* & :not(code) {
 	box-sizing: border-box;
 	font-family:
 		var(--font-inter),
@@ -76,6 +76,7 @@ a {
 	font-size: 14px;
 	font-family: 'Inter';
 }
+
 .mapboxgl-popup-tip {
 	border-top-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
 }
@@ -109,6 +110,7 @@ a {
 	}
 	border-radius: var(--mantine-radius-xs);
 }
+
 .mapboxgl-style-switcher {
 	border-radius: var(--mantine-radius-xs) !important;
 	background-image: url('/icons/layers-subtract.svg') !important;
@@ -125,6 +127,7 @@ a {
 .mapboxgl-ctrl-zoom-out span {
 	background-image: url('/icons/minus.svg') !important;
 }
+
 .mapboxgl-ctrl-compass span {
 	cursor: pointer;
 	background-image: url('/icons/map-north.svg') !important;

@@ -1,36 +1,53 @@
 /* eslint-disable no-undef */
 
 import Page from '@/components/Page';
+import classes from '@/styles/blog.module.css';
+import highlightClasses from '@/styles/highlight.module.css';
 import fetcher from '@/utils/Fetcher';
-import { Title } from '@mantine/core';
+import { Box } from '@mantine/core';
+import hljs from 'highlight.js';
 import { NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-const Newsletter: NextPage = ({ data }: any) => {
-	const router = useRouter();
-	const slug = router.query.slug;
-	// const { data } = useSWR(`/blog/${slug}?slug=true`);
+const Blog: NextPage = ({ data }: any) => {
+	useEffect(() => {
+		hljs.initHighlighting();
+	}, []);
+
+	if (!data)
+		return (
+			<Page
+				head={{
+					title: 'huh',
+					image: '',
+				}}
+			>
+				idk
+				<pre>{JSON.stringify(data, null, 2)}</pre>
+			</Page>
+		);
 
 	return (
 		<Page
 			head={{
-				title: data?.title,
-				image: `https://cdn.buildtheearth.net/uploads/${data?.thumbnail?.name}`,
+				title: data.title,
+				image: data.thumbnail,
 			}}
-			description={`BuildTheEarth Newsletter Issue ${data?.id}, ${new Date(data?.publishedAt).toLocaleDateString()}`}
+			description={`BuildTheEarth Blog: ${data.title}, ${new Date(data.publishedAt).toLocaleDateString()}`}
 		>
-			<Title>{data?.title}</Title>
-			<p>{data?.summary}</p>
-			{data?.content && <div dangerouslySetInnerHTML={{ __html: data.content }} />}
+			<Box
+				dangerouslySetInnerHTML={{ __html: data.content }}
+				className={classes.parent + ' ' + highlightClasses.wrapper}
+			/>
 		</Page>
 	);
 };
 
-export default Newsletter;
+export default Blog;
 
 export async function getStaticProps({ locale, params }: any) {
-	const res = await fetcher(`/blog/${params.slug}?slug=true`);
+	const res = await fetcher(`/blog/${params.slug}`);
 	return {
 		props: {
 			data: res,
@@ -47,6 +64,6 @@ export async function getStaticPaths() {
 				slug: blogPost.slug,
 			},
 		})),
-		fallback: true,
+		fallback: false,
 	};
 }

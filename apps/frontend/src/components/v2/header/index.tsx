@@ -1,11 +1,11 @@
 import { Anchor, Avatar, Box, Burger, Button, CSSProperties, Group, Transition } from '@mantine/core';
+import { signIn, useSession } from 'next-auth/react';
 
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { useUser } from '@/hooks/useUser';
 import logo from '@/public/logo.gif';
 import classes from '@/styles/components/v2/Header.module.css';
 import { useDisclosure } from '@mantine/hooks';
-import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import router from 'next/router';
@@ -53,9 +53,14 @@ const Header = ({ links }: { links: { link: string; translation: string }[] }) =
 				</Group>
 				<Group>
 					{session.status !== 'authenticated' ? (
-						<Button className={classes.button} onClick={() => router.push('/join')}>
-							Join us!
-						</Button>
+						<>
+							<Button className={classes.button} onClick={() => router.push('/join')}>
+								Join us!
+							</Button>
+							<Button onClick={() => signIn('keycloak')} variant="default">
+								Login
+							</Button>
+						</>
 					) : (
 						<HeaderMenu t={t}>
 							<Button
