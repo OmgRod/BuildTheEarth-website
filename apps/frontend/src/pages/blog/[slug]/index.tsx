@@ -17,7 +17,7 @@ const Blog: NextPage = ({ data }: any) => {
 		hljs.initHighlighting();
 	}, []);
 
-	if (data)
+	if (!data)
 		return (
 			<Page
 				head={{
