@@ -1,0 +1,30 @@
+{
+	"name": "@repo/db",
+	"version": "0.0.0",
+	"private": true,
+	"packageManager": "yarn@1.22.22",
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"db:generate": "prisma generate",
+		"db:migrate": "prisma migrate deploy",
+		"db:studio": "prisma studio",
+		"db:pull": "prisma db pull",
+		"env:copy": "cp .env.example .env",
+		"build": "tsc"
+	},
+	"dependencies": {
+		"@prisma/client": "5.18.0",
+		"@repo/typescript-config": "*"
+	},
+	"devDependencies": {
+		"prisma": "5.18.0",
+		"typescript": "^4.9.4"
+	},
+	"exports": {
+		"types": "./src/index.ts",
+		"default": "./dist/index.js"
+	}
+}

@@ -1,10 +1,10 @@
 import * as session from 'express-session';
 import * as winston from 'winston';
 
-import { PrismaClient } from '@prisma/client';
 import { LIB_LICENSE, LIB_VERSION } from './util/package.js';
 import { applicationReminder, purgeClaims, purgeVerifications } from './util/Prisma.js';
 
+import { PrismaClient } from '@repo/db';
 import Keycloak from 'keycloak-connect';
 import AmazonAWS from './util/AmazonAWS.js';
 import CronHandler from './util/CronHandler.js';
@@ -150,7 +150,7 @@ class Core {
 export default Core;
 
 function createPrismaClient() {
-	return new PrismaClient().$extends({
+	return new PrismaClient({ datasourceUrl: process.env.DATABASE_URL }).$extends({
 		name: 'uploadSrc',
 		result: {
 			upload: {

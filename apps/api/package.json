@@ -13,9 +13,6 @@
 		"lint": "eslint . --max-warnings 0",
 		"prebuild": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'+'export const LIB_LICENSE = ' + JSON.stringify(require('./package.json').license) + ';'\" > src/util/package.ts",
 		"prettier": "prettier ./src --write --ignore-unknown",
-		"db:generate": "prisma generate",
-		"db:migrate": "prisma migrate deploy",
-		"db:studio": "prisma studio",
 		"env:copy": "cp .env.example .env"
 	},
 	"devDependencies": {
@@ -32,7 +29,6 @@
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.26.0",
 		"postcss": "^8.4.31",
-		"prisma": "^5.18.0",
 		"ts-node": "^10.9.1",
 		"typescript": "^4.9.4"
 	},
@@ -40,8 +36,8 @@
 		"@aws-sdk/client-s3": "^3.427.0",
 		"@bte-germany/terraconvert": "^1.0.1",
 		"@keycloak/keycloak-admin-client": "24.0.5",
-		"@prisma/client": "^5.18.0",
 		"@repo/prettier-config": "*",
+		"@repo/db": "*",
 		"@repo/typescript-config": "*",
 		"@turf/helpers": "^6.5.0",
 		"@turf/turf": "^6.5.0",
