@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import { AuthOptions, getServerSession } from "next-auth";
 
 import { JWT } from "next-auth/jwt";
 import KeycloakProvider from "next-auth/providers/keycloak";
@@ -50,13 +50,13 @@ const refreshAccessToken = async (token: JWT) => {
   }
 };
 
-export const nextAuthConfig: NextAuthOptions = {
+export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     KeycloakProvider({
-      clientId: process.env.KEYCLOAK_ID || "",
+      clientId: process.env.NEXT_PUBLIC_KEYCLOAK_ID || "",
       clientSecret: process.env.KEYCLOAK_SECRET || "",
-      issuer: process.env.KEYCLOAK_URL || "",
+      issuer: process.env.NEXT_PUBLIC_KEYCLOAK_URL || "",
       profile: (profile) => {
         return {
           ...profile,
@@ -108,4 +108,10 @@ export const nextAuthConfig: NextAuthOptions = {
   },
 };
 
-export default NextAuth(nextAuthConfig);
+/**
+ * Helper function to get the session on the server without having to import the authOptions object every single time
+ * @returns The session object or null
+ */
+export const getSession = () => getServerSession(authOptions);
+
+

@@ -1,8 +1,10 @@
+"use client"
+
 import { LoadingOverlay } from "@mantine/core";
-import { SWRConfig } from "swr";
-import { Session } from "next-auth";
 import { showNotification } from "@mantine/notifications";
+import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
+import { SWRConfig } from "swr";
 
 export default function SWRSetup({ children }: any) {
   const session = useSession();

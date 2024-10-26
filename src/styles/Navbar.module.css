@@ -1,18 +1,3 @@
-.navbarTop {
-  flex: 1;
-}
-
-.navbarHead {
-  margin-bottom: var(--mantine-spacing-md);
-  padding: calc(var(--mantine-spacing-md) * 1.5) var(--mantine-spacing-md);
-  border-bottom: rem(1px) solid
-    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-}
-
-.navbarLinks {
-  padding: 0 var(--mantine-spacing-sm);
-}
-
 .navbarLink {
   display: flex;
   align-items: center;
@@ -20,11 +5,13 @@
   font-size: var(--mantine-font-size-sm);
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1));
   padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
-  border-radius: var(--mantine-radius-sm);
+  border-radius: var(--mantine-radius-default);
   font-weight: 500;
   cursor: pointer;
-
+  margin: 0;
+  
   @mixin hover {
+    text-decoration: none;
     background-color: light-dark(
       var(--mantine-color-gray-0),
       var(--mantine-color-dark-6)
@@ -35,6 +22,8 @@
       color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
     }
   }
+
+  transition: background-color 100ms ease, color 100ms ease;
 
   &[data-active="true"] {
     &,
@@ -54,11 +43,4 @@
   margin-right: var(--mantine-spacing-sm);
   width: rem(25px);
   height: rem(25px);
-}
-
-.navbarBottom {
-  margin-top: var(--mantine-spacing-md);
-  padding-top: var(--mantine-spacing-md);
-  border-top: rem(1px) solid
-    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
