@@ -14,7 +14,7 @@
 		"build:frontend": "turbo build --filter=frontend...",
 		"clean": "turbo clean",
 		"start": "turbo start",
-		"dev": "turbo dev db:studio",
+		"dev": "turbo devW",
 		"lint": "turbo lint",
 		"prettier": "turbo prettier --ui=stream",
 		"db:generate": "turbo db:generate",
@@ -22,8 +22,7 @@
 		"db:migrate": "yarn workspace api db:migrate",
 		"git:pull": "git pull && yarn install && yarn run db:generate",
 		"ws": "yarn workspace",
-		"prepare": "husky || true",
-		"postinstall": "husky || true"
+		"prepare": "husky || true"
 	},
 	"devDependencies": {
 		"@repo/prettier-config": "*",

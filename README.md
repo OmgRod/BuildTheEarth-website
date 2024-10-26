@@ -22,8 +22,10 @@ This repository contains the following apps and other shared packages:
 | -------------------------- | ------------------------------------- | ---------------------- | ----------------------------- |
 | apps/frontend              | BuildTheEarth Website frontend        | Next.js, Typescript    | https://buildtheearth.net     |
 | apps/api                   | BuildTheEarth API and Website backend | express.js, Typescript | https://api.buildtheearth.net |
+| apps/api                   | BuildTheEarth Dashboard               | Next.js, Typescript    | https://my.buildtheearth.net  |
 | packages/typescript-config | Shared tsconfig for all apps          | Typescript, JSON       | -/-                           |
 | packages/prettier-config   | Shared prettier config for all apps   | Prettier, JSOn         | -/-                           |
+| packages/db                | Shared prisma client and schema       | Prisma.js              | -/-                           |
 
 ## Table of Content
 
