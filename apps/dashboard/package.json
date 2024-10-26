@@ -1,0 +1,49 @@
+{
+  "name": "website-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier . -w"
+  },
+  "dependencies": {
+    "@mantine/charts": "^7.13.2",
+    "@mantine/code-highlight": "^7.13.2",
+    "@mantine/core": "^7.13.2",
+    "@mantine/dates": "^7.13.2",
+    "@mantine/form": "^7.13.2",
+    "@mantine/hooks": "^7.13.2",
+    "@mantine/modals": "^7.13.2",
+    "@mantine/notifications": "^7.13.2",
+    "@mantine/nprogress": "^7.13.2",
+    "@mantine/spotlight": "^7.13.2",
+    "@tabler/icons-react": "^3.9.0",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.11",
+    "mantine-contextmenu": "^7.11.0",
+    "mantine-datatable": "^7.13.2",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
+    "next": "14.2.4",
+    "next-auth": "^4.24.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "recharts": "2",
+    "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "eslint-plugin-storybook": "^0.8.0",
+    "postcss": "^8.4.39",
+    "postcss-preset-mantine": "^1.15.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5"
+  }
+}
