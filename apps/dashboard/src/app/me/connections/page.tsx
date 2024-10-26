@@ -1,20 +1,20 @@
 import { Box, Title } from '@mantine/core';
 
-import { SocialAccountStack } from "@/components/data/SocialAccount";
-import { getUser } from "@/hooks/useUser";
-import { KeycloakUser } from "@/types/User";
-import { authedFetcher } from "@/util/data";
+import { SocialAccountStack } from '@/components/data/SocialAccount';
+import { getUser } from '@/hooks/useUser';
+import { KeycloakUser } from '@/types/User';
+import { authedFetcher } from '@/util/data';
 
 export default async function Page() {
-    const user = await getUser();
-    const data = await authedFetcher<KeycloakUser>(`/users/${user.id}/kc`);
+	const user = await getUser();
+	const data = await authedFetcher<KeycloakUser>(`/users/${user.id}/kc`);
 
-    return (
-      <Box ml="md" maw="50vw">
-        <Title order={1} mt="xl" mb="md">
-          Your Social Accounts
-        </Title>
-        <SocialAccountStack identities={data.federatedIdentities} withUnlinked />
-      </Box>
-    );
+	return (
+		<Box ml="md" maw="50vw">
+			<Title order={1} mt="xl" mb="md">
+				Your Social Accounts
+			</Title>
+			<SocialAccountStack identities={data.federatedIdentities} withUnlinked />
+		</Box>
+	);
 }

@@ -1,21 +1,21 @@
-import { Icon, IconProps, icons } from "@tabler/icons-react";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { Icon, IconProps, icons } from '@tabler/icons-react';
+import { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 export default function DynamicIcon({
-  icon,
-  fallback: Fallback,
+	icon,
+	fallback: Fallback,
 }: {
-  icon: string;
-  fallback?: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
+	icon: string;
+	fallback?: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
 }) {
-  const Icon = icons[icon as keyof typeof icons];
-  if (isValidIconName(icon)) {
-    return <Icon />;
-  }
+	const Icon = icons[icon as keyof typeof icons];
+	if (isValidIconName(icon)) {
+		return <Icon />;
+	}
 
-  return Fallback ? <Fallback /> : <></>;
+	return Fallback ? <Fallback /> : <></>;
 }
 
 function isValidIconName(icon: string): icon is keyof typeof icons {
-  return icon in icons;
+	return icon in icons;
 }

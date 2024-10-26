@@ -1,11 +1,11 @@
-import moment from "moment";
+import moment from 'moment';
 
 export function toHumanDate(date: string) {
-  return moment(date).format("DD.MM.YYYY");
+	return moment(date).format('DD.MM.YYYY');
 }
 export function toHumanTime(date: string) {
-  return moment(date).format("HH:mm:ss");
+	return moment(date).format('HH:mm:ss');
 }
 export function toHumanDateTime(date: string) {
-  return moment(date).format("DD.MM.YYYY HH:mm:ss");
+	return moment(date).format('DD.MM.YYYY HH:mm:ss');
 }
