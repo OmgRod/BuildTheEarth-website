@@ -16,11 +16,11 @@
 		"build": "tsc"
 	},
 	"dependencies": {
-		"@prisma/client": "5.18.0",
+		"@prisma/client": "5.21.1",
 		"@repo/typescript-config": "*"
 	},
 	"devDependencies": {
-		"prisma": "5.18.0",
+		"prisma": "5.21.1",
 		"typescript": "^4.9.4"
 	},
 	"exports": {
