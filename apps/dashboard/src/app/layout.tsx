@@ -1,11 +1,11 @@
 import '@/styles/global.css';
-import '@mantine/charts/styles.css';
-import '@mantine/code-highlight/styles.css';
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
-import '@mantine/notifications/styles.css';
-import '@mantine/nprogress/styles.css';
-import '@mantine/spotlight/styles.css';
+import '@mantine/charts/styles.layer.css';
+import '@mantine/code-highlight/styles.layer.css';
+import '@mantine/core/styles.layer.css';
+import '@mantine/dates/styles.layer.css';
+import '@mantine/notifications/styles.layer.css';
+import '@mantine/nprogress/styles.layer.css';
+import '@mantine/spotlight/styles.layer.css';
 import 'mantine-datatable/styles.layer.css';
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';

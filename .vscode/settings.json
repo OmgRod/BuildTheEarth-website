@@ -20,6 +20,7 @@
 		"api/claims",
 		"api/core",
 		"frontend/v2",
-		"api/blog"
+		"api/blog",
+		"dash/src"
 	]
 }

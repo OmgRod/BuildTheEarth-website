@@ -14,7 +14,7 @@
 		"build:frontend": "turbo build --filter=frontend...",
 		"clean": "turbo clean",
 		"start": "turbo start",
-		"dev": "turbo devW",
+		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"prettier": "turbo prettier --ui=stream",
 		"db:generate": "turbo db:generate",
