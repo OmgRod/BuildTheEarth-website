@@ -34,9 +34,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 	const session = await getSession();
 
 	return (
-		<html lang="en" className={`${interFont.variable} ${minecraftFont.variable}`}>
+		<html lang="en" className={`${interFont.variable} ${minecraftFont.variable}`} suppressHydrationWarning>
 			<head>
-				<ColorSchemeScript />
+				<ColorSchemeScript/>
 			</head>
 			<body>
 				<MantineProvider>

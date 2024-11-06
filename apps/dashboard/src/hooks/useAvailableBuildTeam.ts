@@ -1,3 +1,5 @@
+"use client";
+
 import { useLocalStorage } from '@mantine/hooks';
 import { useEffect } from 'react';
 import useSWR from 'swr';

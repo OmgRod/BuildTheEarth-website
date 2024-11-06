@@ -1,7 +1,7 @@
 import { Box, Title } from '@mantine/core';
 
+import { getUser } from '@/actions/getUser';
 import { SocialAccountStack } from '@/components/data/SocialAccount';
-import { getUser } from '@/hooks/useUser';
 import { KeycloakUser } from '@/types/User';
 import { authedFetcher } from '@/util/data';
 

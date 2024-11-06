@@ -1,6 +1,6 @@
 import { Badge, Box, Card, Flex, Group, Stack, Text, Title } from '@mantine/core';
 
-import { getUser } from '@/hooks/useUser';
+import { getUser } from '@/actions/getUser';
 import { KeycloakUser } from '@/types/User';
 import { authedFetcher } from '@/util/data';
 import { IconDevices } from '@tabler/icons-react';

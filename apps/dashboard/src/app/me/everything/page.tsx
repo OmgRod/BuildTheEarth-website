@@ -4,7 +4,6 @@ import {
 	Button,
 	Card,
 	Flex,
-	rem,
 	Stack,
 	Tabs,
 	TabsList,
@@ -12,6 +11,7 @@ import {
 	TabsTab,
 	Text,
 	Title,
+	rem,
 } from '@mantine/core';
 import {
 	IconBrandMinecraft,
@@ -28,10 +28,10 @@ import {
 	IconSocial,
 	IconTable,
 	IconUser,
-	IconUsers,
+	IconUsers
 } from '@tabler/icons-react';
 
-import { getUser } from '@/hooks/useUser';
+import { getUser } from '@/actions/getUser';
 import { KeycloakUser } from '@/types/User';
 import { getSession } from '@/util/auth';
 import { authedFetcher } from '@/util/data';

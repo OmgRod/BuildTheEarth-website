@@ -1,5 +1,5 @@
-import { User } from '@/types/User';
-import { authedFetcher } from '@/util/data';
+'use client';
+
 import useSWR from 'swr';
 
 export const useUser = () => {
@@ -11,6 +11,3 @@ export const useUser = () => {
 	return user;
 };
 
-export const getUser = async () => {
-	return authedFetcher<User>('/account');
-};
