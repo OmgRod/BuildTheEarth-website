@@ -2,9 +2,22 @@ import type { NextConfig } from 'next';
 import path from 'path';
 
 const nextConfig: NextConfig = {
-	experimental: {},
+	experimental: {
+		turbo: {},
+	},
+	transpilePackages: [
+		'@tiptap/react',
+		'@tiptap/starter-kit',
+		'@tiptap/extension-underline',
+		'@tiptap/extension-link',
+		'@tiptap/extension-superscript',
+		'@tiptap/extension-subscript',
+		'@tiptap/extension-highlight',
+		'@tiptap/extension-text-align',
+	],
 	output: 'standalone',
 	poweredByHeader: false,
+	reactStrictMode: true,
 	outputFileTracingRoot: path.join(__dirname, '../../'),
 };
 

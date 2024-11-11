@@ -6,16 +6,18 @@ import '@mantine/dates/styles.layer.css';
 import '@mantine/notifications/styles.layer.css';
 import '@mantine/nprogress/styles.layer.css';
 import '@mantine/spotlight/styles.layer.css';
+import '@mantine/tiptap/styles.layer.css';
 import 'mantine-datatable/styles.layer.css';
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 
-import AuthProvider from '@/components/AuthProvider';
-import SWRSetup from '@/components/core/SWRSetup';
 import AppLayout from '@/components/layout';
-import { getSession } from '@/util/auth';
-import { Notifications } from '@mantine/notifications';
+import AuthProvider from '@/components/AuthProvider';
 import { Inter } from 'next/font/google';
+import { ModalsProvider } from '@mantine/modals';
+import { Notifications } from '@mantine/notifications';
+import SWRSetup from '@/components/core/SWRSetup';
+import { getSession } from '@/util/auth';
 import localFont from 'next/font/local';
 
 export const interFont = Inter({
@@ -36,14 +38,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 	return (
 		<html lang="en" className={`${interFont.variable} ${minecraftFont.variable}`} suppressHydrationWarning>
 			<head>
-				<ColorSchemeScript/>
+				<ColorSchemeScript />
 			</head>
 			<body>
 				<MantineProvider>
 					<AuthProvider session={session}>
 						<SWRSetup>
-							<Notifications limit={3} />
-							<AppLayout>{children}</AppLayout>
+							<ModalsProvider>
+								<Notifications limit={3} />
+								<AppLayout>{children}</AppLayout>
+							</ModalsProvider>
 						</SWRSetup>
 					</AuthProvider>
 				</MantineProvider>

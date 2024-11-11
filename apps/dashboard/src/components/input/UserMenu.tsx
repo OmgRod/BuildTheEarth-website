@@ -5,7 +5,6 @@ import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 const UserMenu = ({ children }: { children: any }) => {
-	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
 	return (
 		<Menu trigger="click-hover" position="right-end" withArrow>

@@ -18,7 +18,7 @@
 		"lint": "turbo lint",
 		"prettier": "turbo prettier --ui=stream",
 		"db:generate": "turbo db:generate",
-		"db:studio": "yarn workspace api db:studio",
+		"db:studio": "yarn workspace @repo/db db:studio",
 		"db:migrate": "yarn workspace api db:migrate",
 		"git:pull": "git pull && yarn install && yarn run db:generate",
 		"ws": "yarn workspace",

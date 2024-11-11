@@ -1,14 +1,10 @@
-import {
-	Box,
-	Button,
-	Group,
-	Title
-} from '@mantine/core';
-import { IconExternalLink, IconPlus } from '@tabler/icons-react';
+import { Box, Button, Group, Title } from '@mantine/core';
 
-import prisma from '@/util/db';
-import Link from 'next/link';
+import { AddFaqQuestionButton } from './interactivity';
 import FAQDatatabe from './datatable';
+import { IconExternalLink } from '@tabler/icons-react';
+import Link from 'next/link';
+import prisma from '@/util/db';
 
 export default async function Page() {
 	const faq = await prisma.fAQQuestion.findMany();
@@ -18,9 +14,7 @@ export default async function Page() {
 			<Group justify="space-between" w="100%" mt="xl" mb="md">
 				<Title order={1}>FAQ Questions</Title>
 				<Group gap="xs">
-					<Button color="green" leftSection={<IconPlus size={14} />}>
-						Add New
-					</Button>
+					<AddFaqQuestionButton />
 					<Button
 						variant="light"
 						color="cyan"
@@ -28,7 +22,8 @@ export default async function Page() {
 						href={`https://buildtheearth.net/faq`}
 						target="_blank"
 						rightSection={<IconExternalLink size={14} />}
-					>Open Page
+					>
+						Open Page
 					</Button>
 				</Group>
 			</Group>

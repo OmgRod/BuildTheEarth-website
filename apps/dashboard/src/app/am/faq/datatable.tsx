@@ -3,9 +3,10 @@
 import { ActionIcon, Code, Group } from '@mantine/core';
 import { IconEdit, IconExternalLink } from '@tabler/icons-react';
 
-import { DataTable } from 'mantine-datatable';
 import { FAQQuestion } from '@repo/db';
+import { DataTable } from 'mantine-datatable';
 import Link from 'next/link';
+import { EditFaqQuestionButton } from './interactivity';
 
 export default function FAQDatatabe({ faq }: { faq: FAQQuestion[] }) {
 	return (
@@ -22,11 +23,9 @@ export default function FAQDatatabe({ faq }: { faq: FAQQuestion[] }) {
 					accessor: '',
 					title: '',
 					textAlign: 'right',
-					render: (question) => (
+					render: (question: FAQQuestion) => (
 						<Group gap={4} justify="right" wrap="nowrap">
-							<ActionIcon size="sm" variant="subtle" color="yellow" aria-label="Edit Question">
-								<IconEdit size={16} />
-							</ActionIcon>
+							<EditFaqQuestionButton id={question.id} question={question.question} answer={question.answer} links={question.links}/>
 							<ActionIcon
 								size="sm"
 								variant="subtle"
