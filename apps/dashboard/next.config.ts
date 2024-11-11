@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
 	],
 	output: 'standalone',
 	poweredByHeader: false,
-	reactStrictMode: true,
 	outputFileTracingRoot: path.join(__dirname, '../../'),
 };
 
