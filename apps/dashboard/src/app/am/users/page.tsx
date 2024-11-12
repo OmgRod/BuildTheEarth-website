@@ -23,7 +23,6 @@ export default async function Page({
 				}
 			: undefined,
 	});
-	console.log(searchQuery);
 	const users = await prisma.user.findMany({
 		take: 50,
 		skip: (Number(page || '1') - 1) * 50,

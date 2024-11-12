@@ -16,7 +16,8 @@
 			"@/utils/*": ["src/utils/*"],
 			"@/src/*": ["src/*"],
 			"@/public/*": ["public/*"]
-		}
+		},
+		"lib": ["dom", "dom.iterable", "esnext"]
 	},
 	"exclude": ["node_modules"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next-i18next.config.js", "next.config.js", ".next/types/**/*.ts"]

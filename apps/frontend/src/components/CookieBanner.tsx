@@ -1,9 +1,10 @@
 import { Button, CloseButton, Group, Paper, Text } from '@mantine/core';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { hasCookie } from 'cookies-next';
 import classes from '../styles/components/CookieBanner.module.css';
+import { MotionDiv } from './Motion';
 
 export default function CookieBanner() {
 	const [showing, setShowing] = useState(false);
@@ -26,7 +27,7 @@ export default function CookieBanner() {
 	return (
 		<AnimatePresence>
 			{showing && (
-				<motion.div
+				<MotionDiv
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0, duration: 0.4 }}
@@ -59,7 +60,7 @@ export default function CookieBanner() {
 							</Button>
 						</Group>
 					</Paper>
-				</motion.div>
+				</MotionDiv>
 			)}
 		</AnimatePresence>
 	);

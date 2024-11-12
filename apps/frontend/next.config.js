@@ -36,6 +36,7 @@ const nextConfig = {
 	},
 	output: 'standalone',
 	poweredByHeader: false,
+	outputFileTracingRoot: path.join(__dirname, '../../'),
 	async redirects() {
 		return [
 			{
@@ -98,9 +99,6 @@ const nextConfig = {
 	},
 	devIndicators: {
 		buildActivityPosition: 'bottom-right',
-	},
-	experimental: {
-		outputFileTracingRoot: path.join(__dirname, '../../'),
 	},
 };
 

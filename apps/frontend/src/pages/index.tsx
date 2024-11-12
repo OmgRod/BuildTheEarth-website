@@ -12,7 +12,7 @@ import {
 	useMantineColorScheme,
 	useMantineTheme,
 } from '@mantine/core';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, ChevronRight } from 'tabler-icons-react';
 
 import BackgroundImage from '@/components/BackgroundImage';
@@ -26,6 +26,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { MotionDiv } from '../components/Motion';
 
 const Home: NextPage = ({ data, headData }: any) => {
 	const theme = useMantineTheme();
@@ -95,7 +96,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 						left: 0,
 					}}
 				>
-					<motion.div
+					<MotionDiv
 						whileHover={{ scale: 1.1 }}
 						whileTap={{ scale: 0.9 }}
 						initial={{ opacity: 0 }}
@@ -112,7 +113,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 						>
 							<ChevronDown size={64} color="white" />
 						</ActionIcon>
-					</motion.div>
+					</MotionDiv>
 				</Center>
 			</BackgroundImage>
 			<Group justify="end" mr="xl" mt="md" gap={4}>
@@ -165,7 +166,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 						</Center>
 					</Grid.Col>
 					<Grid.Col span={{ lg: 7 }} style={{ minHeight: '30vh', position: 'relative' }}>
-						<motion.div
+						<MotionDiv
 							style={{
 								backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
 								y: missionY,
@@ -185,13 +186,13 @@ const Home: NextPage = ({ data, headData }: any) => {
 								blurDataURL={headData[1].image.hash}
 								placeholder="blur"
 							/>
-						</motion.div>
+						</MotionDiv>
 					</Grid.Col>
 					<Grid.Col
 						span={{ sm: 12 }}
 						style={{ marginTop: 5, marginBottom: 25, display: 'flex', justifyContent: 'center' }}
 					>
-						<motion.div
+						<MotionDiv
 							style={{
 								height: '70vh',
 								width: '80%',
@@ -216,10 +217,10 @@ const Home: NextPage = ({ data, headData }: any) => {
 									hash: d.image.hash,
 								}))}
 							/>
-						</motion.div>
+						</MotionDiv>
 					</Grid.Col>
 					<Grid.Col span={{ lg: 6 }} style={{ minHeight: '30vh', position: 'relative', marginTop: 150 }}>
-						<motion.div
+						<MotionDiv
 							style={{
 								backgroundColor: scheme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
 								y: getstartedY,
@@ -239,7 +240,7 @@ const Home: NextPage = ({ data, headData }: any) => {
 								blurDataURL={headData[2].image.hash}
 								placeholder="blur"
 							/>
-						</motion.div>
+						</MotionDiv>
 					</Grid.Col>
 					<Grid.Col span={{ lg: 5 }} style={{ marginTop: 150, marginBottom: 50, minHeight: '30vh' }}>
 						<Center style={{ width: '100%', height: '100%' }}>

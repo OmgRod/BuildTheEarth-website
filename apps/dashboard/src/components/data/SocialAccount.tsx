@@ -4,7 +4,7 @@ import { Badge, Button, Card, Flex, Stack, Text } from '@mantine/core';
 import { IconBrandDiscord, IconBrandGithub, IconWorld } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 
-import { KeycloakUser } from '@/types/User';
+import { WebsiteKeycloakUser } from '@/types/User';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +15,7 @@ export default function SocialAccount({
 	identity,
 	isLinked = true,
 }: {
-	identity: KeycloakUser['federatedIdentities'][0];
+	identity: WebsiteKeycloakUser['federatedIdentities'][0];
 	isLinked?: boolean;
 }) {
 	const Icon = getIcon(identity?.identityProvider || '');
@@ -73,7 +73,7 @@ export function SocialAccountStack({
 	identities,
 	withUnlinked = false,
 }: {
-	identities: KeycloakUser['federatedIdentities'];
+	identities: WebsiteKeycloakUser['federatedIdentities'];
 	withUnlinked?: boolean;
 }) {
 	const linkedProviders = identities.map((identity) => identity.identityProvider);

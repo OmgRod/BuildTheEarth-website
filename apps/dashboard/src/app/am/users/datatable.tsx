@@ -1,12 +1,12 @@
 'use client';
 
-import { ActionIcon, Badge, Code, Group, Menu, MenuDropdown, MenuItem, MenuTarget, Tooltip, rem } from '@mantine/core';
+import { ActionIcon, Badge, Code, Group, Menu, MenuDropdown, MenuItem, MenuTarget, rem, Tooltip } from '@mantine/core';
 import { IconDots, IconEye, IconMessage2 } from '@tabler/icons-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import { User } from '@repo/db';
 import { DataTable } from 'mantine-datatable';
 import Link from 'next/link';
-import { User } from '@repo/db';
 
 export default function UsersDatatabe({ users, count }: { users: User[]; count: number }) {
 	const router = useRouter();
@@ -56,7 +56,6 @@ export default function UsersDatatabe({ users, count }: { users: User[]; count: 
 								aria-label="View Question on Website"
 								component={Link}
 								href={`/am/users/${user.ssoId}`}
-								target="_blank"
 								rel="noopener"
 							>
 								<IconEye size={16} />
@@ -68,7 +67,14 @@ export default function UsersDatatabe({ users, count }: { users: User[]; count: 
 									</ActionIcon>
 								</MenuTarget>
 								<MenuDropdown>
-									<MenuItem leftSection={<IconEye style={{ width: rem(14), height: rem(14) }} />} color="cyan">
+									<MenuItem
+										leftSection={<IconEye style={{ width: rem(14), height: rem(14) }} />}
+										color="cyan"
+										aria-label="View Question on Website"
+										component={Link}
+										href={`/am/users/${user.ssoId}`}
+										rel="noopener"
+									>
 										View Details
 									</MenuItem>
 									<MenuItem

@@ -4,6 +4,7 @@ import {
 	Button,
 	Card,
 	Flex,
+	rem,
 	Stack,
 	Tabs,
 	TabsList,
@@ -11,7 +12,6 @@ import {
 	TabsTab,
 	Text,
 	Title,
-	rem,
 } from '@mantine/core';
 import {
 	IconBrandMinecraft,
@@ -28,11 +28,11 @@ import {
 	IconSocial,
 	IconTable,
 	IconUser,
-	IconUsers
+	IconUsers,
 } from '@tabler/icons-react';
 
 import { getUser } from '@/actions/getUser';
-import { KeycloakUser } from '@/types/User';
+import { WebsiteKeycloakUser } from '@/types/User';
 import { getSession } from '@/util/auth';
 import { authedFetcher } from '@/util/data';
 import { CodeHighlight } from '@mantine/code-highlight';
@@ -41,7 +41,7 @@ import Link from 'next/link';
 export default async function Page() {
 	const user = await getUser();
 	const session = await getSession();
-	const data = await authedFetcher<KeycloakUser>(`/users/${user.id}/kc`);
+	const data = await authedFetcher<WebsiteKeycloakUser>(`/users/${user.id}/kc`);
 
 	return (
 		<Box ml="md" maw="50vw">

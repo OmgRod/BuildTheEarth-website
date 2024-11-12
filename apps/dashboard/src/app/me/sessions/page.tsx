@@ -1,13 +1,13 @@
 import { Badge, Box, Card, Flex, Group, Stack, Text, Title } from '@mantine/core';
 
 import { getUser } from '@/actions/getUser';
-import { KeycloakUser } from '@/types/User';
+import { WebsiteKeycloakUser } from '@/types/User';
 import { authedFetcher } from '@/util/data';
 import { IconDevices } from '@tabler/icons-react';
 
 export default async function Page() {
 	const user = await getUser();
-	const data = await authedFetcher<KeycloakUser>(`/users/${user.id}/kc`);
+	const data = await authedFetcher<WebsiteKeycloakUser>(`/users/${user.id}/kc`);
 
 	return (
 		<Box ml="md" maw="50vw">
@@ -23,7 +23,7 @@ export default async function Page() {
 	);
 }
 
-function UserSession({ session }: { session: KeycloakUser['sessions'][0] }) {
+function UserSession({ session }: { session: WebsiteKeycloakUser['sessions'][0] }) {
 	return (
 		<Card withBorder>
 			<Flex align={'center'} gap={'md'}>
