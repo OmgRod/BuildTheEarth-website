@@ -39,7 +39,7 @@ export type User = {
 		  }
 	)[];
 };
-export type KeycloakUser = {
+export type WebsiteKeycloakUser = {
 	id: string;
 	ssoId: string;
 	discordId: string;

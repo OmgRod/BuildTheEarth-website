@@ -1,6 +1,7 @@
 'use client';
 
 import {
+	IconBubble,
 	IconChartPie,
 	IconDeviceDesktop,
 	IconForms,
@@ -58,6 +59,8 @@ function getIcon(name: string) {
 			return IconDeviceDesktop;
 		case 'Settings':
 			return IconSettings;
+		case 'Bubble':
+			return IconBubble;
 		default:
 			return IconQuestionMark;
 	}

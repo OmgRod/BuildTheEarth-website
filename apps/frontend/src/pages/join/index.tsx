@@ -1,3 +1,4 @@
+import { MotionDiv, MotionH1 } from '@/components/Motion';
 import {
 	ActionIcon,
 	Button,
@@ -10,7 +11,7 @@ import {
 	useMantineColorScheme,
 	useMantineTheme,
 } from '@mantine/core';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, ChevronRight } from 'tabler-icons-react';
 
 import BackgroundImage from '@/components/BackgroundImage';
@@ -70,7 +71,7 @@ const GetStarted: NextPage = () => {
 							left: 0,
 						}}
 					>
-						<motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+						<MotionDiv whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
 							<ActionIcon
 								component={Link}
 								styles={{ root: { height: 64, width: 64, textShadow: '0px 0px 28px #000' } }}
@@ -80,7 +81,7 @@ const GetStarted: NextPage = () => {
 							>
 								<ChevronDown size={64} color="white" />
 							</ActionIcon>
-						</motion.div>
+						</MotionDiv>
 					</Center>
 				</div>
 			</BackgroundImage>
@@ -93,7 +94,7 @@ const GetStarted: NextPage = () => {
 				}}
 				my="xl"
 			>
-				<motion.h1
+				<MotionH1
 					id="more"
 					style={{
 						opacity: titleOp,
@@ -103,7 +104,7 @@ const GetStarted: NextPage = () => {
 					}}
 				>
 					{t('choose.title')}
-				</motion.h1>
+				</MotionH1>
 				<Grid style={{ width: '100%' }} my="xl" pb="xl" gutter={{ base: 'md', sm: '10%' }}>
 					<Grid.Col span={{ xs: 6, base: 9 }}>
 						<Card

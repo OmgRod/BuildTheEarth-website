@@ -49,7 +49,6 @@ export default function SWRSetup({ children }: any) {
 export const swrFetcher = (session?: { data: Session | null }) => {
 	return async (resource: any, init: any) => {
 		if (!resource.includes('/undefined') && !resource.includes('/null')) {
-			console.log(session);
 			const res = await fetch(process.env.NEXT_PUBLIC_API_URL + resource, {
 				headers: {
 					'Access-Control-Allow-Origin': '*',

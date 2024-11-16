@@ -1,3 +1,4 @@
+import { MotionDiv, MotionH1 } from '@/components/Motion';
 import {
 	ActionIcon,
 	Avatar,
@@ -14,7 +15,7 @@ import {
 	useMantineTheme,
 } from '@mantine/core';
 import { IconChevronDown, IconChevronLeft } from '@tabler/icons-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 
 import BackgroundImage from '@/components/BackgroundImage';
 import Page from '@/components/Page';
@@ -79,7 +80,7 @@ const Build: NextPage = ({ data }: any) => {
 							left: 0,
 						}}
 					>
-						<motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+						<MotionDiv whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
 							<ActionIcon
 								component={Link}
 								styles={{ root: { height: 64, width: 64, textShadow: '0px 0px 28px #000' } }}
@@ -89,7 +90,7 @@ const Build: NextPage = ({ data }: any) => {
 							>
 								<IconChevronDown size={64} color="white" />
 							</ActionIcon>
-						</motion.div>
+						</MotionDiv>
 					</Center>
 				</div>
 			</BackgroundImage>
@@ -102,7 +103,7 @@ const Build: NextPage = ({ data }: any) => {
 				}}
 				my="xl"
 			>
-				<motion.h1
+				<MotionH1
 					id="more"
 					style={{
 						opacity: titleOp,
@@ -112,7 +113,7 @@ const Build: NextPage = ({ data }: any) => {
 					}}
 				>
 					{t('build.title')}
-				</motion.h1>
+				</MotionH1>
 				<p>{t('build.description')}</p>
 				<SearchInput onSearch={(search) => setSearch(search)} />
 				<Grid mt="xl" pt="xl" gutter={{ base: '3%' }}>

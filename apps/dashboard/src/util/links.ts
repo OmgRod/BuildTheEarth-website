@@ -72,6 +72,12 @@ export const meNavLinks: NavLink[] = [
 		icon: 'UsersGroup',
 	},
 	{
+		link: '/am/faq',
+		label: 'FAQ',
+		protected: true,
+		icon: 'Bubble',
+	},
+	{
 		link: '/am/claims',
 		label: 'Map Claims',
 		protected: true,

@@ -1,3 +1,4 @@
+import { MotionDiv, MotionH1 } from '@/components/Motion';
 import {
 	ActionIcon,
 	Button,
@@ -24,7 +25,7 @@ import {
 	IconSearch,
 	IconServer,
 } from '@tabler/icons-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 
 import BackgroundImage from '@/components/BackgroundImage';
 import Page from '@/components/Page';
@@ -115,7 +116,7 @@ const Visit: NextPage = ({ data }: any) => {
 							left: 0,
 						}}
 					>
-						<motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+						<MotionDiv whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
 							<ActionIcon
 								component={Link}
 								styles={{ root: { height: 64, width: 64, textShadow: '0px 0px 28px #000' } }}
@@ -125,7 +126,7 @@ const Visit: NextPage = ({ data }: any) => {
 							>
 								<IconChevronDown size={64} color="white" />
 							</ActionIcon>
-						</motion.div>
+						</MotionDiv>
 					</Center>
 				</div>
 			</BackgroundImage>
@@ -138,7 +139,7 @@ const Visit: NextPage = ({ data }: any) => {
 				}}
 				my="xl"
 			>
-				<motion.h1
+				<MotionH1
 					id="more"
 					style={{
 						opacity: titleOp,
@@ -148,7 +149,7 @@ const Visit: NextPage = ({ data }: any) => {
 					}}
 				>
 					{t('visit.title')}
-				</motion.h1>
+				</MotionH1>
 				<p>{t('visit.description')}</p>
 				<SearchInput onSearch={(search) => setSearch(search)} />
 				<Grid mt="xl" pt="xl" gutter={{ base: '3%' }}>

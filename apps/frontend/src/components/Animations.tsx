@@ -1,8 +1,9 @@
-import { AnimatePresence, motion, MotionStyle } from 'framer-motion';
+import { AnimatePresence, MotionStyle } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { Box } from '@mantine/core';
 import { useInterval } from '@mantine/hooks';
+import { MotionSpan } from './Motion';
 
 export const TextLoop = ({ words, interval, style }: { words: string[]; interval: number; style?: MotionStyle }) => {
 	const [index, setIndex] = useState(0);
@@ -16,7 +17,7 @@ export const TextLoop = ({ words, interval, style }: { words: string[]; interval
 	return (
 		<Box style={{ display: 'inline', position: 'relative', width: '100%' }}>
 			<AnimatePresence initial={false}>
-				<motion.span
+				<MotionSpan
 					style={{ position: 'absolute', width: '100%', ...style }}
 					layout
 					key={index}
@@ -48,7 +49,7 @@ export const TextLoop = ({ words, interval, style }: { words: string[]; interval
 					}}
 				>
 					{words[index]}
-				</motion.span>
+				</MotionSpan>
 			</AnimatePresence>
 		</Box>
 	);

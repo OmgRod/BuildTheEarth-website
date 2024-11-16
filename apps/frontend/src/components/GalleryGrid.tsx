@@ -1,10 +1,11 @@
 import { Avatar, Badge, Grid, GridCol, Group, Title, useMantineTheme } from '@mantine/core';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 import { useHover } from '@mantine/hooks';
 import React from 'react';
 import { useIsClient } from '../hooks/useIsClient';
 import BackgroundImage from './BackgroundImage';
+import { MotionDiv } from './Motion';
 
 interface GalleryGridProps {
 	images: GalleryGridImageProps[];
@@ -44,7 +45,7 @@ export function GalleryGridImage(i: GalleryGridImageProps) {
 	const { hovered, ref } = useHover();
 	return (
 		<AnimatePresence>
-			<motion.div
+			<MotionDiv
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
@@ -110,7 +111,7 @@ export function GalleryGridImage(i: GalleryGridImageProps) {
 						</div>
 					</div>
 				</BackgroundImage>
-			</motion.div>
+			</MotionDiv>
 		</AnimatePresence>
 	);
 }

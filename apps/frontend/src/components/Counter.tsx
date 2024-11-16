@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useInView, useMotionValue, useSpring } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
 export default function Counter({
 	value,
@@ -20,7 +20,7 @@ export default function Counter({
 		damping: 100,
 		stiffness: 100,
 	});
-	const isInView = useInView(ref, { once: true, margin: '-100px' });
+	const isInView = useInView(ref as RefObject<Element>, { once: true, margin: '-100px' });
 
 	useEffect(() => {
 		if (isInView) {
@@ -33,7 +33,7 @@ export default function Counter({
 			springValue.on('change', (latest) => {
 				if (ref.current) {
 					ref.current.textContent =
-						(prefix || '') + Intl.NumberFormat('en-US').format(latest.toFixed(0)) + (suffix || '');
+						(prefix || '') + Intl.NumberFormat('en-US').format(Number(latest.toFixed(0))) + (suffix || '');
 				}
 			}),
 		[springValue],

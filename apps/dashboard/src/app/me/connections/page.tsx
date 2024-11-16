@@ -1,13 +1,13 @@
 import { Box, Title } from '@mantine/core';
 
+import { getUser } from '@/actions/getUser';
 import { SocialAccountStack } from '@/components/data/SocialAccount';
-import { getUser } from '@/hooks/useUser';
-import { KeycloakUser } from '@/types/User';
+import { WebsiteKeycloakUser } from '@/types/User';
 import { authedFetcher } from '@/util/data';
 
 export default async function Page() {
 	const user = await getUser();
-	const data = await authedFetcher<KeycloakUser>(`/users/${user.id}/kc`);
+	const data = await authedFetcher<WebsiteKeycloakUser>(`/users/${user.id}/kc`);
 
 	return (
 		<Box ml="md" maw="50vw">
