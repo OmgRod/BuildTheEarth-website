@@ -36,10 +36,10 @@ class BuildTeamController {
 					},
 					members: req.user
 						? {
-								where: {
-									id: req.user.id,
-								},
-							}
+							where: {
+								id: req.user.id,
+							},
+						}
 						: false,
 				},
 			});
@@ -63,10 +63,10 @@ class BuildTeamController {
 				},
 				members: req.user
 					? {
-							where: {
-								id: req.user.id,
-							},
-						}
+						where: {
+							id: req.user.id,
+						},
+					}
 					: false,
 			},
 		});
@@ -86,10 +86,10 @@ class BuildTeamController {
 					? true
 					: req.user
 						? {
-								where: {
-									id: req.user.id,
-								},
-							}
+							where: {
+								id: req.user.id,
+							},
+						}
 						: false,
 				_count: {
 					select: { members: true },
@@ -99,6 +99,33 @@ class BuildTeamController {
 
 		if (buildteam) {
 			res.send({ ...buildteam, token: undefined, webhook: undefined });
+		} else {
+			ERROR_GENERIC(req, res, 404, 'BuildTeam does not exist.');
+		}
+	}
+
+	/**
+	 * Get a single buildteam, only values for modpack
+	 */
+	public async getBuildTeamForModpack(req: Request, res: Response) {
+		const buildteam = await this.core.getPrisma().buildTeam.findFirst({
+			where: req.query.slug ? { slug: req.params.id } : { id: req.params.id },
+			select: {
+				id: true,
+				name: true,
+				ip: true,
+				version: true,
+			},
+		});
+
+		if (buildteam) {
+			// Transform the `ip` field into an array
+			const transformedBuildTeam = {
+				...buildteam,
+				ip: buildteam.ip ? buildteam.ip.split(',').map(ip => ip.trim()) : [], 
+			};
+
+			res.send(transformedBuildTeam);
 		} else {
 			ERROR_GENERIC(req, res, 404, 'BuildTeam does not exist.');
 		}

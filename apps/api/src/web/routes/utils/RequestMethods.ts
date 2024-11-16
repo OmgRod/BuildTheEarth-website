@@ -3,4 +3,5 @@ export enum RequestMethods {
 	POST = 'POST',
 	PUT = 'PUT',
 	DELETE = 'DELETE',
+	HEAD = 'HEAD',
 }
