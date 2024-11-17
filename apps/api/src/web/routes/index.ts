@@ -119,6 +119,21 @@ class Routes {
 		);
 		router.addRoute(
 			RequestMethods.GET,
+			'/buildteams/modpack',
+			async (request, response) => {
+				await controllers.buildTeam.getBuildTeamsForModpack(request, response);
+			},
+		);
+		router.addRoute(
+			RequestMethods.HEAD,
+			'/buildteams/modpack',
+			(request, response) => {
+			  // Return a 200 status for HEAD requests without a body
+			  response.status(200).end();
+			},
+		);
+		router.addRoute(
+			RequestMethods.GET,
 			'/buildteams/:id',
 			async (request, response) => {
 				await controllers.buildTeam.getBuildTeam(request, response);

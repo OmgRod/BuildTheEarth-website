@@ -74,6 +74,38 @@ class BuildTeamController {
 	}
 
 	/**
+	 * Get Information about multiple Buildteams, for modpack
+	 */
+	public async getBuildTeamsForModpack(req: Request, res: Response) {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return ERROR_VALIDATION(req, res, errors.array());
+		}
+
+		const buildteams = await this.core.getPrisma().buildTeam.findMany({
+			orderBy: { members: { _count: 'desc' } },
+			select: {
+				id: true,
+				name: true,
+				ip: true,
+				version: true,
+			},
+		});
+
+		// Transform the array to an object with id as the key and split the 'ip' string into an array
+		const buildteamsObject = buildteams.reduce((acc, b) => {
+			acc[b.id] = {
+				name: b.name,
+				ip: b.ip.split(';'),  // Split the 'ip' string by ';' to make it an array
+				version: b.version,
+			};
+			return acc;
+		}, {});
+
+		res.send(buildteamsObject);
+	}
+
+	/**
 	 * Get a single buildteam, may include members and showcases
 	 */
 	public async getBuildTeam(req: Request, res: Response) {
@@ -122,7 +154,7 @@ class BuildTeamController {
 			// Transform the `ip` field into an array
 			const transformedBuildTeam = {
 				...buildteam,
-				ip: buildteam.ip ? buildteam.ip.split(',').map(ip => ip.trim()) : [], 
+				ip: buildteam.ip ? buildteam.ip.split(';').map(ip => ip.trim()) : [],
 			};
 
 			res.send(transformedBuildTeam);
