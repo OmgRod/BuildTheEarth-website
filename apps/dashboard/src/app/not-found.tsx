@@ -2,8 +2,8 @@
 
 import { ActionIcon, Box, Button, Text, Title } from '@mantine/core';
 
-import { IconChevronDown } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
+import { IconChevronDown } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
 
 export default function NotFound() {

@@ -117,21 +117,13 @@ class Routes {
 			},
 			query('page').isNumeric().optional(),
 		);
-		router.addRoute(
-			RequestMethods.GET,
-			'/buildteams/modpack',
-			async (request, response) => {
-				await controllers.buildTeam.getBuildTeamsForModpack(request, response);
-			},
-		);
-		router.addRoute(
-			RequestMethods.HEAD,
-			'/buildteams/modpack',
-			(request, response) => {
-			  // Return a 200 status for HEAD requests without a body
-			  response.status(200).end();
-			},
-		);
+		router.addRoute(RequestMethods.GET, '/buildteams/modpack', async (request, response) => {
+			await controllers.buildTeam.getBuildTeamsForModpack(request, response);
+		});
+		router.addRoute(RequestMethods.HEAD, '/buildteams/modpack', (request, response) => {
+			// Return a 200 status for HEAD requests without a body
+			response.status(200).end();
+		});
 		router.addRoute(
 			RequestMethods.GET,
 			'/buildteams/:id',
@@ -152,8 +144,8 @@ class Routes {
 			RequestMethods.HEAD,
 			'/buildteams/:id/modpack',
 			(request, response) => {
-			  // Return a 200 status for HEAD requests without a body
-			  response.status(200).end();
+				// Return a 200 status for HEAD requests without a body
+				response.status(200).end();
 			},
 			param('id'),
 		);

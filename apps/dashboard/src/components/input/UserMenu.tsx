@@ -1,11 +1,10 @@
-import { Menu, MenuDropdown, MenuItem, MenuTarget, useMantineColorScheme } from '@mantine/core';
+import { Menu, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { IconLogout, IconMap, IconSettings, IconWorld } from '@tabler/icons-react';
 
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 const UserMenu = ({ children }: { children: any }) => {
-
 	return (
 		<Menu trigger="click-hover" position="right-end" withArrow>
 			<MenuTarget>{children}</MenuTarget>

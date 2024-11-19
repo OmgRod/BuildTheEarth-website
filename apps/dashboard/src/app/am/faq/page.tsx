@@ -1,10 +1,10 @@
 import { Box, Button, Group, Title } from '@mantine/core';
 
-import { AddFaqQuestionButton } from './interactivity';
-import FAQDatatabe from './datatable';
+import prisma from '@/util/db';
 import { IconExternalLink } from '@tabler/icons-react';
 import Link from 'next/link';
-import prisma from '@/util/db';
+import FAQDatatabe from './datatable';
+import { AddFaqQuestionButton } from './interactivity';
 
 export default async function Page() {
 	const faq = await prisma.fAQQuestion.findMany();

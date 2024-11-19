@@ -9,15 +9,11 @@ export default async function Page() {
 				FAQ Questions
 			</Title>
 			<DataTable
-				columns={[
-					{ accessor: 'id', title: '#'},
-					{ accessor: 'question' },
-					{ accessor: '', title: 'Actions'},
-				]}
+				columns={[{ accessor: 'id', title: '#' }, { accessor: 'question' }, { accessor: '', title: 'Actions' }]}
 				records={[]}
 				minHeight={500}
-				width={"100%"}
-				noRecordsText='Loading FAQ Questions...'
+				width={'100%'}
+				noRecordsText="Loading FAQ Questions..."
 			/>
 		</Box>
 	);

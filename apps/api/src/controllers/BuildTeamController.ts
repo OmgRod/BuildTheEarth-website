@@ -36,10 +36,10 @@ class BuildTeamController {
 					},
 					members: req.user
 						? {
-							where: {
-								id: req.user.id,
-							},
-						}
+								where: {
+									id: req.user.id,
+								},
+							}
 						: false,
 				},
 			});
@@ -63,10 +63,10 @@ class BuildTeamController {
 				},
 				members: req.user
 					? {
-						where: {
-							id: req.user.id,
-						},
-					}
+							where: {
+								id: req.user.id,
+							},
+						}
 					: false,
 			},
 		});
@@ -96,7 +96,7 @@ class BuildTeamController {
 		const buildteamsObject = buildteams.reduce((acc, b) => {
 			acc[b.id] = {
 				name: b.name,
-				ip: b.ip.split(';'),  // Split the 'ip' string by ';' to make it an array
+				ip: b.ip.split(';'), // Split the 'ip' string by ';' to make it an array
 				version: b.version,
 			};
 			return acc;
@@ -118,10 +118,10 @@ class BuildTeamController {
 					? true
 					: req.user
 						? {
-							where: {
-								id: req.user.id,
-							},
-						}
+								where: {
+									id: req.user.id,
+								},
+							}
 						: false,
 				_count: {
 					select: { members: true },
@@ -154,7 +154,7 @@ class BuildTeamController {
 			// Transform the `ip` field into an array
 			const transformedBuildTeam = {
 				...buildteam,
-				ip: buildteam.ip ? buildteam.ip.split(';').map(ip => ip.trim()) : [],
+				ip: buildteam.ip ? buildteam.ip.split(';').map((ip) => ip.trim()) : [],
 			};
 
 			res.send(transformedBuildTeam);

@@ -11,13 +11,13 @@ import 'mantine-datatable/styles.layer.css';
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 
-import AppLayout from '@/components/layout';
 import AuthProvider from '@/components/AuthProvider';
-import { Inter } from 'next/font/google';
+import SWRSetup from '@/components/core/SWRSetup';
+import AppLayout from '@/components/layout';
+import { getSession } from '@/util/auth';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
-import SWRSetup from '@/components/core/SWRSetup';
-import { getSession } from '@/util/auth';
+import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const interFont = Inter({

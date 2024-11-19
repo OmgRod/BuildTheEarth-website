@@ -60,7 +60,7 @@ function EditFaqQuestionModal(
 	const form = useForm({
 		initialValues: { id: props.id, question: props.question, answer: props.answer, links: props.links },
 	});
-	const [[addFaqQuestionAction,editFaqQuestionAction, deleteFaqQuestionAction], isPending] = useFormActions([
+	const [[addFaqQuestionAction, editFaqQuestionAction, deleteFaqQuestionAction], isPending] = useFormActions([
 		addFaqQuestion,
 		editFaqQuestion,
 		deleteFaqQuestion,

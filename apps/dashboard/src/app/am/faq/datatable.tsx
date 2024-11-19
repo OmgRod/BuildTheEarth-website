@@ -1,7 +1,7 @@
 'use client';
 
 import { ActionIcon, Code, Group } from '@mantine/core';
-import { IconEdit, IconExternalLink } from '@tabler/icons-react';
+import { IconExternalLink } from '@tabler/icons-react';
 
 import { FAQQuestion } from '@repo/db';
 import { DataTable } from 'mantine-datatable';
@@ -25,7 +25,12 @@ export default function FAQDatatabe({ faq }: { faq: FAQQuestion[] }) {
 					textAlign: 'right',
 					render: (question: FAQQuestion) => (
 						<Group gap={4} justify="right" wrap="nowrap">
-							<EditFaqQuestionButton id={question.id} question={question.question} answer={question.answer} links={question.links}/>
+							<EditFaqQuestionButton
+								id={question.id}
+								question={question.question}
+								answer={question.answer}
+								links={question.links}
+							/>
 							<ActionIcon
 								size="sm"
 								variant="subtle"

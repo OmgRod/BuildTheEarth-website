@@ -2,7 +2,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, RichTextEditor as MRichTextEditor } from '@mantine/tiptap';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import Highlight from '@tiptap/extension-highlight';
 import SubScript from '@tiptap/extension-subscript';
@@ -23,7 +23,6 @@ export default function RichTextEditor({
 	onClick?: (e: any) => void;
 	style?: any;
 }) {
-
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
@@ -39,7 +38,7 @@ export default function RichTextEditor({
 			onChange && onChange(e.editor.getHTML());
 			onClick && onClick(e);
 		},
-		immediatelyRender:false,
+		immediatelyRender: false,
 	});
 
 	useEffect(() => {

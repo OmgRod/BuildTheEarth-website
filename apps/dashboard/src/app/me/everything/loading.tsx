@@ -1,4 +1,4 @@
-import { Alert, Box, Skeleton, Tabs, TabsList, TabsPanel, TabsTab, Title, rem } from '@mantine/core';
+import { Alert, Box, rem, Skeleton, Tabs, TabsList, TabsPanel, TabsTab, Title } from '@mantine/core';
 import { IconCode, IconInfoCircle, IconTable } from '@tabler/icons-react';
 
 export default async function Page() {

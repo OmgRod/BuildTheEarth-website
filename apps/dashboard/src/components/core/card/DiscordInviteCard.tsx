@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Avatar, Card, CardSection, Group, Image, NumberFormatter, Text } from '@mantine/core';
 

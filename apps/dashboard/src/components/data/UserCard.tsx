@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, Group, Text } from '@mantine/core';
 
-import classes from "@/styles/UserCard.module.css";
+import classes from '@/styles/UserCard.module.css';
 
 const stats = [
 	{ value: '34K', label: 'Followers' },

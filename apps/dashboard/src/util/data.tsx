@@ -47,7 +47,6 @@ interface FetchOptions {
 	};
 }
 
-
 export function handleFetch(
 	route: string,
 	{
@@ -80,7 +79,7 @@ export function handleFetch(
 				message: json.message,
 				color: 'red',
 			});
-			console.error(route + " produced an error");
+			console.error(route + ' produced an error');
 			onError && onError(json);
 		} else {
 			successNotification &&
