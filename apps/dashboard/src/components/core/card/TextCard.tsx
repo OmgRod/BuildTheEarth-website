@@ -1,4 +1,4 @@
-import { Group, Paper, Text } from '@mantine/core';
+import { Group, MantineStyleProp, Paper, Text } from '@mantine/core';
 
 export function TextCard(props: {
 	title: string;
@@ -6,10 +6,11 @@ export function TextCard(props: {
 	subtitle?: string;
 	icon?: any;
 	isText?: boolean;
+	style?: MantineStyleProp;
 }) {
 	const Icon = props.icon;
 	return (
-		<Paper withBorder p="md" radius="md" key={props.title} m={0}>
+		<Paper withBorder p="md" radius="md" key={props.title} m={0} style={props.style}>
 			<Group justify="space-between">
 				<Text size="xs" c="dimmed" fw={700} tt="uppercase">
 					{props.title}
