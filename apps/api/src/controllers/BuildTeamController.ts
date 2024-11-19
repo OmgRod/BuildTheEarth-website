@@ -36,10 +36,10 @@ class BuildTeamController {
 					},
 					members: req.user
 						? {
-								where: {
-									id: req.user.id,
-								},
-							}
+							where: {
+								id: req.user.id,
+							},
+						}
 						: false,
 				},
 			});
@@ -63,14 +63,46 @@ class BuildTeamController {
 				},
 				members: req.user
 					? {
-							where: {
-								id: req.user.id,
-							},
-						}
+						where: {
+							id: req.user.id,
+						},
+					}
 					: false,
 			},
 		});
 		res.send(buildteams.map((b) => ({ ...b, token: undefined, webhook: undefined })));
+	}
+
+	/**
+	 * Get Information about multiple Buildteams, for modpack
+	 */
+	public async getBuildTeamsForModpack(req: Request, res: Response) {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return ERROR_VALIDATION(req, res, errors.array());
+		}
+
+		const buildteams = await this.core.getPrisma().buildTeam.findMany({
+			orderBy: { members: { _count: 'desc' } },
+			select: {
+				id: true,
+				name: true,
+				ip: true,
+				version: true,
+			},
+		});
+
+		// Transform the array to an object with id as the key and split the 'ip' string into an array
+		const buildteamsObject = buildteams.reduce((acc, b) => {
+			acc[b.id] = {
+				name: b.name,
+				ip: b.ip.split(';'),  // Split the 'ip' string by ';' to make it an array
+				version: b.version,
+			};
+			return acc;
+		}, {});
+
+		res.send(buildteamsObject);
 	}
 
 	/**
@@ -86,10 +118,10 @@ class BuildTeamController {
 					? true
 					: req.user
 						? {
-								where: {
-									id: req.user.id,
-								},
-							}
+							where: {
+								id: req.user.id,
+							},
+						}
 						: false,
 				_count: {
 					select: { members: true },
@@ -99,6 +131,33 @@ class BuildTeamController {
 
 		if (buildteam) {
 			res.send({ ...buildteam, token: undefined, webhook: undefined });
+		} else {
+			ERROR_GENERIC(req, res, 404, 'BuildTeam does not exist.');
+		}
+	}
+
+	/**
+	 * Get a single buildteam, only values for modpack
+	 */
+	public async getBuildTeamForModpack(req: Request, res: Response) {
+		const buildteam = await this.core.getPrisma().buildTeam.findFirst({
+			where: req.query.slug ? { slug: req.params.id } : { id: req.params.id },
+			select: {
+				id: true,
+				name: true,
+				ip: true,
+				version: true,
+			},
+		});
+
+		if (buildteam) {
+			// Transform the `ip` field into an array
+			const transformedBuildTeam = {
+				...buildteam,
+				ip: buildteam.ip ? buildteam.ip.split(';').map(ip => ip.trim()) : [],
+			};
+
+			res.send(transformedBuildTeam);
 		} else {
 			ERROR_GENERIC(req, res, 404, 'BuildTeam does not exist.');
 		}
