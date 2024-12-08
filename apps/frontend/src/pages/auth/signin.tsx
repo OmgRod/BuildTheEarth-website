@@ -28,7 +28,11 @@ const SignIn: NextPage = () => {
 
 			{router.query.error && <p style={{ color: theme.colors.red[6] }}>An error occurred, please try again later.</p>}
 
-			<Button onClick={() => signIn('keycloak')}>Sign in</Button>
+			<Button
+				onClick={() => signIn('keycloak', { redirect: true, callbackUrl: (router.query.callbackUrl as string) || '/' })}
+			>
+				Sign in
+			</Button>
 
 			{router.query.callbackUrl && (
 				<Text size="sm" c="dimmed" mt="sm">

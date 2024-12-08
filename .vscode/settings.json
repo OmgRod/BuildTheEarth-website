@@ -23,6 +23,7 @@
 		"api/blog",
 		"dash/src",
 		"dash/admin",
-		"dash/me"
+		"dash/me",
+		"frontend/auth"
 	]
 }
