@@ -6,7 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import * as React from 'react';
 
 import { LoadingOverlay, useMantineColorScheme, useMantineTheme } from '@mantine/core';
-import mapboxgl, { GeolocateControl } from 'mapbox-gl';
+import mapboxgl, { GeolocateControl, Map as MapType, MapboxOptions } from 'mapbox-gl';
 import { MapboxStyleDefinition, MapboxStyleSwitcherControl } from 'mapbox-gl-style-switcher';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -14,8 +14,8 @@ import { showNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons-react';
 
 interface IMap {
-	initialOptions?: Omit<mapboxgl.MapboxOptions, 'container'>;
-	onMapLoaded?(map: mapboxgl.Map): void;
+	initialOptions?: Omit<MapboxOptions, 'container'>;
+	onMapLoaded?(map: MapType): void;
 	onMapRemoved?(): void;
 	allowFullscreen?: boolean;
 	savePos?: boolean;
@@ -24,7 +24,7 @@ interface IMap {
 	gelocateControls?: boolean;
 	src?: string;
 	initialStyle?: number;
-	layerSetup?(map: mapboxgl.Map): void;
+	layerSetup?(map: MapType): void;
 	onContextMenu?(event: any): void;
 }
 
@@ -56,7 +56,7 @@ function Map({
 	onContextMenu,
 }: IMap) {
 	// Mapbox map
-	const [map, setMap] = React.useState<mapboxgl.Map>();
+	const [map, setMap] = React.useState<MapType>();
 	// Next Router
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -97,7 +97,7 @@ function Map({
 
 		if (typeof window === 'undefined' || node === null) return;
 
-		const mapboxMap = new mapboxgl.Map({
+		const mapboxMap = new MapType({
 			container: node,
 			accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
 			style: initialStyle || scheme.colorScheme == 'dark' ? styles[0].uri : styles[1].uri,
@@ -242,7 +242,7 @@ export function mapTooltip(map: any, layer: string, callback: (feature: any) => 
 // Map Load Helper Functions
 
 export async function mapLoadGeoJson(
-	map: mapboxgl.Map,
+	map: MapType,
 	url: string,
 	layer: string,
 	layerType: any,

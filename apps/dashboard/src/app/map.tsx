@@ -4,6 +4,7 @@ import MapboxMap, { mapTooltip } from '@/components/map/Map';
 
 import { useContextMenu } from '@/components/core/ContextMenu';
 import { MapContextMenu } from '@/components/map/MapContextMenu';
+import { Map as MapType } from 'mapbox-gl';
 import { useState } from 'react';
 
 export default function Map({
@@ -22,7 +23,7 @@ export default function Map({
 		lat: null,
 		lng: null,
 	});
-	const [map, setMap] = useState<mapboxgl.Map>();
+	const [map, setMap] = useState<MapType>();
 
 	return (
 		<>
