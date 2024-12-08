@@ -89,6 +89,7 @@ class BuildTeamController {
 				name: true,
 				ip: true,
 				version: true,
+				invite: true,
 			},
 		});
 
@@ -96,8 +97,9 @@ class BuildTeamController {
 		const buildteamsObject = buildteams.reduce((acc, b) => {
 			acc[b.id] = {
 				name: b.name,
-				ip: b.ip.split(';'), // Split the 'ip' string by ';' to make it an array
+				ip: b.ip ? b.ip.split(';').map((ip) => ip.trim()) : [],
 				version: b.version,
+				invite: b.invite,
 			};
 			return acc;
 		}, {});
@@ -147,6 +149,7 @@ class BuildTeamController {
 				name: true,
 				ip: true,
 				version: true,
+				invite: true,
 			},
 		});
 
