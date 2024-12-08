@@ -20,11 +20,11 @@ import { Notifications } from '@mantine/notifications';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
-export const interFont = Inter({
+const interFont = Inter({
 	subsets: ['latin'],
 	variable: '--font-inter',
 });
-export const minecraftFont = localFont({
+const minecraftFont = localFont({
 	src: '../../public/fonts/Minecraft.ttf',
 	weight: '100 900',
 	display: 'swap',

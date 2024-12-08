@@ -1,4 +1,4 @@
-import { AppShell, AppShellMain, Box } from '@mantine/core';
+import { AppShell, AppShellMain } from '@mantine/core';
 
 import { getSession } from '@/util/auth';
 import ProtectionProvider from '../ProtectionProvider';
@@ -29,16 +29,8 @@ export default async function AppLayout(props: LayoutProps) {
 
 			<Header />
 
-			<AppShellMain style={{ position: 'relative' }}>
-				<Box
-					style={{
-						maxWidth: '100%',
-						overflowX: 'hidden',
-						marginBottom: 'var(--mantine-spacing-xl)',
-					}}
-				>
-					<ProtectionProvider>{props.children}</ProtectionProvider>
-				</Box>
+			<AppShellMain style={{ position: 'relative', paddingBottom: 'calc(var(--mantine-spacing-xl) * 1.5)' }}>
+				<ProtectionProvider>{props.children}</ProtectionProvider>
 			</AppShellMain>
 		</AppShell>
 	);

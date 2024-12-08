@@ -4,8 +4,8 @@ import {
 	KeycloakGroup,
 	KeycloakSession,
 	KeycloakUser,
-	KeycloakuserConsent,
 	KeycloakUserCredential,
+	KeycloakuserConsent,
 } from '@/types/Keycloak';
 import { capitalize, snakeCaseToStartCase } from '@/util/string';
 import {

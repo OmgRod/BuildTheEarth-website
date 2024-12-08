@@ -22,6 +22,7 @@
 		"frontend/v2",
 		"api/blog",
 		"dash/src",
-		"dash/admin"
+		"dash/admin",
+		"dash/me"
 	]
 }
