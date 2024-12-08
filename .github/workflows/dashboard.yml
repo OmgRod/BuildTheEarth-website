@@ -1,0 +1,45 @@
+name: Docker Publish Dashboard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      has_changes: ${{ steps.check_for_changes.outputs.has_changes }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+      - name: Install turbo
+        run: npm install -g turbo@2.1.1 && npm install -g turbo-ignore
+      - name: Check for changes
+        id: check_for_changes
+        run: npx turbo-ignore dashboard --fallback=HEAD^1 && echo "has_changes=false" >> "$GITHUB_OUTPUT" || echo "has_changes=true" >> "$GITHUB_OUTPUT"
+  build:
+    runs-on: ubuntu-latest
+    needs: check
+    if: needs.check.outputs.has_changes == 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+      - name: Install turbo
+        run: npm install -g turbo@2.1.1
+      - name: Login to Docker
+        run: |
+          echo "${{ github.token }}" | docker login https://ghcr.io -u ${GITHUB_ACTOR} --password-stdin
+      - name: Create env file
+        run: |
+          touch apps/dashboard/.env
+          echo KEYCLOAK_URL="https://auth.buildtheearth.net/realms/website" >> apps/dashboard/.env
+      - name: Build the Docker image
+        run: docker build . --file apps/dashboard/Dockerfile --tag ghcr.io/buildtheearth/dashboard-website:$(git rev-parse --short HEAD) --tag ghcr.io/buildtheearth/dashboard-website:latest
+      - name: Docker push tag
+        run: docker push ghcr.io/buildtheearth/dashboard-website:$(git rev-parse --short HEAD)
+      - name: Docker push latest
+        run: docker push ghcr.io/buildtheearth/dashboard-website:latest
