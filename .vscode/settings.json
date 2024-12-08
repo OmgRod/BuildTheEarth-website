@@ -24,6 +24,7 @@
 		"dash/src",
 		"dash/admin",
 		"dash/me",
-		"frontend/auth"
+		"frontend/auth",
+		"dash/components"
 	]
 }
