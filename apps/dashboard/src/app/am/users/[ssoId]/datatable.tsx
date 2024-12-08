@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Code, Group, Menu, MenuDropdown, MenuItem, MenuTarget, rem, Text } from '@mantine/core';
+import { ActionIcon, Code, Group, Menu, MenuDropdown, MenuItem, MenuTarget, Text, rem } from '@mantine/core';
 import { IconDots, IconEye, IconMessage2 } from '@tabler/icons-react';
 
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
@@ -39,12 +39,12 @@ export default function ClaimDatatabe({
 				{
 					accessor: 'id',
 					title: '#',
-					render: ({ id }) => <Code>{id.split('-')[0]}</Code>,
+					render: ({ id }: any) => <Code>{id.split('-')[0]}</Code>,
 				},
 				{
 					accessor: 'center',
 					title: 'Coordinates',
-					render: ({ center }) => (
+					render: ({ center }: any) => (
 						<Text c="dimmed" fz="sm" maw="90%" lineClamp={1}>
 							{center}
 						</Text>
@@ -59,7 +59,7 @@ export default function ClaimDatatabe({
 				{
 					accessor: 'size',
 					title: 'Size',
-					render: ({ size, buildings }) => (
+					render: ({ size, buildings }: any) => (
 						<>
 							<Code>{size}m²</Code>
 							{', '}
@@ -77,13 +77,13 @@ export default function ClaimDatatabe({
 				{
 					accessor: 'createdAt',
 					title: 'Created At',
-					render: ({ createdAt }) => createdAt.toLocaleString(),
+					render: ({ createdAt }: any) => createdAt.toLocaleString(),
 				},
 				{
 					accessor: '',
 					title: '',
 					textAlign: 'right',
-					render: (claim) => (
+					render: (claim: any) => (
 						<Group gap={4} justify="right" wrap="nowrap">
 							<ActionIcon
 								size="sm"
