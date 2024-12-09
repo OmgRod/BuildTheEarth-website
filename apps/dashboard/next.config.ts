@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
 	output: 'standalone',
 	poweredByHeader: false,
 	outputFileTracingRoot: path.join(__dirname, '../../'),
+	images: {
+		domains: ['cdn.buildtheearth.net'],
+	},
 };
 
 export default nextConfig;

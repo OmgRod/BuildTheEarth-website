@@ -1,10 +1,32 @@
 :root {
 	--mantine-navbar-width: 300;
 	--map-color-filter: invert(77%) sepia(8%) saturate(271%) hue-rotate(169deg) brightness(93%) contrast(90%);
+
+	@mixin dark-root {
+		--mantine-color-card-bg-light: var(--mantine-color-dark-6);
+	}
+	@mixin light-root {
+		--mantine-color-card-bg-light: var(--mantine-color-gray-0);
+	}
+}
+
+body,
+html {
 }
 
 .xl2 {
 	font-size: calc(var(--mantine-font-size-xl) * 1.5) !important;
+}
+
+.animate-scale {
+	transition:
+		box-shadow 150ms ease,
+		transform 100ms ease;
+
+	@mixin hover {
+		box-shadow: var(--mantine-shadow-md);
+		transform: scale(1.025);
+	}
 }
 
 /* Map Styles */

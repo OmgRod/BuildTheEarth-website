@@ -20,11 +20,8 @@ import {
 } from '@tabler/icons-react';
 
 import { ActionsCard } from '@/components/core/card/ActionsCard';
-import { getSession } from '@/util/auth';
 
 export default async function Page() {
-	const session = await getSession();
-
 	return (
 		<Box mx="md" maw="90vw">
 			<Title order={1} mt="xl" mb="md">
