@@ -42,3 +42,26 @@ export const deleteFaqQuestion = async (id: any) => {
 	revalidatePath('/am/faq');
 	return faq;
 };
+
+export const checkUpload = async (id: string) => {
+	const upload = await prisma.upload.update({
+		where: {
+			id,
+		},
+		data: {
+			checked: true,
+		},
+	});
+
+	revalidatePath('/am/uploads/check');
+};
+
+export const deleteUpload = async (id: string) => {
+	const upload = await prisma.upload.delete({
+		where: {
+			id,
+		},
+	});
+
+	revalidatePath('/am/uploads/check');
+};
