@@ -15,9 +15,9 @@ const defaultSeo: DefaultSeoProps = {
 		images: [
 			{
 				url: 'https://cdn.buildtheearth.net/static/preview.webp',
-				width: 1920,
-				height: 1080,
-				alt: 'BuildTheEarth - Building the Earth in Minecraft',
+				width: 1200,
+				height: 630,
+				alt: 'BuildTheEarth - Rebuilding The Earth In Minecraft',
 			},
 		],
 	},
