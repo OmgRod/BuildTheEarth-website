@@ -33,9 +33,3 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 		</Box>
 	);
 }
-
-export async function generateStaticParams() {
-	const teams = await prisma.buildTeam.findMany({ select: { id: true } });
-
-	return teams.map((team) => ({ params: team }));
-}
