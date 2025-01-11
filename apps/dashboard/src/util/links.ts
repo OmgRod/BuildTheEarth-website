@@ -68,37 +68,37 @@ export const meNavLinks: NavLink[] = [
 	{
 		link: '/am/users',
 		label: 'Website Users',
-		protected: true,
+		protected: 'bte_staff_website',
 		icon: 'UsersGroup',
 	},
 	{
 		link: '/am/teams',
 		label: 'BuildTeams',
-		protected: true,
+		protected: 'bte_staff_website',
 		icon: 'UsersGroup',
 	},
 	{
 		link: '/am/faq',
 		label: 'FAQ',
-		protected: true,
+		protected: 'bte_staff_website',
 		icon: 'Bubble',
 	},
 	{
 		link: '/am/claims',
 		label: 'Map Claims',
-		protected: true,
+		protected: 'bte_staff_website',
 		icon: 'Polygon',
 	},
 	{
 		link: '/am/applications',
 		label: 'Team Applications',
-		protected: true,
+		protected: 'bte_staff_website',
 		icon: 'Forms',
 	},
 	{
 		link: '/am/sso',
 		label: 'SSO Configuration and Security',
-		protected: true,
+		protected: 'bte_staff_admin',
 		icon: 'Settings',
 	},
 ];
@@ -118,7 +118,7 @@ type NavLink = {
 	link: string;
 	label: string;
 	icon: any;
-	protected?: boolean;
+	protected?: boolean | 'bte_staff_admin' | 'bte_staff_discord' | 'bte_staff_website' | 'bte_staff';
 	divider?: boolean;
 };
 interface NavLinkGroup {

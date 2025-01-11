@@ -6,14 +6,17 @@ import { navLinks } from '@/util/links';
 import NavLink from './NavLink';
 
 export interface Navbar {
-	displayProtected?: boolean;
+	roles: string[];
 }
 
 /**
  * Main Navbar
  */
 export default async function Navbar(props: Navbar) {
-	const allowedLinks = navLinks.filter((link) => props.displayProtected || !link.protected);
+	const allowedLinks = navLinks.filter(
+		(link) =>
+			!link.protected || props.roles.includes(typeof link.protected === 'boolean' ? 'bte_staff' : link.protected),
+	);
 
 	const links = allowedLinks.map((item) =>
 		item.divider ? (

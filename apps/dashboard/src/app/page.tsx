@@ -88,7 +88,7 @@ export default async function Page() {
 					/>
 				</>
 			)}
-			{(websiteData?._count?.permissions ?? 0) > 0 && (
+			{session?.user?.realm_access?.roles.includes('bte_staff') && (
 				<>
 					<Title order={2} mt="xl">
 						Global Administration

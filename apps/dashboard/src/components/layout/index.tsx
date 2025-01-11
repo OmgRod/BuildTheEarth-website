@@ -14,7 +14,6 @@ export interface LayoutProps {
  */
 export default async function AppLayout(props: LayoutProps) {
 	const session = await getSession();
-	const isStaff = session?.user.realm_access.roles.includes('bte_staff');
 
 	return (
 		<AppShell
@@ -25,7 +24,7 @@ export default async function AppLayout(props: LayoutProps) {
 			header={{ height: 60 }}
 			padding="md"
 		>
-			<Navbar displayProtected={isStaff} />
+			<Navbar roles={session?.user.realm_access.roles || []} />
 
 			<Header />
 

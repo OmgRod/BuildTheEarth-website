@@ -2,15 +2,18 @@
 
 import { redirect, usePathname } from 'next/navigation';
 
+import { navLinks } from '@/util/links';
 import { useSession } from 'next-auth/react';
 
 export default function ProtectionProvider({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const session = useSession();
-	const isProtected = pathname.startsWith('/am/');
-	const isStaff = session.data?.user.realm_access.roles.includes('bte_staff');
+	const requiredRole = navLinks.find((link) => link.link === pathname.split('/').slice(0, 3).join('/'))?.protected;
 
-	if (isProtected && !isStaff) {
+	if (
+		requiredRole &&
+		!session?.data?.user?.realm_access?.roles.includes(typeof requiredRole === 'boolean' ? 'bte_staff' : requiredRole)
+	) {
 		redirect('/');
 	}
 
