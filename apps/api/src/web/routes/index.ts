@@ -450,6 +450,8 @@ class Routes {
 			},
 			param('id'),
 			query('review').isBoolean().optional(),
+			query('page').isNumeric().optional().default(0),
+			query('take').isNumeric().optional().default(10),
 			checkUserPermission(this.web.getCore().getPrisma(), 'team.application.list', 'id'),
 		);
 		router.addRoute(

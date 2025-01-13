@@ -26,6 +26,7 @@
 		"dash/me",
 		"frontend/auth",
 		"dash/components",
-		"frontend/seo"
+		"frontend/seo",
+		"api/applications"
 	]
 }

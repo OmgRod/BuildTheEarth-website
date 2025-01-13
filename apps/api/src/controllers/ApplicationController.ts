@@ -1,6 +1,6 @@
 import { Application, ApplicationQuestionType, ApplicationStatus } from '@repo/db';
 import { Request, Response } from 'express';
-import { sendBtWebhook, WebhookType } from '../util/BtWebhooks.js';
+import { WebhookType, sendBtWebhook } from '../util/BtWebhooks.js';
 import { ERROR_GENERIC, ERROR_NO_PERMISSION, ERROR_VALIDATION } from '../util/Errors.js';
 
 import { validationResult } from 'express-validator';
@@ -30,17 +30,39 @@ class ApplicationController {
 
 		const onlyReview = req.query.review;
 
-		let applications = await this.core.getPrisma().application.findMany({
-			where: {
-				buildteam: req.query.slug ? { slug: req.params.id } : { id: req.params.id },
-				status: onlyReview ? { in: [ApplicationStatus.SEND, ApplicationStatus.REVIEWING] } : undefined,
-			},
-			include: {
-				user: { select: { id: true, username: true } },
-			},
-		});
-
-		res.send(applications);
+		if (req.query && req.query.page) {
+			let page = parseInt(req.query.page as string);
+			let take = parseInt((req.query.take || 10) as string);
+			let applications = await this.core.getPrisma().application.findMany({
+				skip: page * take,
+				take: take,
+				where: {
+					buildteam: req.query.slug ? { slug: req.params.id } : { id: req.params.id },
+					status: onlyReview ? { in: [ApplicationStatus.SEND, ApplicationStatus.REVIEWING] } : undefined,
+				},
+				include: {
+					user: { select: { id: true, username: true } },
+				},
+			});
+			let count = await this.core.getPrisma().application.count({
+				where: {
+					buildteam: req.query.slug ? { slug: req.params.id } : { id: req.params.id },
+					status: onlyReview ? { in: [ApplicationStatus.SEND, ApplicationStatus.REVIEWING] } : undefined,
+				},
+			});
+			res.send({ pages: Math.ceil(count / take), data: applications });
+		} else {
+			let applications = await this.core.getPrisma().application.findMany({
+				where: {
+					buildteam: req.query.slug ? { slug: req.params.id } : { id: req.params.id },
+					status: onlyReview ? { in: [ApplicationStatus.SEND, ApplicationStatus.REVIEWING] } : undefined,
+				},
+				include: {
+					user: { select: { id: true, username: true } },
+				},
+			});
+			res.send(applications);
+		}
 	}
 
 	/**
