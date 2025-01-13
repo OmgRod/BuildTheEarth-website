@@ -33,6 +33,10 @@ class ApplicationController {
 		if (req.query && req.query.page) {
 			let page = parseInt(req.query.page as string);
 			let take = parseInt((req.query.take || 10) as string);
+			let sort = req.query.sort as string;
+			if (sort != 'asc' && sort != 'desc') {
+				sort = 'asc';
+			}
 			let applications = await this.core.getPrisma().application.findMany({
 				skip: page * take,
 				take: take,
@@ -42,6 +46,9 @@ class ApplicationController {
 				},
 				include: {
 					user: { select: { id: true, username: true } },
+				},
+				orderBy: {
+					createdAt: sort as 'asc' | 'desc',
 				},
 			});
 			let count = await this.core.getPrisma().application.count({
