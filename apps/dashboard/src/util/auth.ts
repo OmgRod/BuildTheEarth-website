@@ -1,4 +1,4 @@
-import { AuthOptions, getServerSession } from 'next-auth';
+import { AuthOptions, Session, getServerSession } from 'next-auth';
 
 import { JWT } from 'next-auth/jwt';
 import KeycloakProvider from 'next-auth/providers/keycloak';
@@ -110,3 +110,14 @@ export const authOptions: AuthOptions = {
  * @returns The session object or null
  */
 export const getSession = () => getServerSession(authOptions);
+
+/**
+ * Helper function to check if a user has a specific role
+ * @param session Currently active User Session
+ * @param role Role which is required for the function to return true
+ * @returns If the User has the required role
+ */
+export function hasRole(session: Session | null | undefined, role: string) {
+	console.log(role);
+	return session?.user?.realm_access?.roles?.includes(role);
+}

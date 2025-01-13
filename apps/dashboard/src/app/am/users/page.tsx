@@ -1,5 +1,6 @@
 import { Box, Title } from '@mantine/core';
 
+import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import UsersDatatabe from './datatable';
 import { SearchUsers } from './interactivity';
@@ -39,12 +40,14 @@ export default async function Page({
 	});
 
 	return (
-		<Box mx="md" maw="90vw">
-			<Title order={1} mt="xl" mb="md">
-				Website Users
-			</Title>
-			<SearchUsers mb="md" maw="30%" />
-			<UsersDatatabe users={users} count={userCount} />
-		</Box>
+		<Protection requiredRole="get-users">
+			<Box mx="md" maw="90vw">
+				<Title order={1} mt="xl" mb="md">
+					Website Users
+				</Title>
+				<SearchUsers mb="md" maw="30%" />
+				<UsersDatatabe users={users} count={userCount} />
+			</Box>
+		</Protection>
 	);
 }

@@ -1,14 +1,14 @@
 'use client';
 
 import { ActionIcon, Code, Group } from '@mantine/core';
-import { IconExternalLink } from '@tabler/icons-react';
 
 import { FAQQuestion } from '@repo/db';
+import { IconExternalLink } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import Link from 'next/link';
 import { EditFaqQuestionButton } from './interactivity';
 
-export default function FAQDatatabe({ faq }: { faq: FAQQuestion[] }) {
+export default function FAQDatatabe({ faq, canEdit }: { faq: FAQQuestion[]; canEdit?: boolean }) {
 	return (
 		<DataTable
 			columns={[
@@ -30,6 +30,7 @@ export default function FAQDatatabe({ faq }: { faq: FAQQuestion[] }) {
 								question={question.question}
 								answer={question.answer}
 								links={question.links}
+								disabled={!canEdit}
 							/>
 							<ActionIcon
 								size="sm"

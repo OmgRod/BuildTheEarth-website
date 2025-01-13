@@ -1,7 +1,6 @@
 import { AppShell, AppShellMain } from '@mantine/core';
 
 import { getSession } from '@/util/auth';
-import ProtectionProvider from '../ProtectionProvider';
 import Header from './header';
 import { default as Navbar } from './navbar';
 
@@ -29,7 +28,7 @@ export default async function AppLayout(props: LayoutProps) {
 			<Header />
 
 			<AppShellMain style={{ position: 'relative', paddingBottom: 'calc(var(--mantine-spacing-xl) * 1.5)' }}>
-				<ProtectionProvider>{props.children}</ProtectionProvider>
+				{props.children}
 			</AppShellMain>
 		</AppShell>
 	);

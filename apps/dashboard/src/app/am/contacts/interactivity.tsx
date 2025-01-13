@@ -9,10 +9,11 @@ import { useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
 import { Contact } from '@repo/db';
 
-export function AddContactButton() {
+export function AddContactButton({ disabled }: { disabled?: boolean }) {
 	return (
 		<Button
 			color="green"
+			disabled={disabled}
 			leftSection={<IconPlus size={14} />}
 			onClick={() =>
 				modals.open({
@@ -29,13 +30,14 @@ export function AddContactButton() {
 	);
 }
 
-export function EditContactButton(props: Contact) {
+export function EditContactButton({ disabled, ...props }: Contact & { disabled?: boolean }) {
 	return (
 		<ActionIcon
 			size="sm"
 			variant="subtle"
 			color="yellow"
 			aria-label="Edit Contact"
+			disabled={disabled}
 			onClick={() =>
 				modals.open({
 					id: 'edit-contact',

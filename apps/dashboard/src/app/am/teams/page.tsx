@@ -1,5 +1,6 @@
 import { Box, Button, Group, Title } from '@mantine/core';
 
+import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExternalLink } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -44,24 +45,26 @@ export default async function Page({
 	});
 
 	return (
-		<Box mx="md" maw="90vw">
-			<Group justify="space-between" w="100%" mt="xl" mb="md">
-				<Title order={1}>BuildTeams</Title>
-				<Group gap="xs">
-					<Button
-						variant="light"
-						color="cyan"
-						component={Link}
-						href={`https://buildtheearth.net/teams`}
-						target="_blank"
-						rightSection={<IconExternalLink size={14} />}
-					>
-						Open Page
-					</Button>
+		<Protection requiredRole="get-teams">
+			<Box mx="md" maw="90vw">
+				<Group justify="space-between" w="100%" mt="xl" mb="md">
+					<Title order={1}>BuildTeams</Title>
+					<Group gap="xs">
+						<Button
+							variant="light"
+							color="cyan"
+							component={Link}
+							href={`https://buildtheearth.net/teams`}
+							target="_blank"
+							rightSection={<IconExternalLink size={14} />}
+						>
+							Open Page
+						</Button>
+					</Group>
 				</Group>
-			</Group>
-			<SearchBuildTeams mb="md" maw="30%" />
-			<BuildTeamsDatatable buildTeams={buildTeams} count={buildTeamCount} />
-		</Box>
+				<SearchBuildTeams mb="md" maw="30%" />
+				<BuildTeamsDatatable buildTeams={buildTeams} count={buildTeamCount} />
+			</Box>
+		</Protection>
 	);
 }

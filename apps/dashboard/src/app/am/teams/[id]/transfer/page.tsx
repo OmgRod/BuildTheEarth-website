@@ -1,5 +1,6 @@
 import { Alert, Box, Title } from '@mantine/core';
 
+import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExclamationCircle } from '@tabler/icons-react';
 import TransferStepper from './interactivity';
@@ -25,11 +26,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 	}
 
 	return (
-		<Box mx="md" maw="90vw">
-			<Title order={1} mt="xl" mb="md">
-				Transfer and Delete {team?.name}
-			</Title>
-			<TransferStepper id={id} />
-		</Box>
+		<Protection requiredRole="transfer-team">
+			<Box mx="md" maw="90vw">
+				<Title order={1} mt="xl" mb="md">
+					Transfer and Delete {team?.name}
+				</Title>
+				<TransferStepper id={id} />
+			</Box>
+		</Protection>
 	);
 }

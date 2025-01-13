@@ -10,10 +10,11 @@ import { useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
 import { FAQQuestion } from '@repo/db';
 
-export function AddFaqQuestionButton() {
+export function AddFaqQuestionButton({ disabled }: { disabled?: boolean }) {
 	return (
 		<Button
 			color="green"
+			disabled={disabled}
 			leftSection={<IconPlus size={14} />}
 			onClick={() =>
 				modals.open({
@@ -30,13 +31,14 @@ export function AddFaqQuestionButton() {
 	);
 }
 
-export function EditFaqQuestionButton(props: FAQQuestion) {
+export function EditFaqQuestionButton({ disabled, ...props }: FAQQuestion & { disabled?: boolean }) {
 	return (
 		<ActionIcon
 			size="sm"
 			variant="subtle"
 			color="yellow"
 			aria-label="Edit Question"
+			disabled={disabled}
 			onClick={() =>
 				modals.open({
 					id: 'edit-faq-question',

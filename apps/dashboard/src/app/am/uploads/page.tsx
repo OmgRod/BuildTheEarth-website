@@ -1,7 +1,8 @@
 import { Box, Button, Group, Title } from '@mantine/core';
-import { IconChevronRight } from '@tabler/icons-react';
 
+import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
+import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import UploadsDatatable from './datatable';
 
@@ -29,19 +30,26 @@ export default async function Page({
 	});
 
 	return (
-		<Box mx="md" maw="90vw">
-			<Group justify="space-between" w="100%" mt="xl" mb="md">
-				<Title order={1}>Image Uploads</Title>
-				<Group gap="xs">
-					<Button color="cyan" component={Link} href="/am/uploads/check" rightSection={<IconChevronRight size={14} />}>
-						Check Uploads
-					</Button>
+		<Protection requiredRole="get-uploads">
+			<Box mx="md" maw="90vw">
+				<Group justify="space-between" w="100%" mt="xl" mb="md">
+					<Title order={1}>Image Uploads</Title>
+					<Group gap="xs">
+						<Button
+							color="cyan"
+							component={Link}
+							href="/am/uploads/check"
+							rightSection={<IconChevronRight size={14} />}
+						>
+							Check Uploads
+						</Button>
+					</Group>
 				</Group>
-			</Group>
-			<UploadsDatatable
-				uploads={uploads.map((u) => ({ ...u, createdAt: u.createdAt.toISOString() }))}
-				count={uploadCount}
-			/>
-		</Box>
+				<UploadsDatatable
+					uploads={uploads.map((u) => ({ ...u, createdAt: u.createdAt.toISOString() }))}
+					count={uploadCount}
+				/>
+			</Box>
+		</Protection>
 	);
 }

@@ -9,7 +9,7 @@ import { DataTable } from 'mantine-datatable';
 import Link from 'next/link';
 import { EditContactButton } from './interactivity';
 
-export default function ContactsDatatable({ contacts }: { contacts: Contact[] }) {
+export default function ContactsDatatable({ contacts, canEdit }: { contacts: Contact[]; canEdit?: boolean }) {
 	return (
 		<DataTable
 			columns={[
@@ -29,7 +29,7 @@ export default function ContactsDatatable({ contacts }: { contacts: Contact[] })
 					textAlign: 'right',
 					render: (contact: Contact) => (
 						<Group gap={4} justify="right" wrap="nowrap">
-							<EditContactButton {...contact} />
+							<EditContactButton {...contact} disabled={!canEdit} />
 							<ActionIcon
 								size="sm"
 								variant="subtle"

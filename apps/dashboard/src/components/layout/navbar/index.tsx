@@ -15,7 +15,7 @@ export interface Navbar {
 export default async function Navbar(props: Navbar) {
 	const allowedLinks = navLinks.filter(
 		(link) =>
-			!link.protected || props.roles.includes(typeof link.protected === 'boolean' ? 'bte_staff' : link.protected),
+			!link.permission || props.roles.includes(typeof link.permission === 'boolean' ? 'bte_staff' : link.permission),
 	);
 
 	const links = allowedLinks.map((item) =>
