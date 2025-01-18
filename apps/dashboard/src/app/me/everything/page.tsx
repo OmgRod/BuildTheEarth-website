@@ -4,7 +4,6 @@ import {
 	Button,
 	Card,
 	Flex,
-	rem,
 	Stack,
 	Tabs,
 	TabsList,
@@ -12,6 +11,7 @@ import {
 	TabsTab,
 	Text,
 	Title,
+	rem,
 } from '@mantine/core';
 import {
 	IconBrandMinecraft,
@@ -35,6 +35,7 @@ import { getUser } from '@/actions/getUser';
 import { WebsiteKeycloakUser } from '@/types/User';
 import { getSession } from '@/util/auth';
 import { authedFetcher } from '@/util/data';
+import { navLinks } from '@/util/links';
 import { CodeHighlight } from '@mantine/code-highlight';
 import Link from 'next/link';
 
@@ -213,6 +214,20 @@ export default async function Page() {
 						Session Data
 					</Text>
 					<CodeHighlight code={JSON.stringify(session, null, 2)} language="json" withCopyButton={false} />
+					<Text fw="bold" mt="sm">
+						Allowed Navigation Links
+					</Text>
+					<CodeHighlight
+						code={JSON.stringify(
+							navLinks
+								.filter((link) => !link.permission || session?.user.realm_access.roles.includes(link.permission))
+								.map((i) => i.link),
+							null,
+							2,
+						)}
+						language="json"
+						withCopyButton={false}
+					/>
 				</TabsPanel>
 			</Tabs>
 		</Box>

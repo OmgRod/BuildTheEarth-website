@@ -2,6 +2,7 @@
 
 import { AppShellNavbar, Divider, Stack } from '@mantine/core';
 
+import { hasRole } from '@/util/auth';
 import { navLinks } from '@/util/links';
 import NavLink from './NavLink';
 
@@ -13,9 +14,8 @@ export interface Navbar {
  * Main Navbar
  */
 export default async function Navbar(props: Navbar) {
-	const allowedLinks = navLinks.filter(
-		(link) =>
-			!link.permission || props.roles.includes(typeof link.permission === 'boolean' ? 'bte_staff' : link.permission),
+	const allowedLinks = navLinks.filter((link) =>
+		link.permission ? hasRole({ user: { realm_access: { roles: props.roles } } }, link.permission) : true,
 	);
 
 	const links = allowedLinks.map((item) =>
