@@ -12,7 +12,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 		where: { id },
 		include: { creator: { select: { id: true, username: true, ssoId: true } } },
 	});
-	console.log(team);
 
 	if (!team) {
 		return (

@@ -9,8 +9,11 @@ import {
 } from '@/types/Keycloak';
 import { capitalize, snakeCaseToStartCase } from '@/util/string';
 import {
+	ActionIcon,
+	Alert,
 	Badge,
 	Box,
+	Button,
 	Checkbox,
 	Code,
 	ColorSwatch,
@@ -18,21 +21,33 @@ import {
 	Grid,
 	GridCol,
 	Group,
+	Menu,
+	MenuDropdown,
+	MenuItem,
+	MenuLabel,
+	MenuTarget,
 	ScrollArea,
 	SimpleGrid,
 	Table,
 	Text,
 	Title,
 	Tooltip,
+	rem,
 } from '@mantine/core';
 import {
+	IconBrandDiscord,
 	IconCalendar,
 	IconClockExclamation,
 	IconDatabaseExclamation,
 	IconDevices,
+	IconDots,
+	IconExternalLink,
 	IconFileCheck,
 	IconFiles,
+	IconInfoCircle,
 	IconLink,
+	IconMail,
+	IconMessage2,
 	IconPolygon,
 	IconShieldLock,
 	IconSwipe,
@@ -79,7 +94,6 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace('/realms/website', '')}/admin/realms/website/users/${ssoId}/sessions`,
 		{ headers: { Authorization: `Bearer ${session?.accessToken}` } },
 	);
-
 	const websiteData = await prisma.user.findFirst({
 		where: { ssoId },
 		include: {
@@ -131,52 +145,139 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 	return (
 		<Protection requiredRole="get-users">
 			<Box mx="md" maw="90vw" mih="100vh">
-				<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap" mt="xl" mb="md">
-					<Title order={1}>{websiteData.username}</Title>
-					<Text c="dimmed" fz="sm">
-						({keycloakData.email})
-					</Text>
-				</Flex>
+				<Group justify="space-between" w="100%" mt="xl" mb="md">
+					<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap">
+						<Title order={1}>
+							{websiteData?.username ||
+								websiteData?.minecraft ||
+								(websiteData?.discordId
+									? `Discord User ${websiteData.discordId}`
+									: `Anonymus user ${websiteData.id.split('-')[0]}`)}
+						</Title>
+						<Text c="dimmed" fz="sm">
+							({keycloakData?.email || 'No Email set'})
+						</Text>
+					</Flex>
+					<Group gap="xs">
+						<Button
+							variant="light"
+							color="cyan"
+							component={Link}
+							href={`https://auth.buildtheearth.net/admin/master/console/#/website/users/${ssoId}/settings`}
+							target="_blank"
+							rightSection={<IconExternalLink size={14} />}
+						>
+							Edit in Keycloak
+						</Button>
+						<Menu>
+							<MenuTarget>
+								<ActionIcon size="lg" variant="subtle" color="gray" aria-label="More Actions">
+									<IconDots style={{ width: '70%', height: '70%' }} stroke={1.5} />
+								</ActionIcon>
+							</MenuTarget>
+							<MenuDropdown>
+								<MenuLabel>Message</MenuLabel>
+								<MenuItem
+									leftSection={<IconMessage2 style={{ width: rem(14), height: rem(14) }} />}
+									aria-label="Send Bot Message"
+									component={Link}
+									href={`/am/bot/msg?user=${websiteData?.discordId}`}
+									rel="noopener"
+									disabled={!websiteData?.discordId}
+								>
+									Send via Bot
+								</MenuItem>
+								<MenuItem
+									leftSection={<IconBrandDiscord style={{ width: rem(14), height: rem(14) }} />}
+									component={Link}
+									target="_blank"
+									href={`https://discord.com/channels/@me/${websiteData.discordId}`}
+								>
+									Open DMs
+								</MenuItem>
+								<MenuItem
+									leftSection={<IconMail style={{ width: rem(14), height: rem(14) }} />}
+									component={Link}
+									target="_blank"
+									href={`mailto:${keycloakData?.email}`}
+									disabled={!keycloakData?.email}
+								>
+									Send Email
+								</MenuItem>
+							</MenuDropdown>
+						</Menu>
+					</Group>
+				</Group>
 				<SimpleGrid cols={2}>
-					<TextCard title="Active Sessions" icon={IconDevices}>
-						<Table
-							highlightOnHover
-							data={{
-								head: ['#', 'Start', 'Clients', ''],
-								body: keycloakSessionsData.map((session) => [
-									<Code key={session.id}>{session.id.split('-')[0]}</Code>,
-									new Date(session.start).toLocaleString(),
-									<Group key={session.id} gap={4}>
-										{Object.values(session.clients).map((client) => (
-											<Badge key={client} variant="light">
-												{client}
-											</Badge>
-										))}
-									</Group>,
-								]),
-							}}
-						/>
-					</TextCard>
+					<Flex h="100%" mih={50} gap="md" justify="flex-start" align="flex-start" direction="column">
+						{ssoId.startsWith('o_') && (
+							<Alert
+								variant="light"
+								style={{ border: 'calc(0.0625rem* var(--mantine-scale)) solid var(--mantine-color-red-outline)' }}
+								color="red"
+								radius="md"
+								title="Unregistered User"
+								icon={<IconInfoCircle />}
+							>
+								This user did not sign in to the BuildTheEarth Website or MyBuildTheEarth yet. His account was created
+								in reference to the discord account of @{websiteData?.discordId || '00000'} and will be linked once this
+								discord account logs in. Till then, only limited information is available.
+							</Alert>
+						)}
+						<TextCard title="Active Sessions" icon={IconDevices} style={{ width: '100%', flexGrow: 1 }}>
+							<Table
+								highlightOnHover
+								data={{
+									head: ['#', 'Start', 'Clients', ''],
+									body: Array.isArray(keycloakSessionsData)
+										? keycloakSessionsData?.map((session) => [
+												<Code key={session.id}>{session.id.split('-')[0]}</Code>,
+												new Date(session.start).toLocaleString(),
+												<Group key={session.id} gap={4}>
+													{Object.values(session.clients).map((client) => (
+														<Badge key={client} variant="light">
+															{client}
+														</Badge>
+													))}
+												</Group>,
+											])
+										: [],
+								}}
+							/>
+						</TextCard>
+					</Flex>
 					<Grid h="100%" styles={{ inner: { height: 'calc(100% + var(--mantine-spacing-md))' } }}>
 						<GridCol span={6}>
-							<TextCard title="Account Security" icon={IconShieldLock} subtitle="Account's Security Status">
+							<TextCard
+								title="Account Security"
+								icon={IconShieldLock}
+								subtitle="Account's Security Status"
+								style={{ height: '100%' }}
+							>
 								<Group gap={6}>
-									<Tooltip label={'Account enabled? ' + (keycloakData.enabled ? 'Yes' : 'No')}>
+									<Tooltip label={'Account enabled? ' + (keycloakData?.enabled ? 'Yes' : 'No')}>
 										<ColorSwatch
-											color={keycloakData.enabled ? 'var(--mantine-color-green-7)' : 'var(--mantine-color-red-7)'}
+											color={keycloakData?.enabled ? 'var(--mantine-color-green-7)' : 'var(--mantine-color-red-7)'}
 											radius="sm"
 											size="24px"
 										/>
 									</Tooltip>
 									<Tooltip
 										label={
-											'Federated Identities linked? ' + (keycloakData.federatedIdentities.length > 0 ? 'Yes' : 'No')
+											'Federated Identities linked? ' +
+											(Array.isArray(keycloakData?.federatedIdentities)
+												? keycloakData.federatedIdentities.length > 0
+													? 'Yes'
+													: 'No'
+												: 'No')
 										}
 									>
 										<ColorSwatch
 											color={
-												keycloakData.federatedIdentities.length > 0
-													? 'var(--mantine-color-green-7)'
+												Array.isArray(keycloakData?.federatedIdentities)
+													? keycloakData?.federatedIdentities?.length > 0
+														? 'var(--mantine-color-green-7)'
+														: 'var(--mantine-color-red-7)'
 													: 'var(--mantine-color-red-7)'
 											}
 											radius="sm"
@@ -186,13 +287,13 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 									<Tooltip
 										label={
 											'Email verified? ' +
-											(keycloakData.email ? (keycloakData.emailVerified ? 'Yes' : 'No') : 'No Email set')
+											(keycloakData?.email ? (keycloakData?.emailVerified ? 'Yes' : 'No') : 'No Email set')
 										}
 									>
 										<ColorSwatch
 											color={
-												keycloakData.email
-													? keycloakData.emailVerified
+												keycloakData?.email
+													? keycloakData?.emailVerified
 														? 'var(--mantine-color-green-7)'
 														: 'var(--mantine-color-orange-7)'
 													: 'var(--mantine-color-red-7)'
@@ -201,11 +302,22 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 											size="24px"
 										/>
 									</Tooltip>
-									<Tooltip label={'Credentials set? ' + (keycloakCredentialsData.length > 0 ? 'Yes' : 'No')}>
+									<Tooltip
+										label={
+											'Credentials set? ' +
+											(Array.isArray(keycloakCredentialsData)
+												? keycloakCredentialsData.length > 0
+													? 'Yes'
+													: 'No'
+												: 'No')
+										}
+									>
 										<ColorSwatch
 											color={
-												keycloakCredentialsData.length > 0
-													? 'var(--mantine-color-green-7)'
+												Array.isArray(keycloakCredentialsData)
+													? keycloakCredentialsData.length > 0
+														? 'var(--mantine-color-green-7)'
+														: 'var(--mantine-color-red-7)'
 													: 'var(--mantine-color-red-7)'
 											}
 											radius="sm"
@@ -220,14 +332,19 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								title="Pending Actions"
 								icon={IconClockExclamation}
 								subtitle={
-									keycloakData.requiredActions.length > 1
-										? `And ${keycloakData.requiredActions.length - 1} more...`
-										: 'Required Actions can be added in Keycloak'
+									Array.isArray(keycloakData?.requiredActions)
+										? keycloakData.requiredActions.length > 1
+											? `And ${keycloakData.requiredActions.length - 1} more...`
+											: 'Required Actions can be added in Keycloak'
+										: ''
 								}
+								style={{ height: '100%' }}
 							>
-								{keycloakData.requiredActions.length > 0
-									? snakeCaseToStartCase(keycloakData.requiredActions[0])
-									: 'No Pending Actions'}
+								{Array.isArray(keycloakData?.requiredActions)
+									? keycloakData.requiredActions.length > 0
+										? snakeCaseToStartCase(keycloakData.requiredActions[0])
+										: 'No Pending Actions'
+									: 'Sign into SSO'}
 							</TextCard>
 						</GridCol>
 						<GridCol span={12}>
@@ -236,11 +353,13 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 									highlightOnHover
 									data={{
 										head: ['Provider', 'User #', 'Username'],
-										body: keycloakData.federatedIdentities.map((idp) => [
-											capitalize(idp.identityProvider),
-											idp.userId,
-											idp.userName.replace('#0', ''),
-										]),
+										body: Array.isArray(keycloakData?.federatedIdentities)
+											? keycloakData.federatedIdentities.map((idp) => [
+													capitalize(idp.identityProvider),
+													idp.userId,
+													idp.userName.replace('#0', ''),
+												])
+											: [],
 									}}
 								/>
 							</TextCard>
@@ -250,9 +369,9 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								isText
 								title="External Consents"
 								icon={IconSwipe}
-								subtitle={`${keycloakConsentsData.length > 1 ? 'have' : 'has'} been granted from the User's Account`}
+								subtitle={`${Array.isArray(keycloakConsentsData) && keycloakConsentsData?.length > 1 ? 'have' : 'has'} been granted from the User's Account`}
 							>
-								{keycloakConsentsData.length} Consent{keycloakConsentsData.length > 1 ? 's' : ''}
+								{keycloakConsentsData?.length || 0} Consent{keycloakConsentsData?.length > 1 ? 's' : ''}
 							</TextCard>
 						</GridCol>
 						<GridCol span={6}>
@@ -260,9 +379,10 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								isText
 								title="Account Age"
 								icon={IconCalendar}
-								subtitle={'or since ' + new Date(keycloakData.createdTimestamp).toLocaleDateString()}
+								subtitle={'or since ' + new Date(keycloakData?.createdTimestamp || new Date()).toLocaleDateString()}
 							>
-								{moment().diff(new Date(keycloakData.createdTimestamp), 'days')} Days
+								{keycloakData?.createdTimestamp ? moment().diff(new Date(keycloakData?.createdTimestamp), 'days') : 0}{' '}
+								Days
 							</TextCard>
 						</GridCol>
 					</Grid>
@@ -329,16 +449,26 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 									highlightOnHover
 									data={{
 										head: ['BuildTeam', 'Applications'],
-										body: websiteData.createdBuildTeams.concat(websiteData.joinedBuildTeams).map((team) => [
-											<BuildTeamDisplay team={team} key={team.slug} />,
-											websiteData.applications
-												.filter((app) => app.buildteam.slug === team.slug)
-												.map((app) => (
-													<Badge key={app.id} variant="light" component={Link} href={`/am/apps/${app.id}`}>
-														{app.id.split('-')[0]}
-													</Badge>
-												)),
-										]),
+										body: Array.from(
+											new Set(
+												websiteData.createdBuildTeams.concat(websiteData.joinedBuildTeams).map((team) => team.slug),
+											),
+										).map((slug) => {
+											const team = websiteData.createdBuildTeams
+												.concat(websiteData.joinedBuildTeams)
+												.find((t) => t.slug === slug);
+											if (!team) return [];
+											return [
+												<BuildTeamDisplay team={team} key={team.slug} />,
+												websiteData.applications
+													.filter((app) => app.buildteam.slug === team.slug)
+													.map((app) => (
+														<Badge key={app.id} variant="light" mr={4}>
+															{app.id.split('-')[0]}
+														</Badge>
+													)),
+											];
+										}),
 									}}
 								/>
 							</ScrollArea>
@@ -351,32 +481,34 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 									highlightOnHover
 									data={{
 										head: ['#', 'Created At', 'Status', 'BuildTeam', 'Trial', 'Reviewer'],
-										body: websiteData.applications.map((app) => [
-											<Code key={app.id}>{app.id.split('-')[0]}</Code>,
-											new Date(app.createdAt).toLocaleString(),
-											<Badge
-												key={app.id}
-												variant="dot"
-												color={
-													app.status == ApplicationStatus.ACCEPTED
-														? 'green'
-														: app.status == ApplicationStatus.DECLINED
-															? 'red'
-															: 'blue'
-												}
-											>
-												{app.status.toString()}
-											</Badge>,
-											<BuildTeamDisplay team={app.buildteam} key={app.buildteam.slug} />,
-											<Checkbox readOnly key={app.id} checked={app.trial} color="green" />,
-											app.reviewer ? (
-												<Anchor href={`/am/users/${app.reviewer.ssoId}`} key={app.id} fz="sm" c="gray">
-													{app.reviewer.username}
-												</Anchor>
-											) : (
-												'-/-'
-											),
-										]),
+										body: websiteData.applications
+											.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+											.map((app) => [
+												<Code key={app.id}>{app.id.split('-')[0]}</Code>,
+												new Date(app.createdAt).toLocaleString(),
+												<Badge
+													key={app.id}
+													variant="dot"
+													color={
+														app.status == ApplicationStatus.ACCEPTED
+															? 'green'
+															: app.status == ApplicationStatus.DECLINED
+																? 'red'
+																: 'blue'
+													}
+												>
+													{app.status.toString()}
+												</Badge>,
+												<BuildTeamDisplay team={app.buildteam} key={app.buildteam.slug} />,
+												<Checkbox readOnly key={app.id} checked={app.trial} color="green" />,
+												app.reviewer ? (
+													<Anchor href={`/am/users/${app.reviewer.ssoId}`} key={app.id} fz="sm" c="gray">
+														{app.reviewer.username}
+													</Anchor>
+												) : (
+													'-/-'
+												),
+											]),
 									}}
 								/>
 							</ScrollArea>
@@ -422,18 +554,13 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 					</GridCol>
 					<GridCol span={4}>
 						<TextCard
-							title="Internal Roles"
+							isText
+							title="Internal Groups"
 							icon={IconDatabaseExclamation}
 							subtitle={`these roles manage access to internal tools`}
 							style={{ height: '100%' }}
 						>
-							{keycloakGroupsData.length > 0
-								? keycloakGroupsData.map((group) => (
-										<Badge key={group.id} variant="light" color="grape">
-											{group.name.replace('staff_', '')}
-										</Badge>
-									))
-								: '-/-'}
+							<PluralSingular count={keycloakGroupsData.length} singular="Group" />
 						</TextCard>
 					</GridCol>
 					<GridCol span={12}>

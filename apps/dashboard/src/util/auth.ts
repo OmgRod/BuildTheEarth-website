@@ -121,6 +121,5 @@ export function hasRole(
 	session: Session | null | undefined | { user?: { realm_access?: { roles: string[] } } },
 	role: string,
 ) {
-	console.log(role);
 	return session?.user?.realm_access?.roles?.includes(role);
 }
