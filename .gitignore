@@ -30,3 +30,4 @@ TODO.md
 **/*.js
 **/logs/*.log
 **/*.tsbuildinfo
+.backup
