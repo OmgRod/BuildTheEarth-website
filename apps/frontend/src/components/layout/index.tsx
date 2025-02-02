@@ -1,6 +1,7 @@
 'use server';
 
 import { Box } from '@mantine/core';
+import Footer from './footer';
 import Header from './header';
 
 export interface LayoutProps {
@@ -12,10 +13,10 @@ export interface LayoutProps {
  */
 export default async function AppLayout(props: LayoutProps) {
 	return (
-		<Box style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+		<Box style={{ maxWidth: '100vw', overflowX: 'hidden', padding: 0, margin: 0 }}>
 			<Header />
-
-			<div>{props.children}</div>
+			<div style={{ width: '100%', padding: 0 }}>{props.children}</div>
+			<Footer />
 		</Box>
 	);
 }

@@ -12,6 +12,7 @@ import {
 } from '@mantine/core';
 import {
 	IconChevronDown,
+	IconChevronRight,
 	IconLogout,
 	IconMap,
 	IconMoonStars,
@@ -20,7 +21,6 @@ import {
 	IconWorld,
 } from '@tabler/icons-react';
 import { signOut, useSession } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
 
 import Link from 'next/link';
 
@@ -32,25 +32,30 @@ export default function HeaderProfile({
 	avatarClassName?: string;
 }) {
 	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-	const pathname = usePathname();
 	const session = useSession();
 
 	if (session.status === 'loading')
 		return (
-			<Button
-				variant="transparent"
-				color="gray"
-				leftSection={
-					<Skeleton>
+			<Skeleton width={150}>
+				<Button
+					variant="transparent"
+					color="gray"
+					leftSection={
 						<Avatar color="initials" name={'-'} size="sm" className={avatarClassName} variant="filled">
 							-
 						</Avatar>
-					</Skeleton>
-				}
-				rightSection={<IconChevronDown size={12} />}
-				className={className}
-			>
-				-.-.-.-.-.
+					}
+					rightSection={<IconChevronDown size={12} />}
+					className={className}
+				>
+					-.-.-.-.-.
+				</Button>
+			</Skeleton>
+		);
+	if (session.status === 'unauthenticated')
+		return (
+			<Button variant="filled" color="buildtheearth" rightSection={<IconChevronRight size={12} />}>
+				Get Started
 			</Button>
 		);
 	if (!session.data) return null;

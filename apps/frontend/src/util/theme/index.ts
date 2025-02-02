@@ -56,5 +56,5 @@ export const theme = createTheme({
 	},
 
 	autoContrast: true,
-	luminanceThreshold: 0.33,
+	luminanceThreshold: 0.35,
 });

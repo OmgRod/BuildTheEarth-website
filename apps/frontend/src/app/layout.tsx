@@ -15,6 +15,7 @@ import AuthProvider from '@/components/AuthProvider';
 import SWRSetup from '@/components/core/SWRSetup';
 import AppLayout from '@/components/layout';
 import { getSession } from '@/util/auth';
+import { theme } from '@/util/theme';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { Inter } from 'next/font/google';
@@ -41,7 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 				<ColorSchemeScript />
 			</head>
 			<body>
-				<MantineProvider>
+				<MantineProvider theme={theme}>
 					<AuthProvider session={session}>
 						<SWRSetup>
 							<ModalsProvider>

@@ -2,7 +2,7 @@
 
 import { Container, Group, Text } from '@mantine/core';
 
-import classes from '@/styles/Header.module.css';
+import classes from '@/styles/layout/Header.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import HeaderProfile from './HeaderProfile';
