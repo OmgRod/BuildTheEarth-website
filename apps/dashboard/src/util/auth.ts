@@ -118,7 +118,7 @@ export const getSession = () => getServerSession(authOptions);
  * @returns If the User has the required role
  */
 export function hasRole(
-	session: Session | null | undefined | { user?: { realm_access?: { roles: string[] } } },
+	session: Session | null | undefined | { user: { realm_access?: { roles: string[] } } },
 	role: string,
 ) {
 	return session?.user?.realm_access?.roles?.includes(role);
