@@ -24,7 +24,7 @@ RUN yarn install
 COPY --from=builder /app/out/full/ .
 
 RUN ls -la
-RUN cat .env
+RUN cat apps/dashboard/.env
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
