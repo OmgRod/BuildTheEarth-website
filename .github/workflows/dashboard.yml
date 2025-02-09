@@ -38,8 +38,6 @@ jobs:
           touch apps/dashboard/.env
           echo KEYCLOAK_URL="https://auth.buildtheearth.net/realms/website" >> apps/dashboard/.env
           echo NEXT_PUBLIC_MAPBOX_TOKEN="${{ secrets.MAPBOX_TOKEN }}" >> apps/dashboard/.env
-      - name: Debug
-        run: cat apps/dashboard/.env
       - name: Build the Docker image
         run: docker build . --file apps/dashboard/Dockerfile --tag ghcr.io/buildtheearth/dashboard-website:$(git rev-parse --short HEAD) --tag ghcr.io/buildtheearth/dashboard-website:latest
       - name: Docker push tag
