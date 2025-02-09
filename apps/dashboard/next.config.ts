@@ -2,8 +2,8 @@ import type { NextConfig } from 'next';
 import path from 'path';
 
 const nextConfig: NextConfig = {
-	experimental: {
-		turbo: {},
+	env: {
+		NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
 	},
 	// transpilePackages: [
 	// 	'@tiptap/react',
