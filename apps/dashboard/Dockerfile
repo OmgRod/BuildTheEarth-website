@@ -23,6 +23,9 @@ RUN yarn install
 # Build the project
 COPY --from=builder /app/out/full/ .
 
+RUN ls -la
+RUN cat .env
+
 ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN yarn turbo run build --filter=dashboard...
