@@ -228,8 +228,6 @@ export default async function Page() {
 						language="json"
 						withCopyButton={false}
 					/>
-					<pre>{JSON.stringify(process.env, null, 2)}</pre>
-					<pre>{JSON.stringify(process.env.NEXT_PUBLIC_MAPBOX_TOKEN, null, 2)}</pre>
 				</TabsPanel>
 			</Tabs>
 		</Box>
