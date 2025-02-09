@@ -22,13 +22,14 @@ RUN yarn install
 
 # Build the project
 COPY --from=builder /app/out/full/ .
+COPY --from=builder /app/apps/dashboard/.env ./apps/dashboard/.env
+
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN ls -la
 RUN ls apps -la
 RUN ls apps/dashboard -la
 RUN cat apps/dashboard/.env
-
-ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN yarn turbo run build --filter=dashboard...
 
