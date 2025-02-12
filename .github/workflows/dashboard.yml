@@ -38,6 +38,9 @@ jobs:
           touch apps/dashboard/.env
           echo KEYCLOAK_URL="https://auth.buildtheearth.net/realms/website" >> apps/dashboard/.env
           echo NEXT_PUBLIC_MAPBOX_TOKEN="${{ secrets.MAPBOX_TOKEN }}" >> apps/dashboard/.env
+          echo NEXT_PUBLIC_API_URL="https://api.buildtheearth.net/api/v1" >> apps/dashboard/.env
+          echo NEXT_PUBLIC_SMYLER_API_URL="https://smybteapi.buildtheearth.net" >> apps/dashboard/.env
+          echo NEXT_PUBLIC_FRONTEND_URL="https://buildtheearth.net" >> apps/dashboard/.env
       - name: Build the Docker image
         run: docker build . --file apps/dashboard/Dockerfile --tag ghcr.io/buildtheearth/dashboard-website:$(git rev-parse --short HEAD) --tag ghcr.io/buildtheearth/dashboard-website:latest
       - name: Docker push tag
