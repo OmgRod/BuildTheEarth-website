@@ -1,11 +1,11 @@
 'use server';
 
-import { Container, Group, Text } from '@mantine/core';
+import { Button, Container, Group, Text } from '@mantine/core';
 
 import classes from '@/styles/layout/Header.module.css';
+import { IconChevronRight } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import HeaderProfile from './HeaderProfile';
 
 const links = [
 	{ link: '/gallery', label: 'Gallery' },
@@ -50,7 +50,19 @@ export async function Header() {
 				<Group gap={5} visibleFrom="xs">
 					{items}
 				</Group>
-				<HeaderProfile className={classes.link} />
+				<Group>
+					<Button
+						variant="filled"
+						color="buildtheearth"
+						rightSection={<IconChevronRight size={12} />}
+						className={classes.link}
+					>
+						Get Started
+					</Button>
+					<Button variant="outline" className={classes.link}>
+						Log In
+					</Button>
+				</Group>
 			</Container>
 		</header>
 	);

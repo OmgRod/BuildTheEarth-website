@@ -11,10 +11,8 @@ import 'mantine-datatable/styles.layer.css';
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 
-import AuthProvider from '@/components/AuthProvider';
 import SWRSetup from '@/components/core/SWRSetup';
 import AppLayout from '@/components/layout';
-import { getSession } from '@/util/auth';
 import { theme } from '@/util/theme';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
@@ -34,8 +32,6 @@ const minecraftFont = localFont({
 });
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-	const session = await getSession();
-
 	return (
 		<html lang="en" className={`${interFont.variable} ${minecraftFont.variable}`} suppressHydrationWarning>
 			<head>
@@ -43,14 +39,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 			</head>
 			<body>
 				<MantineProvider theme={theme}>
-					<AuthProvider session={session}>
-						<SWRSetup>
-							<ModalsProvider>
-								<Notifications limit={3} />
-								<AppLayout>{children}</AppLayout>
-							</ModalsProvider>
-						</SWRSetup>
-					</AuthProvider>
+					<SWRSetup>
+						<ModalsProvider>
+							<Notifications limit={3} />
+							<AppLayout>{children}</AppLayout>
+						</ModalsProvider>
+					</SWRSetup>
 				</MantineProvider>
 			</body>
 		</html>

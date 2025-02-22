@@ -49,7 +49,6 @@
 		"moment": "^2.30.1",
 		"moment-timezone": "^0.5.45",
 		"next": "15.0.2",
-		"next-auth": "^4.24.7",
 		"next-transpile-modules": "^10.0.1",
 		"react": "18",
 		"react-dom": "18",

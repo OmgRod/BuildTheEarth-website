@@ -1,3 +1,0 @@
-export { default } from 'next-auth/middleware';
-
-export const config = { matcher: ['/me/:path*', '/teams/:path/manage/:path*'] };

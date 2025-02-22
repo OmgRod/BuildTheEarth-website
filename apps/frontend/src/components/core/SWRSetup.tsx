@@ -1,21 +1,14 @@
 'use client';
 
-import { LoadingOverlay } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { Session } from 'next-auth';
-import { useSession } from 'next-auth/react';
 import { SWRConfig } from 'swr';
 
 export default function SWRSetup({ children }: any) {
-	const session = useSession();
-	if (session.status == 'loading') {
-		return <LoadingOverlay visible />;
-	}
 	return (
 		<SWRConfig
 			value={{
 				// refreshInterval: 0,
-				fetcher: swrFetcher(session),
+				fetcher: swrFetcher(),
 				shouldRetryOnError: true,
 				errorRetryInterval: 1000,
 				errorRetryCount: 2,
@@ -43,16 +36,14 @@ export default function SWRSetup({ children }: any) {
 
 /**
  * Generates a fetcher function for use in a SWR Config with direct support for BTE Access Tokens
- * @param session nextauth session for access token grants
  * @returns a fetch function to use in a SWR Config
  */
-export const swrFetcher = (session?: { data: Session | null }) => {
+export const swrFetcher = () => {
 	return async (resource: any, init: any) => {
 		if (!resource.includes('/undefined') && !resource.includes('/null')) {
 			const res = await fetch(process.env.NEXT_PUBLIC_API_URL + resource, {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
-					Authorization: session?.data?.accessToken ? 'Bearer ' + session?.data?.accessToken : undefined,
 					...init?.headers,
 				},
 				...init,
