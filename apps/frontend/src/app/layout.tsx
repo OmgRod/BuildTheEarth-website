@@ -1,4 +1,5 @@
 import '@/styles/global.css';
+import '@mantine/carousel/styles.css';
 import '@mantine/charts/styles.layer.css';
 import '@mantine/code-highlight/styles.layer.css';
 import '@mantine/core/styles.layer.css';
