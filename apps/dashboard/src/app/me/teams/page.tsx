@@ -25,9 +25,6 @@ export default async function Page() {
 		},
 	});
 
-	// 30 sec delay
-	await new Promise((resolve) => setTimeout(resolve, 5000));
-
 	return (
 		<Box ml="md" maw="50vw">
 			<Title order={1} mt="xl" mb="md">
