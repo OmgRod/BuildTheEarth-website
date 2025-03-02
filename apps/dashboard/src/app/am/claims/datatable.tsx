@@ -1,11 +1,13 @@
 'use client';
 
-import { ActionIcon, Code, Group, Menu, MenuDropdown, MenuItem, MenuTarget, rem } from '@mantine/core';
-import { IconDots, IconExternalLink, IconEye } from '@tabler/icons-react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ActionIcon, Code, Group, Menu, MenuDropdown, MenuItem, MenuTarget, rem, Text } from '@mantine/core';
+import { IconDots, IconExternalLink, IconEye, IconTrash } from '@tabler/icons-react';
+import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import { adminDeleteClaim } from '@/actions/claims';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { UserDisplay } from '@/components/data/User';
+import { openConfirmModal } from '@mantine/modals';
 import { Claim } from '@repo/db';
 import { DataTable } from 'mantine-datatable';
 import Link from 'next/link';
@@ -89,6 +91,32 @@ export default function ClaimsDatatable({ claims, count }: { claims: Claim[]; co
 										href={`https://buildtheearth.net/map?claim=${claim.id}`}
 									>
 										Open on Website
+									</MenuItem>
+									<MenuItem
+										leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
+										color="red"
+										aria-label="Delete Claim"
+										rel="noopener"
+										onClick={() =>
+											openConfirmModal({
+												title: 'Delete Claim',
+												centered: true,
+												confirmProps: { color: 'red' },
+												children: (
+													<Text size="sm">
+														Are you sure you want to delete this claim? This action is irreversible and will cause data
+														mutations.
+													</Text>
+												),
+												labels: { confirm: 'Delete', cancel: 'Cancel' },
+												onConfirm: () => {
+													adminDeleteClaim({ claimId: claim.id });
+													redirect('/am/claims');
+												},
+											})
+										}
+									>
+										Delete Claim
 									</MenuItem>
 								</MenuDropdown>
 							</Menu>

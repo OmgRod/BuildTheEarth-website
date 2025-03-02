@@ -1,6 +1,6 @@
 'use client';
 
-import { adminChangeTeam } from '@/actions/claims';
+import { adminChangeTeam, adminDeleteClaim } from '@/actions/claims';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { BuildTeamSelect } from '@/components/input/BuildTeamSelect';
 import { useFormAction } from '@/hooks/useFormAction';
@@ -15,12 +15,14 @@ import {
 	MenuTarget,
 	Paper,
 	rem,
+	Text,
 	Title,
 } from '@mantine/core';
-import { modals } from '@mantine/modals';
+import { modals, openConfirmModal } from '@mantine/modals';
 import { BuildTeam, Claim } from '@repo/db';
-import { IconDots, IconTransfer } from '@tabler/icons-react';
+import { IconDots, IconTransfer, IconTrash } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } }) {
@@ -56,6 +58,31 @@ export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } })
 					}}
 				>
 					Change BuildTeam
+				</MenuItem>
+				<MenuItem
+					leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
+					color="red"
+					aria-label="Delete Claim"
+					rel="noopener"
+					onClick={() =>
+						openConfirmModal({
+							title: 'Delete Claim',
+							centered: true,
+							confirmProps: { color: 'red' },
+							children: (
+								<Text size="sm">
+									Are you sure you want to delete this claim? This action is irreversible and will cause data mutations.
+								</Text>
+							),
+							labels: { confirm: 'Delete', cancel: 'Cancel' },
+							onConfirm: () => {
+								adminDeleteClaim({ claimId: claim.id });
+								redirect('/am/claims');
+							},
+						})
+					}
+				>
+					Delete Claim
 				</MenuItem>
 			</MenuDropdown>
 		</Menu>

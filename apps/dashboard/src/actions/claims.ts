@@ -16,3 +16,14 @@ export const adminChangeTeam = async (data: { claimId: string; teamId: string })
 	revalidatePath(`/am/claims/${claim.id}`);
 	return claim;
 };
+
+export const adminDeleteClaim = async (data: { claimId: string }) => {
+	const claim = await prisma.claim.delete({
+		where: {
+			id: data.claimId,
+		},
+	});
+
+	revalidatePath(`/am/claims/${claim.id}`);
+	return claim;
+};
