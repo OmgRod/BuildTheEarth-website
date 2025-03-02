@@ -8,6 +8,7 @@ import {
 	Menu,
 	MenuDropdown,
 	MenuItem,
+	MenuLabel,
 	MenuTarget,
 	Text,
 	Tooltip,
@@ -137,6 +138,7 @@ export default function BuildTeamsDatatable({
 									>
 										Open on Website
 									</MenuItem>
+									<MenuLabel>Danger Zone</MenuLabel>
 									<MenuItem
 										leftSection={<IconTransfer style={{ width: rem(14), height: rem(14) }} />}
 										color="red"

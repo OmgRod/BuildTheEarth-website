@@ -42,7 +42,6 @@ export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } })
 				</ActionIcon>
 			</MenuTarget>
 			<MenuDropdown>
-				<MenuLabel>Edit</MenuLabel>
 				<MenuItem
 					leftSection={<IconTransfer style={{ width: rem(14), height: rem(14) }} />}
 					aria-label="Transfer Claim to other buildteam"
@@ -59,6 +58,7 @@ export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } })
 				>
 					Change BuildTeam
 				</MenuItem>
+				<MenuLabel>Danger Zone</MenuLabel>
 				<MenuItem
 					leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
 					color="red"
