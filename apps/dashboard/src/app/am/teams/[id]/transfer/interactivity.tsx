@@ -19,14 +19,14 @@ import {
 } from '@tabler/icons-react';
 import { ForwardRefExoticComponent, RefAttributes, useActionState, useState } from 'react';
 
-import { transferTeam } from '@/app/actions';
+import { adminTransferTeam } from '@/actions/buildTeams';
 import { BuildTeamSelect } from '@/components/input/BuildTeamSelect';
 import { openConfirmModal } from '@mantine/modals';
 
 export default function TransferStepper({ id }: { id: string }) {
 	const [activeStep, setActiveStep] = useState(0);
 	const [destinationTeam, setDestinationTeam] = useState<string | null>(null);
-	const [curentState, transferTeamAction, isLoading] = useActionState(transferTeam, {});
+	const [curentState, transferTeamAction, isLoading] = useActionState(adminTransferTeam, {});
 
 	const steps: {
 		id: string;

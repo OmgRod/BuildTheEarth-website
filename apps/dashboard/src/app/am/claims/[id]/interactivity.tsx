@@ -1,6 +1,6 @@
 'use client';
 
-import { changeTeam } from '@/app/actions';
+import { adminChangeTeam } from '@/actions/claims';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { BuildTeamSelect } from '@/components/input/BuildTeamSelect';
 import { useFormAction } from '@/hooks/useFormAction';
@@ -63,7 +63,7 @@ export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } })
 }
 
 export function ChangeBuildTeamModal({ claim }: { claim: Claim & { buildTeam: BuildTeam } }) {
-	const [changeTeamAction, isPending] = useFormAction(changeTeam);
+	const [changeTeamAction, isPending] = useFormAction(adminChangeTeam);
 	const [destinationTeam, setDestinationTeam] = useState<string | null>(null);
 	return (
 		<>
