@@ -3,6 +3,7 @@ import { TextCard } from '@/components/core/card/TextCard';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { UserDisplay } from '@/components/data/User';
 import { Protection } from '@/components/Protection';
+import { getReviewActivityScore } from '@/util/application/reviewActivity';
 import { toHumanDateTime } from '@/util/date';
 import prisma from '@/util/db';
 import { applicationStatusToColor } from '@/util/transformers';
@@ -16,6 +17,7 @@ import {
 	Group,
 	Image,
 	NumberFormatter,
+	Rating,
 	RingProgress,
 	ScrollAreaAutosize,
 	SimpleGrid,
@@ -31,10 +33,10 @@ import {
 	IconCalendar,
 	IconCamera,
 	IconChecklist,
-	IconChecks,
 	IconClock,
 	IconClockCheck,
 	IconClockExclamation,
+	IconClockHour11,
 	IconExternalLink,
 	IconForms,
 	IconInfoSmall,
@@ -44,7 +46,6 @@ import {
 	IconUser,
 	IconUsers,
 } from '@tabler/icons-react';
-import moment from 'moment';
 import Link from 'next/link';
 import { EditMenu } from './interactivity';
 
@@ -81,32 +82,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 		by: ['status'],
 		_count: true,
 	});
-	const teamAveragePending =
-		((teamApplicationsByStatus.find((a) => a.status == 'SEND')?._count || 0) /
-			teamApplicationsByStatus.reduce((total, a) => total + a._count, 0)) *
-		100;
-
-	const globalApplicationsByStatus = await prisma.application.groupBy({
-		by: ['status'],
-		_count: true,
-	});
-	const globalAveragePending =
-		((globalApplicationsByStatus.find((a) => a.status == 'SEND')?._count || 0) /
-			globalApplicationsByStatus.reduce((total, a) => total + a._count, 0)) *
-		100;
-
 	const oldestApplication = await prisma.application.findFirst({
 		where: { buildteamId: id, status: 'SEND' },
 		orderBy: { createdAt: 'asc' },
 		take: 1,
 		select: { createdAt: true },
 	});
-	const newestApplication = await prisma.application.findFirst({
-		where: { buildteamId: id, status: 'SEND' },
-		orderBy: { createdAt: 'desc' },
-		take: 1,
-		select: { createdAt: true },
-	});
+	const reviewActivity = await getReviewActivityScore(id);
 
 	return (
 		<Protection requiredRole="get-teams">
@@ -201,8 +183,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 							<Text fz="24px" fw={700} lh="1" pb={0}>
 								<NumberFormatter value={team._count.Application} thousandSeparator suffix=" Applications" />
 							</Text>
-							{teamAveragePending > globalAveragePending ? (
-								<Tooltip label="The BuildTeam seems to have a high number of pending applications.">
+							{reviewActivity.par > 30 ? (
+								<Tooltip label="The BuildTeam seems to lack behind on reviewing applications.">
 									<ThemeIcon color="red" size="sm" variant="outline" style={{ border: 'none' }}>
 										<IconAlertCircle style={{ width: '70%', height: '70%' }} />
 									</ThemeIcon>
@@ -258,28 +240,20 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 					<GridCol span={9}>
 						<Grid>
 							<GridCol span={12}>
-								{globalAveragePending - teamAveragePending < -5 ? (
+								{reviewActivity.ras < 2 ? (
 									<Alert
 										variant="light"
 										style={{ border: 'calc(0.0625rem* var(--mantine-scale)) solid var(--mantine-color-red-outline)' }}
 										color="red"
 										radius="md"
-										title="High number of pending applications"
+										title="Low review activity"
 										icon={<IconClockExclamation />}
 									>
-										About <NumberFormatter value={teamAveragePending} decimalScale={2} suffix="%" /> of applications to
-										this BuildTeam are currently pending review. This number is higher than the global average of{' '}
-										<NumberFormatter value={globalAveragePending} decimalScale={2} suffix="%" />. Please get in contact
-										with the staff team of {team.name} to solve this issue as fast as possible. Check the other
-										statistics on this page for potential reasons. Current deficit:{' '}
-										<NumberFormatter
-											value={(globalAveragePending - teamAveragePending) * -1}
-											decimalScale={1}
-											suffix="%"
-										/>
+										This BuildTeam&apos;s review activity score is critically low. This indicates significant problems
+										with the review process, likely due to many pending applications or long review times. Please get in
+										contact with the BuildTeam to resolve this issue.
 									</Alert>
-								) : globalAveragePending - teamAveragePending < 0 ||
-								  (teamApplicationsByStatus.find((a) => a.status == 'SEND')?._count || 0) > 10 ? (
+								) : reviewActivity.ras < 3.75 ? (
 									<Alert
 										variant="light"
 										style={{
@@ -287,27 +261,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 										}}
 										color="orange"
 										radius="md"
-										title="Moderate number of pending applications"
+										title="Moderate review activity"
 										icon={<IconClock />}
 									>
-										About <NumberFormatter value={teamAveragePending} decimalScale={2} suffix="%" /> of applications to
-										this BuildTeam are currently pending review.{' '}
-										{globalAveragePending - teamAveragePending < 0 ? (
-											<>
-												This number is higher than the global average of{' '}
-												<NumberFormatter value={globalAveragePending} decimalScale={2} suffix="%" />, but still
-												tolerable.
-											</>
-										) : (
-											<>This equals to more than 10 Applications, which is still tolerable.</>
-										)}{' '}
-										Please get in contact with the staff team of {team.name} to prevent this number from rising further.
-										Current deficit:{' '}
-										<NumberFormatter
-											value={Math.abs(globalAveragePending - teamAveragePending)}
-											decimalScale={1}
-											suffix="%"
-										/>
+										This BuildTeam&apos;s review activity score is below a good level. This indicates that there are
+										areas where application review can be improved, possibly from pending application backlogs or
+										longer-than-desired review times. Please get in contact with the BuildTeam to prevent this from
+										getting worse.
 									</Alert>
 								) : (
 									<Alert
@@ -315,53 +275,14 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 										style={{ border: 'calc(0.0625rem* var(--mantine-scale)) solid var(--mantine-color-green-outline)' }}
 										color="green"
 										radius="md"
-										title="Perfect review activity"
+										title={`${reviewActivity.ras > 4.5 ? 'Perfect' : 'Good'} review activity`}
 										icon={<IconClockCheck />}
 									>
-										About <NumberFormatter value={teamAveragePending} decimalScale={2} suffix="%" /> of applications to
-										this BuildTeam are currently pending review. This number is lower than the global average of{' '}
-										<NumberFormatter value={globalAveragePending} decimalScale={2} suffix="%" />. There are no problems
-										with review activity in this team. Current surplus:{' '}
-										<NumberFormatter value={globalAveragePending - teamAveragePending} decimalScale={1} suffix="%" />
+										The review activity score of this BuildTeam is above 3.75. This means that the BuildTeam is
+										performing well in reviewing applications. This is a good sign, and the BuildTeam is likely to be
+										efficient in reviewing applications.
 									</Alert>
 								)}
-							</GridCol>
-
-							<GridCol span={4}>
-								<TextCard title="Reviewers" icon={IconUser} isText>
-									<NumberFormatter
-										value={team.UserPermission.filter((p) => p.permission.id == 'team.application.review').length}
-										thousandSeparator
-										suffix=" Reviewers"
-									/>
-								</TextCard>
-							</GridCol>
-							<GridCol span={4}>
-								<TextCard title="Acceptance Rate" icon={IconChecks} isText>
-									<NumberFormatter
-										value={
-											team._count.Application /
-											((teamApplicationsByStatus.find((a) => a.status == 'ACCEPTED')?._count || 0) +
-												(teamApplicationsByStatus.find((a) => a.status == 'TRIAL')?._count || 1))
-										}
-										decimalScale={0}
-										thousandSeparator
-										prefix="1 in "
-									/>
-								</TextCard>
-							</GridCol>
-							<GridCol span={4}>
-								<TextCard title="Trial-Builder Rate" icon={IconChecks} isText>
-									<NumberFormatter
-										value={
-											(teamApplicationsByStatus.find((a) => a.status == 'TRIAL')?._count || 0) /
-											+(teamApplicationsByStatus.find((a) => a.status == 'ACCEPTED')?._count || 1)
-										}
-										decimalScale={0}
-										thousandSeparator
-										prefix="1 in "
-									/>
-								</TextCard>
 							</GridCol>
 							<GridCol span={4}>
 								<TextCard title="Pending Reviews" icon={IconClock} isText>
@@ -373,20 +294,35 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 								</TextCard>
 							</GridCol>
 							<GridCol span={4}>
-								<TextCard title="Oldest pending Application" icon={IconClockExclamation} isText>
-									{oldestApplication ? moment(oldestApplication.createdAt).fromNow() : 'No pending Applications'}
+								<TextCard title="Average Review Time" icon={IconClock} isText>
+									<NumberFormatter value={reviewActivity.art} thousandSeparator suffix=" Days" />
 								</TextCard>
 							</GridCol>
 							<GridCol span={4}>
-								<TextCard title="Newest pending Application" icon={IconClockExclamation} isText>
-									{newestApplication ? moment(newestApplication.createdAt).fromNow() : 'No pending Applications'}
+								<TextCard title="Pending Application Ratio" icon={IconClockExclamation} isText>
+									<NumberFormatter value={reviewActivity.par} thousandSeparator suffix="%" />
+								</TextCard>
+							</GridCol>
+							<GridCol span={4} h="100%">
+								<TextCard title="Review Efficiency Score" icon={IconClockHour11} style={{ height: '100%' }}>
+									<Rating value={reviewActivity.res} fractions={2} readOnly />
+								</TextCard>
+							</GridCol>
+							<GridCol span={4} h="100%">
+								<TextCard title="Pending Score" icon={IconClockHour11} style={{ height: '100%' }}>
+									<Rating value={reviewActivity.ps / 2} fractions={2} readOnly />
+								</TextCard>
+							</GridCol>
+							<GridCol span={4} h="100%">
+								<TextCard title="Review Activity Score" icon={IconClockHour11} style={{ height: '100%' }}>
+									<Rating value={reviewActivity.ras} fractions={2} readOnly />
 								</TextCard>
 							</GridCol>
 						</Grid>
 					</GridCol>
 				</Grid>
 
-				{/* <pre>{JSON.stringify(team, null, 2)}</pre> */}
+				<pre>{JSON.stringify(reviewActivity, null, 2)}</pre>
 			</Box>
 		</Protection>
 	);
