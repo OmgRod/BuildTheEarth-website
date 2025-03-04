@@ -165,7 +165,7 @@ const Apply: NextPage = ({ data: tempData, team }: any) => {
 				title: 'Edit Application Questions',
 				image: thumbnail,
 			}}
-			seo={{ nofollow: true, noindex: true }}
+			seo={{ nofollow: true, noindex: false }}
 			requiredPermissions={{
 				buildteam: team,
 				permissions: ['team.application.edit', 'team.application.list'],

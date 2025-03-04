@@ -14,7 +14,6 @@ const Team: NextPage = () => {
 				title: 'Privacy',
 				image: thumbnail,
 			}}
-			seo={{ nofollow: true, noindex: true }}
 		>
 			<p>Our Terms and Conditions were last updated on 13/01/2024.</p>
 			<p>

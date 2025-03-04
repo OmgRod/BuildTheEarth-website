@@ -42,11 +42,21 @@ const nextConfig = {
 			{
 				source: '/sitemap',
 				destination: '/sitemap.xml',
-				permanent: false,
+				permanent: true,
 			},
 			{
 				source: '/buildteams/:id*',
 				destination: '/teams/:id*',
+				permanent: true,
+			},
+			{
+				source: '/teams/:id/join',
+				destination: '/teams/:id/apply',
+				permanent: true,
+			},
+			{
+				source: '/teams/:id/builds',
+				destination: '/teams/:id',
 				permanent: true,
 			},
 			{
@@ -74,7 +84,11 @@ const nextConfig = {
 				destination: 'https://docs.buildtheearth.net',
 				permanent: true,
 			},
-
+			{
+				source: '/patreon',
+				destination: 'https://www.patreon.com/BuildTheEarth',
+				permanent: true,
+			},
 			{
 				source: '/visit',
 				destination: '/join/visit',
@@ -86,6 +100,11 @@ const nextConfig = {
 				permanent: true,
 			},
 			{
+				source: '/apply',
+				destination: '/join',
+				permanent: true,
+			},
+			{
 				source: '/getstarted',
 				destination: '/join',
 				permanent: true,
@@ -93,6 +112,16 @@ const nextConfig = {
 			{
 				source: '/getstarted/:id*',
 				destination: '/join/:id*',
+				permanent: true,
+			},
+			{
+				source: '/aboutus',
+				destination: '/about',
+				permanent: true,
+			},
+			{
+				source: '/api/v1/:id*',
+				destination: 'https://api.buildtheearth.net/api/v1/:id*',
 				permanent: true,
 			},
 		];

@@ -12,7 +12,6 @@ const Team: NextPage = () => {
 				title: 'Terms of Service',
 				image: thumbnail,
 			}}
-			seo={{ nofollow: true, noindex: true }}
 		>
 			<p>Our Terms and Conditions were last updated on 22/10/2023.</p>
 			<p>Please read these terms and conditions carefully before using Our Service.</p>
