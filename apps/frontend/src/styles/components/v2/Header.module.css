@@ -37,28 +37,24 @@
 	top: 2px;
 	cursor: pointer;
 	user-select: none;
+}
 
-	&[data-on-top='false'] {
-		p {
-			color: var(--mantine-color-text);
-		}
+.logo :global(img) {
+	position: relative;
+	top: -2px;
+}
+.logo :global(p) {
+	font-family: var(--font-minecraft);
+	color: rgb(236, 236, 236);
+	font-size: 20px;
+	margin: 0;
+
+	@media (max-width: 400px) {
+		display: none;
 	}
-
-	img {
-		position: relative;
-		top: -2px;
-	}
-
-	p {
-		font-family: var(--font-minecraft);
-		color: rgb(236, 236, 236);
-		font-size: 20px;
-		margin: 0;
-
-		@media (max-width: 400px) {
-			display: none;
-		}
-	}
+}
+.logo[data-on-top='false'] :global(p) {
+	color: var(--mantine-color-text);
 }
 
 .links {

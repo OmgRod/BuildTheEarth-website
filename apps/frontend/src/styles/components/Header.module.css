@@ -56,10 +56,11 @@
 	top: 2px;
 	cursor: pointer;
 	user-select: none;
-	img {
-		position: relative;
-		top: -2px;
-	}
+}
+
+.logo :global(img) {
+	position: relative;
+	top: -2px;
 }
 
 .links {
