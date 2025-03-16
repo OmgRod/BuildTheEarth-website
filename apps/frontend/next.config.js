@@ -1,4 +1,5 @@
 const path = require('path');
+const i18n = require('./next-i18next.config.js');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
@@ -30,10 +31,7 @@ const nextConfig = {
 			},
 		],
 	},
-	i18n: {
-		defaultLocale: 'en',
-		locales: ['en', 'de', 'fr', 'nl', 'no', 'ru', 'zh'],
-	},
+	i18n,
 	output: 'standalone',
 	poweredByHeader: false,
 	outputFileTracingRoot: path.join(__dirname, '../../'),
