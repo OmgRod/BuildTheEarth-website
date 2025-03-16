@@ -44,6 +44,8 @@ jobs:
           echo NEXT_PUBLIC_API_URL="https://api.buildtheearth.net/api/v1" >> apps/frontend/.env
           echo NEXT_PUBLIC_MAPBOX_TOKEN="${{ secrets.MAPBOX_TOKEN }}" >> apps/frontend/.env
           echo PORT=3000 >> apps/frontend/.env
+      - name: Check env
+        run: cat apps/frontend/.env
       - name: Build the Docker image
         run: docker build . --file apps/frontend/Dockerfile --tag ghcr.io/buildtheearth/website-frontend:$(git rev-parse --short HEAD) --tag ghcr.io/buildtheearth/website-frontend:latest
       - name: Docker push tag
