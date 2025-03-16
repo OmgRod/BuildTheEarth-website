@@ -6,6 +6,7 @@ export function middleware(request: NextRequestWithAuth) {
 	}
 }
 
+// forcee
 export const config = {
 	matcher: ['/((?!api|_next/static|_next/image|auth|favicon.ico|robots.txt|images|$).*)'],
 };
