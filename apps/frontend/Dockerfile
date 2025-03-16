@@ -23,7 +23,8 @@ RUN yarn install
 # Build the project
 COPY --from=builder /app/out/full/ .
 COPY --from=builder /app/apps/frontend/.env ./apps/frontend/.env
-
+COPY --from=builder /app/apps/frontend/next.config.js ./apps/frontend/next.config.js
+COPY --from=builder /app/apps/frontend/next-i18next.config.js ./apps/frontend/next-i18next.config.js
 ENV NEXT_TELEMETRY_DISABLED 1
 
 
