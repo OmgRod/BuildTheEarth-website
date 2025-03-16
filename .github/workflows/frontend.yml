@@ -48,16 +48,6 @@ jobs:
         run: cat apps/frontend/.env
       - name: Build the Docker image
         run: docker build . --file apps/frontend/Dockerfile --tag ghcr.io/buildtheearth/website-frontend:$(git rev-parse --short HEAD) --tag ghcr.io/buildtheearth/website-frontend:latest
-        env:
-          KEYCLOAK_URL: https://auth.buildtheearth.net/realms/website
-          KEYCLOAK_ID: frontend
-          KEYCLOAK_SECRET: ${{ secrets.KEYCLOAK_SECRET }}
-          NEXTAUTH_URL: https://buildtheearth.net
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXT_PUBLIC_API_URL: https://api.buildtheearth.net/api/v1
-          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
-          PORT: 3000
-
       - name: Docker push tag
         run: docker push ghcr.io/buildtheearth/website-frontend:$(git rev-parse --short HEAD)
       - name: Docker push latest
