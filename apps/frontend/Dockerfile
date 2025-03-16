@@ -25,6 +25,8 @@ COPY --from=builder /app/out/full/ .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
+RUN cat /app/apps/frontend/.env
+
 RUN yarn turbo run build --filter=frontend...
 
 FROM base AS runner
