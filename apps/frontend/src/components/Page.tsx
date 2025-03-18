@@ -62,6 +62,7 @@ const Page = (props: PageProps) => {
 						{ link: '/teams', translation: 'teams' },
 						{ link: '/map', translation: 'map' },
 						{ link: '/faq', translation: 'faq' },
+						{ link: '/Merch', translation: 'merch' },
 						{ link: '/contact', translation: 'contact' },
 					]}
 				/>
@@ -121,6 +122,7 @@ const Page = (props: PageProps) => {
 					<Footer
 						links={[
 							{ link: '/faq', translation: 'faq' },
+							{ link: '/merch', translation: 'merch' },
 							{ link: '/contact', translation: 'contact' },
 							{ link: 'https://status.buildtheearth.net', translation: 'status' },
 						]}

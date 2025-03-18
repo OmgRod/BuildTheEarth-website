@@ -120,6 +120,11 @@ const nextConfig = {
 				permanent: true,
 			},
 			{
+				source: '/merch',
+				destination: 'https://shop.buildtheearth.net',
+				permanent: true,
+			},
+			{
 				source: '/api/v1/:id*',
 				destination: 'https://api.buildtheearth.net/api/v1/:id*',
 				permanent: true,
