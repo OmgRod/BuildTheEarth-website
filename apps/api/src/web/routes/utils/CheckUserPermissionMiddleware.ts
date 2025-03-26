@@ -17,6 +17,7 @@ export const checkUserPermission = (prisma: ExtendedPrismaClient, permission: st
 				req.kauth.grant.access_token.content.sub,
 				[permission],
 				buildteam ? req.params[buildteam] : undefined,
+				!!req.query.slug,
 			)
 		) {
 			next();
@@ -41,6 +42,7 @@ export const checkUserPermissions = (prisma: ExtendedPrismaClient, permissions: 
 				req.kauth.grant.access_token.content.sub,
 				permissions,
 				buildteam ? req.params[buildteam] : undefined,
+				!!req.query.slug,
 			)
 		) {
 			next();
@@ -57,6 +59,7 @@ export async function userHasPermissions(
 	ssoId: string,
 	permission: string[],
 	buildteam?: string,
+	isSlug?: boolean,
 ) {
 	let user = await prisma.user.findUnique({
 		where: {
