@@ -15,7 +15,6 @@ export const adminTransferTeam = async (
 		step: string;
 	},
 ) => {
-	console.log('transferTeam', id, destinationId, step);
 	switch (step) {
 		case 'test':
 			console.log('test', id, destinationId);

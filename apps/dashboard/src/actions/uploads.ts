@@ -1,4 +1,5 @@
 'use server';
+import { revalidateWebsitePath } from '@/util/data';
 import prisma from '@/util/db';
 import { revalidatePath } from 'next/cache';
 
@@ -23,4 +24,5 @@ export const adminDeleteUpload = async (id: string) => {
 	});
 
 	revalidatePath('/am/uploads/check');
+	revalidateWebsitePath('/gallery');
 };

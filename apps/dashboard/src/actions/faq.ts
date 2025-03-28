@@ -1,4 +1,5 @@
 'use server';
+import { revalidateWebsitePath } from '@/util/data';
 import prisma from '@/util/db';
 import { revalidatePath } from 'next/cache';
 
@@ -13,6 +14,7 @@ export const adminAddFaqQuestion = async (data: { question: string; answer: stri
 	});
 
 	revalidatePath('/am/faq');
+	revalidateWebsitePath('/faq');
 	return faq;
 };
 
@@ -28,6 +30,7 @@ export const adminEditFaqQuestion = async (data: { question: string; answer: str
 	});
 
 	revalidatePath('/am/faq');
+	revalidateWebsitePath('/faq');
 	return faq;
 };
 
@@ -39,5 +42,6 @@ export const adminDeleteFaqQuestion = async (id: any) => {
 	});
 
 	revalidatePath('/am/faq');
+	revalidateWebsitePath('/faq');
 	return faq;
 };

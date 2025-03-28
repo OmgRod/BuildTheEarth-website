@@ -1,4 +1,5 @@
 'use server';
+import { revalidateWebsitePath } from '@/util/data';
 import prisma from '@/util/db';
 import { revalidatePath } from 'next/cache';
 
@@ -8,6 +9,7 @@ export const adminAddContact = async (data: { name: string; role: string; email:
 	});
 
 	revalidatePath('/am/contacts');
+	revalidateWebsitePath('/contact');
 	return contact;
 };
 
@@ -31,6 +33,7 @@ export const adminEditContact = async (data: {
 	});
 
 	revalidatePath('/am/contacts');
+	revalidateWebsitePath('/contact');
 	return contact;
 };
 
@@ -42,5 +45,6 @@ export const adminDeleteContact = async (id: any) => {
 	});
 
 	revalidatePath('/am/contacts');
+	revalidateWebsitePath('/contact');
 	return contact;
 };

@@ -25,5 +25,6 @@ export const adminDeleteClaim = async (data: { claimId: string }) => {
 	});
 
 	revalidatePath(`/am/claims/${claim.id}`);
+
 	return claim;
 };
