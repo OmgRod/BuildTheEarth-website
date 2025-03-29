@@ -321,8 +321,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 						</Grid>
 					</GridCol>
 				</Grid>
-
-				<pre>{JSON.stringify(reviewActivity, null, 2)}</pre>
 			</Box>
 		</Protection>
 	);
