@@ -10,7 +10,7 @@ export default async function Page({
 	searchParams,
 }: {
 	params: Promise<{ id: string }>;
-	searchParams: { ref?: string };
+	searchParams: Promise<{ ref?: string }>;
 }) {
 	const id = (await params).id;
 	const ref = (await searchParams).ref || 'change';
