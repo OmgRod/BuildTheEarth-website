@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, Box, Button, SimpleGrid, Stepper, Text, Title, rem } from '@mantine/core';
+import { Alert, Box, Button, Checkbox, SimpleGrid, Stepper, Text, Title, rem } from '@mantine/core';
 import {
 	Icon,
 	IconBrandDiscord,
@@ -17,13 +17,15 @@ import {
 	IconUsers,
 	IconUsersGroup,
 } from '@tabler/icons-react';
-import { ForwardRefExoticComponent, RefAttributes, useActionState, useState } from 'react';
+import { ForwardRefExoticComponent, RefAttributes, startTransition, useActionState, useState } from 'react';
 
-import { adminTransferTeam } from '@/actions/buildTeams';
+import { adminChangeTeamOwner, adminTransferTeam } from '@/actions/buildTeams';
 import { BuildTeamSelect } from '@/components/input/BuildTeamSelect';
+import { UserSelect } from '@/components/input/UserSelect';
+import { CodeHighlight } from '@mantine/code-highlight';
 import { openConfirmModal } from '@mantine/modals';
 
-export default function TransferStepper({ id }: { id: string }) {
+export function TransferStepper({ id }: { id: string }) {
 	const [activeStep, setActiveStep] = useState(0);
 	const [destinationTeam, setDestinationTeam] = useState<string | null>(null);
 	const [curentState, transferTeamAction, isLoading] = useActionState(adminTransferTeam, {});
@@ -123,31 +125,7 @@ export default function TransferStepper({ id }: { id: string }) {
 
 	return (
 		<SimpleGrid cols={2} spacing={'md'}>
-			<Box>
-				<Title order={2}>Transfer Steps</Title>
-				<Text size="sm" mb="md" c="dimmed">
-					Click the button on the right to complete the current step.
-				</Text>
-				<Stepper
-					active={activeStep}
-					onStepClick={setActiveStep}
-					orientation="vertical"
-					allowNextStepsSelect={false}
-					color="red"
-					w="100%"
-				>
-					{steps.map((step) => (
-						<Stepper.Step
-							label={step.title}
-							description={step.description}
-							key={step.id}
-							icon={<step.icon style={{ width: rem(18), height: rem(18) }} />}
-							allowStepSelect={false}
-						/>
-					))}
-				</Stepper>
-			</Box>
-			<Box>
+			<Box maw="80%">
 				<Alert title="Warning" color="red" mb="md" icon={<IconExclamationCircle />}>
 					Actions performed on this page are irreversible and cause heavy data mutations. Please be careful of what you
 					are doing here. You will need to confirm every action. To get started, select the destination team you want to
@@ -181,7 +159,11 @@ export default function TransferStepper({ id }: { id: string }) {
 							labels: { confirm: 'Confirm', cancel: 'Cancel' },
 							onConfirm: () => {
 								if (!destinationTeam) return;
-								transferTeamAction({ id, destinationId: destinationTeam, step: steps[activeStep].id });
+
+								startTransition(() => {
+									transferTeamAction({ id, destinationId: destinationTeam, step: steps[activeStep].id });
+								});
+
 								setActiveStep(activeStep + 1);
 							},
 						})
@@ -189,8 +171,93 @@ export default function TransferStepper({ id }: { id: string }) {
 				>
 					Confirm Step: {steps[activeStep]?.button || 'Finish'}
 				</Button>
-				<pre>{JSON.stringify(curentState)}</pre>
+				<Text size="sm" mt="md" c="dimmed">
+					Debug output
+				</Text>
+				<CodeHighlight code={JSON.stringify(curentState, null, 2)} language="json" mb="md"></CodeHighlight>
+			</Box>
+			<Box>
+				<Title order={2} mb="md">
+					Transfer Steps
+				</Title>
+				<Stepper
+					active={activeStep}
+					onStepClick={setActiveStep}
+					orientation="vertical"
+					allowNextStepsSelect={false}
+					color="red"
+					w="100%"
+				>
+					{steps.map((step) => (
+						<Stepper.Step
+							label={step.title}
+							description={step.description}
+							key={step.id}
+							icon={<step.icon style={{ width: rem(18), height: rem(18) }} />}
+							allowStepSelect={false}
+						/>
+					))}
+				</Stepper>
 			</Box>
 		</SimpleGrid>
+	);
+}
+
+export function ChangeOwner({ id }: { id: string }) {
+	const [newOwner, setNewOwner] = useState<string | null>(null);
+	const [grantNewPermissions, setGrantNewPermissions] = useState(false);
+	const [removeOldPermissions, setRemoveOldPermissions] = useState(false);
+
+	const [curentState, changeOwnerAction, isLoading] = useActionState(adminChangeTeamOwner, {
+		status: 'pending',
+		error: '',
+	});
+
+	return (
+		<Box maw="40%">
+			<Alert title="Warning" color="red" mb="md" icon={<IconExclamationCircle />}>
+				Actions performed on this page cause heavy data mutations. Please be careful of what you are doing here. Please
+				let the old and new owners know about the transfer of the team.
+			</Alert>
+			<UserSelect label="New Owner" onChange={setNewOwner} />
+			<Checkbox
+				label="Grant all permissions to new owner"
+				mt="md"
+				onChange={(v) => setGrantNewPermissions(v.target.checked)}
+			/>
+			<Checkbox
+				label="Remove permissions from old owner"
+				mt="md"
+				onChange={(v) => setRemoveOldPermissions(v.target.checked)}
+			/>
+			<Button
+				mt="lg"
+				color="red"
+				fullWidth
+				disabled={!newOwner}
+				loading={isLoading}
+				onClick={() =>
+					openConfirmModal({
+						title: 'Confirm Action',
+						centered: true,
+						confirmProps: { color: 'red' },
+						children: <Text size="sm">Are you sure you want to perform this action?</Text>,
+						labels: { confirm: 'Confirm', cancel: 'Cancel' },
+						onConfirm: () => {
+							if (!newOwner) return;
+							startTransition(() => {
+								changeOwnerAction({ id, newOwnerId: newOwner, grantNewPermissions, removeOldPermissions });
+							});
+						},
+					})
+				}
+			>
+				Change Owner
+			</Button>
+			<Text size="sm" mt="md" c="dimmed">
+				Debug output
+			</Text>
+			<CodeHighlight code={JSON.stringify(curentState, null, 2)} language="json" mb="md"></CodeHighlight>
+		</Box>
 	);
 }

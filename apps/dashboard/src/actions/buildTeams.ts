@@ -111,3 +111,70 @@ export const adminTransferTeam = async (
 			return {};
 	}
 };
+
+export const adminChangeTeamOwner = async (
+	prevState: any,
+	{
+		id,
+		newOwnerId,
+		grantNewPermissions,
+		removeOldPermissions,
+	}: {
+		id: string;
+		newOwnerId: string;
+		grantNewPermissions?: boolean;
+		removeOldPermissions?: boolean;
+	},
+) => {
+	const newOwner = await prisma.user.findFirst({ where: { id: newOwnerId } });
+
+	if (!newOwner) {
+		return { status: 'error', error: 'User not found' };
+	}
+
+	const oldOwner = await prisma.user.findFirst({ where: { createdBuildTeams: { some: { id } } } });
+
+	const team = await prisma.buildTeam.update({
+		where: { id },
+		data: {
+			creatorId: newOwnerId,
+		},
+		select: { id: true, slug: true, creatorId: true },
+	});
+
+	if (removeOldPermissions) {
+		await prisma.userPermission.deleteMany({
+			where: { buildTeamId: team.id, userId: oldOwner?.id, NOT: { permissionId: 'team.application.blocked' } },
+		});
+	}
+	if (grantNewPermissions) {
+		const delRes = await prisma.userPermission.deleteMany({
+			where: { buildTeamId: team.id, userId: newOwnerId },
+		});
+		const res = await prisma.userPermission.createMany({
+			data: [
+				'team.settings.edit',
+				'permission.add',
+				'permission.remove',
+				'team.application.edit',
+				'team.application.list',
+				'team.showcases.edit',
+				'team.application.notify',
+				'team.application.review',
+				'team.socials.edit',
+				'team.claim.list',
+			].map((perm) => ({
+				userId: newOwnerId,
+				buildTeamId: team.id,
+				permissionId: perm,
+			})),
+		});
+	}
+
+	revalidateWebsitePaths(['/teams', `/teams/${team.slug}`]);
+	revalidatePath('/am/teams');
+	revalidatePath(`/am/teams/${team.id}`);
+	revalidatePath(`/am/users/${oldOwner?.id}`);
+	revalidatePath(`/am/users/${newOwnerId}`);
+	return { status: 'success', team };
+};

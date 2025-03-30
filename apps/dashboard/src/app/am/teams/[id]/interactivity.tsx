@@ -3,7 +3,7 @@
 import { hasRole } from '@/util/auth';
 import { ActionIcon, Menu, MenuDropdown, MenuItem, MenuLabel, MenuTarget, rem } from '@mantine/core';
 import { BuildTeam } from '@repo/db';
-import { IconDots, IconTransfer } from '@tabler/icons-react';
+import { IconDots, IconTransfer, IconUserCog } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 export function EditMenu({ team }: { team: BuildTeam }) {
@@ -25,11 +25,21 @@ export function EditMenu({ team }: { team: BuildTeam }) {
 			<MenuDropdown>
 				<MenuLabel>Danger Zone</MenuLabel>
 				<MenuItem
+					leftSection={<IconUserCog style={{ width: rem(14), height: rem(14) }} />}
+					color="red"
+					aria-label="Change Owner"
+					component={Link}
+					href={`/am/teams/${team.id}/transfer?ref=change`}
+					rel="noopener"
+				>
+					Change Owner
+				</MenuItem>
+				<MenuItem
 					leftSection={<IconTransfer style={{ width: rem(14), height: rem(14) }} />}
 					color="red"
 					aria-label="Delete or Transfer Team"
 					component={Link}
-					href={`/am/teams/${team.id}/transfer`}
+					href={`/am/teams/${team.id}/transfer?ref=transfer`}
 					rel="noopener"
 				>
 					Transfer Team

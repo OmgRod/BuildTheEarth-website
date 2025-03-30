@@ -1,9 +1,9 @@
-import { Alert, Box, Title } from '@mantine/core';
+import { Alert, Box, Tabs, TabsList, TabsPanel, TabsTab, Title } from '@mantine/core';
 
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
-import { IconExclamationCircle } from '@tabler/icons-react';
-import TransferStepper from './interactivity';
+import { IconExclamationCircle, IconTransfer, IconUserCog } from '@tabler/icons-react';
+import { ChangeOwner, TransferStepper } from './interactivity';
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
 	const id = (await params).id;
@@ -30,7 +30,24 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 				<Title order={1} mt="xl" mb="md">
 					Transfer and Delete {team?.name}
 				</Title>
-				<TransferStepper id={id} />
+				<Tabs defaultValue="change" color="red">
+					<TabsList>
+						<TabsTab value="change" leftSection={<IconUserCog size={14} />}>
+							Change Owner
+						</TabsTab>
+						<TabsTab value="transfer" leftSection={<IconTransfer size={14} />}>
+							Transfer Data
+						</TabsTab>
+					</TabsList>
+
+					<TabsPanel value="change" pt="md">
+						<ChangeOwner id={id} />
+					</TabsPanel>
+
+					<TabsPanel value="transfer" pt="md">
+						<TransferStepper id={id} />
+					</TabsPanel>
+				</Tabs>
 			</Box>
 		</Protection>
 	);

@@ -1,5 +1,6 @@
 import '@/styles/global.css';
 import '@mantine/charts/styles.layer.css';
+import '@mantine/code-highlight/styles.css';
 import '@mantine/code-highlight/styles.layer.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.layer.css';
