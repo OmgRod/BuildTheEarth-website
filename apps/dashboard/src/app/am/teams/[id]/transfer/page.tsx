@@ -5,8 +5,15 @@ import prisma from '@/util/db';
 import { IconExclamationCircle, IconTransfer, IconUserCog } from '@tabler/icons-react';
 import { ChangeOwner, TransferStepper } from './interactivity';
 
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+export default async function Page({
+	params,
+	searchParams,
+}: {
+	params: Promise<{ id: string }>;
+	searchParams: { ref?: string };
+}) {
 	const id = (await params).id;
+	const ref = (await searchParams).ref || 'change';
 
 	const team = await prisma.buildTeam.findFirst({
 		where: { id },
@@ -30,7 +37,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 				<Title order={1} mt="xl" mb="md">
 					Transfer and Delete {team?.name}
 				</Title>
-				<Tabs defaultValue="change" color="red">
+				<Tabs defaultValue={ref} color="red">
 					<TabsList>
 						<TabsTab value="change" leftSection={<IconUserCog size={14} />}>
 							Change Owner

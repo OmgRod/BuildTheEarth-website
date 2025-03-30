@@ -14,7 +14,7 @@ import {
 	Tooltip,
 	rem,
 } from '@mantine/core';
-import { IconDots, IconExternalLink, IconEye, IconTransfer } from '@tabler/icons-react';
+import { IconDots, IconExternalLink, IconEye, IconTransfer, IconUserCog } from '@tabler/icons-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { UserDisplay } from '@/components/data/User';
@@ -140,11 +140,21 @@ export default function BuildTeamsDatatable({
 									</MenuItem>
 									<MenuLabel>Danger Zone</MenuLabel>
 									<MenuItem
+										leftSection={<IconUserCog style={{ width: rem(14), height: rem(14) }} />}
+										color="red"
+										aria-label="Change Owner"
+										component={Link}
+										href={`/am/teams/${team.id}/transfer?ref=change`}
+										rel="noopener"
+									>
+										Change Owner
+									</MenuItem>
+									<MenuItem
 										leftSection={<IconTransfer style={{ width: rem(14), height: rem(14) }} />}
 										color="red"
 										aria-label="Delete or Transfer Team"
 										component={Link}
-										href={`/am/teams/${team.id}/transfer`}
+										href={`/am/teams/${team.id}/transfer?ref=transfer`}
 										rel="noopener"
 									>
 										Transfer Team
