@@ -39,11 +39,11 @@
 	user-select: none;
 }
 
-.logo :global(img) {
+.logo img {
 	position: relative;
 	top: -2px;
 }
-.logo :global(p) {
+.logo p {
 	font-family: var(--font-minecraft);
 	color: rgb(236, 236, 236);
 	font-size: 20px;
@@ -53,7 +53,7 @@
 		display: none;
 	}
 }
-.logo[data-on-top='false'] :global(p) {
+.logo[data-on-top='false'] p {
 	color: var(--mantine-color-text);
 }
 
