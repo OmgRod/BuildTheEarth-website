@@ -34,7 +34,6 @@
 		"apps/*",
 		"packages/*"
 	],
-	"packageManager": "yarn@1.22.22",
-	"prettier": "@repo/prettier-config",
-	"dependencies": {}
+	"packageManager": "yarn@4.9.1",
+	"prettier": "@repo/prettier-config"
 }

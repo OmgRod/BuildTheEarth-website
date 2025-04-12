@@ -69,7 +69,7 @@ export function UserSelect(
 	} | null>(null);
 	const [debounced] = useDebouncedValue(value, 300);
 	const [empty, setEmpty] = useState(false);
-	const abortController = useRef<AbortController>();
+	const abortController = useRef<AbortController>(undefined);
 
 	const fetchOptions = (query: string) => {
 		abortController.current?.abort();

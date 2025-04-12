@@ -2,7 +2,7 @@
 	"name": "api",
 	"version": "1.1.0",
 	"private": true,
-	"packageManager": "yarn@1.22.22",
+	"packageManager": "yarn@4.9.1",
 	"main": "dist/index.js",
 	"type": "module",
 	"scripts": {
@@ -36,8 +36,8 @@
 		"@aws-sdk/client-s3": "^3.427.0",
 		"@bte-germany/terraconvert": "^1.0.1",
 		"@keycloak/keycloak-admin-client": "24.0.5",
-		"@repo/prettier-config": "*",
 		"@repo/db": "*",
+		"@repo/prettier-config": "*",
 		"@repo/typescript-config": "*",
 		"@turf/helpers": "^6.5.0",
 		"@turf/turf": "^6.5.0",
