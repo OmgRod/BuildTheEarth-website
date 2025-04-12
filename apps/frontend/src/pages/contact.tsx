@@ -2,6 +2,7 @@
 
 import { Discord, Facebook, Instagram, Tiktok, Twitch, Twitter, Youtube } from '@icons-pack/react-simple-icons';
 import {
+	Anchor,
 	Button,
 	Divider,
 	Grid,
@@ -166,6 +167,21 @@ const Contact: NextPage = ({ data }: any) => {
 			<Button component={Link} variant="outline" leftSection={<IconMail />} href="mailto:appeals@buildtheearth.net">
 				Send an Email
 			</Button>
+			<Title order={2} mt="lg">
+				Legal Documents
+			</Title>
+			<p>
+				For legal documents, including the Terms of Service and Privacy Policy, please visit our{' '}
+				<Anchor href="/tos" component={Link}>
+					Terms of Service
+				</Anchor>{' '}
+				and{' '}
+				<Anchor href="/privacy" component={Link}>
+					Privacy Policy
+				</Anchor>{' '}
+				page. If you have any questions or concerns regarding these documents, please contact us at{' '}
+				<Anchor href="mailto:privacy@buildtheearth.net">privacy@buildtheearth.net</Anchor>
+			</p>
 		</Page>
 	);
 };

@@ -65,7 +65,13 @@ export async function getServerSideProps({ res }: any) {
 			priority: 0.2,
 		},
 		{
-			loc: '/legal/tos',
+			loc: '/tos',
+			lastModified: new Date(),
+			changeFrequency: 'yearly',
+			priority: 0.1,
+		},
+		{
+			loc: '/privacy',
 			lastModified: new Date(),
 			changeFrequency: 'yearly',
 			priority: 0.1,
