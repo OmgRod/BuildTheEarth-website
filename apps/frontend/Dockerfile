@@ -25,7 +25,7 @@ RUN yarn list postcss
 COPY --from=builder /app/out/full/ .
 COPY --from=builder /app/apps/frontend/.env ./apps/frontend/.env
 COPY --from=builder /app/apps/frontend/next.config.js ./apps/frontend/next.config.js
-COPY --from=builder /app/apps/frontend/next-seo.config.js ./apps/frontend/next-seo.config.js
+COPY --from=builder /app/apps/frontend/next-seo.config.ts ./apps/frontend/next-seo.config.ts
 COPY --from=builder /app/apps/frontend/postcss.config.js ./apps/frontend/postcss.config.js
 COPY --from=builder /app/apps/frontend/next-i18next.config.js ./apps/frontend/next-i18next.config.js
 ENV NEXT_TELEMETRY_DISABLED 1
