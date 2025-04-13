@@ -131,6 +131,9 @@ const nextConfig = {
 			},
 		];
 	},
+	experimental: {
+		optimizePackageImports: ['@icons-pack/react-simple-icons'],
+	},
 };
 
 module.exports = nextConfig;

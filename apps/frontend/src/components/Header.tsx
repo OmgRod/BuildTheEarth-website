@@ -1,4 +1,3 @@
-import { Discord, Instagram, Reddit, Tiktok, Twitch, Twitter, Youtube } from '@icons-pack/react-simple-icons';
 import {
 	ActionIcon,
 	Anchor,
@@ -36,18 +35,19 @@ import {
 	IconUser,
 	IconUsers,
 } from '@tabler/icons-react';
-import { useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'motion/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import React, { CSSProperties, useState } from 'react';
 import { ChevronDown, FileSearch, Logout, World } from 'tabler-icons-react';
 
 import { usePermissions } from '@/hooks/usePermissions';
 import logo from '@/public/logo.gif';
+import { SiDiscord, SiInstagram, SiReddit, SiTiktok, SiTwitch, SiX, SiYoutube } from '@icons-pack/react-simple-icons';
 import { useDisclosure } from '@mantine/hooks';
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 import { useScrollPosition } from '../hooks/useScrollPosition';
 import { useUser } from '../hooks/useUser';
 import classes from '../styles/components/Header.module.css';
@@ -358,27 +358,27 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 									break;
 								}
 								case 'youtube': {
-									icon = <Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
+									icon = <SiYoutube />;
 									break;
 								}
 								case 'twitter': {
-									icon = <Twitter onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
+									icon = <SiX />;
 									break;
 								}
 								case 'reddit': {
-									icon = <Reddit onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
+									icon = <SiReddit />;
 									break;
 								}
 								case 'twitch': {
-									icon = <Twitch onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
+									icon = <SiTwitch />;
 									break;
 								}
 								case 'instagram': {
-									icon = <Instagram onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
+									icon = <SiInstagram />;
 									break;
 								}
 								case 'tiktok': {
-									icon = <Tiktok onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />;
+									icon = <SiTiktok />;
 									break;
 								}
 								default:
@@ -406,7 +406,7 @@ export const LogoHeader = (props: LogoHeaderProps) => {
 								color="gray"
 								key={'discord-inv'}
 							>
-								<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+								<SiDiscord />
 							</ActionIcon>
 						)}
 						{userStatus != 'Not Joined' ? (

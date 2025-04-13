@@ -12,7 +12,7 @@ import {
 	useMantineColorScheme,
 	useMantineTheme,
 } from '@mantine/core';
-import { useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'motion/react';
 import { ChevronDown, ChevronRight } from 'tabler-icons-react';
 
 import BackgroundImage from '@/components/BackgroundImage';

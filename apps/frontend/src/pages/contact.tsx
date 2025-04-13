@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 
-import { Discord, Facebook, Instagram, Tiktok, Twitch, Twitter, Youtube } from '@icons-pack/react-simple-icons';
 import {
 	Anchor,
 	Button,
@@ -17,6 +16,7 @@ import {
 import Page from '@/components/Page';
 import thumbnail from '@/public/images/thumbnails/contact.png';
 import fetcher from '@/utils/Fetcher';
+import { SiDiscord, SiFacebook, SiInstagram, SiTiktok, SiTwitch, SiX, SiYoutube } from '@icons-pack/react-simple-icons';
 import { IconMail } from '@tabler/icons-react';
 import { NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -51,7 +51,7 @@ const Contact: NextPage = ({ data }: any) => {
 							</Text>
 
 							<Group wrap="nowrap" gap={10} mt={3} justify="flex-start">
-								<Discord width={18} size={16} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+								<SiDiscord width={18} size={16} />
 								<Text size="xs" c="dimmed">
 									{contact.discord}
 								</Text>
@@ -85,7 +85,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiDiscord />
 				</ThemeIcon>
 
 				<ThemeIcon
@@ -97,7 +97,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiYoutube />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -108,7 +108,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Instagram onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiInstagram />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -119,7 +119,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Tiktok onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiTiktok />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -130,7 +130,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Twitter onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiX />
 				</ThemeIcon>
 
 				<ThemeIcon
@@ -142,7 +142,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Twitch onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiTwitch />
 				</ThemeIcon>
 				<ThemeIcon
 					variant="outline"
@@ -153,7 +153,7 @@ const Contact: NextPage = ({ data }: any) => {
 						cursor: 'pointer',
 					}}
 				>
-					<Facebook onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiFacebook />
 				</ThemeIcon>
 			</Group>
 			<Title order={2} mt="lg">

@@ -1,9 +1,9 @@
 import { ActionIcon, Anchor, Container, Group } from '@mantine/core';
 
-import { Discord } from '@icons-pack/react-simple-icons';
+import { SiDiscord } from '@icons-pack/react-simple-icons';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import classes from '../styles/components/Footer.module.css';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
@@ -36,7 +36,7 @@ export default function Footer({ links, style }: FooterSimpleProps) {
 							aria-label="Discord"
 							target="_blank"
 						>
-							<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+							<SiDiscord />
 						</ActionIcon>
 					</Group>
 					<LanguageSwitcher className={classes.language} />

@@ -60,7 +60,7 @@ const Team: NextPage = () => {
 						<a href="#limitation-of-liability">Limitation of Liability</a>
 					</li>
 					<li>
-						<a href="#-as-is-and-as-available-disclaimer">"AS IS" and "AS AVAILABLE" Disclaimer</a>
+						<a href="#-as-is-and-as-available-disclaimer">&quot;AS IS&quot; and &quot;AS AVAILABLE&quot; Disclaimer</a>
 					</li>
 					<li>
 						<a href="#governing-law">Governing Law</a>

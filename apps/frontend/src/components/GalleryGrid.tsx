@@ -1,5 +1,5 @@
 import { Avatar, Badge, Grid, GridCol, Group, Title, useMantineTheme } from '@mantine/core';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 
 import { useHover } from '@mantine/hooks';
 import React from 'react';

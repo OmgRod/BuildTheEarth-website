@@ -1,4 +1,3 @@
-import { Discord, Github } from '@icons-pack/react-simple-icons';
 import { Alert, Badge, Button, Card, Flex, Group, rem, Tabs, Text, TextInput } from '@mantine/core';
 import {
 	IconAlertCircle,
@@ -18,13 +17,14 @@ import Page from '@/components/Page';
 import { useAccessToken } from '@/hooks/useAccessToken';
 import { useUser } from '@/hooks/useUser';
 import thumbnail from '@/public/images/thumbnails/me.png';
+import { SiDiscord, SiGithub } from '@icons-pack/react-simple-icons';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
 
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -220,9 +220,9 @@ const SocialAccount = ({ identities, socialName }: any) => {
 		<Card mb={'md'} withBorder>
 			<Flex align={'center'} gap={'md'}>
 				{socialName === 'discord' ? (
-					<Discord size={'3rem'} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiDiscord size={'3rem'} />
 				) : socialName == 'github' ? (
-					<Github size={'3rem'} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+					<SiGithub size={'3rem'} />
 				) : (
 					<IconWorld size={'3rem'} />
 				)}

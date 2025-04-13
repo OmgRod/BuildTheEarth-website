@@ -6,10 +6,10 @@ import { useIsClient } from '@/hooks/useIsClient';
 import fetcher from '@/utils/Fetcher';
 import getCountryName from '@/utils/ISOCountries';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import sanitizeHtml from 'sanitize-html';
 
 const Team: NextPage = ({ data, data2 }: any) => {

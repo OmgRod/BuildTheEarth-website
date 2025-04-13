@@ -4,10 +4,10 @@ import { Box, Container, Group, Modal, Pagination } from '@mantine/core';
 import Page from '@/components/Page';
 import fetcher from '@/utils/Fetcher';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const MePage: NextPage = ({ data }: any) => {
 	const [activePage, setPage] = useState(1);

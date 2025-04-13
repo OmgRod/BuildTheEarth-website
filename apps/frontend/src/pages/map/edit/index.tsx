@@ -59,14 +59,14 @@ import Page from '@/components/Page';
 import { useAccessToken } from '@/hooks/useAccessToken';
 import { usePermissions } from '@/hooks/usePermissions';
 import { useUser } from '@/hooks/useUser';
-import { Discord } from '@icons-pack/react-simple-icons';
+import { SiDiscord } from '@icons-pack/react-simple-icons';
 import { modals } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
 
 const ClaimEditPage: NextPage = () => {
@@ -627,12 +627,7 @@ const ClaimEditPage: NextPage = () => {
 																</ActionIcon>
 															</MenuTarget>
 															<MenuDropdown>
-																<MenuItem
-																	leftSection={
-																		<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-																	}
-																	onClick={() => clipboard.copy(builder.discordId)}
-																>
+																<MenuItem leftSection={<SiDiscord />} onClick={() => clipboard.copy(builder.discordId)}>
 																	Copy Discord Id
 																</MenuItem>
 																<MenuItem

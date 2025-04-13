@@ -1,5 +1,5 @@
 import { Button, CloseButton, Group, Paper, Text } from '@mantine/core';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 
 import { hasCookie } from 'cookies-next';

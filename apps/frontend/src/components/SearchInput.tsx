@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons-react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 interface SearchInputProps {
 	onSearch?: (search: string) => void;
@@ -27,7 +27,7 @@ const SearchInput = (props: SearchInputProps) => {
 
 	return (
 		<TextInput
-			placeholder={t('search')}
+			placeholder={t('search') ?? ''}
 			leftSection={<IconSearch size="1rem" stroke={1.5} />}
 			{...props.inputProps}
 			defaultValue={value}

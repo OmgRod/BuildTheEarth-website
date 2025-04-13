@@ -38,10 +38,10 @@ const Calendar: NextPage = () => {
 			buildTeam: null,
 		},
 		validate: {
-			start: (value) => (value ? null : 'Start date is required'),
-			end: (value) => (value ? null : 'End date is required'),
-			name: (value) => (value ? null : 'Name is required'),
-			description: (value) => (value ? null : 'Description is required'),
+			start: (value: any) => (value ? null : 'Start date is required'),
+			end: (value: any) => (value ? null : 'End date is required'),
+			name: (value: any) => (value ? null : 'Name is required'),
+			description: (value: any) => (value ? null : 'Description is required'),
 		},
 	});
 

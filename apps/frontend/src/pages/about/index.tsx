@@ -13,11 +13,11 @@ import {
 import BackgroundImage from '@/components/BackgroundImage';
 import Page from '@/components/Page';
 import thumbnail from '@/public/images/thumbnails/about.webp';
-import { Youtube } from '@icons-pack/react-simple-icons';
+import { SiYoutube } from '@icons-pack/react-simple-icons';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 import { ChevronRight } from 'tabler-icons-react';
 
 const Home: NextPage = () => {
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 	const scheme = useMantineColorScheme();
 	const { t } = useTranslation('about');
 	return (
-		<Page fullWidth title={t('head.title')}>
+		<Page fullWidth title={t('head.title') ?? ''}>
 			<BackgroundImage
 				rootStyle={{
 					width: '100%',
@@ -57,14 +57,7 @@ const Home: NextPage = () => {
 						<Text>{t('mission.content.1')}</Text>
 					</Grid.Col>
 					<Grid.Col span={{ md: 5 }}>
-						<Blockquote
-							m="md"
-							cite="– @miallv14"
-							color="red"
-							icon={<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
-							mt="lg"
-							iconSize={40}
-						>
+						<Blockquote m="md" cite="– @miallv14" color="red" icon={<SiYoutube />} mt="lg" iconSize={40}>
 							This was every Minecraft player’s dream since the dawn of Minecraft
 						</Blockquote>
 					</Grid.Col>
@@ -78,14 +71,7 @@ const Home: NextPage = () => {
 						<Text>{t('history.content.1')}</Text>
 					</Grid.Col>
 					<Grid.Col span={{ md: 5 }}>
-						<Blockquote
-							m="md"
-							cite="– @lukastrommer"
-							color="red"
-							icon={<Youtube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
-							mt="lg"
-							iconSize={40}
-						>
+						<Blockquote m="md" cite="– @lukastrommer" color="red" icon={<SiYoutube />} mt="lg" iconSize={40}>
 							Imagine you could just go everywhere in your whole life just in minecraft.
 						</Blockquote>
 					</Grid.Col>

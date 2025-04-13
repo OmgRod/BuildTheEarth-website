@@ -99,7 +99,7 @@ class BlogController {
 			body: JSON.stringify(body),
 		});
 
-		return opts?.dontParseJson ? response : await response.json();
+		return opts?.dontParseJson ? (response as unknown as T) : await response.json();
 	};
 
 	/**

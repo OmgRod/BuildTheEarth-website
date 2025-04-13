@@ -12,9 +12,9 @@ import { searchInOSM } from '@/utils/Fetcher';
 import { modals } from '@mantine/modals';
 import mapboxgl from 'mapbox-gl';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 
 const MapPage: NextPage = () => {
 	const clipboard = useClipboard();

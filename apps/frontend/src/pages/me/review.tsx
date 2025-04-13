@@ -5,9 +5,9 @@ import { useUser } from '@/hooks/useUser';
 import thumbnail from '@/public/images/thumbnails/me.png';
 import { IconFileSearch } from '@tabler/icons-react';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
 
 var vagueTime = require('vague-time');

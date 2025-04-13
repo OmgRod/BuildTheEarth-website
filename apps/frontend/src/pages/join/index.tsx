@@ -11,7 +11,7 @@ import {
 	useMantineColorScheme,
 	useMantineTheme,
 } from '@mantine/core';
-import { useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'motion/react';
 import { ChevronDown, ChevronRight } from 'tabler-icons-react';
 
 import BackgroundImage from '@/components/BackgroundImage';
@@ -20,10 +20,10 @@ import buildImg from '@/public/images/join/build.webp';
 import visitImg from '@/public/images/join/visit.webp';
 import thumbnail from '@/public/images/thumbnails/getstarted.png';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 
 const GetStarted: NextPage = () => {
 	const { t } = useTranslation('getstarted');

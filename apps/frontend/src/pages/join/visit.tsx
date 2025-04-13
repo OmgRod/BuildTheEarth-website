@@ -25,7 +25,7 @@ import {
 	IconSearch,
 	IconServer,
 } from '@tabler/icons-react';
-import { useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'motion/react';
 
 import BackgroundImage from '@/components/BackgroundImage';
 import Page from '@/components/Page';
@@ -34,11 +34,11 @@ import thumbnail from '@/public/images/join/visit.webp';
 import fetcher from '@/utils/Fetcher';
 import getCountryName from '@/utils/ISOCountries';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const Visit: NextPage = ({ data }: any) => {
 	const { t } = useTranslation('getstarted');
@@ -248,9 +248,10 @@ const Visit: NextPage = ({ data }: any) => {
 								label={
 									<div
 										dangerouslySetInnerHTML={{
-											__html: t('visit.country.step2.title', {
-												ip: selected?.ip,
-											}),
+											__html:
+												t('visit.country.step2.title', {
+													ip: selected?.ip,
+												}) ?? '',
 										}}
 									/>
 								}
@@ -263,7 +264,7 @@ const Visit: NextPage = ({ data }: any) => {
 									label={
 										<div
 											dangerouslySetInnerHTML={{
-												__html: t('visit.country.step2.title', { ip: 'buildtheearth.net' }),
+												__html: t('visit.country.step2.title', { ip: 'buildtheearth.net' }) ?? '',
 											}}
 										/>
 									}

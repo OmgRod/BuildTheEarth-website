@@ -8,15 +8,15 @@ import { useAccessToken } from '@/hooks/useAccessToken';
 import { useUser } from '@/hooks/useUser';
 import { ApplicationQuestions } from '@/utils/application/ApplicationQuestions';
 import fetcher from '@/utils/Fetcher';
-import { Discord } from '@icons-pack/react-simple-icons';
+import { SiDiscord } from '@icons-pack/react-simple-icons';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconChevronLeft } from '@tabler/icons-react';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import sanitize from 'sanitize-html';
 
 const Apply: NextPage = ({ data, buildteam }: any) => {
@@ -115,12 +115,7 @@ const Apply: NextPage = ({ data, buildteam }: any) => {
 				style={{ marginBottom: 'var(--mantine-spacing-md)' }}
 			/>
 			{uiError?.title && (
-				<Alert
-					title={uiError.title}
-					mb="md"
-					color="red"
-					icon={<Discord onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
-				>
+				<Alert title={uiError.title} mb="md" color="red" icon={<SiDiscord />}>
 					{uiError?.content}
 				</Alert>
 			)}
