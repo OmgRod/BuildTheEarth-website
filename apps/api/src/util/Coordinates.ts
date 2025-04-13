@@ -7,7 +7,7 @@ import { ERROR_GENERIC, ERROR_VALIDATION } from './Errors.js';
 
 // lat, lng
 export function toPoint(coords: string, splitter?: string): Point {
-	return point(coords.split(splitter || ', '));
+	return point(coords.split(splitter || ', ').map(Number) as [number, number]).geometry;
 }
 
 // ["lat, lng","lat, lng","lat, lng","lat, lng"]
@@ -17,7 +17,7 @@ export function toPolygon(coords: string[], splitter?: string, reverse?: boolean
 			const s = c.split(splitter || ', ');
 			return [parseFloat(s[reverse ? 1 : 0]), parseFloat(s[reverse ? 0 : 1])];
 		}),
-	]);
+	]).geometry;
 }
 
 export function toLngLat(coords: string, latFirst?: boolean, splitter?: string): { lat: number; lng: number } {
