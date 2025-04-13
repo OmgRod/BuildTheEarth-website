@@ -20,7 +20,6 @@ import Core from '../Core.js';
 import { ERROR_GENERIC } from '../util/Errors.js';
 import Routes from './routes/index.js';
 import checkNewUser from './routes/utils/CheckNewUserMiddleware.js';
-import metricsMiddleware from './routes/utils/MetricsMiddleware.js';
 
 class Web {
 	app;
@@ -56,7 +55,6 @@ class Web {
 
 	public startWebserver() {
 		this.app.use(bodyParser.json());
-		this.app.use(metricsMiddleware);
 		this.app.use(
 			session({
 				secret: process.env.SESSION_SECRET,
@@ -78,10 +76,10 @@ class Web {
 
 		this.routes = new Routes(this);
 
-		this.app.use('/api/v1/*', (req: Request, res: Response) => {
+		this.app.use('/api/v1/*splat', (req: Request, res: Response) => {
 			return ERROR_GENERIC(req, res, 404, 'Not Found');
 		});
-		this.app.use('*', (req: Request, res: Response) => {
+		this.app.use('*splat', (req: Request, res: Response) => {
 			return ERROR_GENERIC(req, res, 404, 'Not Found. Use /api/v1');
 		});
 

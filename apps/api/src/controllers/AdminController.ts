@@ -36,7 +36,7 @@ class AdminController {
 					id: j,
 					lastExecution: job.lastExecution?.toISOString(),
 					nextExecution: job.nextDate().toISO(),
-					running: job.running,
+					running: job.isActive,
 					cronTime: job.cronTime.source,
 				};
 			}),
