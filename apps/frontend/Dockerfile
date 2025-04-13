@@ -24,15 +24,12 @@ RUN yarn list postcss
 # Build the project
 COPY --from=builder /app/out/full/ .
 COPY --from=builder /app/apps/frontend/.env ./apps/frontend/.env
-COPY --from=builder /app/apps/frontend/next.config.js ./apps/frontend/next.config.js
-COPY --from=builder /app/apps/frontend/next-seo.config.ts ./apps/frontend/next-seo.config.ts
-COPY --from=builder /app/apps/frontend/postcss.config.js ./apps/frontend/postcss.config.js
-COPY --from=builder /app/apps/frontend/next-i18next.config.js ./apps/frontend/next-i18next.config.js
+COPY --from=builder /app/apps/frontend/next.config.ts ./apps/frontend/next.config.ts
+COPY --from=builder /app/apps/frontend/postcss.config.cjs ./apps/frontend/postcss.config.cjs
 ENV NEXT_TELEMETRY_DISABLED 1
 
 
-
-RUN yarn turbo run build --filter=dashboard...
+RUN yarn turbo run build --filter=frontend...
 
 FROM base AS runner
 WORKDIR /app
