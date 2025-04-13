@@ -13,12 +13,8 @@ const Credits = () => {
 
 				<p>
 					Work on the BuildTheEarth Website is public at{' '}
-					<Anchor component={Link} href={'https://github.com/BuildTheEarth/website-node-backend'}>
-						BuildTheEarth/website-node-backend
-					</Anchor>{' '}
-					and{' '}
-					<Anchor component={Link} href={'https://github.com/BuildTheEarth/website-frontend'}>
-						BuildTheEarth/website-frontend
+					<Anchor component={Link} href={'https://github.com/BuildTheEarth/web'}>
+						BuildTheEarth/web
 					</Anchor>
 					. We believe in transparency and would like you to contribute to this project aswell.
 					<br />
