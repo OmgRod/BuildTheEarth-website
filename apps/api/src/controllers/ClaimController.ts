@@ -354,7 +354,7 @@ class ClaimController {
 
 		const buildingCount = area && (await this.updateClaimBuildingCount({ area }));
 
-		if (!buildingCount || typeof buildingCount != 'number') {
+		if (buildingCount == undefined || buildingCount == null || typeof buildingCount != 'number') {
 			return ERROR_GENERIC(req, res, 500, 'Could not update building count');
 		}
 
@@ -564,7 +564,6 @@ class ClaimController {
 				`data=${overpassQuery.replace('\n', '')}`,
 			);
 
-			console.log(JSON.stringify(data, null, 2));
 			if (!data?.elements || data?.elements.length <= 0) {
 				this.core
 					.getLogger()

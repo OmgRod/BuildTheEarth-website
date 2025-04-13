@@ -27,6 +27,8 @@
 		"frontend/auth",
 		"dash/components",
 		"frontend/seo",
-		"api/applications"
+		"api/applications",
+		"api/claims",
+		"frontend/legal"
 	]
 }

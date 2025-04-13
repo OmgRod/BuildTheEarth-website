@@ -9,6 +9,7 @@
 **/package-lock.json
 **/yarn.lock
 !yarn.lock
+.yarn
 
 # Dependencies
 **/node_modules

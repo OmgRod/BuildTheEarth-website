@@ -4,7 +4,7 @@ import { ActionIcon, Box, Button, Text, Title } from '@mantine/core';
 
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown } from '@tabler/icons-react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function ErrorDisplay({
 	title = 'Something is not right...',
@@ -17,6 +17,7 @@ export default function ErrorDisplay({
 }) {
 	const [opened, { toggle }] = useDisclosure(false);
 	const pathname = usePathname();
+	const router = useRouter();
 
 	return (
 		<Box mx="md" maw="90vw">
@@ -35,7 +36,7 @@ export default function ErrorDisplay({
 				</Text>
 			)}
 			{showBackButton && (
-				<Button variant="outline" size="sm" mt="lg">
+				<Button variant="outline" size="sm" mt="lg" onClick={() => router.back()}>
 					Go Back
 				</Button>
 			)}

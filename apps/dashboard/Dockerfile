@@ -22,6 +22,7 @@ RUN yarn install
 
 # Build the project
 COPY --from=builder /app/out/full/ .
+COPY --from=builder /app/apps/dashboard/.env ./apps/dashboard/.env
 
 ENV NEXT_TELEMETRY_DISABLED 1
 

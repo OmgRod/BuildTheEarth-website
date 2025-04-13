@@ -1,9 +1,9 @@
 'use client';
 
-import { addFaqQuestion, deleteFaqQuestion, editFaqQuestion } from '@/app/actions';
 import { ActionIcon, Button, Group, InputWrapper, TextInput } from '@mantine/core';
 import { IconDeviceFloppy, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
 
+import { adminAddFaqQuestion, adminDeleteFaqQuestion, adminEditFaqQuestion } from '@/actions/faq';
 import RichTextEditor from '@/components/input/RTE';
 import { useFormActions } from '@/hooks/useFormAction';
 import { useForm } from '@mantine/form';
@@ -63,9 +63,9 @@ function EditFaqQuestionModal(
 		initialValues: { id: props.id, question: props.question, answer: props.answer, links: props.links },
 	});
 	const [[addFaqQuestionAction, editFaqQuestionAction, deleteFaqQuestionAction], isPending] = useFormActions([
-		addFaqQuestion,
-		editFaqQuestion,
-		deleteFaqQuestion,
+		adminAddFaqQuestion,
+		adminEditFaqQuestion,
+		adminDeleteFaqQuestion,
 	]);
 
 	const handleSubmit = (values: FAQQuestion) => {

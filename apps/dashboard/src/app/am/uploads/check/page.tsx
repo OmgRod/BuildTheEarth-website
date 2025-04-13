@@ -1,6 +1,6 @@
-import { checkUpload, deleteUpload } from '@/app/actions';
 import { Box, Title } from '@mantine/core';
 
+import { adminCheckUpload, adminDeleteUpload } from '@/actions/uploads';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import UploadsDatatable from './datatable';
@@ -39,8 +39,8 @@ export default async function Page({
 				<UploadsDatatable
 					uploads={uploads.map((u) => ({ ...u, createdAt: u.createdAt.toISOString() }))}
 					count={uploadCount}
-					onCheckAction={checkUpload}
-					onDeleteAction={deleteUpload}
+					onCheckAction={adminCheckUpload}
+					onDeleteAction={adminDeleteUpload}
 				/>
 			</Box>
 		</Protection>

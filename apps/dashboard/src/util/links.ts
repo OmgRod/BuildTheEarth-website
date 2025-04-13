@@ -33,11 +33,6 @@ export const meNavLinks: NavLink[] = [
 		label: 'Claim Overview',
 		icon: 'Polygon',
 	},
-	{
-		link: '/me/network',
-		label: 'Network Statistics',
-		icon: 'ChartPie',
-	},
 
 	// ---- Account Links ----
 	{ link: '', label: 'Your Account', icon: null, divider: true },

@@ -9,8 +9,13 @@ interface ContextMenuInfo {
 
 export function useContextMenu({
 	disableEventPosition = false,
+	offset,
 }: {
 	disableEventPosition?: boolean;
+	offset?: {
+		x: number;
+		y: number;
+	};
 }): [ContextMenuInfo, React.Dispatch<ContextMenuInfo>, React.MouseEventHandler] {
 	const [info, setInfo] = useState<ContextMenuInfo>({ x: 0, y: 0, opened: false });
 
@@ -18,7 +23,7 @@ export function useContextMenu({
 		(e) => {
 			e.preventDefault();
 			if (!disableEventPosition) {
-				setInfo({ x: e.clientX, y: e.clientY, opened: true });
+				setInfo({ x: e.clientX + (offset ? offset.x : 0), y: e.clientY + (offset ? offset.y : 0), opened: true });
 			} else {
 				setInfo({ ...info, opened: true });
 			}

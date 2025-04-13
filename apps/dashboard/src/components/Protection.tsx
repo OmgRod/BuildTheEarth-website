@@ -1,8 +1,9 @@
 'use server';
-
 import { getSession, hasRole } from '@/util/auth';
 
 import ErrorDisplay from './core/ErrorDisplay';
+
+import type { JSX } from 'react';
 
 export async function Protection({ children, requiredRole }: { children: JSX.Element; requiredRole: string }) {
 	const session = await getSession();

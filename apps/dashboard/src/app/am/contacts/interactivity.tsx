@@ -1,9 +1,9 @@
 'use client';
 
-import { addContact, deleteContact, editContact } from '@/app/actions';
 import { ActionIcon, Button, Group, TextInput } from '@mantine/core';
 import { IconDeviceFloppy, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
 
+import { adminAddContact, adminDeleteContact, adminEditContact } from '@/actions/contacts';
 import { useFormActions } from '@/hooks/useFormAction';
 import { useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
@@ -69,9 +69,9 @@ function EditContactModal(
 		},
 	});
 	const [[addContactAction, editContactAction, deleteContactAction], isPending] = useFormActions([
-		addContact,
-		editContact,
-		deleteContact,
+		adminAddContact,
+		adminEditContact,
+		adminDeleteContact,
 	]);
 
 	const handleSubmit = (values: Contact) => {

@@ -13,7 +13,7 @@ export function BuildTeamDisplay({
 		? {}
 		: {
 				component: Link,
-				href: '/am/teams/' + team.slug,
+				href: '/am/teams/' + team.id,
 			};
 
 	return (
