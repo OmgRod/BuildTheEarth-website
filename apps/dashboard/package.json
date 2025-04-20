@@ -14,6 +14,7 @@
 	},
 	"dependencies": {
 		"@bte-germany/terraconvert": "^1.1.2",
+		"@keycloak/keycloak-admin-client": "^26.2.0",
 		"@mantine/charts": "^7.17.4",
 		"@mantine/code-highlight": "^7.17.4",
 		"@mantine/core": "^7.17.4",
