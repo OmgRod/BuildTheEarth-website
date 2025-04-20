@@ -2,15 +2,15 @@ import KcAdminClient from '@keycloak/keycloak-admin-client';
 
 const keycloakAdminClientSingleton = () => {
 	const client = new KcAdminClient({
-		baseUrl: process.env.KEYCLOAK_URL,
-		realmName: process.env.KEYCLOAK_REALM,
+		baseUrl: process.env.NEXT_PUBLIC_KEYCLOAK_URL?.split('/realms/')[0],
+		realmName: process.env.NEXT_PUBLIC_KEYCLOAK_URL?.split('/realms/')[1],
 	});
 
 	client
 		.auth({
 			grantType: 'client_credentials',
-			clientId: process.env.KEYCLOAK_CLIENTID || '',
-			clientSecret: process.env.KEYCLOAK_CLIENTSECRET,
+			clientId: process.env.KEYCLOAK_ADMIN_CLIENT_ID || '',
+			clientSecret: process.env.KEYCLOAK_ADMIN_CLIENT_SECRET,
 		})
 		.then(() => {})
 		.catch((err) => {
