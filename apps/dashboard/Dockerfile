@@ -1,8 +1,7 @@
-FROM node:21-alpine AS base
+FROM node:22-alpine AS base
 
 FROM base AS builder
-RUN apk update
-RUN apk add --no-cache libc6-compat
+RUN apk update && apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Run turbo (will prune the lockfile to only include target dependencies)
@@ -12,8 +11,7 @@ RUN turbo prune dashboard --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
-RUN apk update
-RUN apk add --no-cache libc6-compat
+RUN apk update && apk add --no-cache libc6-compat
 WORKDIR /app
 
 # First install the dependencies (as they change less often)
@@ -35,8 +33,8 @@ ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Create a runner user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
 USER nextjs
 
 # Reduce image size
