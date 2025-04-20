@@ -6,7 +6,6 @@ import React from 'react';
 import { useIsClient } from '../hooks/useIsClient';
 import BackgroundImage from './BackgroundImage';
 import { MotionDiv } from './Motion';
-
 interface GalleryGridProps {
 	images: GalleryGridImageProps[];
 	style?: React.CSSProperties;
@@ -43,6 +42,7 @@ export function GalleryGridImage(i: GalleryGridImageProps) {
 	const theme = useMantineTheme();
 	const isClient = useIsClient();
 	const { hovered, ref } = useHover();
+
 	return (
 		<AnimatePresence>
 			<MotionDiv
@@ -66,7 +66,6 @@ export function GalleryGridImage(i: GalleryGridImageProps) {
 						ref={ref}
 						style={{
 							height: '100%',
-							// position: 'relative',
 							width: '100%',
 							background: 'linear-gradient(160deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0,0.8))',
 							opacity: i.showTooltipOnHover && !hovered ? 0 : 100,
