@@ -126,7 +126,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 								{application.reason}
 							</Blockquote>
 						) : (
-							<Text w="100%">Unfortunately, the BuildTeam did not provide a reason.</Text>
+							<Text w="100%">Unfortunately, the Build Region did not provide a reason.</Text>
 						)}
 					</TextCard>
 					<Space h="md" />
@@ -136,7 +136,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 			<TextCard title="Application Answers">
 				<Text c="dimmed" size="md" mb="lg" maw="60%">
 					These are the answers you provided in your application. If you believe there is an error or you would like to
-					provide additional information, please contact the BuildTeam directly.
+					provide additional information, please contact the Build Region directly.
 				</Text>
 				{applicationAnswers
 					.sort((a: any, b: any) => a.question.sort - b.question.sort)

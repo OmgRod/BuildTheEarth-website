@@ -30,8 +30,8 @@ export function SearchApplications(props: GroupProps) {
 		},
 		{
 			value: 'team',
-			label: 'BuildTeam',
-			example: 'BuildTeam Name, Country, IP, Invite, Slug...',
+			label: 'Build Region',
+			example: 'Build Region Name, Country, IP, Invite, Slug...',
 		},
 	];
 

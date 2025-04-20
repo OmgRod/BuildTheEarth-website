@@ -48,7 +48,7 @@ export default async function Page({
 		<Protection requiredRole="get-teams">
 			<Box mx="md" maw="90vw">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
-					<Title order={1}>BuildTeams</Title>
+					<Title order={1}>Build Regions</Title>
 					<Group gap="xs">
 						<Button
 							variant="light"

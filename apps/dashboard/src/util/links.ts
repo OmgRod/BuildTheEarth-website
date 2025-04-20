@@ -20,7 +20,7 @@ export const meNavLinks: NavLink[] = [
 	},
 	{
 		link: '/me/teams',
-		label: 'Participating Teams',
+		label: 'Participating Regions',
 		icon: 'UsersGroup',
 	},
 	{
@@ -68,7 +68,7 @@ export const meNavLinks: NavLink[] = [
 	},
 	{
 		link: '/am/teams',
-		label: 'BuildTeams',
+		label: 'Build Regions',
 		permission: 'get-teams',
 		icon: 'UsersGroup',
 	},
@@ -86,7 +86,7 @@ export const meNavLinks: NavLink[] = [
 	},
 	{
 		link: '/am/applications',
-		label: 'Team Applications',
+		label: 'Region Applications',
 		permission: 'get-applications',
 		icon: 'Forms',
 	},

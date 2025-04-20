@@ -44,19 +44,19 @@ export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } })
 			<MenuDropdown>
 				<MenuItem
 					leftSection={<IconTransfer style={{ width: rem(14), height: rem(14) }} />}
-					aria-label="Transfer Claim to other buildteam"
+					aria-label="Transfer Claim to other Build Region"
 					rel="noopener"
 					onClick={() => {
 						modals.open({
 							id: 'change-buildteam',
 							centered: true,
-							title: 'Change assigned BuildTeam',
+							title: 'Change assigned Build Region',
 							size: 'lg',
 							children: <ChangeBuildTeamModal claim={claim} />,
 						});
 					}}
 				>
-					Change BuildTeam
+					Change Build Region
 				</MenuItem>
 				<MenuLabel>Danger Zone</MenuLabel>
 				<MenuItem
@@ -95,19 +95,19 @@ export function ChangeBuildTeamModal({ claim }: { claim: Claim & { buildTeam: Bu
 	return (
 		<>
 			<Title order={5} mb="sm">
-				Active BuildTeam
+				Active Build Region
 			</Title>
 			<Paper withBorder p="md" w="fit-content">
 				<BuildTeamDisplay team={claim.buildTeam} />
 			</Paper>
 			<Title order={5} mt="md" mb="sm">
-				New BuildTeam
+				New Build Region
 			</Title>
 			<BuildTeamSelect
 				onChange={setDestinationTeam}
 				searchable
 				id="destinationTeam"
-				description="Select the team you want to transfer the claim to."
+				description="Select the region you want to transfer the claim to."
 			/>
 			<Button
 				type="submit"
@@ -121,7 +121,7 @@ export function ChangeBuildTeamModal({ claim }: { claim: Claim & { buildTeam: Bu
 					modals.closeAll();
 				}}
 			>
-				Change BuildTeam
+				Change Build Region
 			</Button>
 		</>
 	);

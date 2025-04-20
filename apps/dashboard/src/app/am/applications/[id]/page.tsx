@@ -51,7 +51,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 						</TextCard>
 					</GridCol>
 					<GridCol span={2}>
-						<TextCard title="BuildTeam" style={{ height: '100%' }}>
+						<TextCard title="Build Region" style={{ height: '100%' }}>
 							<BuildTeamDisplay team={application.buildteam} />
 						</TextCard>
 					</GridCol>

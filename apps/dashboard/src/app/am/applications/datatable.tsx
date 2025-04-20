@@ -55,7 +55,7 @@ export default function ApplicationsDatatable<A extends { id: string }>({
 				{ accessor: 'createdAt', title: 'Created At', render: ({ createdAt }: any) => toHumanDateTime(createdAt) },
 				{
 					accessor: 'buildteam.name',
-					title: 'BuildTeam',
+					title: 'Build Region',
 					render: ({ buildteam }: any) => <BuildTeamDisplay team={buildteam} />,
 				},
 				{

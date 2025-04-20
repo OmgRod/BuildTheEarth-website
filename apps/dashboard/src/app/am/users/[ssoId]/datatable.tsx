@@ -69,7 +69,7 @@ export default function ClaimDatatabe({
 				},
 				{
 					accessor: 'buildTeam',
-					title: 'BuildTeam',
+					title: 'Build Region',
 					render: ({ buildTeam }: { buildTeam: (typeof claims)[0]['buildTeam'] }) => (
 						<BuildTeamDisplay team={buildTeam} />
 					),

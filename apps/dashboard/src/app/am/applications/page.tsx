@@ -80,7 +80,7 @@ export default async function Page({
 		<Protection requiredRole="get-applications">
 			<Box mx="md" maw="90vw">
 				<Title order={1} mt="xl" mb="md">
-					Team Applications
+					Region Applications
 				</Title>
 				<SearchApplications mb="md" maw="60%" />
 				<ApplicationsDatatable<(typeof applications)[0]> applications={applications} count={applicationCount} />

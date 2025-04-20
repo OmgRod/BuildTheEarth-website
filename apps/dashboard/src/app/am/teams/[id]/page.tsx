@@ -75,7 +75,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 			},
 		},
 	});
-	if (!team) throw Error('Could not find BuildTeam');
+	if (!team) throw Error('Could not find Build Region');
 
 	const teamApplicationsByStatus = await prisma.application.groupBy({
 		where: { buildteamId: id },
@@ -133,7 +133,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 							</TextCard>
 						</GridCol>
 						<GridCol span={6}>
-							<TextCard title="Team Owner" icon={IconUser}>
+							<TextCard title="Region Owner" icon={IconUser}>
 								<UserDisplay user={team.creator as any} />
 							</TextCard>
 						</GridCol>
@@ -184,7 +184,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 								<NumberFormatter value={team._count.Application} thousandSeparator suffix=" Applications" />
 							</Text>
 							{reviewActivity.par > 30 ? (
-								<Tooltip label="The BuildTeam seems to lack behind on reviewing applications.">
+								<Tooltip label="The Build Region seems to lack behind on reviewing applications.">
 									<ThemeIcon color="red" size="sm" variant="outline" style={{ border: 'none' }}>
 										<IconAlertCircle style={{ width: '70%', height: '70%' }} />
 									</ThemeIcon>
@@ -217,8 +217,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 						icon={<IconForms />}
 					>
 						The applications to {team.name} are disabled. This means that no new applications can be submitted to this
-						BuildTeam. This might be due to a high number of pending applications, or other reasons. Please note, that
-						the graphics below might not be accurate, as they are based on the latest data available.
+						Build Region. This might be due to a high number of pending applications, or other reasons. Please note,
+						that the graphics below might not be accurate, as they are based on the latest data available.
 					</Alert>
 				) : undefined}
 				<Grid>
@@ -249,9 +249,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 										title="Low review activity"
 										icon={<IconClockExclamation />}
 									>
-										This BuildTeam&apos;s review activity score is critically low. This indicates significant problems
-										with the review process, likely due to many pending applications or long review times. Please get in
-										contact with the BuildTeam to resolve this issue.
+										This Build Region&apos;s review activity score is critically low. This indicates significant
+										problems with the review process, likely due to many pending applications or long review times.
+										Please get in contact with the Build Region to resolve this issue.
 									</Alert>
 								) : reviewActivity.ras < 3.75 ? (
 									<Alert
@@ -264,9 +264,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 										title="Moderate review activity"
 										icon={<IconClock />}
 									>
-										This BuildTeam&apos;s review activity score is below a good level. This indicates that there are
+										This Build Region&apos;s review activity score is below a good level. This indicates that there are
 										areas where application review can be improved, possibly from pending application backlogs or
-										longer-than-desired review times. Please get in contact with the BuildTeam to prevent this from
+										longer-than-desired review times. Please get in contact with the Build Region to prevent this from
 										getting worse.
 									</Alert>
 								) : (
@@ -278,8 +278,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 										title={`${reviewActivity.ras > 4.5 ? 'Perfect' : 'Good'} review activity`}
 										icon={<IconClockCheck />}
 									>
-										The review activity score of this BuildTeam is above 3.75. This means that the BuildTeam is
-										performing well in reviewing applications. This is a good sign, and the BuildTeam is likely to be
+										The review activity score of this Build Region is above 3.75. This means that the Build Region is
+										performing well in reviewing applications. This is a good sign, and the Build Region is likely to be
 										efficient in reviewing applications.
 									</Alert>
 								)}

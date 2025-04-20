@@ -24,9 +24,9 @@ export default async function Page({
 		return (
 			<Box mx="md" maw="90vw">
 				<Title order={1} mt="xl" mb="md">
-					Transfer and Delete BuildTeam
+					Transfer and Delete Build Region
 				</Title>
-				<Alert title="Team not found" icon={<IconExclamationCircle />} mb="lg" />
+				<Alert title="Region not found" icon={<IconExclamationCircle />} mb="lg" />
 			</Box>
 		);
 	}

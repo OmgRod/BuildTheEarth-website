@@ -15,7 +15,7 @@ export default async function Page() {
 			</Flex>
 			<SimpleGrid cols={2}>
 				<Skeleton>
-					<TextCard isText={false} title="BuildTeam">
+					<TextCard isText={false} title="Build Region">
 						<BuildTeamDisplay team={{ icon: '', name: '', slug: '' }} noAnchor />
 					</TextCard>
 				</Skeleton>

@@ -5,11 +5,11 @@ export default async function Page() {
 	return (
 		<Box ml="md" maw="50vw">
 			<Title order={1} mt="xl" mb="md">
-				Participating BuildTeams
+				Participating Build Regions
 			</Title>
 			<Text c="dimmed" size="md" mb="lg">
-				This list contains all BuildTeams you are currently a member of. Each BuildTeam has its own Discord server and
-				custom requirements, so make sure to join their server and read their information.
+				This list contains all Build Regions you are currently a member of. Each Build Region has its own Discord server
+				and custom requirements, so make sure to join their server and read their information.
 			</Text>
 			<Stack gap="lg">
 				{Array(4)

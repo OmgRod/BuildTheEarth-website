@@ -152,12 +152,12 @@ export default function BuildTeamsDatatable({
 									<MenuItem
 										leftSection={<IconTransfer style={{ width: rem(14), height: rem(14) }} />}
 										color="red"
-										aria-label="Delete or Transfer Team"
+										aria-label="Delete or Transfer Region"
 										component={Link}
 										href={`/am/teams/${team.id}/transfer?ref=transfer`}
 										rel="noopener"
 									>
-										Transfer Team
+										Transfer Region
 									</MenuItem>
 								</MenuDropdown>
 							</Menu>
