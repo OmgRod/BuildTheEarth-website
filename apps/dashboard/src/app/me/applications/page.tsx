@@ -8,11 +8,53 @@ import { applicationStatusToColor, applicationStatusToIcon, applicationStatusToT
 import { IconCalendar, IconCalendarCheck } from '@tabler/icons-react';
 import moment from 'moment';
 import Link from 'next/link';
+import { ApplicationPagination, SearchApplications } from './interactivity';
 
-export default async function Page() {
+export default async function Page({
+	searchParams,
+}: {
+	searchParams: Promise<{ page: string | undefined; query: string | undefined }>;
+}) {
 	const session = await getSession();
+	const page = (await searchParams).page;
+	const searchQuery = (await searchParams).query;
+
+	const applicationCount = await prisma.application.count({
+		where: {
+			user: { ssoId: session?.user?.id },
+			AND: searchQuery
+				? {
+						OR: [
+							{ id: { contains: searchQuery } },
+							{ buildteam: { OR: [{ id: searchQuery }, { name: searchQuery }, { slug: searchQuery }] } },
+						],
+					}
+				: undefined,
+		},
+	});
+
 	const applications = await prisma.application.findMany({
-		where: { user: { ssoId: session?.user?.id } },
+		take: 10,
+		skip: (Number(page || '1') - 1) * 10,
+		where: {
+			user: { ssoId: session?.user?.id },
+			AND: searchQuery
+				? {
+						OR: [
+							{ id: { contains: searchQuery } },
+							{
+								buildteam: {
+									OR: [
+										{ id: { contains: searchQuery } },
+										{ name: { contains: searchQuery } },
+										{ slug: { contains: searchQuery } },
+									],
+								},
+							},
+						],
+					}
+				: undefined,
+		},
 		select: {
 			id: true,
 			buildteam: { select: { id: true, slug: true, icon: true, name: true } },
@@ -31,10 +73,12 @@ export default async function Page() {
 				Your Applications
 			</Title>
 			<Text c="dimmed" size="md" mb="lg">
-				Applications are requests to join a specific BuildTeam as a member. Each BuildTeam has its own requirements and
-				application questions. You can apply to multiple BuildTeams at once, but please keep in mind that each BuildTeam
-				reviews applications separately. Click on an application to view its status and your answers.
+				Applications are requests to join a specific Build Region as a member. Each Build Region has its own
+				requirements and application questions. You can apply to multiple Build Regions at once, but please keep in mind
+				that each Build Region reviews applications separately. Click on an application to view its status and your
+				answers.
 			</Text>
+			<SearchApplications mb="lg" />
 			<Stack gap="lg">
 				{applications
 					.sort((a, b) => (a.status === 'SEND' ? -1 : b.status === 'SEND' ? 1 : 0))
@@ -97,6 +141,7 @@ export default async function Page() {
 						);
 					})}
 			</Stack>
+			<ApplicationPagination applicationCount={applicationCount} pageSize={10} mt="lg" />
 		</Box>
 	);
 }

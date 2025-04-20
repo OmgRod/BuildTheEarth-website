@@ -26,6 +26,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 			status: true,
 			reason: true,
 			trial: true,
+			reviewedAt: true,
 		},
 	});
 
@@ -60,19 +61,28 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 	const alertContent = applicationStatusToAlert(application.status);
 
 	return (
-		<Box mx="md" maw="50vw">
+		<Box mx="md" maw="90vw">
 			<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap" mt="xl" mb="md">
 				<Title order={1}>Application {id.split('-')[0]}</Title>
 				<Text c="dimmed" fz="sm">
 					({application.buildteam.name})
 				</Text>
 			</Flex>
-			<SimpleGrid cols={2}>
-				<TextCard isText={false} title="BuildTeam">
+			<SimpleGrid cols={3}>
+				<TextCard isText={false} title="Build Region">
 					<BuildTeamDisplay team={application.buildteam} noAnchor />
 				</TextCard>
 				<TextCard title="Created At" isText>
 					{toHumanDate(application.createdAt)} ({moment(application.createdAt).fromNow()})
+				</TextCard>
+				<TextCard title="Reviewed At" isText>
+					{application.reviewedAt === null ? (
+						'-/-'
+					) : (
+						<>
+							{toHumanDate(application.reviewedAt)} ({moment(application.reviewedAt).fromNow()})
+						</>
+					)}
 				</TextCard>
 			</SimpleGrid>
 			<Alert
@@ -90,7 +100,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 				<Text>{alertContent.description}</Text>
 				{successorApplications.length > 0 && (
 					<Text mt="sm">
-						We have found a more recent application for this BuildTeam. You can view it{' '}
+						We have found a more recent application for this Build Region. You can view it{' '}
 						<Link href={`/me/applications/${successorApplications.at(-1)?.id || successorApplications[0].id}`}>
 							here
 						</Link>
@@ -105,14 +115,14 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 							Your application to {application.buildteam.name} has been <b>declined</b>.{' '}
 							{application.reason ? (
 								<>
-									The BuildTeam has provided the following <b>reason</b>:
+									The Build Region has provided the following <b>reason</b>:
 								</>
 							) : (
 								<></>
 							)}
 						</Text>
 						{application.reason ? (
-							<Blockquote color="gray" w="100%">
+							<Blockquote color="red" w="100%">
 								{application.reason}
 							</Blockquote>
 						) : (

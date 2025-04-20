@@ -6,7 +6,7 @@ import { IconLoader } from '@tabler/icons-react';
 
 export default async function Page() {
 	return (
-		<Box mx="md" maw="50vw">
+		<Box mx="md" maw="90vw">
 			<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap" mt="xl" mb="md">
 				<Title order={1}>Application XXXXXXXX</Title>
 				<Text c="dimmed" fz="sm">
