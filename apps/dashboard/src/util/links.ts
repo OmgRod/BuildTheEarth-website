@@ -61,18 +61,6 @@ export const meNavLinks: NavLink[] = [
 		divider: true,
 	},
 	{
-		link: '/am/users',
-		label: 'Website Users',
-		permission: 'get-users',
-		icon: 'UsersGroup',
-	},
-	{
-		link: '/am/teams',
-		label: 'Build Regions',
-		permission: 'get-teams',
-		icon: 'UsersGroup',
-	},
-	{
 		link: '/am/faq',
 		label: 'FAQ',
 		permission: 'get-faq',
@@ -91,8 +79,32 @@ export const meNavLinks: NavLink[] = [
 		icon: 'Forms',
 	},
 	{
+		link: '/am/users',
+		label: 'Website Users',
+		permission: 'get-users',
+		icon: 'UsersGroup',
+	},
+	{
+		link: '/am/teams',
+		label: 'Build Regions',
+		permission: 'get-teams',
+		icon: 'UsersGroup',
+	},
+	{
+		link: '/am/contacts',
+		label: 'Contacts',
+		permission: 'get-config',
+		icon: 'Mail',
+	},
+	{
+		link: '/am/uploads',
+		label: 'Uploads',
+		permission: 'get-config',
+		icon: 'Upload',
+	},
+	{
 		link: '/am/sso',
-		label: 'SSO Configuration and Security',
+		label: 'SSO Configuration',
 		permission: 'get-config',
 		icon: 'Settings',
 	},
