@@ -69,6 +69,7 @@ import prisma from '@/util/db';
 import { ApplicationStatus } from '@repo/db';
 import moment from 'moment';
 import Link from 'next/link';
+import { Fragment } from 'react';
 import ClaimDatatabe from './datatable';
 
 export default async function Page({ params }: { params: Promise<{ ssoId: string }> }) {
@@ -581,7 +582,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 											) : (
 												'-/-'
 											),
-											<>
+											<Fragment key={permission.id}>
 												{permission.buildTeamId == null ? (
 													permission.permission.global ? (
 														<Badge variant="transparent" color="lime">
@@ -608,7 +609,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 														}
 													</>
 												)}
-											</>,
+											</Fragment>,
 										]),
 									}}
 								/>
