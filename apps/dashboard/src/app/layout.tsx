@@ -13,7 +13,6 @@ import 'mantine-datatable/styles.layer.css';
 
 import AuthProvider from '@/components/AuthProvider';
 import SWRSetup from '@/components/core/SWRSetup';
-import AppLayout from '@/components/layout';
 import { getSession } from '@/util/auth';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
@@ -46,7 +45,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 						<SWRSetup>
 							<ModalsProvider>
 								<Notifications limit={3} />
-								<AppLayout>{children}</AppLayout>
+								{children}
 							</ModalsProvider>
 						</SWRSetup>
 					</AuthProvider>

@@ -6,6 +6,7 @@ import { default as Navbar } from './navbar';
 
 export interface LayoutProps {
 	children: React.ReactNode;
+	hideNavbar?: boolean;
 }
 
 /**
@@ -19,6 +20,7 @@ export default async function AppLayout(props: LayoutProps) {
 			navbar={{
 				width: 300,
 				breakpoint: 'sm',
+				collapsed: { desktop: props.hideNavbar, mobile: props.hideNavbar },
 			}}
 			header={{ height: 60 }}
 			padding="md"
