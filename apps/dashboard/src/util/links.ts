@@ -29,8 +29,8 @@ export const meNavLinks: NavLink[] = [
 		icon: 'Forms',
 	},
 	{
-		link: '/me/claims',
-		label: 'Claim Overview',
+		link: '/editor',
+		label: 'Claim Editor',
 		icon: 'Polygon',
 	},
 
