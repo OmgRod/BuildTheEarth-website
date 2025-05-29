@@ -30,6 +30,7 @@
 		"api/applications",
 		"api/claims",
 		"frontend/legal",
-		"frontend/gallery"
+		"frontend/gallery",
+		"dash/editor"
 	]
 }

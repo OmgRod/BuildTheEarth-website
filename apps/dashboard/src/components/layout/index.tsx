@@ -1,4 +1,4 @@
-import { AppShell, AppShellMain } from '@mantine/core';
+import { AppShell, AppShellMain, AppShellProps } from '@mantine/core';
 
 import { getSession } from '@/util/auth';
 import Header from './header';
@@ -7,12 +7,13 @@ import { default as Navbar } from './navbar';
 export interface LayoutProps {
 	children: React.ReactNode;
 	hideNavbar?: boolean;
+	customNavbar?: React.ReactNode;
 }
 
 /**
  * Root layout of Pages
  */
-export default async function AppLayout(props: LayoutProps) {
+export default async function AppLayout({ children, hideNavbar, customNavbar, ...props }: LayoutProps & AppShellProps) {
 	const session = await getSession();
 
 	return (
@@ -20,17 +21,19 @@ export default async function AppLayout(props: LayoutProps) {
 			navbar={{
 				width: 300,
 				breakpoint: 'sm',
-				collapsed: { desktop: props.hideNavbar, mobile: props.hideNavbar },
 			}}
 			header={{ height: 60 }}
-			padding="md"
+			p="md"
+			{...props}
 		>
-			<Navbar roles={session?.user.realm_access.roles || []} />
+			{!hideNavbar && <Navbar roles={session?.user.realm_access.roles || []} />}
+
+			{customNavbar}
 
 			<Header />
 
 			<AppShellMain style={{ position: 'relative', paddingBottom: 'calc(var(--mantine-spacing-xl) * 1.5)' }}>
-				{props.children}
+				{children}
 			</AppShellMain>
 		</AppShell>
 	);
