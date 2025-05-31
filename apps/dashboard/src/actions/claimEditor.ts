@@ -1,6 +1,6 @@
 'use server';
 
-import { constructClaimGeoJSONQuery } from '@/app/(sideNavbar)/api/data/claims.geojson/route';
+import { constructClaimGeoJSONQuery } from '@/app/(sideNavbar)/api/data/claims.geojson/query';
 import turf, { toPolygon } from '@/util/coordinates';
 import prisma from '@/util/db';
 import { updateClaimBuildingCount, updateClaimOSMDetails } from '@/util/geojsonHelpers';
