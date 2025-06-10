@@ -16,7 +16,8 @@ export default function EditorMap({ userId }: { userId: string }) {
 	});
 	const [map, setMap] = useState<MapType>();
 
-	const { switchClaim, updateClaim, drawInstance, selectedClaimId, createClaimShell } = useClaimEditorStore();
+	const { switchClaim, updateClaim, drawInstance, selectedClaimId, createClaimShell, setSelectedClaim } =
+		useClaimEditorStore();
 
 	useEffect(() => {
 		const unsubscribeClaimEditorStoreCoordinates = useClaimEditorStore.subscribe(
@@ -58,6 +59,12 @@ export default function EditorMap({ userId }: { userId: string }) {
 
 					const geojson = await fetch(`/api/data/claims.geojson`).then((r) => r.json());
 					drawInstance.set(geojson);
+
+					const searchParams = new URLSearchParams(window.location.search);
+					const initialClaimId = searchParams.get('id');
+					if (initialClaimId) {
+						setSelectedClaim(initialClaimId);
+					}
 
 					// Interactivity
 					map.on('mousemove', (e) => {

@@ -2,6 +2,7 @@
 import { BuildTeamSelect } from '@/components/input/BuildTeamSelect';
 import { Button, Group, Title } from '@mantine/core';
 import { IconDeviceFloppy, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
+import Link from 'next/link';
 import { useState } from 'react';
 import { useClaimEditorStore } from './store';
 
@@ -25,7 +26,8 @@ export function SaveButtonGroup() {
 					variant="outline"
 					color="orange"
 					disabled={!editorStore.selectedClaimId}
-					onClick={() => {}}
+					component={Link}
+					href={`/editor/${editorStore.selectedClaimId}`}
 					rightSection={<IconPencil size={16} />}
 				>
 					Open in advanced Editor
