@@ -3,15 +3,15 @@ import { BuildTeamSelect } from '@/components/input/BuildTeamSelect';
 import { Button, Group, Title } from '@mantine/core';
 import { IconDeviceFloppy, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useClaimEditorStore } from './store';
 
 export function SaveButtonGroup() {
 	const editorStore = useClaimEditorStore();
-	const { drawInstance, selectedClaimId } = editorStore;
 	let claimName = 'None selected';
-	if (drawInstance && selectedClaimId) {
-		const feature = drawInstance.get(selectedClaimId);
+	if (editorStore.drawInstance && editorStore.selectedClaimId) {
+		const feature = editorStore.drawInstance.get(editorStore.selectedClaimId);
 		if (feature && feature.properties?.name) {
 			claimName = feature.properties.name;
 		}
@@ -30,7 +30,7 @@ export function SaveButtonGroup() {
 					href={`/editor/${editorStore.selectedClaimId}`}
 					rightSection={<IconPencil size={16} />}
 				>
-					Open in advanced Editor
+					Open in Detail-Editor
 				</Button>
 				<Button
 					variant="outline"
@@ -57,13 +57,22 @@ export function SaveButtonGroup() {
 
 export function NewClaimButton() {
 	const editorStore = useClaimEditorStore();
+	const pathname = usePathname();
 	return (
 		<Button
 			variant="gradient"
 			gradient={{ from: 'indigo', to: 'cyan' }}
-			disabled={editorStore.isDirty || !editorStore.allowedBuildTeamIds?.length || !editorStore.drawInstance}
+			disabled={
+				editorStore.isDirty ||
+				!editorStore.allowedBuildTeamIds?.length ||
+				!editorStore.drawInstance ||
+				pathname != '/editor'
+			}
 			fullWidth
-			onClick={() => editorStore.drawInstance?.changeMode('draw_polygon')}
+			onClick={() => {
+				if (!editorStore.drawInstance) return;
+				editorStore.drawInstance?.changeMode('draw_polygon');
+			}}
 			rightSection={<IconPlus size={16} />}
 		>
 			Create new Claim

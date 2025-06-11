@@ -65,6 +65,9 @@ export default function EditorMap({ userId }: { userId: string }) {
 					if (initialClaimId) {
 						setSelectedClaim(initialClaimId);
 					}
+					if (searchParams.get('new') === 'true') {
+						drawInstance.changeMode('draw_polygon');
+					}
 
 					// Interactivity
 					map.on('mousemove', (e) => {

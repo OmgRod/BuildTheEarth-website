@@ -84,6 +84,62 @@ export const saveClaim = async (data: { id: string; userId: string; area?: strin
 		return Promise.reject(msg);
 	}
 };
+export const saveAdvancedClaim = async (data: { id: string; userId: string; area?: string[] }): Promise<void> => {
+	try {
+		const claim = await prisma.claim.findFirst({
+			where: { id: data.id, owner: { ssoId: data.userId } },
+		});
+
+		if (!claim) {
+			return Promise.reject('Claim not found or you do not have permission to edit this claim.');
+		}
+
+		let center = undefined;
+		if (data.area && data.area.length > 0) {
+			center = turf.center(toPolygon(data.area)).geometry.coordinates.join(', ');
+		}
+
+		const buildingCount = data.area && (await updateClaimBuildingCount({ area: data.area }));
+
+		if (typeof buildingCount !== 'number') {
+			if (buildingCount && typeof (buildingCount as { message?: string }).message === 'string') {
+				return Promise.reject((buildingCount as { message: string }).message);
+			}
+			return Promise.reject('Failed to update building count for claim.');
+		}
+
+		let osmDetails = undefined;
+
+		if (center) {
+			osmDetails = await updateClaimOSMDetails({ id: data.id, name: claim.name, center });
+			if (!osmDetails) {
+				return Promise.reject('Failed to update OSM details for claim.');
+			}
+		}
+
+		const claim2 = await prisma.claim.update({
+			where: { id: data.id, owner: { ssoId: data.userId } },
+			data: {
+				area: data.area,
+				center: center,
+				buildings: buildingCount,
+				...osmDetails,
+			},
+		});
+
+		revalidatePath('/editor');
+		return;
+	} catch (e) {
+		let msg = 'Unknown error';
+		if (e instanceof Prisma.PrismaClientKnownRequestError) {
+			msg = e.code;
+			if (e.code === 'P2025') {
+				msg = 'Claim not found or you do not have permission to edit this claim.';
+			}
+		}
+		return Promise.reject(msg);
+	}
+};
 export const createClaim = async (data: {
 	id: string;
 	userId: string;

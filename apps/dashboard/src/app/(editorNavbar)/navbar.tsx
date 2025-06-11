@@ -13,6 +13,7 @@ import {
 } from '@mantine/core';
 import { Claim } from '@repo/db';
 import { IconSearch, IconX } from '@tabler/icons-react';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { NewClaimButton } from './editor/interactivity';
 import { useClaimEditorStore } from './editor/store';
@@ -61,6 +62,10 @@ export default function EditorNavbar({ claims }: { claims: (Claim & { imgSrc?: s
 							p="md"
 							style={{ cursor: 'pointer' }}
 							onClick={() => {
+								if (location.pathname != '/editor') {
+									redirect('/editor/' + claim.id);
+								}
+
 								if (!editorStore.drawInstance) return;
 								if (!editorStore.claims) return;
 								editorStore.switchClaim(claim.id, { keepPosition: false });

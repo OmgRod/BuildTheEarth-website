@@ -14,6 +14,7 @@ import 'mantine-datatable/styles.layer.css';
 import AuthProvider from '@/components/AuthProvider';
 import SWRSetup from '@/components/core/SWRSetup';
 import { getSession } from '@/util/auth';
+import { theme } from '@/util/theme';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { Inter } from 'next/font/google';
@@ -40,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 				<ColorSchemeScript />
 			</head>
 			<body>
-				<MantineProvider>
+				<MantineProvider theme={theme}>
 					<AuthProvider session={session}>
 						<SWRSetup>
 							<ModalsProvider>
