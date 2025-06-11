@@ -339,14 +339,24 @@ export const useClaimEditorStore = create<ClaimEditorState>()(
 		},
 
 		createClaimShell: (feature: any) => {
-			get()
-				.drawInstance.setFeatureProperty(feature.id, 'id', feature.id)
-				.setFeatureProperty(feature.id, 'new', true)
-				.setFeatureProperty(
-					feature.id,
-					'area',
-					feature.geometry.coordinates[0].map((c: [number, number]) => c.join(', ')),
-				);
+			const uuid = crypto.randomUUID();
+			const draw = get().drawInstance;
+			if (!draw) return;
+
+			// Clone the feature and assign the new UUID as its id
+			const newFeature = {
+				...feature,
+				id: uuid,
+				properties: {
+					...feature.properties,
+					id: uuid,
+					new: true,
+					area: feature.geometry.coordinates[0].map((c: [number, number]) => c.join(', ')),
+				},
+			};
+
+			draw.add(newFeature);
+			draw.delete(feature.id);
 		},
 		setDrawInstance: (drawInstance) => set({ drawInstance }),
 		setAllowedBuildTeamIds: (allowedBuildTeamIds) => set({ allowedBuildTeamIds }),
