@@ -11,7 +11,7 @@ export function SaveButtonGroup() {
 	const editorStore = useClaimEditorStore();
 	let claimName = 'None selected';
 	if (editorStore.drawInstance && editorStore.selectedClaimId) {
-		const feature = editorStore.drawInstance.get(editorStore.selectedClaimId);
+		const feature = editorStore.drawInstance?.get(editorStore.selectedClaimId);
 		if (feature && feature.properties?.name) {
 			claimName = feature.properties.name;
 		}

@@ -1,5 +1,6 @@
 'use server';
 
+import { getSession } from '@/util/auth';
 import prisma from '@/util/db';
 import { Box, Button, Divider, Group, Title } from '@mantine/core';
 import { IconMap } from '@tabler/icons-react';
@@ -8,9 +9,10 @@ import { AdvancedEditor } from './interactivity';
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
 	const id = (await params).id;
+	const session = await getSession();
 
 	const claim = await prisma.claim.findFirst({
-		where: { id },
+		where: { id, owner: { ssoId: session?.user.id } },
 		include: {
 			owner: { select: { ssoId: true, username: true, id: true } },
 			builders: { select: { ssoId: true, username: true, id: true } },
