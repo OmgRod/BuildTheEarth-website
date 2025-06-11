@@ -2,7 +2,7 @@
 
 import prisma from '@/util/db';
 import { Box, Button, Divider, Group, Title } from '@mantine/core';
-import { IconDeviceFloppy, IconMap, IconTrash } from '@tabler/icons-react';
+import { IconMap } from '@tabler/icons-react';
 import Link from 'next/link';
 import { AdvancedEditor } from './interactivity';
 
@@ -34,24 +34,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 						rightSection={<IconMap size={16} />}
 					>
 						Open in Map-Editor
-					</Button>
-					<Button
-						variant="outline"
-						color="red"
-						disabled={!id}
-						// onClick={() => editorStore.delete()}
-						rightSection={<IconTrash size={16} />}
-					>
-						Delete
-					</Button>
-					<Button
-						variant="gradient"
-						gradient={{ from: 'indigo', to: 'cyan' }}
-						// disabled={!editorStore.isDirty}
-						// onClick={() => editorStore.saveChanges()}
-						rightSection={<IconDeviceFloppy size={16} />}
-					>
-						Save
 					</Button>
 				</Group>
 			</Group>

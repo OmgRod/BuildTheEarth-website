@@ -84,7 +84,16 @@ export const saveClaim = async (data: { id: string; userId: string; area?: strin
 		return Promise.reject(msg);
 	}
 };
-export const saveAdvancedClaim = async (data: { id: string; userId: string; area?: string[] }): Promise<void> => {
+export const saveAdvancedClaim = async (data: {
+	id: string;
+	userId: string;
+	name?: string;
+	description?: string;
+	city?: string;
+	finished?: boolean;
+	active?: boolean;
+	builders?: { id: string }[];
+}): Promise<void> => {
 	try {
 		const claim = await prisma.claim.findFirst({
 			where: { id: data.id, owner: { ssoId: data.userId } },
@@ -94,40 +103,19 @@ export const saveAdvancedClaim = async (data: { id: string; userId: string; area
 			return Promise.reject('Claim not found or you do not have permission to edit this claim.');
 		}
 
-		let center = undefined;
-		if (data.area && data.area.length > 0) {
-			center = turf.center(toPolygon(data.area)).geometry.coordinates.join(', ');
-		}
-
-		const buildingCount = data.area && (await updateClaimBuildingCount({ area: data.area }));
-
-		if (typeof buildingCount !== 'number') {
-			if (buildingCount && typeof (buildingCount as { message?: string }).message === 'string') {
-				return Promise.reject((buildingCount as { message: string }).message);
-			}
-			return Promise.reject('Failed to update building count for claim.');
-		}
-
-		let osmDetails = undefined;
-
-		if (center) {
-			osmDetails = await updateClaimOSMDetails({ id: data.id, name: claim.name, center });
-			if (!osmDetails) {
-				return Promise.reject('Failed to update OSM details for claim.');
-			}
-		}
-
 		const claim2 = await prisma.claim.update({
 			where: { id: data.id, owner: { ssoId: data.userId } },
 			data: {
-				area: data.area,
-				center: center,
-				buildings: buildingCount,
-				...osmDetails,
+				name: data.name,
+				description: data.description,
+				city: data.city,
+				finished: data.finished,
+				active: data.active,
+				builders: data.builders ? { set: data.builders.map((b) => ({ id: b.id })) } : undefined,
 			},
 		});
 
-		revalidatePath('/editor');
+		revalidatePath(`/editor/${data.id}`);
 		return;
 	} catch (e) {
 		let msg = 'Unknown error';
@@ -221,6 +209,43 @@ export const deleteClaim = async (data: { id: string; userId: string }): Promise
 
 		await prisma.claim.delete({
 			where: { id: data.id, owner: { ssoId: data.userId } },
+		});
+
+		revalidatePath('/editor');
+		return;
+	} catch (e) {
+		let msg = 'Unknown error';
+		if (e instanceof Prisma.PrismaClientKnownRequestError) {
+			msg = e.code;
+			if (e.code === 'P2025') {
+				msg = 'Claim not found or you do not have permission to delete this claim.';
+			}
+		}
+		return Promise.reject(msg);
+	}
+};
+export const transferClaim = async (data: { id: string; userId: string; newUserId: string }): Promise<void> => {
+	try {
+		const claim = await prisma.claim.findFirst({
+			where: { id: data.id, owner: { ssoId: data.userId } },
+			include: { builders: { select: { id: true } } },
+		});
+
+		if (!claim) {
+			return Promise.reject('Claim not found or you do not have permission to edit this claim.');
+		}
+
+		await prisma.claim.update({
+			where: { id: data.id, owner: { ssoId: data.userId } },
+			data: {
+				owner: { connect: { id: data.newUserId } },
+				builders: {
+					set: [
+						...(claim.builders.filter((b) => b.id != data.newUserId) || []),
+						...(claim.ownerId ? [{ id: claim.ownerId }] : []),
+					],
+				},
+			},
 		});
 
 		revalidatePath('/editor');

@@ -219,7 +219,7 @@ export function ChangeOwner({ id }: { id: string }) {
 				Actions performed on this page cause heavy data mutations. Please be careful of what you are doing here. Please
 				let the old and new owners know about the transfer of the Build Region.
 			</Alert>
-			<UserSelect label="New Owner" onChange={setNewOwner} />
+			<UserSelect label="New Owner" onChange={(u) => setNewOwner(u?.id || null)} />
 			<Checkbox
 				label="Grant all permissions to new owner"
 				mt="md"

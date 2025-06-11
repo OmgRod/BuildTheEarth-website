@@ -1,4 +1,4 @@
-import { deleteClaim, saveAdvancedClaim } from '@/actions/claimEditor';
+import { deleteClaim, saveAdvancedClaim, transferClaim } from '@/actions/claimEditor';
 import { modals } from '@mantine/modals';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import { Prisma } from '@repo/db';
@@ -29,6 +29,8 @@ interface ClaimEditorState {
 	setClaim: (claim: AdvancedClaimEditorClaim | null) => void;
 	// Save the changes of the current claim only if the editor is dirty
 	saveChanges: () => void;
+	// Transfer ownership of the claim to a new user
+	transferOwnership: (newOwner: { id: string; username: string }) => void;
 	// Delete the currently selected claim
 	delete: () => void;
 	// Set the user ID of the current user
@@ -65,7 +67,7 @@ export const useAdvancedClaimEditorStore = create<ClaimEditorState>()(
 			const claim = get().claim;
 			const userId = get().userId;
 
-			if (claim && userId && get().isDirty) {
+			if (claim && userId) {
 				set({ isLoading: true });
 
 				const notifyId = showNotification({
@@ -78,10 +80,18 @@ export const useAdvancedClaimEditorStore = create<ClaimEditorState>()(
 				});
 
 				try {
-					await saveAdvancedClaim({
-						userId,
-						...claim,
-					});
+					if (get().isDirty) {
+						await saveAdvancedClaim({
+							userId,
+							id: claim.id,
+							name: claim.name ?? undefined,
+							description: claim.description ?? undefined,
+							city: claim.city ?? undefined,
+							active: claim.active ?? undefined,
+							finished: claim.finished ?? undefined,
+							builders: claim.builders?.map((b) => ({ id: b.id })) || [],
+						});
+					}
 
 					updateNotification({
 						id: notifyId,
@@ -112,6 +122,77 @@ export const useAdvancedClaimEditorStore = create<ClaimEditorState>()(
 					message: 'Please select a claim to save changes.',
 					color: 'red',
 				});
+			}
+		},
+
+		transferOwnership: async (newOwner: { id: string; username: string }) => {
+			const claim = get().claim;
+			if (!claim || get().userId == null) {
+				showNotification({
+					title: 'No Claim selected',
+					message: 'Please select a claim to delete.',
+					color: 'red',
+				});
+				return;
+			}
+
+			const confirmTransfer = async () =>
+				new Promise<boolean>((resolve) => {
+					modals.openConfirmModal({
+						title: 'Transfer Claim',
+						centered: true,
+						children: `Are you sure you want to transfer the claim "${claim.name}" to ${newOwner.username}? This action cannot be undone.`,
+						labels: { confirm: 'Transfer', cancel: 'Cancel' },
+						onConfirm: () => resolve(true),
+						onCancel: () => resolve(false),
+						closeOnConfirm: true,
+						closeOnCancel: true,
+						onClose: () => resolve(false),
+					});
+				});
+
+			const confirmed = await confirmTransfer();
+
+			if (!confirmed) {
+				return;
+			}
+
+			set({ isLoading: true });
+			const notifyId = showNotification({
+				title: 'Transferring Claim',
+				loading: true,
+				autoClose: false,
+				withCloseButton: false,
+				color: 'blue',
+				message: 'Your claim is being transferred...',
+			});
+
+			try {
+				await transferClaim({ userId: get().userId || 'xxx', id: claim.id, newUserId: newOwner.id });
+				updateNotification({
+					id: notifyId,
+					title: 'Claim Transferred',
+					message: 'Your claim has been successfully transferred.',
+					color: 'green',
+					loading: false,
+					autoClose: 2000,
+					icon: <IconCheck size={18} />,
+				});
+
+				set({ claim: null, isDirty: false, isLoading: false });
+			} catch (e) {
+				updateNotification({
+					id: notifyId,
+					title: 'Error',
+					message: `${e instanceof Error ? e.message : 'Unknown error'}`,
+					color: 'red',
+					loading: false,
+					autoClose: 5000,
+					icon: <IconX size={18} />,
+				});
+			} finally {
+				set({ isLoading: false });
+				redirect('/editor');
 			}
 		},
 
