@@ -28,6 +28,7 @@ export function useContextMenu({
 				setInfo({ ...info, opened: true });
 			}
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[setInfo, disableEventPosition, info],
 	);
 

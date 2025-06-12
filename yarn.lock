@@ -6626,6 +6626,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mapbox-gl@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "@types/mapbox-gl@npm:3.4.1"
+  dependencies:
+    "@types/geojson": "npm:*"
+  checksum: 10c0/475f48063a39cc791a0efa099f4a62b84df56a52e1d111e32d11930fcee8e281f20b157f4069ff0ff4d5e13889ce9b452ca4a57e5c27c6d70a32fb3f5a184e72
+  languageName: node
+  linkType: hard
+
 "@types/mapbox__mapbox-gl-draw@npm:1.4.4":
   version: 1.4.4
   resolution: "@types/mapbox__mapbox-gl-draw@npm:1.4.4"
@@ -8811,6 +8820,7 @@ __metadata:
     "@tiptap/starter-kit": "npm:^2.11.7"
     "@turf/helpers": "npm:^7.2.0"
     "@turf/turf": "npm:^7.2.0"
+    "@types/mapbox-gl": "npm:^3.4.1"
     "@types/mapbox__mapbox-gl-draw": "npm:^1.4.8"
     "@types/node": "npm:^20"
     "@types/react": "npm:19.1.1"
