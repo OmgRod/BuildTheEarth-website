@@ -38,7 +38,7 @@ export default function Page() {
 	return (
 		<Box ml="md" maw="50vw">
 			<Title order={1} mt="xl" mb="md">
-				Global Settings
+				Profile Settings
 			</Title>
 			<Text c="dimmed" size="md" mb="lg" maw="50vw">
 				Here you can make changes to your account and other settings. Please note that some settings cant be edited. If

@@ -3,10 +3,14 @@ import { Box, Button, Group, Title } from '@mantine/core';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExternalLink } from '@tabler/icons-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import BuildTeamsDatatable from './datatable';
 import { SearchBuildTeams } from './interactivity';
 
+export const metadata: Metadata = {
+	title: 'Build Regions',
+};
 export default async function Page({
 	searchParams,
 }: {

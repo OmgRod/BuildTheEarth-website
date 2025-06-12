@@ -25,7 +25,7 @@ export const meNavLinks: NavLink[] = [
 	},
 	{
 		link: '/me/applications',
-		label: 'My Applications',
+		label: 'Your Applications',
 		icon: 'Forms',
 	},
 	{
@@ -48,7 +48,7 @@ export const meNavLinks: NavLink[] = [
 	},
 	{
 		link: '/me/settings',
-		label: 'Global Settings',
+		label: 'Profile Settings',
 		icon: 'Settings',
 	},
 
@@ -68,13 +68,13 @@ export const meNavLinks: NavLink[] = [
 	},
 	{
 		link: '/am/claims',
-		label: 'Map Claims',
+		label: 'Claims',
 		permission: 'get-claims',
 		icon: 'Polygon',
 	},
 	{
 		link: '/am/applications',
-		label: 'Region Applications',
+		label: 'Applications',
 		permission: 'get-applications',
 		icon: 'Forms',
 	},

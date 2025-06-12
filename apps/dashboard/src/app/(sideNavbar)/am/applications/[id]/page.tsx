@@ -11,6 +11,15 @@ import { getSession } from '@/util/auth';
 import { toHumanDateTime } from '@/util/date';
 import prisma from '@/util/db';
 import { IconClockExclamation } from '@tabler/icons-react';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+	const { id } = await params;
+
+	return {
+		title: 'Application ' + id.split('-')[0],
+	};
+}
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
 	const session = await getSession();

@@ -68,9 +68,18 @@ import { globalFetcher } from '@/util/data';
 import prisma from '@/util/db';
 import { ApplicationStatus } from '@repo/db';
 import moment from 'moment';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import ClaimDatatabe from './datatable';
+
+export async function generateMetadata({ params }: { params: Promise<{ ssoId: string }> }): Promise<Metadata> {
+	const { ssoId } = await params;
+
+	return {
+		title: 'User ' + ssoId.split('-')[0],
+	};
+}
 
 export default async function Page({ params }: { params: Promise<{ ssoId: string }> }) {
 	const session = await getSession();

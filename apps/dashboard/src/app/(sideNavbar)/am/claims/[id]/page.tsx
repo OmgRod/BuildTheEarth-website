@@ -24,9 +24,18 @@ import { getCountryNames } from '@/util/countries';
 import { toHumanDateTime } from '@/util/date';
 import prisma from '@/util/db';
 import { IconAlertCircle, IconCheck, IconClockExclamation, IconExternalLink } from '@tabler/icons-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { EditMenu } from './interactivity';
 import { Map } from './map';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+	const { id } = await params;
+
+	return {
+		title: 'Claim ' + id.split('-')[0],
+	};
+}
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
 	const id = (await params).id;

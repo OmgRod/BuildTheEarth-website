@@ -3,7 +3,16 @@ import { Alert, Box, Tabs, TabsList, TabsPanel, TabsTab, Title } from '@mantine/
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExclamationCircle, IconTransfer, IconUserCog } from '@tabler/icons-react';
+import { Metadata } from 'next';
 import { ChangeOwner, TransferStepper } from './interactivity';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+	const { id } = await params;
+
+	return {
+		title: 'Transfer Build Region ' + id.split('-')[0],
+	};
+}
 
 export default async function Page({
 	params,

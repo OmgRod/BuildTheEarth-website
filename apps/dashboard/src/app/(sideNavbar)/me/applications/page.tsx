@@ -7,8 +7,13 @@ import prisma from '@/util/db';
 import { applicationStatusToColor, applicationStatusToIcon, applicationStatusToTooltip } from '@/util/transformers';
 import { IconCalendar, IconCalendarCheck } from '@tabler/icons-react';
 import moment from 'moment';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { ApplicationPagination, SearchApplications } from './interactivity';
+
+export const metadata: Metadata = {
+	title: 'Your Applications',
+};
 
 export default async function Page({
 	searchParams,

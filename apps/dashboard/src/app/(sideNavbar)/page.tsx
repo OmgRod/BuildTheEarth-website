@@ -1,5 +1,3 @@
-'use server';
-
 import { Box, Text, Title } from '@mantine/core';
 import {
 	IconFileUpload,
@@ -24,6 +22,11 @@ import { ActionsCard } from '@/components/core/card/ActionsCard';
 import { Greeting } from '@/components/data/Greeting';
 import { getSession } from '@/util/auth';
 import prisma from '@/util/db';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Your Home',
+};
 
 export default async function Page() {
 	const session = await getSession();

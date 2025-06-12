@@ -4,9 +4,14 @@ import { Box, Button, Group, Title } from '@mantine/core';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExternalLink } from '@tabler/icons-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import ContactsDatatable from './datatable';
 import { AddContactButton } from './interactivity';
+
+export const metadata: Metadata = {
+	title: 'Contacts',
+};
 
 export default async function Page() {
 	const contacts = await prisma.contact.findMany();

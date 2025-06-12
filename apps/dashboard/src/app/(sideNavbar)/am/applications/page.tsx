@@ -3,8 +3,13 @@ import { Box, Title } from '@mantine/core';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { Prisma } from '@repo/db';
+import { Metadata } from 'next';
 import ApplicationsDatatable from './datatable';
 import { SearchApplications } from './interactivity';
+
+export const metadata: Metadata = {
+	title: 'Applications',
+};
 
 export default async function Page({
 	searchParams,

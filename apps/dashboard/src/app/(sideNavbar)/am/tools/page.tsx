@@ -1,5 +1,3 @@
-'use server';
-
 import { Box, Title } from '@mantine/core';
 import {
 	IconBrandDocker,
@@ -21,6 +19,11 @@ import {
 
 import { ActionsCard } from '@/components/core/card/ActionsCard';
 import { Protection } from '@/components/Protection';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Tools',
+};
 
 export default async function Page() {
 	return (

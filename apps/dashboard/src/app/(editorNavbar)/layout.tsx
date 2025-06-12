@@ -1,7 +1,12 @@
 import AppLayout from '@/components/layout';
 import { getSession } from '@/util/auth';
 import prisma from '@/util/db';
+import { Metadata } from 'next';
 import EditorNavbar from './navbar';
+
+export const metadata: Metadata = {
+	title: 'Claim Editor',
+};
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 	const session = await getSession();

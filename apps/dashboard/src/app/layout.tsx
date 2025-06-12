@@ -17,6 +17,7 @@ import { getSession } from '@/util/auth';
 import { theme } from '@/util/theme';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
+import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
@@ -31,6 +32,32 @@ const minecraftFont = localFont({
 	style: 'normal',
 	variable: '--font-minecraft',
 });
+
+export const metadata: Metadata = {
+	title: {
+		default: 'MyBuildTheEarth',
+		template: '%s | MyBuildTheEarth',
+	},
+	description: "Your portal to BuildTheEarth - get involved in the world's largest Minecraft project!",
+	generator: 'MyBuildTheEarth',
+	applicationName: 'MyBuildTheEarth',
+	authors: [{ name: 'BuildTheEarth', url: 'https://buildtheearth.net' }],
+	referrer: 'origin-when-cross-origin',
+	keywords: ['BuildTheEarth', 'Minecraft', 'MyBuildTheEarth', 'Community', 'World', 'Map', 'Dashboard'],
+};
+
+export const viewport: Viewport = {
+	themeColor: [
+		{
+			color: '#121315',
+			media: '(prefers-color-scheme: dark)',
+		},
+		{
+			color: '#ffffff',
+			media: '(prefers-color-scheme: light)',
+		},
+	],
+};
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 	const session = await getSession();

@@ -3,8 +3,12 @@ import { Box, Title } from '@mantine/core';
 import { adminCheckUpload, adminDeleteUpload } from '@/actions/uploads';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
+import { Metadata } from 'next';
 import UploadsDatatable from './datatable';
 
+export const metadata: Metadata = {
+	title: 'Check Uploads',
+};
 export default async function Page({
 	searchParams,
 }: {

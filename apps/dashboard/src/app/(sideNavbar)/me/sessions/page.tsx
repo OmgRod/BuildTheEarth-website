@@ -5,6 +5,12 @@ import { WebsiteKeycloakUser } from '@/types/User';
 import { authedFetcher } from '@/util/data';
 import { IconDevices } from '@tabler/icons-react';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Active Sessions',
+};
+
 export default async function Page() {
 	const user = await getUser();
 	const data = await authedFetcher<WebsiteKeycloakUser>(`/users/${user.id}/kc`);

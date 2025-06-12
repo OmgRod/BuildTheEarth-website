@@ -6,7 +6,12 @@ import { getCountryNames } from '@/util/countries';
 import { toHumanDate } from '@/util/date';
 import prisma from '@/util/db';
 import { IconCalendar, IconMapPin, IconPencil, IconPolygon, IconStar, IconTools } from '@tabler/icons-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+	title: 'Build Regions',
+};
 
 export default async function Page() {
 	const session = await getSession();

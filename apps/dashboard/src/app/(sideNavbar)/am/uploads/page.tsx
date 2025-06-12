@@ -6,6 +6,12 @@ import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import UploadsDatatable from './datatable';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Uploads',
+};
+
 export default async function Page({
 	searchParams,
 }: {

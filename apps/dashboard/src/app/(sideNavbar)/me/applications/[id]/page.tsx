@@ -1,5 +1,3 @@
-'use server';
-
 import { Alert, Blockquote, Box, Flex, SimpleGrid, Space, Text, Title } from '@mantine/core';
 
 import { TextCard } from '@/components/core/card/TextCard';
@@ -11,7 +9,16 @@ import { toHumanDate } from '@/util/date';
 import prisma from '@/util/db';
 import { applicationStatusToAlert } from '@/util/transformers';
 import moment from 'moment';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+	const { id } = await params;
+
+	return {
+		title: 'Application ' + id.split('-')[0],
+	};
+}
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
 	const session = await getSession();

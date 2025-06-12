@@ -17,7 +17,10 @@ export function BuildTeamSelect(
 
 	return (
 		<Select
-			data={(data || [])?.filter(props.filter).map((team: any) => ({ label: team.name, value: team.id }))}
+			data={(props.filter ? (data || []).filter(props.filter) : data || []).map((team: any) => ({
+				label: team.name,
+				value: team.id,
+			}))}
 			disabled={!data}
 			{...{ ...props, filter: undefined }}
 		/>

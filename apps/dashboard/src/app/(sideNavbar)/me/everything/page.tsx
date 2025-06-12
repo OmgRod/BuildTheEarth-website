@@ -37,8 +37,12 @@ import { getSession } from '@/util/auth';
 import { authedFetcher } from '@/util/data';
 import { navLinks } from '@/util/links';
 import { CodeHighlight } from '@mantine/code-highlight';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
+export const metadata: Metadata = {
+	title: 'Your Data',
+};
 export default async function Page() {
 	const user = await getUser();
 	const session = await getSession();

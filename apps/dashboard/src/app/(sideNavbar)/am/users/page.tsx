@@ -2,8 +2,13 @@ import { Box, Title } from '@mantine/core';
 
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
+import { Metadata } from 'next';
 import UsersDatatabe from './datatable';
 import { SearchUsers } from './interactivity';
+
+export const metadata: Metadata = {
+	title: 'Website Users',
+};
 
 export default async function Page({
 	searchParams,

@@ -24,6 +24,11 @@ import Anchor from '@/components/core/Anchor';
 import { Protection } from '@/components/Protection';
 import { getSession } from '@/util/auth';
 import { globalFetcher } from '@/util/data';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'SSO',
+};
 
 export default async function Page() {
 	const session = await getSession();
