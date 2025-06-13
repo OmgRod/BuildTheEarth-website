@@ -12,8 +12,9 @@ RUN turbo prune dashboard --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
-RUN apk update && apk add --no-cache libc6-compat openssl
-RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
+RUN apk update && apk add --no-cache libc6-compat openssl 
+# This is only for prisma v5 because it only looks in /lib for openssl libaries
+RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3 
 WORKDIR /app
 
 # First install the dependencies (as they change less often)
