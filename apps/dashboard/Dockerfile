@@ -1,22 +1,24 @@
-FROM node:22-slim AS base
+FROM node:22-alpine AS base
 RUN corepack enable
 
 FROM base AS builder
-RUN apt-get update && apt-get install -y --no-install-recommends libssl1.1 libc6 
+RUN apk update && apk add --no-cache libc6-compat openssl
 WORKDIR /app
 
 # Run turbo (will prune the lockfile to only include target dependencies)
 RUN yarn global add turbo@^2.1.1
 COPY . .
-RUN yarn turbo prune dashboard --docker
+RUN turbo prune dashboard --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
-RUN apt-get update && apt-get install -y --no-install-recommends libssl1.1 libc6
+RUN apk update && apk add --no-cache libc6-compat openssl
+RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 WORKDIR /app
 
 # First install the dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
+RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 RUN yarn install
 
 # Build the project
