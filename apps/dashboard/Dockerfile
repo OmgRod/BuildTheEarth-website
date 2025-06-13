@@ -18,7 +18,7 @@ WORKDIR /app
 
 # First install the dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
-RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
+# RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 RUN yarn install
 
 # Build the project
