@@ -2,7 +2,7 @@ FROM node:22-alpine AS base
 RUN corepack enable
 
 FROM base AS builder
-RUN apk update && apk add --no-cache libc6-compat openssl
+RUN apk update && apk add --no-cache libc6-compat openssl openssl1.1-compat
 WORKDIR /app
 
 # Run turbo (will prune the lockfile to only include target dependencies)
@@ -12,7 +12,7 @@ RUN turbo prune dashboard --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
-RUN apk update && apk add --no-cache libc6-compat openssl
+RUN apk update && apk add --no-cache libc6-compat openssl openssl1.1-compat
 WORKDIR /app
 
 # First install the dependencies (as they change less often)
