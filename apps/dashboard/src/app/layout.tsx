@@ -34,6 +34,7 @@ const minecraftFont = localFont({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://my.buildtheearth.net'),
 	title: {
 		default: 'MyBuildTheEarth',
 		template: '%s | MyBuildTheEarth',

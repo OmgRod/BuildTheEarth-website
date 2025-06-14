@@ -27,7 +27,6 @@ COPY --from=builder /app/out/full/ .
 COPY --from=builder /app/apps/dashboard/.env ./apps/dashboard/.env
 
 ENV NEXT_TELEMETRY_DISABLED 1
-RUN echo "Using env file: \n $(cat apps/dashboard/.env)"
 RUN yarn turbo run build --filter=dashboard...
 
 FROM base AS runner
