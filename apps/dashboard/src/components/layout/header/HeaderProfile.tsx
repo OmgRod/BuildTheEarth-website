@@ -32,18 +32,24 @@ const HeaderProfile = () => {
 	return (
 		<Menu>
 			<MenuTarget>
-				<Button
-					variant="transparent"
-					color="gray"
-					leftSection={
-						<Avatar color="initials" name={session.data.user.username} size="sm">
-							{session.data.user.username[0].toUpperCase()}
-						</Avatar>
-					}
-					rightSection={<IconChevronDown size={12} />}
-				>
-					{session.data.user.username}
-				</Button>
+				<div>
+					<Button
+						variant="transparent"
+						color="gray"
+						leftSection={
+							<Avatar color="initials" name={session.data.user.username} size="sm" lh={0}>
+								{session.data.user.username[0].toUpperCase()}
+							</Avatar>
+						}
+						rightSection={<IconChevronDown size={12} />}
+						visibleFrom="xs"
+					>
+						{session.data.user.username}
+					</Button>
+					<Avatar color="initials" name={session.data.user.username} size="sm" lh={0} hiddenFrom="xs">
+						{session.data.user.username[0].toUpperCase()}
+					</Avatar>
+				</div>
 			</MenuTarget>
 			<MenuDropdown style={{ zIndex: 1000 }}>
 				<MenuItem component={Link} href="https://buildtheearth.net" leftSection={<IconWorld size={14} />}>

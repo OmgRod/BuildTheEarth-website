@@ -1504,35 +1504,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/charts@npm:^7.17.4":
-  version: 7.17.4
-  resolution: "@mantine/charts@npm:7.17.4"
+"@mantine/charts@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/charts@npm:8.1.2"
   peerDependencies:
-    "@mantine/core": 7.17.4
-    "@mantine/hooks": 7.17.4
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
     react: ^18.x || ^19.x
     react-dom: ^18.x || ^19.x
     recharts: ^2.13.3
-  checksum: 10c0/05ca1f8236cd914c2ced2f20d0bc74ee6b4b79146f66d30466548658c8c0ed5789866481a0ad3c903e780281b90b178294032fedb07a2c7177a4f766857dca41
+  checksum: 10c0/c777b868b617bc6abba337ed927eb056a7bf574906278f1cccd32be89a5f4da3a1014893734f6260a515139ff796c2d609bcfd50d5b6d7f93f647cd21c9cb9cf
   languageName: node
   linkType: hard
 
-"@mantine/code-highlight@npm:^7.17.4":
-  version: 7.17.4
-  resolution: "@mantine/code-highlight@npm:7.17.4"
+"@mantine/code-highlight@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/code-highlight@npm:8.1.2"
   dependencies:
     clsx: "npm:^2.1.1"
     highlight.js: "npm:^11.10.0"
   peerDependencies:
-    "@mantine/core": 7.17.4
-    "@mantine/hooks": 7.17.4
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
     react: ^18.x || ^19.x
     react-dom: ^18.x || ^19.x
-  checksum: 10c0/cc08ee18036cd1da105e58259db8ce823be40bd4a34dbf55dc0806a65782821c733ad49dd5e3133eeed0404dba9071e5627bdd1184f1a30a62332ba185033ba4
+  checksum: 10c0/6ae939a378b99e9166a2b903c8cdb81bc14ba71346fded11ba63d4c823a7d4c5d944d21052c9da35eb4bffe439cc160ee34462fac4417df245d73ccc75bf2d2c
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:7.17.4, @mantine/core@npm:^7.17.4":
+"@mantine/core@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/core@npm:7.17.4"
   dependencies:
@@ -1550,7 +1550,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/dates@npm:7.17.4, @mantine/dates@npm:^7.17.4":
+"@mantine/core@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/core@npm:8.1.2"
+  dependencies:
+    "@floating-ui/react": "npm:^0.26.28"
+    clsx: "npm:^2.1.1"
+    react-number-format: "npm:^5.4.3"
+    react-remove-scroll: "npm:^2.6.2"
+    react-textarea-autosize: "npm:8.5.9"
+    type-fest: "npm:^4.27.0"
+  peerDependencies:
+    "@mantine/hooks": 8.1.2
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/c6498676dc5a50a036778588002301717cd9e290f6e9c460702592a2d5f0da0dc19be56f781f890656ca04ea353328c9c605fdc105924544978aa39b995433d5
+  languageName: node
+  linkType: hard
+
+"@mantine/dates@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/dates@npm:7.17.4"
   dependencies:
@@ -1562,6 +1580,21 @@ __metadata:
     react: ^18.x || ^19.x
     react-dom: ^18.x || ^19.x
   checksum: 10c0/a9d9964525be159520e272898ac090b59336fcf8c10542d571963f7a6b1b42019e1951deec78d3c08b8e6c149b2708f31222b719e651088579ef260cf108febe
+  languageName: node
+  linkType: hard
+
+"@mantine/dates@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/dates@npm:8.1.2"
+  dependencies:
+    clsx: "npm:^2.1.1"
+  peerDependencies:
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
+    dayjs: ">=1.0.0"
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/c004d3b0bd4feec50af421f701e11e5065b93cc625e9d36a9c9616eb5db3528886bef18fa3cda84dccc1523a5d6e06a7060503c2562744895eb9c9da2c1a83eb
   languageName: node
   linkType: hard
 
@@ -1579,7 +1612,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/form@npm:7.17.4, @mantine/form@npm:^7.17.4":
+"@mantine/form@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/form@npm:7.17.4"
   dependencies:
@@ -1591,7 +1624,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:7.17.4, @mantine/hooks@npm:^7.17.4":
+"@mantine/form@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/form@npm:8.1.2"
+  dependencies:
+    fast-deep-equal: "npm:^3.1.3"
+    klona: "npm:^2.0.6"
+  peerDependencies:
+    react: ^18.x || ^19.x
+  checksum: 10c0/b99b37837348f43bb0cf5d92d1b019ed2fa136a1426f8e24886b42dd486928c3f5c5aba17ed87c7d390c2fad4ca4890e790a6663c8e296eb4ea7288612f4554f
+  languageName: node
+  linkType: hard
+
+"@mantine/hooks@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/hooks@npm:7.17.4"
   peerDependencies:
@@ -1600,7 +1645,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/modals@npm:7.17.4, @mantine/modals@npm:^7.17.4":
+"@mantine/hooks@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/hooks@npm:8.1.2"
+  peerDependencies:
+    react: ^18.x || ^19.x
+  checksum: 10c0/64bbc2b4cf39b315958939ce0c1febf2e35c79618f99cc2a262788e7d180922f7d551445606a2b4d66fcbf5371d1d40f9c50e5ff8e87b16ac1c28e5a4f2f4373
+  languageName: node
+  linkType: hard
+
+"@mantine/modals@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/modals@npm:7.17.4"
   peerDependencies:
@@ -1609,6 +1663,18 @@ __metadata:
     react: ^18.x || ^19.x
     react-dom: ^18.x || ^19.x
   checksum: 10c0/fbdd680c0668eea9ddce3723dfdf6384abdc94bad8c84c5b802d9b17e3260be7596ffcd9432805f9b57fb01c97821787bbbf68be8f85448d2e6adf1267b923f0
+  languageName: node
+  linkType: hard
+
+"@mantine/modals@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/modals@npm:8.1.2"
+  peerDependencies:
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/0520953642c51d8c91f7c6286af70640d843d25b7d91e403ea403b1260050ef39f695d832fd50599e5bdbac6d44d49b26249183624232663883085ed34b64078
   languageName: node
   linkType: hard
 
@@ -1626,7 +1692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/notifications@npm:7.17.4, @mantine/notifications@npm:^7.17.4":
+"@mantine/notifications@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/notifications@npm:7.17.4"
   dependencies:
@@ -1641,7 +1707,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/nprogress@npm:7.17.4, @mantine/nprogress@npm:^7.17.4":
+"@mantine/notifications@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/notifications@npm:8.1.2"
+  dependencies:
+    "@mantine/store": "npm:8.1.2"
+    react-transition-group: "npm:4.4.5"
+  peerDependencies:
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/05e144b928f80a2f3590d4e063c9a9b560c7c4ee3cf089521cccfb155d4ca3300a3c5895a45b39f18ce5869d4fcde7e37ff63afcc1e1bbc06961b6ef1ea1b01a
+  languageName: node
+  linkType: hard
+
+"@mantine/nprogress@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/nprogress@npm:7.17.4"
   dependencies:
@@ -1655,7 +1736,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/spotlight@npm:7.17.4, @mantine/spotlight@npm:^7.17.4":
+"@mantine/nprogress@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/nprogress@npm:8.1.2"
+  dependencies:
+    "@mantine/store": "npm:8.1.2"
+  peerDependencies:
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/ec907add1387b8ce0c8a0c58e28859e21031228b5b204e9be4e307c5faf854ce5d00c6863ed9c65b4f3295e59f9370dc5ca922161796d27f8dd9ceb5d87ac592
+  languageName: node
+  linkType: hard
+
+"@mantine/spotlight@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/spotlight@npm:7.17.4"
   dependencies:
@@ -1666,6 +1761,20 @@ __metadata:
     react: ^18.x || ^19.x
     react-dom: ^18.x || ^19.x
   checksum: 10c0/17465b96895e19b64c659f117b5ac3cc504ee6b44dd6003ccbd459eabe11ab7c49a80b9df38130801011dd2b7d6d2b5b15ac35d9bd6033e84bef79806ebe7456
+  languageName: node
+  linkType: hard
+
+"@mantine/spotlight@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/spotlight@npm:8.1.2"
+  dependencies:
+    "@mantine/store": "npm:8.1.2"
+  peerDependencies:
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/09511a8c1a17305a686b33f266485d24a81f421612dd25a7652735db5cd8c34ef2626b72b545d049a77ee60e472bfd96e78aed076a178747eee9d1d9e474ca5b
   languageName: node
   linkType: hard
 
@@ -1693,6 +1802,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/store@npm:8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/store@npm:8.1.2"
+  peerDependencies:
+    react: ^18.x || ^19.x
+  checksum: 10c0/6d6a34bfe7e6e672496a8fc09326f5a9bd65614cc6e282af66e972593336b6464ee9af2f33973df174b2b2ea2e1d1a851149bc7283a03ec8c99ae337ba41f381
+  languageName: node
+  linkType: hard
+
 "@mantine/styles@npm:6.0.22":
   version: 6.0.22
   resolution: "@mantine/styles@npm:6.0.22"
@@ -1707,7 +1825,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/tiptap@npm:7.17.4, @mantine/tiptap@npm:^7.17.4":
+"@mantine/tiptap@npm:7.17.4":
   version: 7.17.4
   resolution: "@mantine/tiptap@npm:7.17.4"
   peerDependencies:
@@ -1718,6 +1836,20 @@ __metadata:
     react: ^18.x || ^19.x
     react-dom: ^18.x || ^19.x
   checksum: 10c0/c93b4d655882e024ce554dcd5befe086959c0232340c9479bdd413152fec407ac45f0743bcd80d9862c25e28a718c205ae5312638ce48d50a3400bfd89f87928
+  languageName: node
+  linkType: hard
+
+"@mantine/tiptap@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@mantine/tiptap@npm:8.1.2"
+  peerDependencies:
+    "@mantine/core": 8.1.2
+    "@mantine/hooks": 8.1.2
+    "@tiptap/extension-link": ">=2.1.12"
+    "@tiptap/react": ">=2.1.12"
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/020ddd15241273dfa6cc5e1ce45a63e9dbed543b456e28083e9b6fff60d3e9a19432454d7f2ea9db3f7ca8831006a2f1ecfd6ba7f01aed972e54edae662eaa64
   languageName: node
   linkType: hard
 
@@ -1937,6 +2069,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/env@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/env@npm:15.3.4"
+  checksum: 10c0/43d37896e1422c9c353d9ded1d1b01545aa30b2bb125bcc40ffd4474dbc6e0ba603a77fc2a598616964a925379bb5a39eb1a242f0c49fc933e39e099fb2f7d75
+  languageName: node
+  linkType: hard
+
 "@next/eslint-plugin-next@npm:15.3.0":
   version: 15.3.0
   resolution: "@next/eslint-plugin-next@npm:15.3.0"
@@ -1953,9 +2092,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-darwin-arm64@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-darwin-arm64@npm:15.3.4"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@next/swc-darwin-x64@npm:15.3.0":
   version: 15.3.0
   resolution: "@next/swc-darwin-x64@npm:15.3.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@next/swc-darwin-x64@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-darwin-x64@npm:15.3.4"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -1967,9 +2120,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-linux-arm64-gnu@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-linux-arm64-gnu@npm:15.3.4"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@next/swc-linux-arm64-musl@npm:15.3.0":
   version: 15.3.0
   resolution: "@next/swc-linux-arm64-musl@npm:15.3.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-arm64-musl@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-linux-arm64-musl@npm:15.3.4"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
@@ -1981,9 +2148,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-linux-x64-gnu@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-linux-x64-gnu@npm:15.3.4"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@next/swc-linux-x64-musl@npm:15.3.0":
   version: 15.3.0
   resolution: "@next/swc-linux-x64-musl@npm:15.3.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-x64-musl@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-linux-x64-musl@npm:15.3.4"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
@@ -1995,9 +2176,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-win32-arm64-msvc@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-win32-arm64-msvc@npm:15.3.4"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@next/swc-win32-x64-msvc@npm:15.3.0":
   version: 15.3.0
   resolution: "@next/swc-win32-x64-msvc@npm:15.3.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@next/swc-win32-x64-msvc@npm:15.3.4":
+  version: 15.3.4
+  resolution: "@next/swc-win32-x64-msvc@npm:15.3.4"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -8803,17 +8998,17 @@ __metadata:
   dependencies:
     "@bte-germany/terraconvert": "npm:^1.1.2"
     "@keycloak/keycloak-admin-client": "npm:^26.2.0"
-    "@mantine/charts": "npm:^7.17.4"
-    "@mantine/code-highlight": "npm:^7.17.4"
-    "@mantine/core": "npm:^7.17.4"
-    "@mantine/dates": "npm:^7.17.4"
-    "@mantine/form": "npm:^7.17.4"
-    "@mantine/hooks": "npm:^7.17.4"
-    "@mantine/modals": "npm:^7.17.4"
-    "@mantine/notifications": "npm:^7.17.4"
-    "@mantine/nprogress": "npm:^7.17.4"
-    "@mantine/spotlight": "npm:^7.17.4"
-    "@mantine/tiptap": "npm:^7.17.4"
+    "@mantine/charts": "npm:^8.1.2"
+    "@mantine/code-highlight": "npm:^8.1.2"
+    "@mantine/core": "npm:^8.1.2"
+    "@mantine/dates": "npm:^8.1.2"
+    "@mantine/form": "npm:^8.1.2"
+    "@mantine/hooks": "npm:^8.1.2"
+    "@mantine/modals": "npm:^8.1.2"
+    "@mantine/notifications": "npm:^8.1.2"
+    "@mantine/nprogress": "npm:^8.1.2"
+    "@mantine/spotlight": "npm:^8.1.2"
+    "@mantine/tiptap": "npm:^8.1.2"
     "@mapbox/mapbox-gl-draw": "npm:^1.5.0"
     "@repo/db": "npm:*"
     "@repo/prettier-config": "npm:*"
@@ -8850,7 +9045,7 @@ __metadata:
     mapbox-gl-style-switcher: "npm:^1.0.11"
     moment: "npm:^2.30.1"
     moment-timezone: "npm:^0.5.45"
-    next: "npm:15.3.0"
+    next: "npm:^15.3.4"
     next-auth: "npm:^4.24.7"
     next-transpile-modules: "npm:^10.0.1"
     postcss: "npm:^8.5.3"
@@ -13798,6 +13993,67 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: 10c0/6e0cb3aff3487ca4c705b824c3b773e4a639cf19b9d7333b78314915b155c84c16e0855f5f235d0ebfc2a957276a11b90efd4b61213d544740f91a49e3e1be63
+  languageName: node
+  linkType: hard
+
+"next@npm:^15.3.4":
+  version: 15.3.4
+  resolution: "next@npm:15.3.4"
+  dependencies:
+    "@next/env": "npm:15.3.4"
+    "@next/swc-darwin-arm64": "npm:15.3.4"
+    "@next/swc-darwin-x64": "npm:15.3.4"
+    "@next/swc-linux-arm64-gnu": "npm:15.3.4"
+    "@next/swc-linux-arm64-musl": "npm:15.3.4"
+    "@next/swc-linux-x64-gnu": "npm:15.3.4"
+    "@next/swc-linux-x64-musl": "npm:15.3.4"
+    "@next/swc-win32-arm64-msvc": "npm:15.3.4"
+    "@next/swc-win32-x64-msvc": "npm:15.3.4"
+    "@swc/counter": "npm:0.1.3"
+    "@swc/helpers": "npm:0.5.15"
+    busboy: "npm:1.6.0"
+    caniuse-lite: "npm:^1.0.30001579"
+    postcss: "npm:8.4.31"
+    sharp: "npm:^0.34.1"
+    styled-jsx: "npm:5.1.6"
+  peerDependencies:
+    "@opentelemetry/api": ^1.1.0
+    "@playwright/test": ^1.41.2
+    babel-plugin-react-compiler: "*"
+    react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+    react-dom: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+    sass: ^1.3.0
+  dependenciesMeta:
+    "@next/swc-darwin-arm64":
+      optional: true
+    "@next/swc-darwin-x64":
+      optional: true
+    "@next/swc-linux-arm64-gnu":
+      optional: true
+    "@next/swc-linux-arm64-musl":
+      optional: true
+    "@next/swc-linux-x64-gnu":
+      optional: true
+    "@next/swc-linux-x64-musl":
+      optional: true
+    "@next/swc-win32-arm64-msvc":
+      optional: true
+    "@next/swc-win32-x64-msvc":
+      optional: true
+    sharp:
+      optional: true
+  peerDependenciesMeta:
+    "@opentelemetry/api":
+      optional: true
+    "@playwright/test":
+      optional: true
+    babel-plugin-react-compiler:
+      optional: true
+    sass:
+      optional: true
+  bin:
+    next: dist/bin/next
+  checksum: 10c0/52d3fba6f53d5d2a339cbde433ab360301e9a0a0d9b95a656bf29ce1af43f02e9cc32571d5d4095bcb8ab7a795207d6e75c64b33fc1f90d21f2f9b157cc9a503
   languageName: node
   linkType: hard
 

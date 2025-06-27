@@ -11,7 +11,7 @@ const Header = () => {
 			<Group h="100%" px="md" justify="space-between">
 				<Group>
 					<Image src="/logo.png" alt="Logo" width={32} height={32} style={{ marginRight: '4px' }} />
-					<Text fw="bold" ff="var(--font-minecraft)" fz="20px" m={0} display={{ base: 'none', xs: 'unset' }}>
+					<Text fw="bold" ff="var(--font-minecraft)" fz="20px" m={0}>
 						MyBuildTheEarth
 					</Text>
 				</Group>
