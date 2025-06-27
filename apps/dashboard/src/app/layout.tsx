@@ -49,7 +49,6 @@ export const metadata: Metadata = {
 			},
 		],
 	},
-	themeColor: '#1C7ED6',
 	description: "Your portal to BuildTheEarth - get involved in the world's largest Minecraft project!",
 	generator: 'MyBuildTheEarth',
 	applicationName: 'MyBuildTheEarth',
@@ -59,16 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-	themeColor: [
-		{
-			color: '#121315',
-			media: '(prefers-color-scheme: dark)',
-		},
-		{
-			color: '#ffffff',
-			media: '(prefers-color-scheme: light)',
-		},
-	],
+	themeColor: '#1C7ED6',
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
