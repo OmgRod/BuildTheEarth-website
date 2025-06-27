@@ -10,7 +10,7 @@ import UploadsDatatable from './datatable';
 export const metadata: Metadata = {
 	title: 'Check Uploads',
 };
-export default async function Page({ searchParams }: { searchParams: Promise }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string; query?: string }> }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const uploadCount = await prisma.upload.count({});
@@ -28,6 +28,7 @@ export default async function Page({ searchParams }: { searchParams: Promise }) 
 			height: true,
 			width: true,
 			name: true,
+			checked: true,
 		},
 	});
 

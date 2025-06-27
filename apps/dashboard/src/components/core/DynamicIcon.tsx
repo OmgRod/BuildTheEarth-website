@@ -6,7 +6,7 @@ export default function DynamicIcon({
 	fallback: Fallback,
 }: {
 	icon: string;
-	fallback?: ForwardRefExoticComponent;
+	fallback?: ForwardRefExoticComponent<React.ComponentProps<'svg'>>;
 }) {
 	const Icon = icons[icon as keyof typeof icons];
 	if (isValidIconName(icon)) {

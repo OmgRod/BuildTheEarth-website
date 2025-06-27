@@ -4,6 +4,7 @@ import { Badge, Code, Switch, Text, Tooltip } from '@mantine/core';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { useDisclosure } from '@mantine/hooks';
+import { Upload } from '@repo/db';
 import { DataTable } from 'mantine-datatable';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,7 +13,7 @@ export default function UploadsDatatable({
 	uploads,
 	count,
 }: {
-	uploads: ({ createdAt: string } & Omit)[];
+	uploads: ({ createdAt: string } & Omit<Upload, 'createdAt'>)[];
 	count: number;
 }) {
 	const router = useRouter();

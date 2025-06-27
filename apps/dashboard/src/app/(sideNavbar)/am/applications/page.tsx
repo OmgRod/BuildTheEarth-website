@@ -12,7 +12,11 @@ export const metadata: Metadata = {
 	title: 'Applications',
 };
 
-export default async function Page({ searchParams }: { searchParams: Promise }) {
+export default async function Page({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string; query?: string; onlyPending?: string; searchType?: string }>;
+}) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const onlyPending = (await searchParams).onlyPending;

@@ -66,11 +66,11 @@ import { Protection } from '@/components/Protection';
 import { getSession } from '@/util/auth';
 import { globalFetcher } from '@/util/data';
 import prisma from '@/util/db';
-import { ApplicationStatus } from '@repo/db';
+import { Application, ApplicationStatus } from '@repo/db';
 import moment from 'moment';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Fragment } from 'react';
+import { Fragment, Key } from 'react';
 import ClaimDatatabe from './datatable';
 
 export async function generateMetadata({ params }: { params: Promise<{ ssoId: string }> }): Promise<Metadata> {
@@ -422,7 +422,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							isText
 							title="Created Applications"
 							icon={IconFiles}
-							subtitle={`including ${websiteData.applications.filter((app) => app.status === ApplicationStatus.SEND).length} pending Applications`}
+							subtitle={`including ${websiteData.applications.filter((app: { status: string }) => app.status === ApplicationStatus.SEND).length} pending Applications`}
 						>
 							{websiteData.applications.length} Application{websiteData.applications.length > 1 ? 's' : ''}
 						</TextCard>
@@ -432,16 +432,18 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							isText
 							title="Successfull Applications"
 							icon={IconFileCheck}
-							subtitle={`with a ${Math.floor((websiteData.applications.filter((app) => app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL).length / websiteData.applications.length) * 100)}% Success Rate`}
+							subtitle={`with a ${Math.floor((websiteData.applications.filter((app: { status: string }) => app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL).length / websiteData.applications.length) * 100)}% Success Rate`}
 						>
 							{
 								websiteData.applications.filter(
-									(app) => app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL,
+									(app: { status: string }) =>
+										app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL,
 								).length
 							}{' '}
 							Application
 							{websiteData.applications.filter(
-								(app) => app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL,
+								(app: { status: string }) =>
+									app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL,
 							).length > 1
 								? 's'
 								: ''}
@@ -456,20 +458,22 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 										head: ['Build Region', 'Applications'],
 										body: Array.from(
 											new Set(
-												websiteData.createdBuildTeams.concat(websiteData.joinedBuildTeams).map((team) => team.slug),
+												websiteData.createdBuildTeams
+													.concat(websiteData.joinedBuildTeams)
+													.map((team: { slug: any }) => team.slug),
 											),
 										).map((slug) => {
 											const team = websiteData.createdBuildTeams
 												.concat(websiteData.joinedBuildTeams)
-												.find((t) => t.slug === slug);
+												.find((t: { slug: unknown }) => t.slug === slug);
 											if (!team) return [];
 											return [
 												<BuildTeamDisplay team={team} key={team.slug} />,
 												websiteData.applications
-													.filter((app) => app.buildteam.slug === team.slug)
-													.map((app) => (
+													.filter((app: { buildteam: { slug: any } }) => app.buildteam.slug === team.slug)
+													.map((app: { id: Key | null | undefined }) => (
 														<Badge key={app.id} variant="light" mr={4}>
-															{app.id.split('-')[0]}
+															{String(app.id).split('-')[0]}
 														</Badge>
 													)),
 											];
@@ -493,9 +497,12 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 									data={{
 										head: ['#', 'Created At', 'Status', 'Build Region', 'Trial', 'Reviewer'],
 										body: websiteData.applications
-											.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+											.sort(
+												(a: Application, b: Application) =>
+													new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+											)
 											.map((app) => [
-												<Code key={app.id}>{app.id.split('-')[0]}</Code>,
+												<Code key={app.id}>{app.id?.split('-')[0]}</Code>,
 												new Date(app.createdAt).toLocaleString(),
 												<Badge
 													key={app.id}
@@ -542,7 +549,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								count={
 									websiteData.permissions.filter(
 										(permission, index, self) =>
-											self.findIndex((p) => p.buildTeamId === permission.buildTeamId) === index &&
+											self.findIndex((p: { buildTeamId: any }) => p.buildTeamId === permission.buildTeamId) === index &&
 											permission.buildTeamId != null,
 									).length
 								}

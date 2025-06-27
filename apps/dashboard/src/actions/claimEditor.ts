@@ -25,7 +25,7 @@ export const getAllowedBuildTeams = async (userId: string) => {
 			id: true,
 		},
 	});
-	return buildTeams.map((bt) => bt.id);
+	return buildTeams.map((bt: { id: string }) => bt.id);
 };
 
 export const saveClaim = async (data: { id: string; userId: string; area?: string[] }): Promise<void> => {
@@ -241,7 +241,7 @@ export const transferClaim = async (data: { id: string; userId: string; newUserI
 				owner: { connect: { id: data.newUserId } },
 				builders: {
 					set: [
-						...(claim.builders.filter((b) => b.id != data.newUserId) || []),
+						...(claim.builders.filter((b: { id: string }) => b.id != data.newUserId) || []),
 						...(claim.ownerId ? [{ id: claim.ownerId }] : []),
 					],
 				},

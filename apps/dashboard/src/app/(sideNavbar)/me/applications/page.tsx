@@ -6,6 +6,7 @@ import { getSession } from '@/util/auth';
 import { toHumanDateTime } from '@/util/date';
 import prisma from '@/util/db';
 import { applicationStatusToColor, applicationStatusToIcon, applicationStatusToTooltip } from '@/util/transformers';
+import { Application } from '@repo/db';
 import { IconCalendar, IconCalendarCheck } from '@tabler/icons-react';
 import moment from 'moment';
 import { Metadata } from 'next';

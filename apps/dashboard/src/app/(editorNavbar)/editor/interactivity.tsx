@@ -88,7 +88,9 @@ export function SelectBuildTeamModal(props: {
 	return (
 		<>
 			<BuildTeamSelect
-				filter={(bt) => bt.allowBuilderClaim && !!props.allowedBuildTeamIds?.includes(bt.id)}
+				filter={(bt: { allowBuilderClaim: any; id: string }) =>
+					bt.allowBuilderClaim && !!props.allowedBuildTeamIds?.includes(bt.id)
+				}
 				searchable
 				placeholder="Select a Build Team"
 				onChange={setBuildTeamId}

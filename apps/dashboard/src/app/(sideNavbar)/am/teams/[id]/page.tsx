@@ -26,6 +26,7 @@ import {
 	Title,
 	Tooltip,
 } from '@mantine/core';
+import { ApplicationStatus } from '@repo/db';
 import {
 	IconAlertCircle,
 	IconBrandDiscord,
@@ -232,7 +233,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 								w="100%"
 								size={300}
 								thickness={50}
-								sections={teamApplicationsByStatus.map((a) => ({
+								sections={teamApplicationsByStatus.map((a: { _count: number; status: ApplicationStatus }) => ({
 									value: (a._count / team._count.Application) * 100,
 									tooltip: `${a.status.slice(0, 1).toUpperCase()}${a.status.slice(1).toLowerCase()}: ${a._count} (${Math.round((a._count / team._count.Application) * 1000) / 10}%)`,
 									color: applicationStatusToColor(a.status),
@@ -290,7 +291,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 							<GridCol span={{ base: 12, sm: 6, xl: 4 }}>
 								<TextCard title="Pending Reviews" icon={IconClock} isText>
 									<NumberFormatter
-										value={teamApplicationsByStatus.find((a) => a.status == 'SEND')?._count || 0}
+										value={teamApplicationsByStatus.find((a: { status: string }) => a.status == 'SEND')?._count || 0}
 										thousandSeparator
 										suffix=" Applications"
 									/>

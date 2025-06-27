@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	title: 'Website Users',
 };
 
-export default async function Page({ searchParams }: { searchParams: Promise }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string; query?: string }> }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const userCount = await prisma.user.count({

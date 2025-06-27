@@ -5,7 +5,7 @@ import keycloakAdmin from '@/util/keycloak';
 export const editOwnProfile = async (
 	prevState: any,
 	data: { email: string; username: string; ssoId: string },
-): Promise => {
+): Promise<any> => {
 	try {
 		const user = await prisma.user.update({
 			where: { ssoId: data.ssoId },

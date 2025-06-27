@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { useDisclosure } from '@mantine/hooks';
 import { openConfirmModal } from '@mantine/modals';
+import { Upload } from '@repo/db';
 import { DataTable } from 'mantine-datatable';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,7 +17,7 @@ export default function UploadsDatatable({
 	onCheckAction,
 	onDeleteAction,
 }: {
-	uploads: ({ createdAt: string } & Omit)[];
+	uploads: ({ createdAt: string } & Omit<Upload, 'createdAt'>)[];
 	count: number;
 	onCheckAction: (id: string) => void;
 	onDeleteAction: (id: string) => void;

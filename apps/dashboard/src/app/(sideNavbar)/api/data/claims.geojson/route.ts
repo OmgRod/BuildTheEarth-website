@@ -1,4 +1,5 @@
 import prisma from '@/util/db';
+import { Claim } from '@repo/db';
 import { NextRequest } from 'next/server';
 import { constructClaimGeoJSONQuery } from './query';
 

@@ -2,7 +2,7 @@ import { Select } from '@mantine/core';
 import useSWR from 'swr';
 
 export function BuildTeamSelect(
-	props: Omit & {
+	props: Omit<React.ComponentProps<typeof Select>, 'filter' | 'data'> & {
 		filter?: (buildTeam: {
 			id: string;
 			slug: string;

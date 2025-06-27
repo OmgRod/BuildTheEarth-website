@@ -12,7 +12,7 @@ import { SearchBuildTeams } from './interactivity';
 export const metadata: Metadata = {
 	title: 'Build Regions',
 };
-export default async function Page({ searchParams }: { searchParams: Promise }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string; query?: string }> }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const buildTeamCount = await prisma.buildTeam.count({

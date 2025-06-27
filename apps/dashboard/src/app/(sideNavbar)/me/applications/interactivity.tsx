@@ -47,7 +47,10 @@ export function ApplicationPagination({
 	pageSize,
 	applicationCount,
 	...props
-}: { pageSize: number; applicationCount: number } & Omit) {
+}: { pageSize: number; applicationCount: number } & Omit<
+	React.ComponentProps<typeof Pagination>,
+	'value' | 'onChange' | 'total'
+>) {
 	const router = useRouter();
 	const params = useSearchParams();
 	const pathname = usePathname();

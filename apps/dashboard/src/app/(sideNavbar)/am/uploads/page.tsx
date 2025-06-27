@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 	title: 'Uploads',
 };
 
-export default async function Page({ searchParams }: { searchParams: Promise }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string; query?: string }> }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const uploadCount = await prisma.upload.count({});
@@ -49,7 +49,10 @@ export default async function Page({ searchParams }: { searchParams: Promise }) 
 					</Group>
 				</Group>
 				<UploadsDatatable
-					uploads={uploads.map((u) => ({ ...u, createdAt: u.createdAt.toISOString() }))}
+					uploads={uploads.map((u) => ({
+						...u,
+						createdAt: u.createdAt.toISOString(),
+					}))}
 					count={uploadCount}
 				/>
 			</ContentWrapper>

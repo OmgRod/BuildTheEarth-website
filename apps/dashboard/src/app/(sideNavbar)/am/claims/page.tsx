@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 	title: 'Claims',
 };
 
-export default async function Page({ searchParams }: { searchParams: Promise }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string; query?: string }> }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const claimCount = await prisma.claim.count({

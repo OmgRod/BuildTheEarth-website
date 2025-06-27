@@ -3,7 +3,7 @@ import { reviewActivityCheck } from './reviewActivityCheck';
 export type CronJob = {
 	name: string;
 	description: string;
-	handler: (job: CronJob, writeLog: (line: string) => void) => Promise | void;
+	handler: (job: CronJob, writeLog: (line: string) => void) => Promise<void> | void;
 };
 
 export const CRON_JOBS: { [key: string]: CronJob } = {

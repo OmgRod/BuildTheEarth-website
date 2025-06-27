@@ -41,10 +41,14 @@ type MessageContent<T extends MessageKeys> = {
 	[K in keyof (typeof messages)[T]['vars']]: string;
 };
 
-export async function messageUser<T extends MessageKeys>(discordId: string, messageType: T, content: MessageContent) {
+export async function messageUser<T extends MessageKeys>(
+	discordId: string,
+	messageType: T,
+	content: MessageContent<T>,
+) {
 	const rawMessage = messages[messageType].message;
 
-	let message = rawMessage.replace(/{{{(.*?)}}}/g, (_, key: keyof MessageContent) => {
+	let message = rawMessage.replace(/{{{(.*?)}}}/g, (_, key: keyof MessageContent<T>) => {
 		return content[key];
 	});
 
