@@ -4,7 +4,6 @@ import {
 	Alert,
 	Box,
 	Button,
-	Flex,
 	Grid,
 	GridCol,
 	Group,
@@ -17,6 +16,7 @@ import {
 } from '@mantine/core';
 
 import { Protection } from '@/components/Protection';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { TextCard } from '@/components/core/card/TextCard';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { UserDisplay } from '@/components/data/User';
@@ -53,15 +53,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
 	return (
 		<Protection requiredRole="get-claims">
-			<Box mx="md" maw="90vw" mih="100vh">
-				<Group justify="space-between" w="100%" mt="xl" mb="md"></Group>
+			<ContentWrapper maw="90vw" mih="100vh">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
-					<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap">
-						<Title order={1}>{claim.name || `Claim ${id.split('-')[0]}`}</Title>
-						<Text c="dimmed" fz="sm">
-							{claim.name ? `(${id.split('-')[0]})` : null}
-						</Text>
-					</Flex>
+					<Title order={1}>{claim.name || `Claim ${id.split('-')[0]}`}</Title>
 
 					<Group gap="xs">
 						<Button
@@ -78,22 +72,22 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 					</Group>
 				</Group>
 				<Grid>
-					<GridCol span={2}>
+					<GridCol span={{ base: 6, lg: 2 }}>
 						<TextCard title="Owner" style={{ height: '100%' }}>
 							<UserDisplay user={claim?.owner as any} />
 						</TextCard>
 					</GridCol>
-					<GridCol span={2}>
+					<GridCol span={{ base: 6, lg: 2 }}>
 						<TextCard title="Build Region" style={{ height: '100%' }}>
 							<BuildTeamDisplay team={claim.buildTeam} />
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, md: 6, lg: 3 }}>
 						<TextCard title="Created At" isText style={{ height: '100%' }}>
 							{toHumanDateTime(claim?.createdAt)}
 						</TextCard>
 					</GridCol>
-					<GridCol span={5}>
+					<GridCol span={{ base: 12, md: 6, lg: 5 }}>
 						{!claim.active ? (
 							<Alert
 								variant="light"
@@ -138,24 +132,24 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 					Claim Information
 				</Title>
 				<Grid>
-					<GridCol span={6}>
+					<GridCol span={{ base: 12, md: 6 }}>
 						<TextCard title="Name" style={{ height: '100%' }}>
 							{claim.name}
 						</TextCard>
 					</GridCol>
-					<GridCol span={6}>
+					<GridCol span={{ base: 12, md: 6 }}>
 						<TextCard title="City" style={{ height: '100%' }}>
 							{claim.city}
 						</TextCard>
 					</GridCol>
-					<GridCol span={6}>
+					<GridCol span={{ base: 12, md: 6 }}>
 						<TextCard title="Description" style={{ height: '100%' }}>
 							<Text lineClamp={5} mah="90%">
 								{claim.description}
 							</Text>
 						</TextCard>
 					</GridCol>
-					<GridCol span={6}>
+					<GridCol span={{ base: 12, md: 6 }}>
 						<Stack gap="md">
 							<TextCard title="Country" style={{ height: '100%' }}>
 								<Text fz="24px" fw={700} lh="1">
@@ -198,7 +192,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 				<Box w="100%" h="60vh">
 					<Map claim={claim} />
 				</Box>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

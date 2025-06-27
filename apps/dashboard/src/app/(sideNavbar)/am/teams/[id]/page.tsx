@@ -1,5 +1,6 @@
 import Anchor from '@/components/core/Anchor';
 import { TextCard } from '@/components/core/card/TextCard';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { UserDisplay } from '@/components/data/User';
 import { Protection } from '@/components/Protection';
@@ -9,7 +10,6 @@ import prisma from '@/util/db';
 import { applicationStatusToColor } from '@/util/transformers';
 import {
 	Alert,
-	Box,
 	Button,
 	Flex,
 	Grid,
@@ -91,17 +91,11 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 		by: ['status'],
 		_count: true,
 	});
-	const oldestApplication = await prisma.application.findFirst({
-		where: { buildteamId: id, status: 'SEND' },
-		orderBy: { createdAt: 'asc' },
-		take: 1,
-		select: { createdAt: true },
-	});
 	const reviewActivity = await getReviewActivityScore(id);
 
 	return (
 		<Protection requiredRole="get-teams">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
 					<Title order={1}>{team.name}</Title>
 					<Group gap="xs">
@@ -118,7 +112,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 						<EditMenu team={team} />
 					</Group>
 				</Group>
-				<SimpleGrid cols={2}>
+				<SimpleGrid cols={{ base: 1, md: 2 }}>
 					<Flex h="100%" mih={50} gap="md" justify="flex-start" align="flex-start" direction="column">
 						<TextCard
 							title={`About ${team.name}`}
@@ -136,42 +130,42 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 								<Image src={team.backgroundImage} alt="Banner" style={{ aspectRatio: '16 / 9' }} w="100%" radius="md" />
 							</TextCard>
 						</GridCol>
-						<GridCol span={6}>
+						<GridCol span={{ base: 12, sm: 6, md: 12, lg: 6 }}>
 							<TextCard title="Public Representation" icon={IconCamera}>
 								<BuildTeamDisplay team={team} />
 							</TextCard>
 						</GridCol>
-						<GridCol span={6}>
+						<GridCol span={{ base: 12, sm: 6, md: 12, lg: 6 }}>
 							<TextCard title="Region Owner" icon={IconUser}>
 								<UserDisplay user={team.creator as any} />
 							</TextCard>
 						</GridCol>
-						<GridCol span={4}>
+						<GridCol span={{ base: 6, lg: 4 }}>
 							<TextCard title="Discord Link" icon={IconBrandDiscord}>
 								<Anchor href={team.invite} target="_blank">
 									{team.invite.replace('https://discord', '')}
 								</Anchor>
 							</TextCard>
 						</GridCol>
-						<GridCol span={5}>
+						<GridCol span={{ base: 6, lg: 5 }}>
 							<TextCard title="Server IP" icon={IconBrandMinecraft}>
 								<Anchor href={team.ip} target="_blank">
 									{team.ip}
 								</Anchor>
 							</TextCard>
 						</GridCol>
-						<GridCol span={3}>
+						<GridCol span={{ base: 5, lg: 3 }}>
 							<TextCard title="Slug" icon={IconTag}>
 								{team.slug}
 							</TextCard>
 						</GridCol>
-						<GridCol span={6} h="100%">
+						<GridCol span={{ base: 7, lg: 6 }} h="100%">
 							<TextCard title="Minecraft Version" icon={IconBrandMinecraft} style={{ height: '100%' }}>
 								{team.version}
 							</TextCard>
 						</GridCol>
 
-						<GridCol span={6} h="100%">
+						<GridCol span={{ base: 12, lg: 6 }} h="100%">
 							<TextCard title="Created At" isText icon={IconCalendar} style={{ height: '100%' }}>
 								{toHumanDateTime(team.createdAt)}
 							</TextCard>
@@ -182,12 +176,12 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 					Statistics
 				</Title>
 				<Grid>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, xs: 6, lg: 3 }}>
 						<TextCard title="Members" icon={IconUsers} isText>
 							<NumberFormatter value={team._count.members} thousandSeparator suffix=" Members" />
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, xs: 6, lg: 3 }}>
 						<TextCard title="Applications" icon={IconForms}>
 							<Text fz="24px" fw={700} lh="1" pb={0}>
 								<NumberFormatter value={team._count.Application} thousandSeparator suffix=" Applications" />
@@ -201,12 +195,12 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 							) : undefined}
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, xs: 6, lg: 3 }}>
 						<TextCard title="Claims" icon={IconPolygon} isText>
 							<NumberFormatter value={team._count.claims} thousandSeparator suffix=" Claims" />
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, xs: 6, lg: 3 }}>
 						<TextCard title="Showcase Images" icon={IconPhoto} isText>
 							<NumberFormatter value={team._count.showcases} thousandSeparator suffix=" Images" />
 						</TextCard>
@@ -231,7 +225,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 					</Alert>
 				) : undefined}
 				<Grid>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, md: 6, xl: 3 }}>
 						<TextCard title="Application Status" icon={IconChecklist}>
 							<RingProgress
 								h="100%"
@@ -246,7 +240,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 							/>
 						</TextCard>
 					</GridCol>
-					<GridCol span={9}>
+					<GridCol span={{ base: 12, md: 6, xl: 9 }}>
 						<Grid>
 							<GridCol span={12}>
 								{reviewActivity.ras < 2 ? (
@@ -293,7 +287,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 									</Alert>
 								)}
 							</GridCol>
-							<GridCol span={4}>
+							<GridCol span={{ base: 12, sm: 6, xl: 4 }}>
 								<TextCard title="Pending Reviews" icon={IconClock} isText>
 									<NumberFormatter
 										value={teamApplicationsByStatus.find((a) => a.status == 'SEND')?._count || 0}
@@ -302,27 +296,27 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 									/>
 								</TextCard>
 							</GridCol>
-							<GridCol span={4}>
+							<GridCol span={{ base: 12, sm: 6, xl: 4 }}>
 								<TextCard title="Average Review Time" icon={IconClock} isText>
 									<NumberFormatter value={reviewActivity.art} thousandSeparator suffix=" Days" />
 								</TextCard>
 							</GridCol>
-							<GridCol span={4}>
+							<GridCol span={{ base: 12, sm: 6, xl: 4 }}>
 								<TextCard title="Pending Application Ratio" icon={IconClockExclamation} isText>
 									<NumberFormatter value={reviewActivity.par} thousandSeparator suffix="%" />
 								</TextCard>
 							</GridCol>
-							<GridCol span={4} h="100%">
+							<GridCol span={{ base: 12, sm: 6, xl: 4 }} h="100%">
 								<TextCard title="Review Efficiency Score" icon={IconClockHour11} style={{ height: '100%' }}>
 									<Rating value={reviewActivity.res} fractions={2} readOnly />
 								</TextCard>
 							</GridCol>
-							<GridCol span={4} h="100%">
+							<GridCol span={{ base: 12, sm: 6, xl: 4 }} h="100%">
 								<TextCard title="Pending Score" icon={IconClockHour11} style={{ height: '100%' }}>
 									<Rating value={reviewActivity.ps / 2} fractions={2} readOnly />
 								</TextCard>
 							</GridCol>
-							<GridCol span={4} h="100%">
+							<GridCol span={{ base: 12, sm: 6, xl: 4 }} h="100%">
 								<TextCard title="Review Activity Score" icon={IconClockHour11} style={{ height: '100%' }}>
 									<Rating value={reviewActivity.ras} fractions={2} readOnly />
 								</TextCard>
@@ -330,7 +324,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 						</Grid>
 					</GridCol>
 				</Grid>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

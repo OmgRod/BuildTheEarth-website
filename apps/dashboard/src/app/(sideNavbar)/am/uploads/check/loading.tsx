@@ -1,15 +1,16 @@
-import { Box, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
 import { Protection } from '@/components/Protection';
+import ContentWrapper from '@/components/core/ContentWrapper';
 
 export default async function Page() {
 	return (
 		<Protection requiredRole="review-uploads">
-			<Box ml="md" maw="50vw">
+			<ContentWrapper maw="50vw">
 				<Title order={1} mt="xl" mb="md">
 					Check Image Uploads
 				</Title>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

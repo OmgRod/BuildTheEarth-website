@@ -1,8 +1,9 @@
-import { Box, Skeleton, Text, Title } from '@mantine/core';
+import ContentWrapper from '@/components/core/ContentWrapper';
+import { Skeleton, Text, Title } from '@mantine/core';
 
 export default async function Page() {
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Active Sessions
 			</Title>
@@ -16,6 +17,6 @@ export default async function Page() {
 				<br />
 				<Text fz="sm">Loading...</Text>
 			</Skeleton>
-		</Box>
+		</ContentWrapper>
 	);
 }

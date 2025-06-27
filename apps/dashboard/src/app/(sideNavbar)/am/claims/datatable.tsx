@@ -36,6 +36,7 @@ export default function ClaimsDatatable({ claims, count }: { claims: Claim[]; co
 				{
 					accessor: 'center',
 					render: ({ center }) => <Code>{center}</Code>,
+					visibleMediaQuery: '(min-width: 64em)', // md
 				},
 				{
 					accessor: 'city',
@@ -43,6 +44,7 @@ export default function ClaimsDatatable({ claims, count }: { claims: Claim[]; co
 				{
 					accessor: 'owner',
 					title: 'Owner',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ owner }: any) => (owner ? <UserDisplay user={owner} /> : ''),
 				},
 				{

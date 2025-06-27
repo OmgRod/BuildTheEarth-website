@@ -44,6 +44,7 @@ export default function ClaimDatatabe({
 				{
 					accessor: 'center',
 					title: 'Coordinates',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ center }: any) => (
 						<Text c="dimmed" fz="sm" maw="90%" lineClamp={1}>
 							{center}
@@ -59,6 +60,7 @@ export default function ClaimDatatabe({
 				{
 					accessor: 'size',
 					title: 'Size',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ size, buildings }: any) => (
 						<>
 							<Code>{size}m²</Code>
@@ -70,6 +72,7 @@ export default function ClaimDatatabe({
 				{
 					accessor: 'buildTeam',
 					title: 'Build Region',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ buildTeam }: { buildTeam: (typeof claims)[0]['buildTeam'] }) => (
 						<BuildTeamDisplay team={buildTeam} />
 					),
@@ -77,6 +80,7 @@ export default function ClaimDatatabe({
 				{
 					accessor: 'createdAt',
 					title: 'Created At',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ createdAt }: any) => createdAt.toLocaleString(),
 				},
 				{
@@ -128,7 +132,7 @@ export default function ClaimDatatabe({
 				},
 			]}
 			records={claims.slice(20 * page - 20, 20 * page)}
-			height="40vh"
+			height="60vh"
 			style={{ width: '100%' }}
 		/>
 	);

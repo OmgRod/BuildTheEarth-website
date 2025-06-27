@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 class LogStream {
 	private queue: string[] = [];
-	private waiting: ((result: IteratorResult<string>) => void)[] = [];
+	private waiting: ((result: IteratorResult) => void)[] = [];
 	private finished = false;
 
 	push(message: string) {
@@ -18,7 +18,7 @@ class LogStream {
 		}
 	}
 
-	async next(): Promise<IteratorResult<string>> {
+	async next(): Promise {
 		if (this.queue.length) {
 			return { value: this.queue.shift()!, done: false };
 		}

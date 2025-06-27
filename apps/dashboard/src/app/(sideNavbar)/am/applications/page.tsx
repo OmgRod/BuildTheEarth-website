@@ -1,5 +1,6 @@
-import { Box, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { Prisma } from '@repo/db';
@@ -11,16 +12,7 @@ export const metadata: Metadata = {
 	title: 'Applications',
 };
 
-export default async function Page({
-	searchParams,
-}: {
-	searchParams: Promise<{
-		page: string | undefined;
-		query: string | undefined;
-		onlyPending: string | undefined;
-		searchType: string | undefined;
-	}>;
-}) {
+export default async function Page({ searchParams }: { searchParams: Promise }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const onlyPending = (await searchParams).onlyPending;
@@ -83,13 +75,13 @@ export default async function Page({
 
 	return (
 		<Protection requiredRole="get-applications">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Title order={1} mt="xl" mb="md">
 					Region Applications
 				</Title>
-				<SearchApplications mb="md" maw="60%" />
-				<ApplicationsDatatable<(typeof applications)[0]> applications={applications} count={applicationCount} />
-			</Box>
+				<SearchApplications mb="md" maw={{ base: '100%', md: '60%', lg: '30%' }} />
+				<ApplicationsDatatable applications={applications} count={applicationCount} />
+			</ContentWrapper>
 		</Protection>
 	);
 }

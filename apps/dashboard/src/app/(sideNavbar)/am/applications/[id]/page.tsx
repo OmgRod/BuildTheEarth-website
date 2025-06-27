@@ -1,8 +1,9 @@
 'use server';
 
-import { Alert, Box, Flex, Grid, GridCol, Group, Text, Title } from '@mantine/core';
+import { Alert, Box, Grid, GridCol, Title } from '@mantine/core';
 
 import { Protection } from '@/components/Protection';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { TextCard } from '@/components/core/card/TextCard';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { UserDisplay } from '@/components/data/User';
@@ -43,40 +44,34 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
 	return (
 		<Protection requiredRole="get-applications">
-			<Box mx="md" maw="90vw" mih="100vh">
-				<Group justify="space-between" w="100%" mt="xl" mb="md">
-					<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap">
-						<Title order={1}>Application {id.split('-')[0]}</Title>
-						<Text c="dimmed" fz="sm">
-							({application.buildteam.name})
-						</Text>
-					</Flex>
-					<Group gap="xs"></Group>
-				</Group>
+			<ContentWrapper maw="90vw" mih="100vh">
+				<Title order={1} mt="xl" mb="md">
+					Application {id.split('-')[0]}
+				</Title>
 				<Grid>
-					<GridCol span={2}>
+					<GridCol span={{ base: 12, sm: 6, xl: 2 }}>
 						<TextCard title="Applicant" style={{ height: '100%' }}>
 							<UserDisplay user={application?.user as any} />
 						</TextCard>
 					</GridCol>
-					<GridCol span={2}>
+					<GridCol span={{ base: 12, sm: 6, xl: 2 }}>
 						<TextCard title="Build Region" style={{ height: '100%' }}>
 							<BuildTeamDisplay team={application.buildteam} />
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, xl: 3 }}>
 						<TextCard title="Created At" isText style={{ height: '100%' }}>
 							{toHumanDateTime(application?.createdAt)}
 						</TextCard>
 					</GridCol>
 					{application.reviewer && application.reviewedAt ? (
 						<>
-							<GridCol span={2}>
+							<GridCol span={{ base: 12, sm: 6, xl: 2 }}>
 								<TextCard title="Reviewer" style={{ height: '100%' }}>
 									<UserDisplay user={application?.reviewer as any} />
 								</TextCard>
 							</GridCol>
-							<GridCol span={3}>
+							<GridCol span={{ base: 12, sm: 6, xl: 3 }}>
 								<TextCard title="Reviewed At" isText style={{ height: '100%' }}>
 									{application?.reviewedAt ? toHumanDateTime(application?.reviewedAt) : 'Not Reviewed'}
 								</TextCard>
@@ -103,7 +98,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 					Application Questions
 				</Title>
 
-				<Box maw="45%" mt="md">
+				<Box maw={{ base: '100%', sm: '85%', md: '60%', xl: '45%' }} mt="md">
 					{applicationAnswers
 						.sort((a: any, b: any) => a.question.sort - b.question.sort)
 						.map((a: any, i: number) => {
@@ -122,7 +117,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 							);
 						})}
 				</Box>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

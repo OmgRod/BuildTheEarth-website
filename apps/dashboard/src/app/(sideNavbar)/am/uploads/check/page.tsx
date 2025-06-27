@@ -1,6 +1,7 @@
-import { Box, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
 import { adminCheckUpload, adminDeleteUpload } from '@/actions/uploads';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { Metadata } from 'next';
@@ -9,11 +10,7 @@ import UploadsDatatable from './datatable';
 export const metadata: Metadata = {
 	title: 'Check Uploads',
 };
-export default async function Page({
-	searchParams,
-}: {
-	searchParams: Promise<{ page: string | undefined; query: string | undefined }>;
-}) {
+export default async function Page({ searchParams }: { searchParams: Promise }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const uploadCount = await prisma.upload.count({});
@@ -36,7 +33,7 @@ export default async function Page({
 
 	return (
 		<Protection requiredRole="review-uploads">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Title order={1} mt="xl" mb="md">
 					Check Image Uploads
 				</Title>
@@ -46,7 +43,7 @@ export default async function Page({
 					onCheckAction={adminCheckUpload}
 					onDeleteAction={adminDeleteUpload}
 				/>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

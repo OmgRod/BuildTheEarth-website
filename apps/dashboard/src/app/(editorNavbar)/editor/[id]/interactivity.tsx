@@ -39,7 +39,7 @@ export function AdvancedEditor({ initialClaim }: { initialClaim: AdvancedClaimEd
 	}, [initialClaim]);
 
 	return (
-		<SimpleGrid cols={2} spacing="xl" w="100%">
+		<SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl" w="100%">
 			<Box m="xl">
 				<Title order={3} mb="md">
 					Claim Details

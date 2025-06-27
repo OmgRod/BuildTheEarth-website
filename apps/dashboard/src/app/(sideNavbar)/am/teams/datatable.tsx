@@ -56,6 +56,7 @@ export default function BuildTeamsDatatable({
 				},
 				{
 					accessor: 'location',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ location }) => (
 						<Group gap={2}>
 							{location
@@ -78,6 +79,7 @@ export default function BuildTeamsDatatable({
 				},
 				{
 					accessor: 'ip',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ ip }) => (
 						<Group gap={2}>
 							{ip.split(' ')[0].replace(';', '')}{' '}
@@ -94,6 +96,7 @@ export default function BuildTeamsDatatable({
 				{
 					accessor: 'creator.username',
 					title: 'Creator',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ creator }: any) => <UserDisplay user={creator} />,
 				},
 				{

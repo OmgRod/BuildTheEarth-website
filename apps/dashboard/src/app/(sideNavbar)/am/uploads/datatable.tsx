@@ -4,7 +4,6 @@ import { Badge, Code, Switch, Text, Tooltip } from '@mantine/core';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { useDisclosure } from '@mantine/hooks';
-import { Upload } from '@repo/db';
 import { DataTable } from 'mantine-datatable';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,7 +12,7 @@ export default function UploadsDatatable({
 	uploads,
 	count,
 }: {
-	uploads: ({ createdAt: string } & Omit<Upload, 'createdAt'>)[];
+	uploads: ({ createdAt: string } & Omit)[];
 	count: number;
 }) {
 	const router = useRouter();
@@ -53,6 +52,7 @@ export default function UploadsDatatable({
 					{
 						accessor: 'claimId',
 						title: 'Claim',
+						visibleMediaQuery: '(min-width: 64em)', // md
 						render: ({ claimId }) =>
 							claimId ? (
 								// @ts-ignore (No idea why the href is not defined when using Link polymorphically here, but works in other places??)
@@ -66,6 +66,7 @@ export default function UploadsDatatable({
 					{
 						accessor: 'resolution',
 						title: 'Resolution',
+						visibleMediaQuery: '(min-width: 64em)', // md
 						render: ({ width, height }) => {
 							const res = Math.floor((width / height) * 100);
 							return (

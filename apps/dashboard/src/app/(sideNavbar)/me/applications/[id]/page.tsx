@@ -1,6 +1,7 @@
-import { Alert, Blockquote, Box, Flex, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import { Alert, Blockquote, SimpleGrid, Space, Text, Title } from '@mantine/core';
 
 import { TextCard } from '@/components/core/card/TextCard';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import ErrorDisplay from '@/components/core/ErrorDisplay';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { ApplicationQuestions } from '@/util/application';
@@ -68,14 +69,11 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 	const alertContent = applicationStatusToAlert(application.status);
 
 	return (
-		<Box mx="md" maw="90vw">
-			<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap" mt="xl" mb="md">
-				<Title order={1}>Application {id.split('-')[0]}</Title>
-				<Text c="dimmed" fz="sm">
-					({application.buildteam.name})
-				</Text>
-			</Flex>
-			<SimpleGrid cols={3}>
+		<ContentWrapper maw="90vw">
+			<Title order={1} mt="xl" mb="md">
+				Application {id.split('-')[0]}
+			</Title>
+			<SimpleGrid cols={{ base: 1, md: 3 }}>
 				<TextCard isText={false} title="Build Region">
 					<BuildTeamDisplay team={application.buildteam} noAnchor />
 				</TextCard>
@@ -141,7 +139,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 			)}
 
 			<TextCard title="Application Answers">
-				<Text c="dimmed" size="md" mb="lg" maw="60%">
+				<Text c="dimmed" size="md" mb="lg" maw={{ base: '100%', md: '90%', xl: '60%' }}>
 					These are the answers you provided in your application. If you believe there is an error or you would like to
 					provide additional information, please contact the Build Region directly.
 				</Text>
@@ -163,6 +161,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 						);
 					})}
 			</TextCard>
-		</Box>
+		</ContentWrapper>
 	);
 }

@@ -1,5 +1,6 @@
-import { Box, Button, Group, Title } from '@mantine/core';
+import { Button, Group, Title } from '@mantine/core';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import { IconExternalLink } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
@@ -9,7 +10,7 @@ import { SearchClaims } from './interactivity';
 export default function Page() {
 	return (
 		<Protection requiredRole="get-claims">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
 					<Title order={1}>Claims</Title>
 					<Group gap="xs">
@@ -31,27 +32,32 @@ export default function Page() {
 						{
 							accessor: 'id',
 							title: '#',
-
-							width: 250,
+							width: 120,
 						},
 						{
 							accessor: 'name',
-							width: 450,
+							width: 430,
+						},
+
+						{
+							accessor: 'center',
+							visibleMediaQuery: '(min-width: 64em)', // md
 						},
 						{
-							accessor: 'location',
+							accessor: 'city',
 						},
 						{
-							accessor: 'ip',
+							accessor: 'owner',
+							title: 'Owner',
+							visibleMediaQuery: '(min-width: 64em)', // md
 						},
 						{
-							accessor: 'creator.username',
-							title: 'Creator',
+							accessor: 'buildTeam',
+							title: 'Build Region',
 						},
 						{
 							accessor: '',
 							title: '',
-							textAlign: 'right',
 						},
 					]}
 					records={[]}
@@ -59,7 +65,7 @@ export default function Page() {
 					width={'100%'}
 					noRecordsText="Loading Claims..."
 				/>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

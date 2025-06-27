@@ -124,8 +124,8 @@ export function TransferStepper({ id }: { id: string }) {
 	];
 
 	return (
-		<SimpleGrid cols={2} spacing={'md'}>
-			<Box maw="80%">
+		<SimpleGrid cols={{ base: 1, lg: 2 }} spacing={'md'}>
+			<Box maw={{ base: '100%', md: '80%' }}>
 				<Alert title="Warning" color="red" mb="md" icon={<IconExclamationCircle />}>
 					Actions performed on this page are irreversible and cause heavy data mutations. Please be careful of what you
 					are doing here. You will need to confirm every action. To get started, select the destination Build Region you
@@ -214,7 +214,7 @@ export function ChangeOwner({ id }: { id: string }) {
 	});
 
 	return (
-		<Box maw="40%">
+		<Box maw={{ base: '100%', sm: '80%', md: '60%', xl: '40%' }}>
 			<Alert title="Warning" color="red" mb="md" icon={<IconExclamationCircle />}>
 				Actions performed on this page cause heavy data mutations. Please be careful of what you are doing here. Please
 				let the old and new owners know about the transfer of the Build Region.

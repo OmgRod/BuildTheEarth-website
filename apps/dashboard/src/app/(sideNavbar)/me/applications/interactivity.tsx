@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Pagination, PaginationProps, TextInput, TextInputProps, rem } from '@mantine/core';
+import { ActionIcon, Pagination, TextInput, TextInputProps, rem } from '@mantine/core';
 import { IconSearch, IconX } from '@tabler/icons-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -47,7 +47,7 @@ export function ApplicationPagination({
 	pageSize,
 	applicationCount,
 	...props
-}: { pageSize: number; applicationCount: number } & Omit<PaginationProps, 'total' | 'value' | 'onChange'>) {
+}: { pageSize: number; applicationCount: number } & Omit) {
 	const router = useRouter();
 	const params = useSearchParams();
 	const pathname = usePathname();

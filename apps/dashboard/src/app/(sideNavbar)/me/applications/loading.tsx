@@ -1,10 +1,11 @@
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
-import { Box, Card, Grid, GridCol, Group, Skeleton, Stack, Text, ThemeIcon, Title } from '@mantine/core';
+import { Card, Grid, GridCol, Group, Skeleton, Stack, Text, ThemeIcon, Title } from '@mantine/core';
 import { IconCalendar, IconCalendarCheck, IconX } from '@tabler/icons-react';
 
 export default async function Page() {
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Your Applications
 			</Title>
@@ -22,18 +23,18 @@ export default async function Page() {
 							<Skeleton key={i} className="animate-scale">
 								<Card>
 									<Grid>
-										<GridCol span={0.75}>
+										<GridCol span={{ base: 1.75, lg: 0.75 }}>
 											<ThemeIcon variant="light" radius="xl" size="lg">
 												<IconX style={{ width: '70%', height: '70%' }} />
 											</ThemeIcon>
 										</GridCol>
-										<GridCol span={6.25}>
+										<GridCol span={{ base: 10.25, lg: 7.25 }}>
 											<Stack>
 												<Title order={4}>Application XXXX</Title>
 												<BuildTeamDisplay team={{ icon: '', name: '', slug: '', id: '' }} noAnchor />
 											</Stack>
 										</GridCol>
-										<GridCol span={5}>
+										<GridCol span={{ base: 11.25, lg: 4 }} offset={{ base: 1.75, lg: 0 }}>
 											<Group wrap="nowrap" gap={5} mt={5}>
 												<IconCalendar
 													stroke={1.5}
@@ -61,6 +62,6 @@ export default async function Page() {
 						);
 					})}
 			</Stack>
-		</Box>
+		</ContentWrapper>
 	);
 }

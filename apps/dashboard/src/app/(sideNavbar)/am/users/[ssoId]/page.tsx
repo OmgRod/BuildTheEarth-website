@@ -12,7 +12,6 @@ import {
 	ActionIcon,
 	Alert,
 	Badge,
-	Box,
 	Button,
 	Checkbox,
 	Code,
@@ -60,6 +59,7 @@ import {
 
 import Anchor from '@/components/core/Anchor';
 import { TextCard } from '@/components/core/card/TextCard';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { PluralSingular } from '@/components/data/PluralSingular';
 import { Protection } from '@/components/Protection';
@@ -154,7 +154,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 
 	return (
 		<Protection requiredRole="get-users">
-			<Box mx="md" maw="90vw" mih="100vh">
+			<ContentWrapper maw="90vw" mih="100vh">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
 					<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap">
 						<Title order={1}>
@@ -218,7 +218,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 						</Menu>
 					</Group>
 				</Group>
-				<SimpleGrid cols={2}>
+				<SimpleGrid cols={{ base: 1, md: 2 }}>
 					<Flex h="100%" mih={50} gap="md" justify="flex-start" align="flex-start" direction="column">
 						{ssoId.startsWith('o_') && (
 							<Alert
@@ -257,7 +257,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 						</TextCard>
 					</Flex>
 					<Grid h="100%" styles={{ inner: { height: 'calc(100% + var(--mantine-spacing-md))' } }}>
-						<GridCol span={6}>
+						<GridCol span={{ base: 12, sm: 6 }}>
 							<TextCard
 								title="Account Security"
 								icon={IconShieldLock}
@@ -337,7 +337,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								</Group>
 							</TextCard>
 						</GridCol>
-						<GridCol span={6}>
+						<GridCol span={{ base: 12, sm: 6 }}>
 							<TextCard
 								title="Pending Actions"
 								icon={IconClockExclamation}
@@ -374,7 +374,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								/>
 							</TextCard>
 						</GridCol>
-						<GridCol span={6}>
+						<GridCol span={{ base: 12, sm: 6 }}>
 							<TextCard
 								isText
 								title="External Consents"
@@ -384,7 +384,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								{keycloakConsentsData?.length || 0} Consent{keycloakConsentsData?.length > 1 ? 's' : ''}
 							</TextCard>
 						</GridCol>
-						<GridCol span={6}>
+						<GridCol span={{ base: 12, sm: 6 }}>
 							<TextCard
 								isText
 								title="Account Age"
@@ -401,7 +401,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 					Build Regions and Applications
 				</Title>
 				<Grid styles={{ inner: { height: 'calc(100% + var(--mantine-spacing-md))' } }} h="100%">
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, sm: 6, lg: 3 }}>
 						<TextCard
 							isText
 							title="Joined Build Regions"
@@ -412,17 +412,12 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							{websiteData.joinedBuildTeams.length} Region{websiteData.joinedBuildTeams.length > 1 ? 's' : ''}
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
-						<TextCard
-							isText
-							title="Owned Build Regions"
-							icon={IconUser}
-							subtitle={'does not include Regions with additional Permissions.'}
-						>
+					<GridCol span={{ base: 12, sm: 6, lg: 3 }}>
+						<TextCard isText title="Owned Build Regions" icon={IconUser} subtitle={'beeing owned'}>
 							{websiteData.createdBuildTeams.length} Region{websiteData.createdBuildTeams.length > 1 ? 's' : ''}
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, sm: 6, lg: 3 }}>
 						<TextCard
 							isText
 							title="Created Applications"
@@ -432,7 +427,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							{websiteData.applications.length} Application{websiteData.applications.length > 1 ? 's' : ''}
 						</TextCard>
 					</GridCol>
-					<GridCol span={3}>
+					<GridCol span={{ base: 12, sm: 6, lg: 3 }}>
 						<TextCard
 							isText
 							title="Successfull Applications"
@@ -452,7 +447,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								: ''}
 						</TextCard>
 					</GridCol>
-					<GridCol span={5}>
+					<GridCol span={{ base: 12, xl: 5 }}>
 						<TextCard title="Build Regions" icon={IconUsers}>
 							<ScrollArea h="45vh" w="100%" type="always" mih="45vh">
 								<Table
@@ -484,7 +479,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							</ScrollArea>
 						</TextCard>
 					</GridCol>
-					<GridCol span={7}>
+					<GridCol span={{ base: 12, xl: 7 }}>
 						<TextCard
 							title="Applications"
 							icon={IconFiles}
@@ -535,7 +530,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 					Permissions
 				</Title>
 				<Grid>
-					<GridCol span={4}>
+					<GridCol span={{ base: 12, md: 4 }}>
 						<TextCard
 							isText
 							title="Managed Build Regions"
@@ -555,7 +550,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							/>
 						</TextCard>
 					</GridCol>
-					<GridCol span={4}>
+					<GridCol span={{ base: 12, md: 4 }}>
 						<TextCard
 							isText
 							title="Global Permissions"
@@ -568,7 +563,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							/>
 						</TextCard>
 					</GridCol>
-					<GridCol span={4}>
+					<GridCol span={{ base: 12, md: 4 }}>
 						<TextCard
 							isText
 							title="Internal Groups"
@@ -576,7 +571,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							subtitle={`these roles manage access to internal tools`}
 							style={{ height: '100%' }}
 						>
-							<PluralSingular count={keycloakGroupsData.length} singular="Group" />
+							<PluralSingular count={keycloakGroupsData.length || 0} singular="Group" />
 						</TextCard>
 					</GridCol>
 					<GridCol span={12}>
@@ -638,7 +633,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 				<TextCard title="Claims" icon={IconPolygon}>
 					<ClaimDatatabe claims={websiteData.claims.concat(websiteData.claimsBuilder)} />
 				</TextCard>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

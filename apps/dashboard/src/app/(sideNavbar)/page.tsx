@@ -1,4 +1,4 @@
-import { Box, Text, Title } from '@mantine/core';
+import { Text, Title } from '@mantine/core';
 import {
 	IconFileUpload,
 	IconForms,
@@ -19,6 +19,7 @@ import {
 } from '@tabler/icons-react';
 
 import { ActionsCard } from '@/components/core/card/ActionsCard';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Greeting } from '@/components/data/Greeting';
 import { getSession } from '@/util/auth';
 import prisma from '@/util/db';
@@ -46,7 +47,7 @@ export default async function Page() {
 	});
 
 	return (
-		<Box mx="md" maw="90vw">
+		<ContentWrapper maw="90vw">
 			<Title order={1} mt="xl">
 				<Greeting username={session?.user.given_name || session?.user.username} />
 			</Title>
@@ -112,6 +113,6 @@ export default async function Page() {
 					/>
 				</>
 			)}
-		</Box>
+		</ContentWrapper>
 	);
 }

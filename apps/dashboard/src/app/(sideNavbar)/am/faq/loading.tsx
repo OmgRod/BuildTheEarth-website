@@ -1,12 +1,13 @@
-import { Box, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import { DataTable } from 'mantine-datatable';
 
 export default async function Page() {
 	return (
 		<Protection requiredRole="get-faq">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Title order={1} mt="xl" mb="md">
 					FAQ Questions
 				</Title>
@@ -17,7 +18,7 @@ export default async function Page() {
 					width={'100%'}
 					noRecordsText="Loading FAQ Questions..."
 				/>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

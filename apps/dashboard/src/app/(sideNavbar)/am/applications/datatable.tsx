@@ -50,9 +50,15 @@ export default function ApplicationsDatatable<A extends { id: string }>({
 				{
 					accessor: 'reviewer.username',
 					title: 'Reviewer',
+					visibleMediaQuery: '(min-width: 64em)', // md
 					render: ({ reviewer }: any) => (reviewer ? <UserDisplay user={reviewer} /> : '-/-'),
 				},
-				{ accessor: 'createdAt', title: 'Created At', render: ({ createdAt }: any) => toHumanDateTime(createdAt) },
+				{
+					accessor: 'createdAt',
+					title: 'Created At',
+					visibleMediaQuery: '(min-width: 64em)', // md
+					render: ({ createdAt }: any) => toHumanDateTime(createdAt),
+				},
 				{
 					accessor: 'buildteam.name',
 					title: 'Build Region',

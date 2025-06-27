@@ -1,4 +1,4 @@
-import { Box, Button, Group, Title } from '@mantine/core';
+import { Button, Group, Title } from '@mantine/core';
 
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
@@ -6,17 +6,14 @@ import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import UploadsDatatable from './datatable';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Uploads',
 };
 
-export default async function Page({
-	searchParams,
-}: {
-	searchParams: Promise<{ page: string | undefined; query: string | undefined }>;
-}) {
+export default async function Page({ searchParams }: { searchParams: Promise }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const uploadCount = await prisma.upload.count({});
@@ -37,7 +34,7 @@ export default async function Page({
 
 	return (
 		<Protection requiredRole="get-uploads">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
 					<Title order={1}>Image Uploads</Title>
 					<Group gap="xs">
@@ -55,7 +52,7 @@ export default async function Page({
 					uploads={uploads.map((u) => ({ ...u, createdAt: u.createdAt.toISOString() }))}
 					count={uploadCount}
 				/>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

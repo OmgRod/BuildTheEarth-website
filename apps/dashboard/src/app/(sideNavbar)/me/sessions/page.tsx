@@ -1,10 +1,11 @@
-import { Badge, Box, Card, Flex, Group, Stack, Text, Title } from '@mantine/core';
+import { Badge, Card, Flex, Group, Stack, Text, Title } from '@mantine/core';
 
 import { getUser } from '@/actions/getUser';
 import { WebsiteKeycloakUser } from '@/types/User';
 import { authedFetcher } from '@/util/data';
 import { IconDevices } from '@tabler/icons-react';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,16 +17,20 @@ export default async function Page() {
 	const data = await authedFetcher<WebsiteKeycloakUser>(`/users/${user.id}/kc`);
 
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Active Sessions
 			</Title>
+			<Text c="dimmed" size="md" mb="lg">
+				Here you can see a list of your active sessions. If you see any suspicious activity, please contact us
+				immediately.
+			</Text>
 			<Stack>
 				{data.sessions.map((session) => (
 					<UserSession key={session.id} session={session} />
 				))}
 			</Stack>
-		</Box>
+		</ContentWrapper>
 	);
 }
 
@@ -37,7 +42,7 @@ function UserSession({ session }: { session: WebsiteKeycloakUser['sessions'][0] 
 				<Flex gap={5} direction={'column'} style={{ flex: 1 }}>
 					<Flex align={'center'} gap={'xs'}>
 						<Text fw={'bold'}>Session #{session.id.split('-')[0]} </Text>{' '}
-						<Group gap={'xs'}>
+						<Group gap={'xs'} visibleFrom="sm">
 							{Object.values(session.clients).map((client) => (
 								<Badge key={client} variant="light" color="cyan">
 									{client}

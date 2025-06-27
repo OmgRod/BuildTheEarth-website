@@ -1,5 +1,6 @@
-import { Box, Card, Grid, GridCol, Group, Stack, Text, ThemeIcon, Title, Tooltip } from '@mantine/core';
+import { Card, Grid, GridCol, Group, Stack, Text, ThemeIcon, Title, Tooltip } from '@mantine/core';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { getSession } from '@/util/auth';
 import { toHumanDateTime } from '@/util/date';
@@ -30,8 +31,16 @@ export default async function Page({
 			AND: searchQuery
 				? {
 						OR: [
-							{ id: { contains: searchQuery } },
-							{ buildteam: { OR: [{ id: searchQuery }, { name: searchQuery }, { slug: searchQuery }] } },
+							{ id: { contains: searchQuery, mode: 'insensitive' } },
+							{
+								buildteam: {
+									OR: [
+										{ id: { contains: searchQuery, mode: 'insensitive' } },
+										{ name: { contains: searchQuery, mode: 'insensitive' } },
+										{ slug: { contains: searchQuery, mode: 'insensitive' } },
+									],
+								},
+							},
 						],
 					}
 				: undefined,
@@ -46,13 +55,13 @@ export default async function Page({
 			AND: searchQuery
 				? {
 						OR: [
-							{ id: { contains: searchQuery } },
+							{ id: { contains: searchQuery, mode: 'insensitive' } },
 							{
 								buildteam: {
 									OR: [
-										{ id: { contains: searchQuery } },
-										{ name: { contains: searchQuery } },
-										{ slug: { contains: searchQuery } },
+										{ id: { contains: searchQuery, mode: 'insensitive' } },
+										{ name: { contains: searchQuery, mode: 'insensitive' } },
+										{ slug: { contains: searchQuery, mode: 'insensitive' } },
 									],
 								},
 							},
@@ -73,7 +82,7 @@ export default async function Page({
 	});
 
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Your Applications
 			</Title>
@@ -97,7 +106,7 @@ export default async function Page({
 								className="animate-scale"
 							>
 								<Grid>
-									<GridCol span={0.75}>
+									<GridCol span={{ base: 1.75, lg: 0.75 }}>
 										<Tooltip label={applicationStatusToTooltip(application.status)}>
 											<ThemeIcon
 												variant="light"
@@ -109,7 +118,7 @@ export default async function Page({
 											</ThemeIcon>
 										</Tooltip>
 									</GridCol>
-									<GridCol span={6.25}>
+									<GridCol span={{ base: 10.25, lg: 7.25 }}>
 										<Stack>
 											<Title order={4}>
 												{application.trial ? 'Trial' : 'Builder'} Application {application.id.split('-')[0]}
@@ -117,7 +126,7 @@ export default async function Page({
 											<BuildTeamDisplay team={application.buildteam} noAnchor />
 										</Stack>
 									</GridCol>
-									<GridCol span={5}>
+									<GridCol span={{ base: 11.25, lg: 4 }} offset={{ base: 1.75, lg: 0 }}>
 										<Group wrap="nowrap" gap={5} mt={5}>
 											<IconCalendar
 												stroke={1.5}
@@ -147,6 +156,6 @@ export default async function Page({
 					})}
 			</Stack>
 			<ApplicationPagination applicationCount={applicationCount} pageSize={10} mt="lg" />
-		</Box>
+		</ContentWrapper>
 	);
 }

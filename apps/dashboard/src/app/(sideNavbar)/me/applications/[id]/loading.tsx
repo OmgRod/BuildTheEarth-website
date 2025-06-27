@@ -1,18 +1,17 @@
-import { Alert, Box, Flex, SimpleGrid, Skeleton, Text, Title } from '@mantine/core';
+import { Alert, SimpleGrid, Skeleton, Text, Title } from '@mantine/core';
 
 import { TextCard } from '@/components/core/card/TextCard';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { BuildTeamDisplay } from '@/components/data/BuildTeam';
 import { applicationStatusToAlert } from '@/util/transformers';
 import { ApplicationStatus } from '@repo/db';
 
 export default async function Page() {
 	return (
-		<Box mx="md" maw="90vw">
-			<Flex gap="sm" justify="flex-start" align="flex-end" direction="row" wrap="nowrap" mt="xl" mb="md">
-				<Title order={1}>
-					Application <Skeleton component={'span'}>xxxxxxxx</Skeleton>
-				</Title>
-			</Flex>
+		<ContentWrapper maw="90vw">
+			<Title order={1} mt="xl" mb="md">
+				Application <Skeleton component={'span'}>xxxxxxxx</Skeleton>
+			</Title>
 			<SimpleGrid cols={3}>
 				<Skeleton>
 					<TextCard isText={false} title="Build Region">
@@ -47,12 +46,12 @@ export default async function Page() {
 			</Skeleton>
 			<Skeleton mt="md" mih="40vh">
 				<TextCard title="Application Answers">
-					<Text c="dimmed" size="md" mb="lg" maw="60%">
+					<Text c="dimmed" size="md" mb="lg" maw={{ base: '100%', md: '90%', xl: '60%' }}>
 						These are the answers you provided in your application. If you believe there is an error or you would like
 						to provide additional information, please contact the Build Region directly.
 					</Text>
 				</TextCard>
 			</Skeleton>
-		</Box>
+		</ContentWrapper>
 	);
 }

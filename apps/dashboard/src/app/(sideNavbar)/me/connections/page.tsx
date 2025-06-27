@@ -1,6 +1,7 @@
-import { Box, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
 import { getUser } from '@/actions/getUser';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { SocialAccountStack } from '@/components/data/SocialAccount';
 import { WebsiteKeycloakUser } from '@/types/User';
 import { authedFetcher } from '@/util/data';
@@ -14,11 +15,11 @@ export default async function Page() {
 	const data = await authedFetcher<WebsiteKeycloakUser>(`/users/${user.id}/kc`);
 
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Your Social Accounts
 			</Title>
 			<SocialAccountStack identities={data.federatedIdentities} withUnlinked />
-		</Box>
+		</ContentWrapper>
 	);
 }

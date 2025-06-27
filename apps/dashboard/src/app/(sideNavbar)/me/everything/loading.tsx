@@ -1,9 +1,10 @@
-import { Alert, Box, rem, Skeleton, Tabs, TabsList, TabsPanel, TabsTab, Title } from '@mantine/core';
+import ContentWrapper from '@/components/core/ContentWrapper';
+import { Alert, rem, Skeleton, Tabs, TabsList, TabsPanel, TabsTab, Title } from '@mantine/core';
 import { IconCode, IconInfoCircle, IconTable } from '@tabler/icons-react';
 
 export default async function Page() {
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Your Data
 			</Title>
@@ -30,6 +31,6 @@ export default async function Page() {
 					<Skeleton mb="md" h="70vh"></Skeleton>
 				</TabsPanel>
 			</Tabs>
-		</Box>
+		</ContentWrapper>
 	);
 }

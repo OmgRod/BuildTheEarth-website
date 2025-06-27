@@ -1,5 +1,6 @@
-import { Box, Button, Group, Title } from '@mantine/core';
+import { Button, Group, Title } from '@mantine/core';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExternalLink } from '@tabler/icons-react';
@@ -12,11 +13,7 @@ export const metadata: Metadata = {
 	title: 'Claims',
 };
 
-export default async function Page({
-	searchParams,
-}: {
-	searchParams: Promise<{ page: string | undefined; query: string | undefined }>;
-}) {
+export default async function Page({ searchParams }: { searchParams: Promise }) {
 	const page = (await searchParams).page;
 	const searchQuery = (await searchParams).query;
 	const claimCount = await prisma.claim.count({
@@ -60,7 +57,7 @@ export default async function Page({
 
 	return (
 		<Protection requiredRole="get-claims">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
 					<Title order={1}>Claims</Title>
 					<Group gap="xs">
@@ -76,9 +73,9 @@ export default async function Page({
 						</Button>
 					</Group>
 				</Group>
-				<SearchClaims mb="md" maw="30%" />
+				<SearchClaims mb="md" maw={{ base: '100%', md: '60%', lg: '30%' }} />
 				<ClaimsDatatable claims={claims} count={claimCount} />
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

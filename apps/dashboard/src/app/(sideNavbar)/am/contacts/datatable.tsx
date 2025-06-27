@@ -21,8 +21,15 @@ export default function ContactsDatatable({ contacts, canEdit }: { contacts: Con
 				},
 				{ accessor: 'name' },
 				{ accessor: 'role' },
-				{ accessor: 'email', render: ({ email }) => <Anchor href={`mailto:${email}`}>{email}</Anchor> },
-				{ accessor: 'discord' },
+				{
+					accessor: 'email',
+					visibleMediaQuery: '(min-width: 64em)', // md
+					render: ({ email }) => <Anchor href={`mailto:${email}`}>{email}</Anchor>,
+				},
+				{
+					accessor: 'discord',
+					visibleMediaQuery: '(min-width: 64em)', // md
+				},
 				{
 					accessor: '',
 					title: '',

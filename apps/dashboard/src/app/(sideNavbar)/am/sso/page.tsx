@@ -1,6 +1,5 @@
 import {
 	Badge,
-	Box,
 	Card,
 	Code,
 	NumberFormatter,
@@ -21,6 +20,7 @@ import {
 } from '@mantine/core';
 
 import Anchor from '@/components/core/Anchor';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import { getSession } from '@/util/auth';
 import { globalFetcher } from '@/util/data';
@@ -52,7 +52,7 @@ export default async function Page() {
 
 	return (
 		<Protection requiredRole="get-config">
-			<Box ml="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Title order={1} mt="xl" mb="md">
 					SSO Configuration and Security
 				</Title>
@@ -150,7 +150,7 @@ export default async function Page() {
 						</SimpleGrid>
 					</TabsPanel>
 				</Tabs>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

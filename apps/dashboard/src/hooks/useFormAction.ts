@@ -5,7 +5,7 @@ import { useTransition } from 'react';
  * @param action A React Server Action
  * @returns A tuple of a boolean that represents the status of the action's execution and an action that will execute
  */
-export function useFormAction(action: (...data: any[]) => Promise<any>): [(...data: any[]) => Promise<void>, boolean] {
+export function useFormAction(action: (...data: any[]) => Promise): [(...data: any[]) => Promise, boolean] {
 	const [isPending, startTransition] = useTransition();
 
 	const actionWithStatus = async (...data: any[]) => {
@@ -22,9 +22,7 @@ export function useFormAction(action: (...data: any[]) => Promise<any>): [(...da
  * @param actions A Array of React Server Actions
  * @returns A tuple of a boolean that represents the status of the action's execution and an array of actions that will execute
  */
-export function useFormActions(
-	actions: Array<(...data: any[]) => Promise<any>>,
-): [Array<(...data: any[]) => Promise<void>>, boolean] {
+export function useFormActions(actions: Array): [Array, boolean] {
 	const [isPending, startTransition] = useTransition();
 
 	const actionsWithStatus = actions.map((action) => async (...data: any[]) => {

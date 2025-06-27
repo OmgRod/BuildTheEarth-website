@@ -1,5 +1,6 @@
 import { Alert, Box, Tabs, TabsList, TabsPanel, TabsTab, Title } from '@mantine/core';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExclamationCircle, IconTransfer, IconUserCog } from '@tabler/icons-react';
@@ -42,7 +43,7 @@ export default async function Page({
 
 	return (
 		<Protection requiredRole="transfer-team">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Title order={1} mt="xl" mb="md">
 					Transfer and Delete {team?.name}
 				</Title>
@@ -64,7 +65,7 @@ export default async function Page({
 						<TransferStepper id={id} />
 					</TabsPanel>
 				</Tabs>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

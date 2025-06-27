@@ -23,6 +23,8 @@ export default function UsersDatatabe({ users, count }: { users: User[]; count: 
 					title: '#',
 					render: ({ id }) => <Code>{id.split('-')[0]}</Code>,
 				},
+
+				{ accessor: 'username' },
 				{
 					accessor: 'ssoId',
 					title: 'SSO #',
@@ -40,9 +42,12 @@ export default function UsersDatatabe({ users, count }: { users: User[]; count: 
 				{
 					accessor: 'discordId',
 					title: 'Discord #',
+					visibleMediaQuery: '(min-width: 64em)', // md
 				},
-				{ accessor: 'username' },
-				{ accessor: 'minecraft' },
+				{
+					accessor: 'minecraft',
+					visibleMediaQuery: '(min-width: 64em)', // md
+				},
 				{
 					accessor: '',
 					title: '',

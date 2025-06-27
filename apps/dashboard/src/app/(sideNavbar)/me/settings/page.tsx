@@ -1,7 +1,8 @@
 'use client';
 import { editOwnProfile } from '@/actions/user';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { UserDisplay } from '@/components/data/User';
-import { Box, Button, Paper, Text, TextInput, Title, Tooltip } from '@mantine/core';
+import { Button, Paper, Text, TextInput, Title, Tooltip } from '@mantine/core';
 
 import { useForm } from '@mantine/form';
 import { IconQuestionMark } from '@tabler/icons-react';
@@ -36,18 +37,18 @@ export default function Page() {
 	});
 
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Profile Settings
 			</Title>
-			<Text c="dimmed" size="md" mb="lg" maw="50vw">
+			<Text c="dimmed" size="md" mb="lg">
 				Here you can make changes to your account and other settings. Please note that some settings cant be edited. If
-				you feel like something should be changed, please message us.
+				you feel like something should be changed, please contact us.
 			</Text>
 			<Text mb="md" fz="xs" c="dimmed">
 				How you will be displayed for others:
 			</Text>
-			<Paper withBorder p="md" w="30%" mb="md">
+			<Paper withBorder p="md" w={{ base: '80%', xs: '50%', sm: '60%', md: '50%', lg: '30%' }} mb="md">
 				<UserDisplay user={{ id: '', ssoId: session?.data?.user.id || '', username: form.values?.username }} noAnchor />
 			</Paper>
 			<form
@@ -76,6 +77,6 @@ export default function Page() {
 					Save Changes
 				</Button>
 			</form>
-		</Box>
+		</ContentWrapper>
 	);
 }

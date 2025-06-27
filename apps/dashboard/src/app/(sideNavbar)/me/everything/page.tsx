@@ -1,18 +1,4 @@
-import {
-	Alert,
-	Box,
-	Button,
-	Card,
-	Flex,
-	Stack,
-	Tabs,
-	TabsList,
-	TabsPanel,
-	TabsTab,
-	Text,
-	Title,
-	rem,
-} from '@mantine/core';
+import { Alert, Button, Card, Flex, Stack, Tabs, TabsList, TabsPanel, TabsTab, Text, Title, rem } from '@mantine/core';
 import {
 	IconBrandMinecraft,
 	IconCalendar,
@@ -32,6 +18,7 @@ import {
 } from '@tabler/icons-react';
 
 import { getUser } from '@/actions/getUser';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { WebsiteKeycloakUser } from '@/types/User';
 import { getSession } from '@/util/auth';
 import { authedFetcher } from '@/util/data';
@@ -49,7 +36,7 @@ export default async function Page() {
 	const data = await authedFetcher<WebsiteKeycloakUser>(`/users/${user.id}/kc`);
 
 	return (
-		<Box ml="md" maw="50vw">
+		<ContentWrapper>
 			<Title order={1} mt="xl" mb="md">
 				Your Data
 			</Title>
@@ -199,10 +186,10 @@ export default async function Page() {
 					<Text my="sm" fw="bold" fz="lg">
 						Other Data
 					</Text>
-					<Button component={Link} href="/me/sessions" rightSection={<IconChevronRight />} mr="md">
+					<Button component={Link} href="/me/sessions" rightSection={<IconChevronRight />} mr="md" mb="md">
 						View active Sessions
 					</Button>
-					<Button component={Link} href="/me/connections" rightSection={<IconChevronRight />}>
+					<Button component={Link} href="/me/connections" rightSection={<IconChevronRight />} mr="md" mb="md">
 						List Social Connections
 					</Button>
 				</TabsPanel>
@@ -234,6 +221,6 @@ export default async function Page() {
 					/>
 				</TabsPanel>
 			</Tabs>
-		</Box>
+		</ContentWrapper>
 	);
 }

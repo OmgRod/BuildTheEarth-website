@@ -1,4 +1,4 @@
-import { Box, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 import {
 	IconBrandDocker,
 	IconBrandGoogleAnalytics,
@@ -18,6 +18,7 @@ import {
 } from '@tabler/icons-react';
 
 import { ActionsCard } from '@/components/core/card/ActionsCard';
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import { Metadata } from 'next';
 
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 export default async function Page() {
 	return (
 		<Protection requiredRole="bte_staff">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Title order={1} mt="xl" mb="md">
 					Internal Tools and Status
 				</Title>
@@ -90,7 +91,7 @@ export default async function Page() {
 						{ title: 'MinIO', icon: IconFileDatabase, color: 'blue', url: 'https://s3.buildtheearth.net/' },
 					]}
 				/>
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }

@@ -1,6 +1,7 @@
 import { getSession, hasRole } from '@/util/auth';
-import { Box, Button, Group, Title } from '@mantine/core';
+import { Button, Group, Title } from '@mantine/core';
 
+import ContentWrapper from '@/components/core/ContentWrapper';
 import { Protection } from '@/components/Protection';
 import prisma from '@/util/db';
 import { IconExternalLink } from '@tabler/icons-react';
@@ -19,7 +20,7 @@ export default async function Page() {
 
 	return (
 		<Protection requiredRole="get-contacts">
-			<Box mx="md" maw="90vw">
+			<ContentWrapper maw="90vw">
 				<Group justify="space-between" w="100%" mt="xl" mb="md">
 					<Title order={1}>Contacts</Title>
 					<Group gap="xs">
@@ -37,7 +38,7 @@ export default async function Page() {
 					</Group>
 				</Group>
 				<ContactsDatatable contacts={contacts} canEdit={hasRole(session, 'edit-contacts')} />
-			</Box>
+			</ContentWrapper>
 		</Protection>
 	);
 }
