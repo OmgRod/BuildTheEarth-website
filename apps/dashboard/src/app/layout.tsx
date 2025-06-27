@@ -49,6 +49,7 @@ export const metadata: Metadata = {
 			},
 		],
 	},
+	themeColor: '#1C7ED6',
 	description: "Your portal to BuildTheEarth - get involved in the world's largest Minecraft project!",
 	generator: 'MyBuildTheEarth',
 	applicationName: 'MyBuildTheEarth',
