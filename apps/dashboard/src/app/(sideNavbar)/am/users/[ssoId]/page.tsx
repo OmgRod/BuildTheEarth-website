@@ -485,7 +485,13 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 						</TextCard>
 					</GridCol>
 					<GridCol span={7}>
-						<TextCard title="Applications" icon={IconFiles}>
+						<TextCard
+							title="Applications"
+							icon={IconFiles}
+							style={{ height: '100%' }}
+							href={`/am/applications?query=${ssoId}&searchType=applicant&onlyPending=false&page=1`}
+							hrefText="View all"
+						>
 							<ScrollArea h="45vh" w="100%" type="always" mih="45vh">
 								<Table
 									highlightOnHover
