@@ -39,6 +39,16 @@ export const metadata: Metadata = {
 		default: 'MyBuildTheEarth',
 		template: '%s | MyBuildTheEarth',
 	},
+	openGraph: {
+		images: [
+			{
+				url: 'https://cdn.buildtheearth.net/static/preview-mybte.webp',
+				width: 1200,
+				height: 630,
+				alt: "MyBuildTheEarth - get involved in the world's largest Minecraft project!",
+			},
+		],
+	},
 	description: "Your portal to BuildTheEarth - get involved in the world's largest Minecraft project!",
 	generator: 'MyBuildTheEarth',
 	applicationName: 'MyBuildTheEarth',
