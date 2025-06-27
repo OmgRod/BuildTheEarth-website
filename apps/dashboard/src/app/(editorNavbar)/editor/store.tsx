@@ -279,7 +279,9 @@ export const useClaimEditorStore = create<ClaimEditorState>()(
 					modals.openConfirmModal({
 						title: 'Delete Claim',
 						centered: true,
-						children: `Are you sure you want to delete the claim "${draw.get(id).properties.name}"? This action cannot be undone.`,
+						children: `Are you sure you want to delete the claim "${
+							draw.get(id).properties.name
+						}"? This action cannot be undone.`,
 						labels: { confirm: 'Delete', cancel: 'Cancel' },
 						onConfirm: () => resolve(true),
 						onCancel: () => resolve(false),

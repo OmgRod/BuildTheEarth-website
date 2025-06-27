@@ -146,8 +146,12 @@ export default async function Page({
 											/>
 											<Text fz="xs" c="dimmed">
 												{application.reviewedAt
-													? `${toHumanDateTime(application.reviewedAt)} (${moment.duration(moment(application.createdAt).diff(application.reviewedAt)).humanize()})`
-													: `Pending review... (${moment.duration(moment(application.createdAt).diff(moment.now())).humanize()})`}
+													? `${toHumanDateTime(application.reviewedAt)} (${moment
+															.duration(moment(application.createdAt).diff(application.reviewedAt))
+															.humanize()})`
+													: `Pending review... (${moment
+															.duration(moment(application.createdAt).diff(moment.now()))
+															.humanize()})`}
 											</Text>
 										</Group>
 									</GridCol>

@@ -89,19 +89,31 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 		{ headers: { Authorization: `Bearer ${session?.accessToken}` } },
 	);
 	const keycloakConsentsData = await globalFetcher<KeycloakuserConsent[]>(
-		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace('/realms/website', '')}/admin/realms/website/users/${ssoId}/consents`,
+		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace(
+			'/realms/website',
+			'',
+		)}/admin/realms/website/users/${ssoId}/consents`,
 		{ headers: { Authorization: `Bearer ${session?.accessToken}` } },
 	);
 	const keycloakCredentialsData = await globalFetcher<KeycloakUserCredential[]>(
-		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace('/realms/website', '')}/admin/realms/website/users/${ssoId}/credentials`,
+		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace(
+			'/realms/website',
+			'',
+		)}/admin/realms/website/users/${ssoId}/credentials`,
 		{ headers: { Authorization: `Bearer ${session?.accessToken}` } },
 	);
 	const keycloakGroupsData = await globalFetcher<KeycloakGroup[]>(
-		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace('/realms/website', '')}/admin/realms/website/users/${ssoId}/groups`,
+		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace(
+			'/realms/website',
+			'',
+		)}/admin/realms/website/users/${ssoId}/groups`,
 		{ headers: { Authorization: `Bearer ${session?.accessToken}` } },
 	);
 	const keycloakSessionsData = await globalFetcher<KeycloakSession[]>(
-		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace('/realms/website', '')}/admin/realms/website/users/${ssoId}/sessions`,
+		`${process.env.NEXT_PUBLIC_KEYCLOAK_URL?.replace(
+			'/realms/website',
+			'',
+		)}/admin/realms/website/users/${ssoId}/sessions`,
 		{ headers: { Authorization: `Bearer ${session?.accessToken}` } },
 	);
 	const websiteData = await prisma.user.findFirst({
@@ -379,7 +391,9 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 								isText
 								title="External Consents"
 								icon={IconSwipe}
-								subtitle={`${Array.isArray(keycloakConsentsData) && keycloakConsentsData?.length > 1 ? 'have' : 'has'} been granted from the User's Account`}
+								subtitle={`${
+									Array.isArray(keycloakConsentsData) && keycloakConsentsData?.length > 1 ? 'have' : 'has'
+								} been granted from the User's Account`}
 							>
 								{keycloakConsentsData?.length || 0} Consent{keycloakConsentsData?.length > 1 ? 's' : ''}
 							</TextCard>
@@ -406,7 +420,9 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							isText
 							title="Joined Build Regions"
 							icon={IconUsers}
-							subtitle={`with an average of ${Math.floor((websiteData.applications.length / websiteData.joinedBuildTeams.length) * 10) / 10} Applications per Region`}
+							subtitle={`with an average of ${
+								Math.floor((websiteData.applications.length / websiteData.joinedBuildTeams.length) * 10) / 10
+							} Applications per Region`}
 							style={{ height: '100%' }}
 						>
 							{websiteData.joinedBuildTeams.length} Region{websiteData.joinedBuildTeams.length > 1 ? 's' : ''}
@@ -422,7 +438,10 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							isText
 							title="Created Applications"
 							icon={IconFiles}
-							subtitle={`including ${websiteData.applications.filter((app: { status: string }) => app.status === ApplicationStatus.SEND).length} pending Applications`}
+							subtitle={`including ${
+								websiteData.applications.filter((app: { status: string }) => app.status === ApplicationStatus.SEND)
+									.length
+							} pending Applications`}
 						>
 							{websiteData.applications.length} Application{websiteData.applications.length > 1 ? 's' : ''}
 						</TextCard>
@@ -432,7 +451,14 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 							isText
 							title="Successfull Applications"
 							icon={IconFileCheck}
-							subtitle={`with a ${Math.floor((websiteData.applications.filter((app: { status: string }) => app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL).length / websiteData.applications.length) * 100)}% Success Rate`}
+							subtitle={`with a ${Math.floor(
+								(websiteData.applications.filter(
+									(app: { status: string }) =>
+										app.status === ApplicationStatus.ACCEPTED || app.status == ApplicationStatus.TRIAL,
+								).length /
+									websiteData.applications.length) *
+									100,
+							)}% Success Rate`}
 						>
 							{
 								websiteData.applications.filter(

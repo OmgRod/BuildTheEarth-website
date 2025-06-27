@@ -235,7 +235,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 								thickness={50}
 								sections={teamApplicationsByStatus.map((a: { _count: number; status: ApplicationStatus }) => ({
 									value: (a._count / team._count.Application) * 100,
-									tooltip: `${a.status.slice(0, 1).toUpperCase()}${a.status.slice(1).toLowerCase()}: ${a._count} (${Math.round((a._count / team._count.Application) * 1000) / 10}%)`,
+									tooltip: `${a.status.slice(0, 1).toUpperCase()}${a.status.slice(1).toLowerCase()}: ${a._count} (${
+										Math.round((a._count / team._count.Application) * 1000) / 10
+									}%)`,
 									color: applicationStatusToColor(a.status),
 								}))}
 							/>
