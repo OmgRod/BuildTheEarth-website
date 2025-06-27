@@ -21,6 +21,7 @@ export default async function AppLayout({ children, hideNavbar, customNavbar, ..
 			navbar={{
 				width: 300,
 				breakpoint: 'sm',
+				collapsed: { mobile: true, desktop: false },
 			}}
 			header={{ height: 60 }}
 			p="md"
@@ -30,7 +31,7 @@ export default async function AppLayout({ children, hideNavbar, customNavbar, ..
 
 			{customNavbar}
 
-			<Header />
+			<Header roles={session?.user.realm_access.roles || []} />
 
 			<AppShellMain style={{ position: 'relative', paddingBottom: 'calc(var(--mantine-spacing-xl) * 1.5)' }}>
 				{children}

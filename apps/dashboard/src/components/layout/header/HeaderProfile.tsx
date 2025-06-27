@@ -1,6 +1,15 @@
 'use client';
 
-import { Avatar, Button, Menu, MenuDropdown, MenuItem, MenuTarget, useMantineColorScheme } from '@mantine/core';
+import {
+	Avatar,
+	Button,
+	Menu,
+	MenuDivider,
+	MenuDropdown,
+	MenuItem,
+	MenuTarget,
+	useMantineColorScheme,
+} from '@mantine/core';
 import {
 	IconChevronDown,
 	IconLogout,
@@ -52,6 +61,18 @@ const HeaderProfile = () => {
 				</div>
 			</MenuTarget>
 			<MenuDropdown style={{ zIndex: 1000 }}>
+				<MenuItem
+					leftSection={
+						<Avatar color="initials" name={session.data.user.username} size="sm" lh={0}>
+							{session.data.user.username[0].toUpperCase()}
+						</Avatar>
+					}
+					hiddenFrom="xs"
+				>
+					{session.data.user.username}
+				</MenuItem>
+				<MenuDivider hiddenFrom="xs" />
+				<Menu.Label>Links</Menu.Label>
 				<MenuItem component={Link} href="https://buildtheearth.net" leftSection={<IconWorld size={14} />}>
 					BuildTheEarth
 				</MenuItem>
@@ -62,15 +83,13 @@ const HeaderProfile = () => {
 					Settings
 				</Menu.Item>
 				<Menu.Divider />
-				<Menu.Label>Quick Actions</Menu.Label>
+				<Menu.Label>Actions</Menu.Label>
 				<Menu.Item
 					leftSection={colorScheme === 'dark' ? <IconMoonStars size={14} /> : <IconSun size={14} />}
 					onClick={() => toggleColorScheme()}
 				>
 					{colorScheme === 'dark' ? 'Light Mode' : 'Dark Mode'}
 				</Menu.Item>
-
-				<Menu.Divider />
 				<Menu.Item
 					leftSection={<IconLogout size={14} />}
 					color="red"

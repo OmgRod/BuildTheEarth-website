@@ -32,6 +32,7 @@
 		"frontend/legal",
 		"frontend/gallery",
 		"dash/editor",
-		"db"
+		"db",
+		"dash/responsive"
 	]
 }
