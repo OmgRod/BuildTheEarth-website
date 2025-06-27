@@ -3,7 +3,6 @@
 import { hasRole } from '@/util/auth';
 import { navLinks } from '@/util/links';
 import { AppShellNavbar, Divider, ScrollArea, Stack } from '@mantine/core';
-import { unstable_ViewTransition as ViewTransition } from 'react';
 import NavLink from './NavLink';
 
 export interface Navbar {
@@ -27,12 +26,10 @@ export default async function Navbar(props: Navbar) {
 	);
 
 	return (
-		<ViewTransition name="layout-navbar">
-			<AppShellNavbar p="md">
-				<ScrollArea pb="xl" offsetScrollbars>
-					<Stack gap="xs">{links}</Stack>
-				</ScrollArea>
-			</AppShellNavbar>
-		</ViewTransition>
+		<AppShellNavbar p="md">
+			<ScrollArea pb="xl" offsetScrollbars>
+				<Stack gap="xs">{links}</Stack>
+			</ScrollArea>
+		</AppShellNavbar>
 	);
 }
