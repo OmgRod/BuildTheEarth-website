@@ -18,6 +18,9 @@ WORKDIR /app
 
 # Install dependencies
 COPY --from=builder /app/out/json/ .
+# Enable corepack to use the correct Yarn version
+RUN corepack enable
+RUN corepack prepare yarn@4.9.1 --activate
 RUN yarn install
 
 # Build the project
