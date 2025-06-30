@@ -40,8 +40,6 @@ class ClaimController {
 			},
 		});
 
-		// d
-
 		res.send(claims);
 	}
 
