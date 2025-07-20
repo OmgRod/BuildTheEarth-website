@@ -34,5 +34,8 @@
 		"dash/editor",
 		"db",
 		"dash/responsive"
+	],
+	"githubPullRequests.ignoredPullRequestBranches": [
+		"main"
 	]
 }
