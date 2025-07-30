@@ -18,15 +18,17 @@ import {
 	Text,
 	Title,
 } from '@mantine/core';
+import { useClipboard } from '@mantine/hooks';
 import { modals, openConfirmModal } from '@mantine/modals';
 import { BuildTeam, Claim } from '@repo/db';
-import { IconDots, IconTransfer, IconTrash } from '@tabler/icons-react';
+import { IconDots, IconId, IconTransfer, IconTrash } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } }) {
 	const session = useSession();
+	const clipboard = useClipboard({ timeout: 500 });
 
 	return (
 		<Menu>
@@ -42,6 +44,13 @@ export function EditMenu({ claim }: { claim: Claim & { buildTeam: BuildTeam } })
 				</ActionIcon>
 			</MenuTarget>
 			<MenuDropdown>
+				<MenuItem
+					leftSection={<IconId style={{ width: rem(14), height: rem(14) }} />}
+					aria-label="Copy ID"
+					onClick={() => clipboard.copy(claim.id)}
+				>
+					Copy ID
+				</MenuItem>
 				<MenuItem
 					leftSection={<IconTransfer style={{ width: rem(14), height: rem(14) }} />}
 					aria-label="Transfer Claim to other Build Region"
