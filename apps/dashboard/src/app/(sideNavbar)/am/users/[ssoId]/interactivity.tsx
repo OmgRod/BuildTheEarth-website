@@ -72,6 +72,19 @@ export function UserMenu({ user }: { user: User }) {
 				</ActionIcon>
 			</MenuTarget>
 			<MenuDropdown>
+				<Menu.Sub position="left-start">
+					<Menu.Sub.Target>
+						<Menu.Sub.Item>Products</Menu.Sub.Item>
+					</Menu.Sub.Target>
+
+					<Menu.Sub.Dropdown>
+						<Menu.Item>All products</Menu.Item>
+						<Menu.Item>Categories</Menu.Item>
+						<Menu.Item>Tags</Menu.Item>
+						<Menu.Item>Attributes</Menu.Item>
+						<Menu.Item>Shipping classes</Menu.Item>
+					</Menu.Sub.Dropdown>
+				</Menu.Sub>
 				<MenuLabel>Sessions</MenuLabel>
 				<MenuItem>Close session...</MenuItem>
 				<MenuItem>Close all sessions</MenuItem>
