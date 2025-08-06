@@ -1,6 +1,7 @@
 'use server';
 import prisma from '@/util/db';
 import keycloakAdmin from '@/util/keycloak';
+import { revalidatePath } from 'next/cache';
 
 export const editOwnProfile = async (
 	prevState: any,
@@ -17,5 +18,47 @@ export const editOwnProfile = async (
 	} catch (error) {
 		console.error('Error updating user:', error);
 		return { status: 'error', error: 'Failed to update user' };
+	}
+};
+
+export const adminRemoveFromTeam = async (prevState: any, data: { ssoId: string; slug: string }): Promise<any> => {
+	try {
+		const user = await prisma.user.findUnique({
+			where: { ssoId: data.ssoId },
+			include: { joinedBuildTeams: true },
+		});
+		if (!user) {
+			return { status: 'error', error: 'User not found' };
+		}
+		const team = user.joinedBuildTeams.find((t) => t.slug === data.slug);
+		if (!team) {
+			return { status: 'error', error: 'Team not found' };
+		}
+
+		// Prevent removing the creator from their own team
+		if (team.creatorId === user.id) {
+			return { status: 'error', error: 'Cannot remove the creator from their own team' };
+		}
+
+		await prisma.buildTeam.update({
+			where: { id: team.id },
+			data: {
+				members: {
+					disconnect: { id: user.id },
+				},
+			},
+		});
+		await prisma.userPermission.deleteMany({
+			where: {
+				userId: user.id,
+				buildTeamId: team.id,
+			},
+		});
+
+		revalidatePath(`/am/users/${data.ssoId}`);
+		return { status: 'success', message: 'User removed from team successfully' };
+	} catch (error) {
+		console.error('Error removing user from team:', error);
+		return { status: 'error', error: 'Failed to remove user from team' };
 	}
 };

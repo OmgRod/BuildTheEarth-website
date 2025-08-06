@@ -43,11 +43,14 @@ import {
 	IconExternalLink,
 	IconFileCheck,
 	IconFiles,
+	IconId,
 	IconInfoCircle,
+	IconKarate,
 	IconLink,
 	IconMail,
 	IconMessage2,
 	IconPolygon,
+	IconRowRemove,
 	IconShieldLock,
 	IconSwipe,
 	IconUser,
@@ -57,6 +60,7 @@ import {
 	IconWorldExclamation,
 } from '@tabler/icons-react';
 
+import { adminRemoveFromTeam } from '@/actions/user';
 import Anchor from '@/components/core/Anchor';
 import { TextCard } from '@/components/core/card/TextCard';
 import ContentWrapper from '@/components/core/ContentWrapper';
@@ -72,6 +76,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Fragment, Key } from 'react';
 import ClaimDatatabe from './datatable';
+import { BuildTeamMenu, UserMenu } from './interactivity';
 
 export async function generateMetadata({ params }: { params: Promise<{ ssoId: string }> }): Promise<Metadata> {
 	const { ssoId } = await params;
@@ -191,43 +196,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 						>
 							Edit in Keycloak
 						</Button>
-						<Menu>
-							<MenuTarget>
-								<ActionIcon size="lg" variant="subtle" color="gray" aria-label="More Actions">
-									<IconDots style={{ width: '70%', height: '70%' }} stroke={1.5} />
-								</ActionIcon>
-							</MenuTarget>
-							<MenuDropdown>
-								<MenuLabel>Message</MenuLabel>
-								<MenuItem
-									leftSection={<IconMessage2 style={{ width: rem(14), height: rem(14) }} />}
-									aria-label="Send Bot Message"
-									component={Link}
-									href={`/am/bot/msg?user=${websiteData?.discordId}`}
-									rel="noopener"
-									disabled={!websiteData?.discordId}
-								>
-									Send via Bot
-								</MenuItem>
-								<MenuItem
-									leftSection={<IconBrandDiscord style={{ width: rem(14), height: rem(14) }} />}
-									component={Link}
-									target="_blank"
-									href={`https://discord.com/channels/@me/${websiteData.discordId}`}
-								>
-									Open DMs
-								</MenuItem>
-								<MenuItem
-									leftSection={<IconMail style={{ width: rem(14), height: rem(14) }} />}
-									component={Link}
-									target="_blank"
-									href={`mailto:${keycloakData?.email}`}
-									disabled={!keycloakData?.email}
-								>
-									Send Email
-								</MenuItem>
-							</MenuDropdown>
-						</Menu>
+						<UserMenu user={websiteData} />
 					</Group>
 				</Group>
 				<SimpleGrid cols={{ base: 1, md: 2 }}>
@@ -476,7 +445,7 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 						</TextCard>
 					</GridCol>
 					<GridCol span={{ base: 12, xl: 5 }}>
-						<TextCard title="Build Regions" icon={IconUsers}>
+						<TextCard title="Build Regions" icon={IconUsers} href={`/am/teams?query=${ssoId}`} hrefText="View all">
 							<ScrollArea h="45vh" w="100%" type="always" mih="45vh">
 								<Table
 									highlightOnHover
@@ -495,13 +464,25 @@ export default async function Page({ params }: { params: Promise<{ ssoId: string
 											if (!team) return [];
 											return [
 												<BuildTeamDisplay team={team} key={team.slug} />,
-												websiteData.applications
-													.filter((app: { buildteam: { slug: any } }) => app.buildteam.slug === team.slug)
-													.map((app: { id: Key | null | undefined }) => (
-														<Badge key={app.id} variant="light" mr={4}>
-															{String(app.id).split('-')[0]}
-														</Badge>
-													)),
+												websiteData.applications.filter(
+													(app: { buildteam: { slug: any } }) => app.buildteam.slug === team.slug,
+												).length > 2 ? (
+													<Code>
+														{
+															websiteData.applications.filter(
+																(app: { buildteam: { slug: any } }) => app.buildteam.slug === team.slug,
+															).length
+														}
+													</Code>
+												) : (
+													websiteData.applications
+														.filter((app: { buildteam: { slug: any } }) => app.buildteam.slug === team.slug)
+														.map((app: { id: Key | null | undefined }) => (
+															<Badge key={app.id} variant="light" mr={4}>
+																{String(app.id).split('-')[0]}
+															</Badge>
+														))
+												),
 											];
 										}),
 									}}

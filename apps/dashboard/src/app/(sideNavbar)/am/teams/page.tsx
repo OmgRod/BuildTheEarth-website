@@ -24,6 +24,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
 						{ location: { contains: searchQuery || undefined } },
 						{ invite: { contains: searchQuery || undefined } },
 						{ ip: { contains: searchQuery || undefined } },
+						{ members: { some: { ssoId: { contains: searchQuery || undefined } } } },
+						{ creator: { ssoId: { contains: searchQuery || undefined } } },
 					],
 				}
 			: undefined,
@@ -39,6 +41,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
 						{ location: { contains: searchQuery || undefined } },
 						{ invite: { contains: searchQuery || undefined } },
 						{ ip: { contains: searchQuery || undefined } },
+						{ members: { some: { ssoId: { contains: searchQuery || undefined } } } },
+						{ creator: { ssoId: { contains: searchQuery || undefined } } },
 					],
 				}
 			: undefined,
