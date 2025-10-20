@@ -10,7 +10,7 @@ import KeycloakProvider from 'next-auth/providers/keycloak';
  */
 const refreshAccessToken = async (token: JWT) => {
 	try {
-		if (Date.now() > token.refreshTokenExpired) throw Error;
+		if (Date.now() < token.refreshTokenExpired) throw Error;
 		const details = {
 			client_id: process.env.KEYCLOAK_ID,
 			client_secret: process.env.KEYCLOAK_SECRET,
