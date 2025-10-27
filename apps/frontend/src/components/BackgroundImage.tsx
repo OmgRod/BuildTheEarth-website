@@ -22,12 +22,9 @@ export default function Background({
 				<Image
 					loading={loading}
 					priority={priority}
-					// {...props} //@ts-ignore
-					// rootStyle={undefined}
-					alt="Mountains"
+					alt="Background image"
 					src={src}
-					placeholder={typeof src != 'string' || props.blurDataURL ? 'blur' : undefined}
-					// fill={typeof src == 'string'}
+					placeholder={blurDataURL ? 'blur' : undefined}
 					fill
 					sizes="100vw"
 					style={{

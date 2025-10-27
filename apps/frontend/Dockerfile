@@ -1,4 +1,4 @@
-FROM node:21-alpine AS base
+FROM node:22-alpine AS base
 
 FROM base AS builder
 RUN apk update
@@ -18,8 +18,8 @@ WORKDIR /app
 
 # First install the dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
+RUN corepack enable
 RUN yarn install
-RUN yarn list postcss
 
 # Build the project
 COPY --from=builder /app/out/full/ .

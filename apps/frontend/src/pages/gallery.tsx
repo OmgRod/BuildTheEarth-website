@@ -42,7 +42,7 @@ const MePage: NextPage = ({ data }: any) => {
 					noAnimation
 					hash={
 						img?.hash ||
-						"'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj0NE3+g8AAqUBjTCztj4AAAAASUVORK5CYII='"
+						'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj0NE3+g8AAqUBjTCztj4AAAAASUVORK5CYII'
 					}
 				/>
 			</Modal>
@@ -67,20 +67,22 @@ const MePage: NextPage = ({ data }: any) => {
 							data
 								?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 								.slice(activePage * 20 - 20, activePage * 20)
-								.map((d: any) => ({
-									name: d?.title + (d?.city ? ', ' + d.city : ''),
-									src: `https://cdn.buildtheearth.net/uploads/${d?.image?.name}`,
-									date: d?.createdAt,
-									team: {
-										name: d?.buildTeam.name,
-										slug: d?.buildTeam.slug,
-										logo: d?.buildTeam.icon,
-									},
-									hash:
-										d?.image?.hash ||
-										'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj0NE3+g8AAqUBjTCztj4AAAAASUVORK5CYII=',
-									onClick: () => setFocus(d?.image?.name),
-								})) || [{}]
+								.map((d: any) => {
+									return {
+										name: d?.title + (d?.city ? ', ' + d.city : ''),
+										src: `https://cdn.buildtheearth.net/uploads/${d?.image?.name}`,
+										date: d?.createdAt,
+										team: {
+											name: d?.buildTeam.name,
+											slug: d?.buildTeam.slug,
+											logo: d?.buildTeam.icon,
+										},
+										hash:
+											d?.image?.hash ||
+											'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj0NE3+g8AAqUBjTCztj4AAAAASUVORK5CYII=',
+										onClick: () => setFocus(d?.image?.name),
+									};
+								}) || [{}]
 						}
 						showTooltipOnHover={true}
 					/>
